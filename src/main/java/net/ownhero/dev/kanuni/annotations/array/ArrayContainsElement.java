@@ -17,7 +17,7 @@ import net.ownhero.dev.kanuni.annotations.meta.ConditionPattern;
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
-@ConditionPattern ("ArrayCondition.contains($pname$, $marker$, $value$, new Object[0])")
+@ConditionPattern ("ArrayCondition.contains(($w) $pname$, (($w) $marker$), $value$, new Object[0])")
 @Target (value = { ElementType.PARAMETER })
 public @interface ArrayContainsElement {
 	

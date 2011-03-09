@@ -15,12 +15,16 @@ import org.apache.commons.collections.CollectionUtils;
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
  * 
  */
+/**
+ * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ * 
+ */
 public class ArrayCheck {
 	
 	/**
 	 * @param array
 	 * @param element
-	 * @return
+	 * @return true if the element is contained in the array
 	 */
 	private static final boolean contains(final Object array,
 	                                      final Object element) {
@@ -77,7 +81,8 @@ public class ArrayCheck {
 	
 	/**
 	 * @param array
-	 * @param message
+	 * @param formatString
+	 * @param arguments
 	 */
 	public static final void empty(final Object array,
 	                               final String formatString,
@@ -204,7 +209,8 @@ public class ArrayCheck {
 	
 	/**
 	 * @param array
-	 * @param message
+	 * @param formatString
+	 * @param arguments
 	 */
 	public static final void notEmpty(final Object array,
 	                                  final String formatString,

@@ -360,7 +360,7 @@ public class StringCheck {
 	 * 
 	 * @param string
 	 *            the string under suspect
-	 * @param patter
+	 * @param pattern
 	 *            the pattern to check against
 	 * @param formatString
 	 *            the message/formatString describing the violation
@@ -517,7 +517,7 @@ public class StringCheck {
 	 * 
 	 * @param string
 	 *            the string under suspect
-	 * @param patter
+	 * @param pattern
 	 *            the pattern to check against
 	 * @param formatString
 	 *            the message/formatString describing the violation
@@ -559,7 +559,8 @@ public class StringCheck {
 	 * @param strings
 	 * @param formatString
 	 * @param arguments
-	 * @return
+	 * @return true if all strings in the array are of same length (pairwise
+	 *         compair).
 	 */
 	private static final boolean pairwiseSameLength(final String[] strings,
 	                                                final String formatString,

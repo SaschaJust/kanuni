@@ -9,7 +9,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.ownhero.dev.kanuni.annotations.factories.CreatorRange;
 import net.ownhero.dev.kanuni.annotations.meta.ConditionPattern;
+import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 
 /**
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
@@ -17,7 +19,8 @@ import net.ownhero.dev.kanuni.annotations.meta.ConditionPattern;
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
-@ConditionPattern ("BoundsCondition.range($pname$, $min$, $max$, $value$, new Object[0])")
+@FactoryClass (CreatorRange.class)
+@ConditionPattern ("BoundsCondition.range((Character) Character.valueOf((char) $pname$), new Character((char) '$min$'), new Character((char) '$max$'), $value$, new Object[0])")
 @Target (value = { ElementType.PARAMETER })
 public @interface RangeChar {
 	

@@ -68,7 +68,7 @@ public class Check {
 		/**
 		 * @param formatString
 		 * @param arguments
-		 * @return
+		 * @return the current instance of the {@link NoneNullPredicate}
 		 */
 		public NoneNullPredicate setMessage(final String formatString,
 		                                    final Object... arguments) {
@@ -81,7 +81,7 @@ public class Check {
 	final static NoneNullPredicate noneNullPredicate = new NoneNullPredicate();
 	
 	/**
-	 * @return
+	 * @return a string representing the line of code the check was called from.
 	 */
 	static final String getCallerString() {
 		Throwable throwable = new Throwable();

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.ownhero.dev.kanuni.annotations.array;
+package net.ownhero.dev.kanuni.annotations.bounds;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -9,7 +9,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.ownhero.dev.kanuni.annotations.factories.CreatorRange;
 import net.ownhero.dev.kanuni.annotations.meta.ConditionPattern;
+import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 
 /**
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
@@ -17,11 +19,14 @@ import net.ownhero.dev.kanuni.annotations.meta.ConditionPattern;
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
-@ConditionPattern ("ArrayCondition.size($pname$, new Integer($size$), $value$, new Object[0])")
+@FactoryClass (CreatorRange.class)
+@ConditionPattern ("BoundsCondition.range(new Long($pname$), new Long($min$), new Long($max$), $value$, new Object[0])")
 @Target (value = { ElementType.PARAMETER })
-public @interface ArraySize {
+public @interface RangeLong {
 	
-	int size();
+	long max();
+	
+	long min();
 	
 	String value() default "";
 }

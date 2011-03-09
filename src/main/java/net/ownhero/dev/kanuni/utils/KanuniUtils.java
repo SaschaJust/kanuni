@@ -16,27 +16,17 @@ import org.apache.commons.lang.math.NumberUtils;
  */
 public class KanuniUtils {
 	
-	/**
-	 * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
-	 * 
-	 */
 	public enum NumberType {
 		BYTE, DOUBLE, FLOAT, INTEGER, LONG, SHORT;
 	}
 	
-	private static Pattern xdigit    = Pattern.compile("^\\p{XDigit}+$");
-	
-	private static Pattern ascii     = Pattern.compile("^\\p{ASCII}+$");
-	
-	private static Pattern uppercase = Pattern.compile("^\\p{Upper}+$");
-	
-	private static Pattern lowercase = Pattern.compile("^\\p{Lower}+$");
-	
-	private static Pattern digit     = Pattern.compile("^\\p{Digit}+$");
-	
-	private static Pattern alpha     = Pattern.compile("^\\p{Alpha}+$");
-	
-	private static Pattern alphanum  = Pattern.compile("^\\p{Alnum}+$");
+	private static final Pattern xdigit    = Pattern.compile("^\\p{XDigit}+$");
+	private static final Pattern ascii     = Pattern.compile("^\\p{ASCII}+$");
+	private static final Pattern uppercase = Pattern.compile("^\\p{Upper}+$");
+	private static final Pattern lowercase = Pattern.compile("^\\p{Lower}+$");
+	private static final Pattern digit     = Pattern.compile("^\\p{Digit}+$");
+	private static final Pattern alpha     = Pattern.compile("^\\p{Alpha}+$");
+	private static final Pattern alphanum  = Pattern.compile("^\\p{Alnum}+$");
 	
 	/**
 	 * Checks a given string to be convertible to a given number type (e.g.
@@ -76,6 +66,7 @@ public class KanuniUtils {
 		} catch (NumberFormatException e) {
 			return false;
 		}
+		
 		return true;
 	}
 	
@@ -93,6 +84,7 @@ public class KanuniUtils {
 		} catch (PatternSyntaxException e) {
 			return false;
 		}
+		
 		return true;
 	}
 	
@@ -101,7 +93,8 @@ public class KanuniUtils {
 	 * expression.
 	 * 
 	 * @param string
-	 * @return
+	 * @return true if the given string matches the corresponding pattern.
+	 * @see KanuniUtils#alpha
 	 */
 	public static boolean isAlpha(final String string) {
 		return alpha.matcher(string).matches();
@@ -112,7 +105,8 @@ public class KanuniUtils {
 	 * regular expression.
 	 * 
 	 * @param string
-	 * @return
+	 * @return true if the given string matches the corresponding pattern.
+	 * @see KanuniUtils#alphanum
 	 */
 	public static boolean isAlphanum(final String string) {
 		return alphanum.matcher(string).matches();
@@ -123,7 +117,8 @@ public class KanuniUtils {
 	 * expression.
 	 * 
 	 * @param string
-	 * @return
+	 * @return true if the given string matches the corresponding pattern.
+	 * @see KanuniUtils#ascii
 	 */
 	public static boolean isAscii(final String string) {
 		return ascii.matcher(string).matches();
@@ -134,7 +129,8 @@ public class KanuniUtils {
 	 * expression.
 	 * 
 	 * @param string
-	 * @return
+	 * @return true if the given string matches the corresponding pattern.
+	 * @see KanuniUtils#digit
 	 */
 	public static boolean isDigit(final String string) {
 		return digit.matcher(string).matches();
@@ -145,7 +141,8 @@ public class KanuniUtils {
 	 * regular expression.
 	 * 
 	 * @param string
-	 * @return
+	 * @return true if the given string matches the corresponding pattern.
+	 * @see KanuniUtils#lowercase
 	 */
 	public static boolean isLowercase(final String string) {
 		return lowercase.matcher(string).matches();
@@ -156,7 +153,8 @@ public class KanuniUtils {
 	 * regular expression.
 	 * 
 	 * @param string
-	 * @return
+	 * @return true if the given string matches the corresponding pattern.
+	 * @see KanuniUtils#uppercase
 	 */
 	public static boolean isUppercase(final String string) {
 		return uppercase.matcher(string).matches();
@@ -167,7 +165,8 @@ public class KanuniUtils {
 	 * expression.
 	 * 
 	 * @param string
-	 * @return
+	 * @return true if the given string matches the corresponding pattern.
+	 * @see KanuniUtils#xdigit
 	 */
 	public static boolean isXDigit(final String string) {
 		return xdigit.matcher(string).matches();

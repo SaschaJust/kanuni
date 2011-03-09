@@ -332,7 +332,7 @@ public final class StringCondition {
 	 * 
 	 * @param string
 	 *            the string under suspect
-	 * @param patter
+	 * @param pattern
 	 *            the pattern to check against
 	 * @param formatString
 	 *            the message/formatString describing the violation
@@ -440,7 +440,7 @@ public final class StringCondition {
 	 * 
 	 * @param string
 	 *            the string under suspect
-	 * @param patter
+	 * @param pattern
 	 *            the pattern to check against
 	 * @param formatString
 	 *            the message/formatString describing the violation

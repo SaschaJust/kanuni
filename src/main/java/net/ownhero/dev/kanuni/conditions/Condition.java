@@ -74,7 +74,7 @@ public final class Condition {
 		/**
 		 * @param formatString
 		 * @param arguments
-		 * @return
+		 * @return the current instance of {@link NoneNullPredicate}.
 		 */
 		public NoneNullPredicate setMessage(final String formatString,
 		                                    final Object... arguments) {
@@ -100,7 +100,8 @@ public final class Condition {
 	}
 	
 	/**
-	 * @return
+	 * @return a string representing the line of code the condition was
+	 *         triggered from.
 	 */
 	static final String getCallerString() {
 		Throwable throwable = new Throwable();

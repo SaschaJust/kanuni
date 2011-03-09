@@ -17,7 +17,7 @@ public final class ArrayCondition {
 	/**
 	 * @param array
 	 * @param element
-	 * @return
+	 * @return true if the element is contained in the array.
 	 */
 	private static final boolean contains(final Object array,
 	                                      final Object element) {
@@ -48,9 +48,12 @@ public final class ArrayCondition {
 		assert element != null : Condition.getCallerString()
 		        + String.format("Element is null, but should be a valid element of the array. Violation: %s",
 		                        String.format(formatString, arguments));
-		assert element.getClass().equals(array.getClass().getComponentType()) : Condition.getCallerString()
-		        + String.format("Element type differs from array component type. Violation: %s",
-		                        String.format(formatString, arguments));
+		// assert element.getClass().equals(array.getClass().getComponentType())
+		// : Condition.getCallerString()
+		// +
+		// String.format("Element type differs from array component type (%s vs. %s). Violation: %s",
+		// element.getClass(), array.getClass().getComponentType(),
+		// String.format(formatString, arguments));
 		assert contains(array, element) : Condition.getCallerString()
 		        + String.format("Array does not contain element `%s`. Violation: %s", element,
 		                        String.format(formatString, arguments));
@@ -58,7 +61,8 @@ public final class ArrayCondition {
 	
 	/**
 	 * @param array
-	 * @param message
+	 * @param formatString
+	 * @param arguments
 	 */
 	public static final void empty(final Object array,
 	                               final String formatString,
@@ -137,7 +141,8 @@ public final class ArrayCondition {
 	
 	/**
 	 * @param array
-	 * @param message
+	 * @param formatString
+	 * @param arguments
 	 */
 	public static final void notEmpty(final Object array,
 	                                  final String formatString,
