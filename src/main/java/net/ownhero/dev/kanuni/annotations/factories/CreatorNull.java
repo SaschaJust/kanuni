@@ -32,7 +32,7 @@ public class CreatorNull implements Creator {
 	public String createBehaviorInstrumentation(final Annotation annotation,
 	                                            final CtBehavior behavior,
 	                                            final Map<Integer, SortedSet<String>> markers) {
-		throw new MalformedAnnotationException(CreatorStringType.class.getName() + ": unsupported behavior ("
+		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported behavior ("
 		        + behavior.getName() + ") annotation: " + annotation.getTypeName());
 	}
 	

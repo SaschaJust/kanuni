@@ -42,7 +42,7 @@ public class CreatorRange implements Creator {
 	public String createBehaviorInstrumentation(final Annotation annotation,
 	                                            final CtBehavior behavior,
 	                                            final Map<Integer, SortedSet<String>> markers) {
-		throw new MalformedAnnotationException(CreatorStringType.class.getName() + ": unsupported behavior ("
+		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported behavior ("
 		        + behavior.getName() + ") annotation: " + annotation.getTypeName());
 	}
 	
@@ -161,101 +161,5 @@ public class CreatorRange implements Creator {
 		
 		return builder.toString();
 	}
-	
-	// private String getParameterInstrumentation(final Annotation annotation,
-	// final String parameterName,
-	// final CtClass parameterType,
-	// final String template,
-	// final Map<Integer, SortedSet<String>> markers) {
-	// Condition.notNull(annotation,
-	// "When instrumention is requested for parameters the corresponding annotation might never be (null).");
-	// StringCondition.matches(parameterName,
-	// "\\$[0-9]+",
-	// "Parameter names must match the pattern '\\$[0-9]+' since they are replace by javassist on compile. Got: %s",
-	// parameterName);
-	// Condition.notNull(parameterType,
-	// "Every parameter an instrumentation is requested for has to provide a proper type, but parameterType was set to (null).");
-	// StringCondition.notEmpty(template,
-	// "The template of the annotation the instrumentation is build for cannot be empty.");
-	//
-	// String instrumentation = String.format("%s", template);
-	//
-	// // escape the parameterName with '\\' since '$' will cause
-	// // backreferencing when using replaceAll(String, String)
-	// instrumentation = instrumentation.replaceAll("\\$pname\\$", "\\" +
-	// parameterName);
-	// instrumentation = instrumentation.replaceAll("\\$ptype\\$",
-	// parameterType.getName());
-	//
-	// Pattern pattern = Pattern.compile("\\$([A-Za-z:]+)\\$");
-	// Matcher matcher = pattern.matcher(instrumentation);
-	//
-	// while (matcher.find()) {
-	// String memberName = matcher.group().substring(1);
-	// memberName = memberName.substring(0, memberName.length() - 1);
-	// Object memberValue = getMemberValue(annotation, memberName);
-	// if (memberName.equals("marker")) {
-	// ArrayMemberValue amv = (ArrayMemberValue) memberValue;
-	// if (amv.getValue().length > 1) {
-	// for (MemberValue marker : amv.getValue()) {
-	// String markerParameterName = " new Object[] { "
-	// + markers.get(Integer.parseInt(marker.toString())).first() + " } ";
-	// instrumentation = instrumentation.replace("$" + memberName + "$",
-	// markerParameterName);
-	// }
-	// } else {
-	// // TODO check bounds
-	// // TODO check list to not be null
-	// SortedSet<String> markerNames =
-	// markers.get(Integer.parseInt(amv.getValue()[0].toString()));
-	//
-	// StringBuilder builder = new StringBuilder();
-	//
-	// if (markerNames.size() > 1) {
-	// final String prepend = " new Object[] { ";
-	// builder.append(prepend);
-	// for (String markerName : markerNames) {
-	// if (builder.length() > prepend.length()) {
-	// builder.append(", ");
-	// }
-	// builder.append(markerName);
-	// }
-	// builder.append(" } ");
-	// } else {
-	// String markerName = markerNames.first();
-	// markerNames.remove(markerName);
-	// builder.append(markerName);
-	// }
-	//
-	// instrumentation = instrumentation.replace("$" + memberName + "$",
-	// builder.toString());
-	// }
-	// } else {
-	// instrumentation = instrumentation.replace("$" + memberName + "$",
-	// memberValue.toString());
-	// }
-	// // TODO for each marker
-	// // get marker name (i.e. $2, $3)...
-	// // replace $marker$ with $2, $3... correspondingly
-	//
-	// }
-	//
-	// // prepend package
-	// instrumentation = Condition.class.getPackage().getName() + "." +
-	// instrumentation + ";";
-	//
-	// // TODO This will fail, e.g. when using @Matches("$foo:bar$") - what
-	// // actually makes no sense.
-	// // But assume we would have an @StringEquals("$foo:bar$"), this would
-	// // break the condition for valid instrumentation.
-	// StringCondition.notMatches(instrumentation, "\\$[A-Za-z:]+\\$",
-	// "Some of the placeholder in the template were not processed correctly: %s",
-	// instrumentation);
-	// StringCondition.notEmpty(instrumentation,
-	// "The instrumentation string might never be empty.");
-	//
-	// // System.err.println("generated instrumentation: " + instrumentation);
-	// return instrumentation;
-	// }
 	
 }

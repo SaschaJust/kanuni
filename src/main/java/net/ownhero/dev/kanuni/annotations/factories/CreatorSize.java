@@ -12,6 +12,7 @@ import javassist.CtBehavior;
 import javassist.CtClass;
 import javassist.NotFoundException;
 import javassist.bytecode.annotation.Annotation;
+import javassist.bytecode.annotation.IntegerMemberValue;
 import javassist.bytecode.annotation.StringMemberValue;
 import net.ownhero.dev.kanuni.conditions.ArrayCondition;
 import net.ownhero.dev.kanuni.conditions.CollectionCondition;
@@ -26,7 +27,7 @@ import org.apache.commons.lang.ArrayUtils;
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
  *
  */
-public class CreatorContains implements Creator {
+public class CreatorSize implements Creator {
 	
 	/* (non-Javadoc)
 	 * @see net.ownhero.dev.kanuni.annotations.factories.Creator#createBehaviorInstrumentation(javassist.bytecode.annotation.Annotation, javassist.CtBehavior, java.util.Map)
@@ -35,8 +36,8 @@ public class CreatorContains implements Creator {
 	public String createBehaviorInstrumentation(final Annotation annotation,
 	                                            final CtBehavior behavior,
 	                                            final Map<Integer, SortedSet<String>> markers) {
-		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported behavior ("
-		                                       + behavior.getName() + ") annotation: " + annotation.getTypeName());
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	/* (non-Javadoc)
@@ -53,18 +54,17 @@ public class CreatorContains implements Creator {
 		StringMemberValue textMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation, "value");
 		String text = textMember.getValue();
 		
+		IntegerMemberValue sizeMemberValue = (IntegerMemberValue) KanuniClassloader.getMemberValue(annotation, "size");
+		int size = sizeMemberValue.getValue();
+		
 		if (parameterType.isArray()) {
-			for (Integer markerId : markers.keySet()) {
-				for (String markerParameter : markers.get(markerId)) {
-					builder.append(ArrayCondition.class.getCanonicalName()).append(".");
-					builder.append(String.format("contains(($w) %s, ($w) %s, \"%s\", new Object[0]);",
-					                             parameterName, markerParameter, text));
-					builder.append(System.getProperty("line.separator"));
-				}
-			}
+			builder.append(ArrayCondition.class.getCanonicalName())
+			       .append(String.format(".size(%s, %s, \"%s\", new Object[0]);", parameterName, size, text))
+			       .append(System.getProperty("line.separator"));
 		} else {
 			try {
 				CtClass[] interfaces = parameterType.getInterfaces();
+				
 				Class<?>[] realInterfaces = new Class[interfaces.length];
 				
 				for (int i = 0; i < interfaces.length; ++i) {
@@ -72,39 +72,30 @@ public class CreatorContains implements Creator {
 				}
 				
 				if (ArrayUtils.contains(realInterfaces, Map.class)) {
-					for (Integer markerId : markers.keySet()) {
-						for (String markerParameter : markers.get(markerId)) {
-							builder.append(MapCondition.class.getCanonicalName()).append(".");
-							builder.append(String.format("containsValue(%s, %s, \"%s\", new Object[0]);",
-							                             parameterName, markerParameter,
-							                             text));
-							builder.append(System.getProperty("line.separator"));
-						}
-					}
+					builder.append(MapCondition.class.getCanonicalName())
+					       .append(String.format(".size(%s, %s, \"%s\", new Object[0]);", parameterName, size, text))
+					       .append(System.getProperty("line.separator"));
 				} else if (ArrayUtils.contains(realInterfaces, Collection.class)) {
-					for (Integer markerId : markers.keySet()) {
-						for (String markerParameter : markers.get(markerId)) {
-							builder.append(CollectionCondition.class.getCanonicalName()).append(".");
-							builder.append(String.format("contains(%s, %s, \"%s\", new Object[0]);", parameterName,
-							                             markerParameter, text));
-							builder.append(System.getProperty("line.separator"));
-						}
-					}
-					builder.append(CollectionCondition.class.getPackage().getName()).append(".");
+					builder.append(CollectionCondition.class.getCanonicalName())
+					       .append(String.format(".size(%s, %s, \"%s\", new Object[0]);", parameterName, size, text))
+					       .append(System.getProperty("line.separator"));
 				} else {
 					throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported parameter ("
-					                                       + parameterName + ":" + parameterType.getName() + ") annotation: "
-					                                       + annotation.getTypeName());
+					        + parameterName + ":" + parameterType.getName() + ") annotation: "
+					        + annotation.getTypeName());
 				}
 			} catch (NotFoundException e) {
-				e.printStackTrace();
+				throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported parameter ("
+				                                       + parameterName + ":" + parameterType.getName() + ") annotation: " + annotation.getTypeName(),
+				                                       e);
 			} catch (CannotCompileException e) {
-				e.printStackTrace();
+				throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported parameter ("
+				                                       + parameterName + ":" + parameterType.getName() + ") annotation: " + annotation.getTypeName(),
+				                                       e);
 			}
 		}
 		
 		return builder.toString();
-		
 	}
 	
 }

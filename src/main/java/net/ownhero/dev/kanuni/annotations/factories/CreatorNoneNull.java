@@ -65,7 +65,7 @@ public class CreatorNoneNull implements Creator {
 	                                             final CtClass parameterType,
 	                                             final Map<Integer, SortedSet<String>> markers) {
 		// TODO check for collections/maps/arrays
-		throw new MalformedAnnotationException(CreatorStringType.class.getName() + ": unsupported parameter ("
+		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported parameter ("
 		                                       + parameterName + ":" + parameterType.getName() + ") annotation: " + annotation.getTypeName());
 	}
 	

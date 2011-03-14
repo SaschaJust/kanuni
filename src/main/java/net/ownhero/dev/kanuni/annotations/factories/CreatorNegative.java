@@ -20,7 +20,7 @@ public class CreatorNegative implements Creator {
 	public String createBehaviorInstrumentation(final Annotation annotation,
 	                                            final CtBehavior behavior,
 	                                            final Map<Integer, SortedSet<String>> markers) {
-		throw new MalformedAnnotationException(CreatorStringType.class.getName() + ": unsupported behavior ("
+		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported behavior ("
 		                                       + behavior.getName() + ") annotation: " + annotation.getTypeName());
 	}
 	
@@ -29,7 +29,7 @@ public class CreatorNegative implements Creator {
 	                                             final String parameterName,
 	                                             final CtClass parameterType,
 	                                             final Map<Integer, SortedSet<String>> markers) {
-		throw new MalformedAnnotationException(CreatorStringType.class.getName() + ": unsupported parameter ("
+		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported parameter ("
 		        + parameterName + ":" + parameterType.getName() + ") annotation: " + annotation.getTypeName());
 	}
 	

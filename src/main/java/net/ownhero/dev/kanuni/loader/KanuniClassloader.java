@@ -15,8 +15,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javassist.CannotCompileException;
 import javassist.ClassClassPath;
@@ -47,14 +45,6 @@ import javassist.bytecode.annotation.MemberValue;
 import javassist.bytecode.annotation.MemberValueVisitor;
 import javassist.bytecode.annotation.ShortMemberValue;
 import javassist.bytecode.annotation.StringMemberValue;
-import net.ownhero.dev.kanuni.annotations.array.ArrayContains;
-import net.ownhero.dev.kanuni.annotations.array.ArrayIndexRange;
-import net.ownhero.dev.kanuni.annotations.array.ArrayIsEmpty;
-import net.ownhero.dev.kanuni.annotations.array.ArrayMaxSize;
-import net.ownhero.dev.kanuni.annotations.array.ArrayMinSize;
-import net.ownhero.dev.kanuni.annotations.array.ArrayNoneNull;
-import net.ownhero.dev.kanuni.annotations.array.ArrayNotEmpty;
-import net.ownhero.dev.kanuni.annotations.array.ArraySize;
 import net.ownhero.dev.kanuni.annotations.bevahiors.Contains;
 import net.ownhero.dev.kanuni.annotations.bevahiors.NoneNull;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeChar;
@@ -62,28 +52,28 @@ import net.ownhero.dev.kanuni.annotations.bounds.RangeDouble;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeFloat;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeInteger;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeLong;
-import net.ownhero.dev.kanuni.annotations.collection.CollectionContains;
-import net.ownhero.dev.kanuni.annotations.collection.CollectionIndexRange;
-import net.ownhero.dev.kanuni.annotations.collection.CollectionIsEmpty;
-import net.ownhero.dev.kanuni.annotations.collection.CollectionMaxSize;
-import net.ownhero.dev.kanuni.annotations.collection.CollectionMinSize;
-import net.ownhero.dev.kanuni.annotations.collection.CollectionNoneNull;
-import net.ownhero.dev.kanuni.annotations.collection.CollectionNotEmpty;
-import net.ownhero.dev.kanuni.annotations.collection.CollectionSize;
 import net.ownhero.dev.kanuni.annotations.compare.Equals;
 import net.ownhero.dev.kanuni.annotations.compare.Greater;
 import net.ownhero.dev.kanuni.annotations.compare.GreaterOrEqual;
 import net.ownhero.dev.kanuni.annotations.compare.Less;
 import net.ownhero.dev.kanuni.annotations.compare.LessOrEqual;
 import net.ownhero.dev.kanuni.annotations.factories.Creator;
+import net.ownhero.dev.kanuni.annotations.map.ContainsKey;
+import net.ownhero.dev.kanuni.annotations.map.ContainsValue;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 import net.ownhero.dev.kanuni.annotations.meta.Marker;
+import net.ownhero.dev.kanuni.annotations.simple.IndexRange;
+import net.ownhero.dev.kanuni.annotations.simple.IsEmpty;
+import net.ownhero.dev.kanuni.annotations.simple.MaxSize;
+import net.ownhero.dev.kanuni.annotations.simple.MinSize;
 import net.ownhero.dev.kanuni.annotations.simple.Negative;
+import net.ownhero.dev.kanuni.annotations.simple.NotEmpty;
 import net.ownhero.dev.kanuni.annotations.simple.NotNegative;
 import net.ownhero.dev.kanuni.annotations.simple.NotNull;
 import net.ownhero.dev.kanuni.annotations.simple.NotPositive;
 import net.ownhero.dev.kanuni.annotations.simple.Null;
 import net.ownhero.dev.kanuni.annotations.simple.Positive;
+import net.ownhero.dev.kanuni.annotations.simple.Size;
 import net.ownhero.dev.kanuni.annotations.string.AlphaNumString;
 import net.ownhero.dev.kanuni.annotations.string.AlphaString;
 import net.ownhero.dev.kanuni.annotations.string.AsciiString;
@@ -105,8 +95,6 @@ import net.ownhero.dev.kanuni.annotations.string.SameLength;
 import net.ownhero.dev.kanuni.annotations.string.ShortString;
 import net.ownhero.dev.kanuni.annotations.string.Trimmed;
 import net.ownhero.dev.kanuni.annotations.string.Uppercase;
-import net.ownhero.dev.kanuni.conditions.Condition;
-import net.ownhero.dev.kanuni.conditions.StringCondition;
 
 /**
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
@@ -299,49 +287,35 @@ public final class KanuniClassloader extends ClassLoader {
 		//@formatter:off
 		
 		Class<?>[] kanuniAnnotations = {
-				ArrayContains.class,
-				ArrayIndexRange.class,
-				ArrayIsEmpty.class,
-				ArrayMaxSize.class,
-				ArrayMinSize.class,
-				ArrayNoneNull.class,
-				ArrayNotEmpty.class,
-				ArraySize.class,
 				Contains.class,
 				NoneNull.class,
+				net.ownhero.dev.kanuni.annotations.simple.NoneNull.class,
 				RangeChar.class,
 				RangeDouble.class,
 				RangeFloat.class,
 				RangeInteger.class,
 				RangeLong.class,
-				CollectionContains.class,
-				CollectionIndexRange.class,
-				CollectionIsEmpty.class,
-				CollectionMaxSize.class,
-				CollectionMinSize.class,
-				CollectionNoneNull.class,
-				CollectionNotEmpty.class,
-				CollectionSize.class,
 				Equals.class,
 				Greater.class,
 				GreaterOrEqual.class,
 				Less.class,
 				LessOrEqual.class,
-				//				MapContainsKeysElement.class,
-				//				MapContainsKeysValue.class,
-				//				MapContainsValuesElement.class,
-				//				MapContainsValuesValue.class,
-				//				MapIsEmpty.class,
-				//				MapMaxSize.class,
-				//				MapMinSize.class,
-				//				MapNotEmpty.class,
-				//				MapSize.class,
+				ContainsKey.class,
+				ContainsValue.class,
+				Contains.class,
+				IndexRange.class,
+				IsEmpty.class,
+				MaxSize.class,
+				MinSize.class,
 				Negative.class,
+				NoneNull.class,
+				NotEmpty.class,
 				NotNegative.class,
 				NotNull.class,
 				NotPositive.class,
 				Null.class,
 				Positive.class,
+				Size.class,
 				AlphaNumString.class,
 				AlphaString.class,
 				AsciiString.class,
@@ -436,81 +410,6 @@ public final class KanuniClassloader extends ClassLoader {
 	                                final String instrumentation) {
 		System.err.println("Adding instrumentation: " + instrumentation.trim());
 		this.instrumentations.add(instrumentation);
-	}
-	
-	/**
-	 * @param class1
-	 * @param markers
-	 * @return
-	 */
-	private String buildArray(final Class<String> class1,
-	                          final SortedSet<String> markers) {
-		StringBuilder builder = new StringBuilder();
-		
-		builder.append("new ").append(class1.getCanonicalName()).append('[');
-		builder.append("] {");
-		
-		StringBuilder innerBuilder = new StringBuilder();
-		
-		for (String string : markers) {
-			if (innerBuilder.length() != 0) {
-				innerBuilder.append(", ");
-			}
-			innerBuilder.append("\\" + string);
-		}
-		
-		builder.append(innerBuilder);
-		builder.append("}");
-		
-		return builder.toString();
-	}
-	
-	/**
-	 * @param annotation
-	 * @param template
-	 * @param markers
-	 * @param markerIndex
-	 * @return
-	 */
-	private String getBehaviorInstrumentation(final Annotation annotation,
-	                                          final String template,
-	                                          final Map<Integer, SortedSet<String>> markers,
-	                                          final int markerIndex) {
-		String instrumentation = String.format("%s", template);
-		
-		// TODO this should not be String, but the corresponding type of the
-		// parameters
-		// TODO make sure all parameters in markers list have the same type
-		String theArray = buildArray(String.class, markers.get(markerIndex));
-		
-		instrumentation = instrumentation.replaceAll("\\$" + "String" + ":marker\\$", theArray);
-		Pattern pattern = Pattern.compile("\\$([A-Za-z:]+)\\$");
-		Matcher matcher = pattern.matcher(instrumentation);
-		
-		while (matcher.find()) {
-			String memberName = matcher.group().substring(1);
-			memberName = memberName.substring(0, memberName.length() - 1);
-			
-			if (!memberName.contains(":")) {
-				Object memberValue = getMemberValue(annotation, memberName);
-				instrumentation = instrumentation.replaceAll("\\$" + memberName + "\\$", memberValue.toString());
-			}
-		}
-		
-		// prepend package
-		instrumentation = Condition.class.getPackage().getName() + "." + instrumentation + ";";
-		
-		// TODO This will fail, e.g. when using @Matches("$foo:bar$") - what
-		// actually makes no sense.
-		// But assume we would have an @StringEquals("$foo:bar$"), this would
-		// break the condition for valid instrumentation.
-		StringCondition.notMatches(instrumentation, "\\$[A-Za-z:]+\\$",
-		                           "Some of the placeholder in the template were not processed correctly: %s",
-		                           instrumentation);
-		StringCondition.notEmpty(instrumentation, "The instrumentation string might never be empty.");
-		
-		// System.err.println("generated instrumentation: " + instrumentation);
-		return instrumentation;
 	}
 	
 	/**
@@ -633,37 +532,6 @@ public final class KanuniClassloader extends ClassLoader {
 					}
 					
 					addInstrumentation(behavior, creator.createBehaviorInstrumentation(annotation, behavior, markers));
-					
-					// TODO remove remaining crap
-					
-					// @SuppressWarnings ("unchecked")
-					// Set<String> memberNames = annotation.getMemberNames();
-					//
-					// // Add all field names (member names) of the annotation
-					// // which aren't set explicitly.
-					// memberNames.addAll(getDeclaredMemberNames(annotation));
-					//
-					// creator.createBehaviorInstrumentation(annotation,
-					// behavior, markers);
-					//
-					// if ((memberNames != null) && !memberNames.isEmpty()) {
-					// // process annotations with parameters
-					// if (memberNames.contains("marker")) {
-					// ArrayMemberValue amv = (ArrayMemberValue)
-					// getMemberValue(annotation, "marker");
-					//
-					// for (int markerIndex : convertMarkerIndexes(amv)) {
-					// for (String template :
-					// methodAnnotations.get(annotation.getTypeName())) {
-					// addInstrumentation(behavior,
-					// getBehaviorInstrumentation(annotation, template, markers,
-					// markerIndex));
-					// }
-					// }
-					// }
-					//
-					// }
-					
 				}
 			}
 		}
@@ -760,8 +628,7 @@ public final class KanuniClassloader extends ClassLoader {
 		for (Annotation[] parAnnotations : annotations) {
 			// for each annotation
 			for (Annotation annotation : parAnnotations) {
-				if (annotation.getTypeName().equals(Marker.class.getCanonicalName())
-						&& parameterAnnotations.containsKey(annotation.getTypeName())) {
+				if (annotation.getTypeName().equals(Marker.class.getCanonicalName())) {
 					String parameterName = "$" + (i);
 					
 					int markerIndex = getMarkerIndex(annotation);

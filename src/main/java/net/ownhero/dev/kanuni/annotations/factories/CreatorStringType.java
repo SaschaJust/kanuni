@@ -46,7 +46,7 @@ public class CreatorStringType implements Creator {
 	public String createBehaviorInstrumentation(final Annotation annotation,
 	                                            final CtBehavior behavior,
 	                                            final Map<Integer, SortedSet<String>> markers) {
-		throw new MalformedAnnotationException(CreatorStringType.class.getName() + ": unsupported behavior ("
+		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported behavior ("
 		        + behavior.getName() + ") annotation: " + annotation.getTypeName());
 	}
 	
@@ -100,7 +100,7 @@ public class CreatorStringType implements Creator {
 		} else if (annotation.getTypeName().equals(Uppercase.class.getName())) {
 			builder.append("uppercase");
 		} else {
-			throw new MalformedAnnotationException(CreatorStringType.class.getName() + " does not support annotation: "
+			throw new MalformedAnnotationException(this.getClass().getName() + " does not support annotation: "
 			                                       + annotation.getTypeName());
 		}
 		

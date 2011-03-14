@@ -14,6 +14,7 @@ import javassist.bytecode.annotation.StringMemberValue;
 import net.ownhero.dev.kanuni.annotations.string.MaxLength;
 import net.ownhero.dev.kanuni.annotations.string.MinLength;
 import net.ownhero.dev.kanuni.annotations.string.SameLength;
+import net.ownhero.dev.kanuni.conditions.CollectionCondition;
 import net.ownhero.dev.kanuni.conditions.StringCondition;
 import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
 import net.ownhero.dev.kanuni.loader.KanuniClassloader;
@@ -37,6 +38,10 @@ public class CreatorStringLength implements Creator {
 		if (annotation.getTypeName().equals(SameLength.class.getName())) {
 			StringBuilder builder = new StringBuilder();
 			
+			CollectionCondition.notEmpty(markers.keySet(),
+			                             "Marker set of behavior annotations for " + SameLength.class.getName()
+			                                     + " may not be empty.");
+
 			for (Integer markerId : markers.keySet()) {
 				StringBuilder arrayBuilder = new StringBuilder();
 				String initialPrepend = "new String[] { ";
@@ -62,6 +67,8 @@ public class CreatorStringLength implements Creator {
 				builder.append(";");
 				builder.append(System.getProperty("line.separator"));
 			}
+			
+			StringCondition.notEmpty(builder.toString(), "Successful created annotations may never be empty.");
 			
 			return builder.toString();
 		} else {
