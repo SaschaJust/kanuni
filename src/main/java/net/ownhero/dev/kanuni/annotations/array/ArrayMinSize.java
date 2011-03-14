@@ -9,7 +9,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import net.ownhero.dev.kanuni.annotations.meta.ConditionPattern;
+import net.ownhero.dev.kanuni.annotations.factories.CreatorArraySize;
+import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 
 /**
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
@@ -17,7 +18,7 @@ import net.ownhero.dev.kanuni.annotations.meta.ConditionPattern;
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
-@ConditionPattern ("ArrayCondition.minSize($pname$, new Integer($min$), $value$, new Object[0])")
+@FactoryClass (CreatorArraySize.class)
 @Target (value = { ElementType.PARAMETER })
 public @interface ArrayMinSize {
 	

@@ -6,8 +6,9 @@ package main;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.ownhero.dev.kanuni.annotations.string.AnnotatedForArray;
-import net.ownhero.dev.kanuni.annotations.string.AnnotatedForString;
+import net.ownhero.dev.kanuni.annotations.AnnotatedForArray;
+import net.ownhero.dev.kanuni.annotations.AnnotatedForBounds;
+import net.ownhero.dev.kanuni.annotations.AnnotatedForString;
 
 /**
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
@@ -103,7 +104,8 @@ public final class TestMain {
 	 */
 	public static void main(final String[] args) {
 		AnnotatedForString afs = new AnnotatedForString();
-		new AnnotatedForArray();
+		AnnotatedForArray afa = new AnnotatedForArray();
+		new AnnotatedForBounds();
 		
 		try {
 			afs.maxLength3("123456789");
@@ -141,6 +143,19 @@ public final class TestMain {
 		} catch (AssertionError e) {
 		}
 		
+		try {
+			afa.testArrayContainsElement(new int[] { 1, 2, 3 }, 0);
+			addError("testArrayContainsElement_invalid");
+		} catch (AssertionError e) {
+		}
+		
+		try {
+			afa.testArrayContainsElement(new int[] { 1, 2, 3 }, 2);
+		} catch (AssertionError e) {
+			addError("testArrayContainsElement_valid");
+		}
+		
+		System.err.println("Errors: " + errors.size());
 		for (Error error : errors) {
 			System.err.println(error);
 		}

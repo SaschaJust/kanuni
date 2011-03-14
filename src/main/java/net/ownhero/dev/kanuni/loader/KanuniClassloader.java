@@ -47,14 +47,64 @@ import javassist.bytecode.annotation.MemberValue;
 import javassist.bytecode.annotation.MemberValueVisitor;
 import javassist.bytecode.annotation.ShortMemberValue;
 import javassist.bytecode.annotation.StringMemberValue;
+import net.ownhero.dev.kanuni.annotations.array.ArrayContains;
+import net.ownhero.dev.kanuni.annotations.array.ArrayIndexRange;
+import net.ownhero.dev.kanuni.annotations.array.ArrayIsEmpty;
+import net.ownhero.dev.kanuni.annotations.array.ArrayMaxSize;
+import net.ownhero.dev.kanuni.annotations.array.ArrayMinSize;
+import net.ownhero.dev.kanuni.annotations.array.ArrayNoneNull;
+import net.ownhero.dev.kanuni.annotations.array.ArrayNotEmpty;
+import net.ownhero.dev.kanuni.annotations.array.ArraySize;
+import net.ownhero.dev.kanuni.annotations.bevahiors.Contains;
+import net.ownhero.dev.kanuni.annotations.bevahiors.NoneNull;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeChar;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeDouble;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeFloat;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeInteger;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeLong;
+import net.ownhero.dev.kanuni.annotations.collection.CollectionContains;
+import net.ownhero.dev.kanuni.annotations.collection.CollectionIndexRange;
+import net.ownhero.dev.kanuni.annotations.collection.CollectionIsEmpty;
+import net.ownhero.dev.kanuni.annotations.collection.CollectionMaxSize;
+import net.ownhero.dev.kanuni.annotations.collection.CollectionMinSize;
+import net.ownhero.dev.kanuni.annotations.collection.CollectionNoneNull;
+import net.ownhero.dev.kanuni.annotations.collection.CollectionNotEmpty;
+import net.ownhero.dev.kanuni.annotations.collection.CollectionSize;
+import net.ownhero.dev.kanuni.annotations.compare.Equals;
+import net.ownhero.dev.kanuni.annotations.compare.Greater;
+import net.ownhero.dev.kanuni.annotations.compare.GreaterOrEqual;
+import net.ownhero.dev.kanuni.annotations.compare.Less;
+import net.ownhero.dev.kanuni.annotations.compare.LessOrEqual;
 import net.ownhero.dev.kanuni.annotations.factories.Creator;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 import net.ownhero.dev.kanuni.annotations.meta.Marker;
+import net.ownhero.dev.kanuni.annotations.simple.Negative;
+import net.ownhero.dev.kanuni.annotations.simple.NotNegative;
+import net.ownhero.dev.kanuni.annotations.simple.NotNull;
+import net.ownhero.dev.kanuni.annotations.simple.NotPositive;
+import net.ownhero.dev.kanuni.annotations.simple.Null;
+import net.ownhero.dev.kanuni.annotations.simple.Positive;
+import net.ownhero.dev.kanuni.annotations.string.AlphaNumString;
+import net.ownhero.dev.kanuni.annotations.string.AlphaString;
+import net.ownhero.dev.kanuni.annotations.string.AsciiString;
+import net.ownhero.dev.kanuni.annotations.string.ByteString;
+import net.ownhero.dev.kanuni.annotations.string.DigitString;
+import net.ownhero.dev.kanuni.annotations.string.DoubleString;
+import net.ownhero.dev.kanuni.annotations.string.EmptyString;
+import net.ownhero.dev.kanuni.annotations.string.FloatString;
+import net.ownhero.dev.kanuni.annotations.string.HexString;
+import net.ownhero.dev.kanuni.annotations.string.IntegerString;
+import net.ownhero.dev.kanuni.annotations.string.Length;
+import net.ownhero.dev.kanuni.annotations.string.LongString;
+import net.ownhero.dev.kanuni.annotations.string.Lowercase;
+import net.ownhero.dev.kanuni.annotations.string.Matches;
+import net.ownhero.dev.kanuni.annotations.string.MaxLength;
+import net.ownhero.dev.kanuni.annotations.string.MinLength;
+import net.ownhero.dev.kanuni.annotations.string.NotEmptyString;
+import net.ownhero.dev.kanuni.annotations.string.SameLength;
+import net.ownhero.dev.kanuni.annotations.string.ShortString;
+import net.ownhero.dev.kanuni.annotations.string.Trimmed;
+import net.ownhero.dev.kanuni.annotations.string.Uppercase;
 import net.ownhero.dev.kanuni.conditions.Condition;
 import net.ownhero.dev.kanuni.conditions.StringCondition;
 
@@ -153,6 +203,67 @@ public final class KanuniClassloader extends ClassLoader {
 	private static boolean                    assertionsEnabled      = false;
 	
 	/**
+	 * @param memberValue
+	 * @return
+	 */
+	public static Integer[] convertMarkerIndexes(final ArrayMemberValue memberValue) {
+		final LinkedList<Integer> markerIndexes = new LinkedList<Integer>();
+		IntegerValueVisitor visitor = new KanuniClassloader().new IntegerValueVisitor(markerIndexes);
+		
+		for (MemberValue meValue : memberValue.getValue()) {
+			meValue.accept(visitor);
+		}
+		
+		return markerIndexes.toArray(new Integer[0]);
+	}
+	
+	/**
+	 * @param annotation
+	 * @return
+	 */
+	public static Set<String> getDeclaredMemberNames(final Annotation annotation) {
+		try {
+			CtClass ctClass = classPool.get(annotation.getTypeName());
+			HashSet<String> retSet = new HashSet<String>();
+			
+			for (CtBehavior ctBehavior : ctClass.getDeclaredMethods()) {
+				retSet.add(ctBehavior.getName());
+			}
+			
+			return retSet;
+		} catch (NotFoundException e) {
+			e.printStackTrace();
+			return new HashSet<String>();
+		}
+	}
+	
+	/**
+	 * @param annotation
+	 * @param memberName
+	 * @return
+	 */
+	public static Object getMemberValue(final Annotation annotation,
+	                                    final String memberName) {
+		Object memberValue = annotation.getMemberValue(memberName);
+		
+		if (memberValue == null) {
+			CtClass ctClass;
+			
+			try {
+				ctClass = classPool.get(annotation.getTypeName());
+				
+				MethodInfo info = ctClass.getDeclaredMethod(memberName).getMethodInfo();
+				AnnotationDefaultAttribute ada = (AnnotationDefaultAttribute) info.getAttribute(AnnotationDefaultAttribute.tag);
+				memberValue = ada.getDefaultValue();
+			} catch (NotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return memberValue;
+	}
+	
+	/**
 	 * @return the assertionsEnabled
 	 */
 	public static boolean isAssertionsEnabled() {
@@ -187,40 +298,71 @@ public final class KanuniClassloader extends ClassLoader {
 		
 		//@formatter:off
 		
-		Class<?>[] kanuniAnnotations = { 
-//				ArrayContainsElement.class,
-//				ArrayIndexRange.class,
-//				ArrayIsEmpty.class,
-//				ArrayMaxSize.class,
-//				ArrayMinSize.class,
-//				ArrayNoneNull.class,
-//				ArrayNotEmpty.class,
-//				ArraySize.class,
-//				AlphaNumString.class,
-//				AlphaString.class,
-//				AsciiString.class,
-//				ByteString.class,
-//				DigitString.class,
-//				DoubleString.class,
-//				FloatString.class,
-//				HexString.class,
-//				IntegerString.class,
-//				LongString.class,
-//				Lowercase.class,
-//				Matches.class,
-//				MaxLength.class,
-//				MinLength.class,
-//				SameLength.class,
-//				ShortString.class,
-//				Trimmed.class,
-//				Uppercase.class,
-//				Marker.class,
-//				Length.class,
+		Class<?>[] kanuniAnnotations = {
+				ArrayContains.class,
+				ArrayIndexRange.class,
+				ArrayIsEmpty.class,
+				ArrayMaxSize.class,
+				ArrayMinSize.class,
+				ArrayNoneNull.class,
+				ArrayNotEmpty.class,
+				ArraySize.class,
+				Contains.class,
+				NoneNull.class,
 				RangeChar.class,
 				RangeDouble.class,
 				RangeFloat.class,
 				RangeInteger.class,
-				RangeLong.class
+				RangeLong.class,
+				CollectionContains.class,
+				CollectionIndexRange.class,
+				CollectionIsEmpty.class,
+				CollectionMaxSize.class,
+				CollectionMinSize.class,
+				CollectionNoneNull.class,
+				CollectionNotEmpty.class,
+				CollectionSize.class,
+				Equals.class,
+				Greater.class,
+				GreaterOrEqual.class,
+				Less.class,
+				LessOrEqual.class,
+				//				MapContainsKeysElement.class,
+				//				MapContainsKeysValue.class,
+				//				MapContainsValuesElement.class,
+				//				MapContainsValuesValue.class,
+				//				MapIsEmpty.class,
+				//				MapMaxSize.class,
+				//				MapMinSize.class,
+				//				MapNotEmpty.class,
+				//				MapSize.class,
+				Negative.class,
+				NotNegative.class,
+				NotNull.class,
+				NotPositive.class,
+				Null.class,
+				Positive.class,
+				AlphaNumString.class,
+				AlphaString.class,
+				AsciiString.class,
+				ByteString.class,
+				DigitString.class,
+				DoubleString.class,
+				EmptyString.class,
+				FloatString.class,
+				HexString.class,
+				IntegerString.class,
+				Length.class,
+				LongString.class,
+				Lowercase.class,
+				Matches.class,
+				MaxLength.class,
+				MinLength.class,
+				NotEmptyString.class,
+				SameLength.class,
+				ShortString.class,
+				Trimmed.class,
+				Uppercase.class
 		};
 		
 		//@formatter:on
@@ -292,7 +434,7 @@ public final class KanuniClassloader extends ClassLoader {
 	 */
 	private void addInstrumentation(final CtBehavior behavior,
 	                                final String instrumentation) {
-		System.err.println("Adding instrumentation: " + instrumentation);
+		System.err.println("Adding instrumentation: " + instrumentation.trim());
 		this.instrumentations.add(instrumentation);
 	}
 	
@@ -321,21 +463,6 @@ public final class KanuniClassloader extends ClassLoader {
 		builder.append("}");
 		
 		return builder.toString();
-	}
-	
-	/**
-	 * @param memberValue
-	 * @return
-	 */
-	private Integer[] convertMarkerIndexes(final ArrayMemberValue memberValue) {
-		final LinkedList<Integer> markerIndexes = new LinkedList<Integer>();
-		IntegerValueVisitor visitor = new IntegerValueVisitor(markerIndexes);
-		
-		for (MemberValue meValue : memberValue.getValue()) {
-			meValue.accept(visitor);
-		}
-		
-		return markerIndexes.toArray(new Integer[0]);
 	}
 	
 	/**
@@ -390,26 +517,6 @@ public final class KanuniClassloader extends ClassLoader {
 	 * @param annotation
 	 * @return
 	 */
-	private Set<String> getDeclaredMemberNames(final Annotation annotation) {
-		try {
-			CtClass ctClass = classPool.get(annotation.getTypeName());
-			HashSet<String> retSet = new HashSet<String>();
-			
-			for (CtBehavior ctBehavior : ctClass.getDeclaredMethods()) {
-				retSet.add(ctBehavior.getName());
-			}
-			
-			return retSet;
-		} catch (NotFoundException e) {
-			e.printStackTrace();
-			return new HashSet<String>();
-		}
-	}
-	
-	/**
-	 * @param annotation
-	 * @return
-	 */
 	private int getMarkerIndex(final Annotation annotation) {
 		MemberValue memberValue = (MemberValue) getMemberValue(annotation, "value");
 		final LinkedList<Integer> markerIndexes = new LinkedList<Integer>();
@@ -420,127 +527,6 @@ public final class KanuniClassloader extends ClassLoader {
 		return markerIndexes.iterator().next();
 	}
 	
-	/**
-	 * @param annotation
-	 * @param memberName
-	 * @return
-	 */
-	private Object getMemberValue(final Annotation annotation,
-	                              final String memberName) {
-		Object memberValue = annotation.getMemberValue(memberName);
-		
-		if (memberValue == null) {
-			CtClass ctClass;
-			
-			try {
-				ctClass = classPool.get(annotation.getTypeName());
-				
-				MethodInfo info = ctClass.getDeclaredMethod(memberName).getMethodInfo();
-				AnnotationDefaultAttribute ada = (AnnotationDefaultAttribute) info.getAttribute(AnnotationDefaultAttribute.tag);
-				memberValue = ada.getDefaultValue();
-			} catch (NotFoundException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return memberValue;
-	}
-	
-	/**
-	 * @param annotation
-	 * @param parameterName
-	 * @param parameterType
-	 * @param template
-	 * @return
-	 */
-	private String getParameterInstrumentation(final Annotation annotation,
-	                                           final String parameterName,
-	                                           final CtClass parameterType,
-	                                           final String template,
-	                                           final Map<Integer, SortedSet<String>> markers) {
-		Condition.notNull(annotation,
-		                  "When instrumention is requested for parameters the corresponding annotation might never be (null).");
-		StringCondition.matches(parameterName,
-		                        "\\$[0-9]+",
-		                        "Parameter names must match the pattern '\\$[0-9]+' since they are replace by javassist on compile. Got: %s",
-		                        parameterName);
-		Condition.notNull(parameterType,
-		                  "Every parameter an instrumentation is requested for has to provide a proper type, but parameterType was set to (null).");
-		StringCondition.notEmpty(template,
-		                         "The template of the annotation the instrumentation is build for cannot be empty.");
-		
-		String instrumentation = String.format("%s", template);
-		
-		// escape the parameterName with '\\' since '$' will cause
-		// backreferencing when using replaceAll(String, String)
-		instrumentation = instrumentation.replaceAll("\\$pname\\$", "\\" + parameterName);
-		instrumentation = instrumentation.replaceAll("\\$ptype\\$", parameterType.getName());
-		
-		Pattern pattern = Pattern.compile("\\$([A-Za-z:]+)\\$");
-		Matcher matcher = pattern.matcher(instrumentation);
-		
-		while (matcher.find()) {
-			String memberName = matcher.group().substring(1);
-			memberName = memberName.substring(0, memberName.length() - 1);
-			Object memberValue = getMemberValue(annotation, memberName);
-			if (memberName.equals("marker")) {
-				ArrayMemberValue amv = (ArrayMemberValue) memberValue;
-				if (amv.getValue().length > 1) {
-					for (MemberValue marker : amv.getValue()) {
-						String markerParameterName = " new Object[] { "
-						        + markers.get(Integer.parseInt(marker.toString())).first() + " } ";
-						instrumentation = instrumentation.replace("$" + memberName + "$", markerParameterName);
-					}
-				} else {
-					// TODO check bounds
-					// TODO check list to not be null
-					SortedSet<String> markerNames = markers.get(Integer.parseInt(amv.getValue()[0].toString()));
-					
-					StringBuilder builder = new StringBuilder();
-					
-					if (markerNames.size() > 1) {
-						final String prepend = " new Object[] { ";
-						builder.append(prepend);
-						for (String markerName : markerNames) {
-							if (builder.length() > prepend.length()) {
-								builder.append(", ");
-							}
-							builder.append(markerName);
-						}
-						builder.append(" } ");
-					} else {
-						String markerName = markerNames.first();
-						markerNames.remove(markerName);
-						builder.append(markerName);
-					}
-					
-					instrumentation = instrumentation.replace("$" + memberName + "$", builder.toString());
-				}
-			} else {
-				instrumentation = instrumentation.replace("$" + memberName + "$", memberValue.toString());
-			}
-			// TODO foreach marker
-			// get marker name (i.e. $2, $3)...
-			// replace $marker$ with $2, $3... correspondinly
-			
-		}
-		
-		// prepend package
-		instrumentation = Condition.class.getPackage().getName() + "." + instrumentation + ";";
-		
-		// TODO This will fail, e.g. when using @Matches("$foo:bar$") - what
-		// actually makes no sense.
-		// But assume we would have an @StringEquals("$foo:bar$"), this would
-		// break the condition for valid instrumentation.
-		StringCondition.notMatches(instrumentation, "\\$[A-Za-z:]+\\$",
-		                           "Some of the placeholder in the template were not processed correctly: %s",
-		                           instrumentation);
-		StringCondition.notEmpty(instrumentation, "The instrumentation string might never be empty.");
-		
-		// System.err.println("generated instrumentation: " + instrumentation);
-		return instrumentation;
-	}
-	
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.ClassLoader#loadClass(java.lang.String)
@@ -549,30 +535,30 @@ public final class KanuniClassloader extends ClassLoader {
 	public Class<?> loadClass(final String name) throws ClassNotFoundException {
 		//@formatter:off
 		
-		/* skip classes that may not be stubbed 
+		/* skip classes that may not be stubbed
 		 * (taken from the JUnit exclude list)
-		 *  
-		 * sun.* 
+		 * 
+		 * sun.*
 		 * com.sun.*
-		 * org.omg.* 
-		 * javax.* 
+		 * org.omg.*
+		 * javax.*
 		 * sunw.*
-		 * java.* 
-		 * org.w3c.dom.* 
+		 * java.*
+		 * org.w3c.dom.*
 		 * org.xml.sax.*
 		 * net.jini.*
 		 */
-		if (name.startsWith("sun.") 
-				|| name.startsWith("com.sun.") 
+		if (name.startsWith("sun.")
+				|| name.startsWith("com.sun.")
 				|| name.startsWith("org.omg.")
-		        || name.startsWith("javax.") 
-		        || name.startsWith("sunw.") 
-		        || name.startsWith("java.")
-		        || name.startsWith("org.w3c.dom.") 
-		        || name.startsWith("org.xml.sax.") 
-		        || name.startsWith("net.jini.")
-		        || name.startsWith("org.eclipse.")) {
-		//@formatter:on
+				|| name.startsWith("javax.")
+				|| name.startsWith("sunw.")
+				|| name.startsWith("java.")
+				|| name.startsWith("org.w3c.dom.")
+				|| name.startsWith("org.xml.sax.")
+				|| name.startsWith("net.jini.")
+				|| name.startsWith("org.eclipse.")) {
+			//@formatter:on
 			return getParent().loadClass(name);
 		} else {
 			try {
@@ -580,8 +566,8 @@ public final class KanuniClassloader extends ClassLoader {
 				CtClass ctClass = classPool.get(name);
 				// only instrument if assertions are enabled
 				return assertionsEnabled
-				                        ? processAnnotations(ctClass).toClass()
-				                        : ctClass.toClass();
+				? processAnnotations(ctClass).toClass()
+				: ctClass.toClass();
 			} catch (NotFoundException e) {
 				throw new ClassNotFoundException(e.getMessage(), e);
 			} catch (CannotCompileException e) {
@@ -639,7 +625,7 @@ public final class KanuniClassloader extends ClassLoader {
 			for (Annotation annotation : annotations) {
 				// we are responsible for this annotation
 				if (methodAnnotations.containsKey(annotation.getTypeName())
-				        || constructorAnnotations.containsKey(annotation.getTypeName())) {
+						|| constructorAnnotations.containsKey(annotation.getTypeName())) {
 					Creator creator = methodAnnotations.get(annotation.getTypeName());
 					
 					if (creator == null) {
@@ -698,7 +684,7 @@ public final class KanuniClassloader extends ClassLoader {
 			// for each annotation
 			for (Annotation annotation : parAnnotations) {
 				if (!annotation.getTypeName().equals(Marker.class.getCanonicalName())
-				        && parameterAnnotations.containsKey(annotation.getTypeName())) {
+						&& parameterAnnotations.containsKey(annotation.getTypeName())) {
 					// method.getMethodInfo().getAttributes().get(i - 1);
 					// String parameterName = attributeInfo.getName();
 					
@@ -775,7 +761,7 @@ public final class KanuniClassloader extends ClassLoader {
 			// for each annotation
 			for (Annotation annotation : parAnnotations) {
 				if (annotation.getTypeName().equals(Marker.class.getCanonicalName())
-				        && parameterAnnotations.containsKey(annotation.getTypeName())) {
+						&& parameterAnnotations.containsKey(annotation.getTypeName())) {
 					String parameterName = "$" + (i);
 					
 					int markerIndex = getMarkerIndex(annotation);

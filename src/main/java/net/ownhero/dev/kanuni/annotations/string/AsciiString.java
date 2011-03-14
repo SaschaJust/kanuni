@@ -9,7 +9,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import net.ownhero.dev.kanuni.annotations.meta.ConditionPattern;
+import net.ownhero.dev.kanuni.annotations.factories.CreatorStringType;
+import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 import net.ownhero.dev.kanuni.loader.KanuniClassloader;
 
 /**
@@ -52,8 +53,8 @@ import net.ownhero.dev.kanuni.loader.KanuniClassloader;
  * 
  * <pre>
  * public class A {
- * 	
- * 	A(@AsciiString(&quot;According to spec 123.45 the submitted string has to be pure ascii.&quot;) 
+ * 
+ * 	A(@AsciiString(&quot;According to spec 123.45 the submitted string has to be pure ascii.&quot;)
  * 	                  final String string) {
  * 		...
  * 	}
@@ -69,8 +70,8 @@ import net.ownhero.dev.kanuni.loader.KanuniClassloader;
  * 
  * <pre>
  * public class A {
- * 	
- * 	A(final String string) { 
+ * 
+ * 	A(final String string) {
  * 		StringCondition.alphanum(string, &quot;According to spec 123.45 the submitted string has to be pure ascii.&quot;);
  * 		...
  * 	}
@@ -101,7 +102,7 @@ import net.ownhero.dev.kanuni.loader.KanuniClassloader;
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
-@ConditionPattern ("StringCondition.ascii($pname$, $value$, new Object[0])")
+@FactoryClass (CreatorStringType.class)
 @Target (value = { ElementType.PARAMETER })
 public @interface AsciiString {
 	

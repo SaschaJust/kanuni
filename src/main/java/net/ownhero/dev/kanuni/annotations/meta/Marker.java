@@ -13,7 +13,6 @@ import java.lang.annotation.Target;
  * 
  */
 @Retention (RetentionPolicy.RUNTIME)
-@ConditionPattern ("")
 @Target (value = { ElementType.PARAMETER })
 public @interface Marker {
 	
