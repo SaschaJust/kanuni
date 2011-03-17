@@ -27,7 +27,7 @@ import net.ownhero.dev.kanuni.loader.KanuniClassloader;
 import org.apache.commons.lang.StringEscapeUtils;
 
 /**
- * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ * @author Sascha Just <sascha.just@own-hero.net>
  * 
  */
 public class CreatorRange implements Creator {

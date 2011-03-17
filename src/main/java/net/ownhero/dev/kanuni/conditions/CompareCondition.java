@@ -8,7 +8,7 @@ import org.apache.commons.lang.math.NumberUtils;
 /**
  * Handles all comparison checks. Arguments are being checked to be not null.
  * 
- * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ * @author Sascha Just <sascha.just@own-hero.net>
  * 
  */
 public final class CompareCondition {

@@ -8,9 +8,10 @@
 <listEntry value="1"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+<listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
 <listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="main.TestMain"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="kanuni"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Djava.system.class.loader=net.ownhero.dev.kanuni.loader.KanuniClassloader -ea -Ddebug"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Djava.system.class.loader=net.ownhero.dev.kanuni.loader.KanuniClassloader -ea"/>
 </launchConfiguration>

@@ -11,13 +11,17 @@ import java.lang.annotation.Target;
 
 import net.ownhero.dev.kanuni.annotations.factories.CreatorStringType;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
+import net.ownhero.dev.kanuni.annotations.simple.NotNull;
 import net.ownhero.dev.kanuni.loader.KanuniClassloader;
 
 /**
- * Annotation to assert a string is either empty (but not null) or consists only
- * of alpha-numeric characters. The annotation will cause the
- * {@link KanuniClassloader} to insert appropriate assertions at the beginning
- * of the method/constructor at load time.
+ * Annotation to assert a string is either empty or consists only of
+ * alpha-numeric characters. If the string is null, the annotation will
+ * <b>not</b> trigger a violation. If you want the string also be checked to be
+ * not null use the {@link NotNull} annotation in addition.
+ * 
+ * The annotation will cause the {@link KanuniClassloader} to insert appropriate
+ * assertions at the beginning of the method/constructor at load time.
  * 
  * <h3>Example 1</h3>
  * <dl>
@@ -53,52 +57,62 @@ import net.ownhero.dev.kanuni.loader.KanuniClassloader;
  * 
  * <pre>
  * public class A {
- * 
+ * 	
  * 	A(@AlphaNumString(&quot;According to spec 123.45 the submitted string has to be alpha-numerical.&quot;)
  * 	                  final String string) {
  * 		...
  * 	}
  * }
  * 
+ * 
+ * 
+ * 
+ * 
  * </pre>
  * 
- * </dt></dl> This code will be translated by the {@link KanuniClassloader} to:
+ * </dt> </dl>
  * 
+ * This code will be translated by the {@link KanuniClassloader} to:
  * 
  * <dt>
  * <dl>
  * 
  * <pre>
  * public class A {
- * 
+ * 	
  * 	A(final String string) {
  * 		StringCondition.alphanum(string, &quot;According to spec 123.45 the submitted string has to be alpha-numerical.&quot;);
  * 		...
  * 	}
  * }
  * 
+ * 
+ * 
+ * 
+ * 
  * </pre>
  * 
- * </dt></dl>
- * 
- * 
+ * </dt> </dl>
  * 
  * @see AlphaNumString
  * @see AlphaString
  * @see AsciiString
  * @see ByteString
+ * @see CreatorStringType
  * @see DigitString
  * @see DoubleString
+ * @see EmptyString
  * @see FloatString
  * @see HexString
  * @see IntegerString
  * @see LongString
  * @see Lowercase
+ * @see NotEmptyString
  * @see ShortString
  * @see Trimmed
  * @see Uppercase
  * 
- * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ * @author Sascha Just <sascha.just@own-hero.net>
  */
 
 @Documented

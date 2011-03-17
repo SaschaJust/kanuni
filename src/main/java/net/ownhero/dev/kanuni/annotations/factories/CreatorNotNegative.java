@@ -15,7 +15,7 @@ import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
 import net.ownhero.dev.kanuni.loader.KanuniClassloader;
 
 /**
- * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ * @author Sascha Just <sascha.just@own-hero.net>
  * 
  */
 public class CreatorNotNegative implements Creator {

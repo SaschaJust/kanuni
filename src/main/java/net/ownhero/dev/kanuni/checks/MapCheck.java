@@ -10,7 +10,7 @@ import net.ownhero.dev.kanuni.exceptions.CheckViolation;
 import org.apache.commons.collections.CollectionUtils;
 
 /**
- * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ * @author Sascha Just <sascha.just@own-hero.net>
  * 
  */
 public class MapCheck {

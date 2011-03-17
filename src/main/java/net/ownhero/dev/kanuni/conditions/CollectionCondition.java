@@ -9,7 +9,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 
 /**
- * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ * @author Sascha Just <sascha.just@own-hero.net>
  * 
  */
 public final class CollectionCondition {
@@ -222,9 +222,10 @@ public final class CollectionCondition {
 		                collection.size(), String.format(formatString, arguments));
 	}
 	
+	
 	/**
 	 * @param collection
-	 * @param length
+	 * @param index
 	 * @param formatString
 	 * @param arguments
 	 */
@@ -233,10 +234,10 @@ public final class CollectionCondition {
 	                                    final String formatString,
 	                                    final Object... arguments) {
 		assert index < collection.size() : Condition.getCallerString()
-		        + String.format("Collection index %s invalid for collection size %s. Violataion: %s", index,
+		+ String.format("Collection index %s invalid for collection size %s. Violataion: %s", index,
 		                collection.size(), String.format(formatString, arguments));
 		assert index >= 0 : Condition.getCallerString()
-		        + String.format("Collection index %s invalid for collection size %s. Violataion: %s", index,
+		+ String.format("Collection index %s invalid for collection size %s. Violataion: %s", index,
 		                collection.size(), String.format(formatString, arguments));
 	}
 	

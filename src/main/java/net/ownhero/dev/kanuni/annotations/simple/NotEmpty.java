@@ -14,7 +14,7 @@ import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 
 
 /**
- * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ * @author Sascha Just <sascha.just@own-hero.net>
  *
  */
 @Documented

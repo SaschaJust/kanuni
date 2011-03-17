@@ -6,7 +6,7 @@ package net.ownhero.dev.kanuni.conditions;
 import org.apache.commons.lang.math.NumberRange;
 
 /**
- * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ * @author Sascha Just <sascha.just@own-hero.net>
  * 
  */
 public final class BoundsCondition {

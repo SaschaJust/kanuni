@@ -14,11 +14,11 @@ import net.ownhero.dev.kanuni.annotations.simple.Size;
 import net.ownhero.dev.kanuni.annotations.simple.ValidIndex;
 
 /**
- * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ * @author Sascha Just <sascha.just@own-hero.net>
  * 
  */
 /**
- * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ * @author Sascha Just <sascha.just@own-hero.net>
  * 
  */
 public class AnnotatedForArray {

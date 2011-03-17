@@ -57,9 +57,11 @@ import net.ownhero.dev.kanuni.annotations.compare.EqualsInt;
 import net.ownhero.dev.kanuni.annotations.compare.Greater;
 import net.ownhero.dev.kanuni.annotations.compare.GreaterInt;
 import net.ownhero.dev.kanuni.annotations.compare.GreaterOrEqual;
+import net.ownhero.dev.kanuni.annotations.compare.GreaterOrEqualInt;
 import net.ownhero.dev.kanuni.annotations.compare.Less;
 import net.ownhero.dev.kanuni.annotations.compare.LessInt;
 import net.ownhero.dev.kanuni.annotations.compare.LessOrEqual;
+import net.ownhero.dev.kanuni.annotations.compare.LessOrEqualInt;
 import net.ownhero.dev.kanuni.annotations.compare.NotEquals;
 import net.ownhero.dev.kanuni.annotations.compare.NotEqualsInt;
 import net.ownhero.dev.kanuni.annotations.factories.Creator;
@@ -105,7 +107,7 @@ import net.ownhero.dev.kanuni.conditions.Condition;
 import net.ownhero.dev.kanuni.conditions.StringCondition;
 
 /**
- * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ * @author Sascha Just <sascha.just@own-hero.net>
  * 
  */
 public final class KanuniClassloader extends ClassLoader {
@@ -202,7 +204,7 @@ public final class KanuniClassloader extends ClassLoader {
 	
 	/**
 	 * @param memberValue
-	 * @return
+	 * @return an array containing all marker indexes to a memberValue
 	 */
 	public static Integer[] convertMarkerIndexes(final ArrayMemberValue memberValue) {
 		final LinkedList<Integer> markerIndexes = new LinkedList<Integer>();
@@ -217,7 +219,7 @@ public final class KanuniClassloader extends ClassLoader {
 	
 	/**
 	 * @param annotation
-	 * @return
+	 * @return returns a set with all fields of the annotation
 	 */
 	public static Set<String> getDeclaredMemberNames(final Annotation annotation) {
 		try {
@@ -238,7 +240,7 @@ public final class KanuniClassloader extends ClassLoader {
 	/**
 	 * @param annotation
 	 * @param memberName
-	 * @return
+	 * @return the actual value of a member of the annotation
 	 */
 	public static Object getMemberValue(final Annotation annotation,
 	                                    final String memberName) {
@@ -311,15 +313,15 @@ public final class KanuniClassloader extends ClassLoader {
 				Greater.class,
 				GreaterInt.class,
 				GreaterOrEqual.class,
+				GreaterOrEqualInt.class,
 				Less.class,
 				LessInt.class,
 				LessOrEqual.class,
+				LessOrEqualInt.class,
 				NotEquals.class,
 				NotEqualsInt.class,
 				ContainsKey.class,
 				ContainsValue.class,
-				FactoryClass.class,
-				Marker.class,
 				Contains.class,
 				Empty.class,
 				MaxSize.class,
@@ -397,7 +399,7 @@ public final class KanuniClassloader extends ClassLoader {
 	
 	/**
 	 * @param interfaze
-	 * @return
+	 * @return a collection containing all interfaces of the given class
 	 */
 	public static Collection<Class<?>> getInterfaces(final Class<?> interfaze) {
 		LinkedList<Class<?>> ifaces = new LinkedList<Class<?>>();
@@ -463,7 +465,7 @@ public final class KanuniClassloader extends ClassLoader {
 	
 	/**
 	 * @param annotation
-	 * @return
+	 * @return the index of the marker using an IntegerValueVisitor
 	 */
 	private int getMarkerIndex(final Annotation annotation) {
 		MemberValue memberValue = (MemberValue) getMemberValue(annotation, "value");
@@ -547,7 +549,7 @@ public final class KanuniClassloader extends ClassLoader {
 	
 	/**
 	 * @param cc
-	 * @return
+	 * @return a CtClass instance after being instrumented
 	 */
 	private CtClass processAnnotations(final CtClass cc) {
 		// process methods
@@ -615,7 +617,8 @@ public final class KanuniClassloader extends ClassLoader {
 	 * @param behavior
 	 * @param annotations
 	 * @param markers
-	 * @return
+	 * @return a map from integer (marker index) to the corresponding argument
+	 *         aliases
 	 */
 	private Map<Integer, SortedSet<String>> processBehaviorParameterAnnotations(final CtBehavior behavior,
 	                                                                            final Annotation[][] annotations,
@@ -701,7 +704,8 @@ public final class KanuniClassloader extends ClassLoader {
 	/**
 	 * @param behavior
 	 * @param annotations
-	 * @return
+	 * @return a map from integer (marker index) to the corresponding argument
+	 *         aliases
 	 */
 	private Map<Integer, SortedSet<String>> processMarkers(final CtBehavior behavior,
 	                                                       final Annotation[][] annotations) {

@@ -34,7 +34,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 
 
 /**
- * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ * @author Sascha Just <sascha.just@own-hero.net>
  *
  */
 public class CreatorStringType implements Creator {

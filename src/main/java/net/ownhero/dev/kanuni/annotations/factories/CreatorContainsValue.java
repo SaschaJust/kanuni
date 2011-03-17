@@ -17,7 +17,7 @@ import net.ownhero.dev.kanuni.loader.KanuniClassloader;
 
 
 /**
- * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ * @author Sascha Just <sascha.just@own-hero.net>
  *
  */
 public class CreatorContainsValue implements Creator {

@@ -13,7 +13,7 @@ import net.ownhero.dev.kanuni.utils.KanuniUtils.NumberType;
  * Class that holds all checks on strings. Methods will return true on empty
  * strings, but false on <code>null</code>.
  * 
- * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ * @author Sascha Just <sascha.just@own-hero.net>
  * 
  */
 public final class StringCondition {

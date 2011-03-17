@@ -11,7 +11,7 @@ import org.junit.BeforeClass;
 
 
 /**
- * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ * @author Sascha Just <sascha.just@own-hero.net>
  *
  */
 public class ArrayAnnotationTest {

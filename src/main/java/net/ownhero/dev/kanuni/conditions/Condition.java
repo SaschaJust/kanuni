@@ -15,7 +15,7 @@ import org.apache.commons.collections.Predicate;
  * 
  * If you require further checks extend this class correspondingly.
  * 
- * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ * @author Sascha Just <sascha.just@own-hero.net>
  * 
  */
 public final class Condition {
