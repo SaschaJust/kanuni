@@ -507,7 +507,8 @@ public final class KanuniClassloader extends ClassLoader {
 				|| name.startsWith("org.w3c.dom.")
 				|| name.startsWith("org.xml.sax.")
 				|| name.startsWith("net.jini.")
-				|| name.startsWith("org.eclipse.")) {
+				|| name.startsWith("org.eclipse.")
+				|| name.startsWith("org.ccil.")) {
 			//@formatter:on
 			if (debug) {
 				System.err.println("Delegating loading for " + name);

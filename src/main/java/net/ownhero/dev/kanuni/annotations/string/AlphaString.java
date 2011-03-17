@@ -12,11 +12,12 @@ import java.lang.annotation.Target;
 import net.ownhero.dev.kanuni.annotations.factories.CreatorStringType;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 import net.ownhero.dev.kanuni.annotations.simple.NotNull;
+import net.ownhero.dev.kanuni.conditions.StringCondition;
 import net.ownhero.dev.kanuni.loader.KanuniClassloader;
 
 /**
- * Annotation to assert a string is either empty (but not null) or consists only
- * of alpha-numeric characters. If the string is null, the annotation will
+ * Annotation to assert a string is either empty or consists only of
+ * alphabetic characters. If the string is null, the annotation will
  * <b>not</b> trigger a violation. If you want the string also be checked to be
  * not null use the {@link NotNull} annotation in addition.
  * 
@@ -24,72 +25,46 @@ import net.ownhero.dev.kanuni.loader.KanuniClassloader;
  * assertions at the beginning of the method/constructor at load time.
  * 
  * <h3>Example 1</h3>
- * <dl>
- * <dt>
- * 
- * <pre>
+ * <dt><dl><pre>
  * public void someFunction(@AlphaString final String string) {
  * 	...
  * }
- * </pre>
+ * </pre></dt></dl>
  * 
- * </dt>
- * </dl>
- * <br />
  * This code will be translated by the {@link KanuniClassloader} to:
- * <dl>
- * <dt>
  * 
- * <pre>
+ * <dt><dl><pre>
  * public void someFunction(final String string) {
  *  StringCondition.alphanum(string);
  *  ...
  * }
- * </pre>
- * 
- * </dt>
- * </dl>
+ * </pre></dt></dl>
+
  * 
  * <h3>Example 2</h3>
- * 
- * <dt>
- * <dl>
- * 
- * <pre>
+ * <dt><dl><pre>
  * public class A {
- * 	
+ * 
  * 	A(@AlphaString(&quot;According to spec 123.45 the submitted string has to be alphabetic.&quot;)
  * 	                  final String string) {
  * 		...
  * 	}
  * }
+ * </pre></dt></dl>
  * 
+ * This code will be translated by the {@link KanuniClassloader} to:
  * 
- * 
- * </pre>
- * 
- * </dt></dl> This code will be translated by the {@link KanuniClassloader} to:
- * 
- * 
- * <dt>
- * <dl>
- * 
- * <pre>
+ * <dt><dl><pre>
  * public class A {
- * 	
+ * 
  * 	A(final String string) {
  * 		StringCondition.alphanum(string, &quot;According to spec 123.45 the submitted string has to be alphabetic.&quot;);
  * 		...
  * 	}
  * }
+ * </pre></dt></dl>
  * 
- * 
- * 
- * </pre>
- * 
- * </dt></dl>
- * 
- * 
+ * @see StringCondition#alpha(String, String, Object...)
  * 
  * @see AlphaNumString
  * @see AlphaString

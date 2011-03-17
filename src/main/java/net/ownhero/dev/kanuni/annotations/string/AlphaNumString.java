@@ -12,6 +12,7 @@ import java.lang.annotation.Target;
 import net.ownhero.dev.kanuni.annotations.factories.CreatorStringType;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 import net.ownhero.dev.kanuni.annotations.simple.NotNull;
+import net.ownhero.dev.kanuni.conditions.StringCondition;
 import net.ownhero.dev.kanuni.loader.KanuniClassloader;
 
 /**
@@ -24,75 +25,45 @@ import net.ownhero.dev.kanuni.loader.KanuniClassloader;
  * assertions at the beginning of the method/constructor at load time.
  * 
  * <h3>Example 1</h3>
- * <dl>
- * <dt>
- * 
- * <pre>
+ * <dl><dt><pre>
  * public void someFunction(@AlphaNumString final String string) {
  * 	...
  * }
- * </pre>
- * 
- * </dt>
- * </dl>
+ * </pre></dt></dl>
  * <br />
  * This code will be translated by the {@link KanuniClassloader} to:
- * <dl>
- * <dt>
- * 
- * <pre>
+ * <dl><dt><pre>
  * public void someFunction(final String string) {
  *  StringCondition.alphanum(string);
  *  ...
  * }
- * </pre>
- * 
- * </dt>
- * </dl>
+ * </pre></dt></dl>
  * 
  * <h3>Example 2</h3>
  * 
- * <dt>
- * <dl>
- * 
- * <pre>
+ * <dt><dl><pre>
  * public class A {
- * 	
+ * 
  * 	A(@AlphaNumString(&quot;According to spec 123.45 the submitted string has to be alpha-numerical.&quot;)
  * 	                  final String string) {
  * 		...
  * 	}
  * }
- * 
- * 
- * 
- * 
- * 
- * </pre>
- * 
- * </dt> </dl>
+ * </pre></dt></dl>
  * 
  * This code will be translated by the {@link KanuniClassloader} to:
  * 
- * <dt>
- * <dl>
- * 
- * <pre>
+ * <dt><dl><pre>
  * public class A {
- * 	
+ * 
  * 	A(final String string) {
  * 		StringCondition.alphanum(string, &quot;According to spec 123.45 the submitted string has to be alpha-numerical.&quot;);
  * 		...
  * 	}
  * }
+ * </pre></dt> </dl>
  * 
- * 
- * 
- * 
- * 
- * </pre>
- * 
- * </dt> </dl>
+ * @see StringCondition#alphanum(String, String, Object...)
  * 
  * @see AlphaNumString
  * @see AlphaString
