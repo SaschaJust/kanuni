@@ -39,12 +39,12 @@ public final class StringCondition {
 	public static final void alpha(final String string,
 	                               final String formatString,
 	                               final Object... arguments) {
-		assert string != null : Condition.getCallerString()
-		        + String.format("Null is not an alphabetic string. Violation: %s",
-		                        String.format(formatString, arguments));
-		assert (string.length() == 0) || alpha.matcher(string).matches() : Condition.getCallerString()
-		        + String.format("Not an alphabetic string: %s. Violation: %s", string,
-		                        String.format(formatString, arguments));
+		// assert string != null : Condition.getCallerString()
+		// + String.format("Null is not an alphabetic string. Violation: %s",
+		// String.format(formatString, arguments));
+		assert ((string == null) || (string.length() == 0)) || alpha.matcher(string).matches() : Condition.getCallerString()
+		+ String.format("Not an alphabetic string: %s. Violation: %s", string,
+		                String.format(formatString, arguments));
 	}
 	
 	/**
@@ -60,12 +60,12 @@ public final class StringCondition {
 	public static final void alphanum(final String string,
 	                                  final String formatString,
 	                                  final Object... arguments) {
-		assert string != null : Condition.getCallerString()
-		        + String.format("Null is not an alpha-numeric string. Violation: %s",
-		                        String.format(formatString, arguments));
-		assert (string.length() == 0) || alphanum.matcher(string).matches() : Condition.getCallerString()
-		        + String.format("Not an alphanumeric string: %s. Violation: %s", string,
-		                        String.format(formatString, arguments));
+		// assert string != null : Condition.getCallerString()
+		// + String.format("Null is not an alpha-numeric string. Violation: %s",
+		// String.format(formatString, arguments));
+		assert ((string == null) || (string.length() == 0)) || alphanum.matcher(string).matches() : Condition.getCallerString()
+		+ String.format("Not an alphanumeric string: %s. Violation: %s", string,
+		                String.format(formatString, arguments));
 	}
 	
 	/**
@@ -81,11 +81,12 @@ public final class StringCondition {
 	public static final void ascii(final String string,
 	                               final String formatString,
 	                               final Object... arguments) {
-		assert string != null : Condition.getCallerString()
-		        + String.format("Null is not an ascii string. Violation: %s", String.format(formatString, arguments));
-		assert (string.length() == 0) || ascii.matcher(string).matches() : Condition.getCallerString()
-		        + String.format("Not an ascii string: %s. Violation: %s", string,
-		                        String.format(formatString, arguments));
+		// assert string != null : Condition.getCallerString()
+		// + String.format("Null is not an ascii string. Violation: %s",
+		// String.format(formatString, arguments));
+		assert ((string == null) || (string.length() == 0)) || ascii.matcher(string).matches() : Condition.getCallerString()
+		+ String.format("Not an ascii string: %s. Violation: %s", string,
+		                String.format(formatString, arguments));
 	}
 	
 	/**
@@ -118,10 +119,11 @@ public final class StringCondition {
 	public static final void digit(final String string,
 	                               final String formatString,
 	                               final Object... arguments) {
-		assert string != null : Condition.getCallerString()
-		        + String.format("Null is not an digit string. Violation: %s", String.format(formatString, arguments));
-		assert (string.length() == 0) || digit.matcher(string).matches() : Condition.getCallerString()
-		        + String.format("Not a digit string: %s. Violation: %s", string, String.format(formatString, arguments));
+		// assert string != null : Condition.getCallerString()
+		// + String.format("Null is not an digit string. Violation: %s",
+		// String.format(formatString, arguments));
+		assert ((string == null) || (string.length() == 0)) || digit.matcher(string).matches() : Condition.getCallerString()
+		+ String.format("Not a digit string: %s. Violation: %s", string, String.format(formatString, arguments));
 	}
 	
 	/**
@@ -137,12 +139,13 @@ public final class StringCondition {
 	public static final void empty(final String string,
 	                               final String formatString,
 	                               final Object... arguments) {
-		assert string != null : Condition.getCallerString()
-		        + String.format("Null (string) can not hold any length constraints. Violation: %s",
-		                        String.format(formatString, arguments));
-		assert string.length() == 0 : Condition.getCallerString()
-		        + String.format("String is not empty: %s. Violation: %s", string,
-		                        String.format(formatString, arguments));
+		// assert string != null : Condition.getCallerString()
+		// +
+		// String.format("Null (string) can not hold any length constraints. Violation: %s",
+		// String.format(formatString, arguments));
+		assert (string == null) || (string.length() == 0) : Condition.getCallerString()
+		+ String.format("String is not empty: %s. Violation: %s", string,
+		                String.format(formatString, arguments));
 	}
 	
 	/**
@@ -158,10 +161,11 @@ public final class StringCondition {
 	public static final void hex(final String string,
 	                             final String formatString,
 	                             final Object... arguments) {
-		assert string != null : Condition.getCallerString()
-		        + String.format("Null is not an hex string. Violation: %s", String.format(formatString, arguments));
-		assert (string.length() == 0) || xdigit.matcher(string).matches() : Condition.getCallerString()
-		        + String.format("Not a hex string: %s. Violation: %s", string, String.format(formatString, arguments));
+		// assert string != null : Condition.getCallerString()
+		// + String.format("Null is not an hex string. Violation: %s",
+		// String.format(formatString, arguments));
+		assert ((string == null) || (string.length() == 0)) || xdigit.matcher(string).matches() : Condition.getCallerString()
+		+ String.format("Not a hex string: %s. Violation: %s", string, String.format(formatString, arguments));
 	}
 	
 	/**
@@ -177,10 +181,11 @@ public final class StringCondition {
 	public static final void isByte(final String string,
 	                                final String formatString,
 	                                final Object... arguments) {
-		assert string != null : Condition.getCallerString()
-		        + String.format("Null is no Byte. Violation: %s", String.format(formatString, arguments));
-		assert (string.length() == 0) || KanuniUtils.checkNumber(string, NumberType.BYTE) : Condition.getCallerString()
-		        + String.format("String is no Byte: %s. Violation: %s", string, String.format(formatString, arguments));
+		// assert string != null : Condition.getCallerString()
+		// + String.format("Null is no Byte. Violation: %s",
+		// String.format(formatString, arguments));
+		assert ((string == null) || (string.length() == 0)) || KanuniUtils.checkNumber(string, NumberType.BYTE) : Condition.getCallerString()
+		+ String.format("String is no Byte: %s. Violation: %s", string, String.format(formatString, arguments));
 	}
 	
 	/**
@@ -196,11 +201,12 @@ public final class StringCondition {
 	public static final void isDouble(final String string,
 	                                  final String formatString,
 	                                  final Object... arguments) {
-		assert string != null : Condition.getCallerString()
-		        + String.format("Null is no Double. Violation: %s", String.format(formatString, arguments));
-		assert (string.length() == 0) || KanuniUtils.checkNumber(string, NumberType.DOUBLE) : Condition.getCallerString()
-		        + String.format("String is no Double: %s. Violation: %s", string,
-		                        String.format(formatString, arguments));
+		// assert string != null : Condition.getCallerString()
+		// + String.format("Null is no Double. Violation: %s",
+		// String.format(formatString, arguments));
+		assert ((string == null) || (string.length() == 0)) || KanuniUtils.checkNumber(string, NumberType.DOUBLE) : Condition.getCallerString()
+		+ String.format("String is no Double: %s. Violation: %s", string,
+		                String.format(formatString, arguments));
 	}
 	
 	/**
@@ -216,10 +222,11 @@ public final class StringCondition {
 	public static final void isFloat(final String string,
 	                                 final String formatString,
 	                                 final Object... arguments) {
-		assert string != null : Condition.getCallerString()
-		        + String.format("Null is no Float. Violation: %s", String.format(formatString, arguments));
-		assert (string.length() == 0) || KanuniUtils.checkNumber(string, NumberType.FLOAT) : Condition.getCallerString()
-		        + String.format("String is no Float: %s. Violation: %s", string, String.format(formatString, arguments));
+		// assert string != null : Condition.getCallerString()
+		// + String.format("Null is no Float. Violation: %s",
+		// String.format(formatString, arguments));
+		assert ((string == null) || (string.length() == 0)) || KanuniUtils.checkNumber(string, NumberType.FLOAT) : Condition.getCallerString()
+		+ String.format("String is no Float: %s. Violation: %s", string, String.format(formatString, arguments));
 	}
 	
 	/**
@@ -235,11 +242,12 @@ public final class StringCondition {
 	public static final void isInteger(final String string,
 	                                   final String formatString,
 	                                   final Object... arguments) {
-		assert string != null : Condition.getCallerString()
-		        + String.format("Null is no Integer. Violation: %s", String.format(formatString, arguments));
-		assert (string.length() == 0) || KanuniUtils.checkNumber(string, NumberType.INTEGER) : Condition.getCallerString()
-		        + String.format("String is no Integer: %s. Violation: %s", string,
-		                        String.format(formatString, arguments));
+		// assert string != null : Condition.getCallerString()
+		// + String.format("Null is no Integer. Violation: %s",
+		// String.format(formatString, arguments));
+		assert ((string == null) || (string.length() == 0)) || KanuniUtils.checkNumber(string, NumberType.INTEGER) : Condition.getCallerString()
+		+ String.format("String is no Integer: %s. Violation: %s", string,
+		                String.format(formatString, arguments));
 	}
 	
 	/**
@@ -255,10 +263,11 @@ public final class StringCondition {
 	public static final void isLong(final String string,
 	                                final String formatString,
 	                                final Object... arguments) {
-		assert string != null : Condition.getCallerString()
-		        + String.format("Null is no Long. Violation: %s", String.format(formatString, arguments));
-		assert (string.length() == 0) || KanuniUtils.checkNumber(string, NumberType.LONG) : Condition.getCallerString()
-		        + String.format("String is no Long: %s. Violation: %s", string, String.format(formatString, arguments));
+		// assert string != null : Condition.getCallerString()
+		// + String.format("Null is no Long. Violation: %s",
+		// String.format(formatString, arguments));
+		assert ((string == null) || (string.length() == 0)) || KanuniUtils.checkNumber(string, NumberType.LONG) : Condition.getCallerString()
+		+ String.format("String is no Long: %s. Violation: %s", string, String.format(formatString, arguments));
 	}
 	
 	/**
@@ -274,10 +283,11 @@ public final class StringCondition {
 	public static final void isShort(final String string,
 	                                 final String formatString,
 	                                 final Object... arguments) {
-		assert string != null : Condition.getCallerString()
-		        + String.format("Null is no Short. Violation: %s", String.format(formatString, arguments));
-		assert (string.length() == 0) || KanuniUtils.checkNumber(string, NumberType.SHORT) : Condition.getCallerString()
-		        + String.format("String is no Short: %s. Violation: %s", string, String.format(formatString, arguments));
+		// assert string != null : Condition.getCallerString()
+		// + String.format("Null is no Short. Violation: %s",
+		// String.format(formatString, arguments));
+		assert ((string == null) || (string.length() == 0)) || KanuniUtils.checkNumber(string, NumberType.SHORT) : Condition.getCallerString()
+		+ String.format("String is no Short: %s. Violation: %s", string, String.format(formatString, arguments));
 	}
 	
 	/**
@@ -296,15 +306,16 @@ public final class StringCondition {
 	                                final Integer length,
 	                                final String formatString,
 	                                final Object... arguments) {
-		assert string != null : Condition.getCallerString()
-		        + String.format("Null (string) can not hold any length constraints. Violation: %s",
-		                        String.format(formatString, arguments));
+		// assert string != null : Condition.getCallerString()
+		// +
+		// String.format("Null (string) can not hold any length constraints. Violation: %s",
+		// String.format(formatString, arguments));
 		assert length != null : Condition.getCallerString()
-		        + String.format("Null is not a valid length for a string. Violation: %s",
-		                        String.format(formatString, arguments));
-		assert string.length() == length : Condition.getCallerString()
-		        + String.format("String (length=%s) does not have length %s: %s. Violation: %s", string.length(),
-		                        length, string, String.format(formatString, arguments));
+		+ String.format("Null is not a valid length for a string. Violation: %s",
+		                String.format(formatString, arguments));
+		assert (string == null) || (string.length() == length) : Condition.getCallerString()
+		+ String.format("String (length=%s) does not have length %s: %s. Violation: %s", string.length(),
+		                length, string, String.format(formatString, arguments));
 	}
 	
 	/**
@@ -320,11 +331,12 @@ public final class StringCondition {
 	public static final void lowercase(final String string,
 	                                   final String formatString,
 	                                   final Object... arguments) {
-		assert string != null : Condition.getCallerString()
-		        + String.format("Null is not a lowercase string. Violation: %s", String.format(formatString, arguments));
-		assert (string.length() == 0) || lowercase.matcher(string).matches() : Condition.getCallerString()
-		        + String.format("Not a lowercase string: %s. Violation: %s", string,
-		                        String.format(formatString, arguments));
+		// assert string != null : Condition.getCallerString()
+		// + String.format("Null is not a lowercase string. Violation: %s",
+		// String.format(formatString, arguments));
+		assert ((string == null) || (string.length() == 0)) || lowercase.matcher(string).matches() : Condition.getCallerString()
+		+ String.format("Not a lowercase string: %s. Violation: %s", string,
+		                String.format(formatString, arguments));
 	}
 	
 	/**
@@ -343,16 +355,17 @@ public final class StringCondition {
 	                                 final String pattern,
 	                                 final String formatString,
 	                                 final Object... arguments) {
-		assert string != null : Condition.getCallerString()
-		        + String.format("Null is not a valid string. Violation: %s", String.format(formatString, arguments));
+		// assert string != null : Condition.getCallerString()
+		// + String.format("Null is not a valid string. Violation: %s",
+		// String.format(formatString, arguments));
 		assert pattern != null : Condition.getCallerString()
-		        + String.format("Null is not a valid pattern. Violation: %s", String.format(formatString, arguments));
+		+ String.format("Null is not a valid pattern. Violation: %s", String.format(formatString, arguments));
 		assert compilablePattern(pattern) : Condition.getCallerString()
-		        + String.format("The pattern `%s` can not be compiled. Violation: %s", pattern,
-		                        String.format(formatString, arguments));
-		assert Pattern.matches(pattern, string) : Condition.getCallerString()
-		        + String.format("String `%s` does not match pattern: %s. Violation: %s", string, pattern,
-		                        String.format(formatString, arguments));
+		+ String.format("The pattern `%s` can not be compiled. Violation: %s", pattern,
+		                String.format(formatString, arguments));
+		assert (string == null) || Pattern.matches(pattern, string) : Condition.getCallerString()
+		+ String.format("String `%s` does not match pattern: %s. Violation: %s", string, pattern,
+		                String.format(formatString, arguments));
 	}
 	
 	/**
@@ -371,18 +384,19 @@ public final class StringCondition {
 	                                   final Integer max,
 	                                   final String formatString,
 	                                   final Object... arguments) {
-		assert string != null : Condition.getCallerString()
-		        + String.format("Null (string) can not hold any length constraints. Violation: %s",
-		                        String.format(formatString, arguments));
+		// assert string != null : Condition.getCallerString()
+		// +
+		// String.format("Null (string) can not hold any length constraints. Violation: %s",
+		// String.format(formatString, arguments));
 		assert max != null : Condition.getCallerString()
-		        + String.format("Null is not a valid length for a string. Violation: %s",
-		                        String.format(formatString, arguments));
+		+ String.format("Null is not a valid length for a string. Violation: %s",
+		                String.format(formatString, arguments));
 		assert max >= 0 : Condition.getCallerString()
-		        + String.format("Negative lengths (%s) are not allowed for string constraints. Violation: %s", max,
-		                        String.format(formatString, arguments));
-		assert string.length() <= max : Condition.getCallerString()
-		        + String.format("String (length=%s) does not have maximal length of %s: %s. Violation: %s",
-		                        string.length(), max, string, String.format(formatString, arguments));
+		+ String.format("Negative lengths (%s) are not allowed for string constraints. Violation: %s", max,
+		                String.format(formatString, arguments));
+		assert (string == null) || (string.length() <= max) : Condition.getCallerString()
+		+ String.format("String (length=%s) does not have maximal length of %s: %s. Violation: %s",
+		                string.length(), max, string, String.format(formatString, arguments));
 	}
 	
 	/**
@@ -401,18 +415,19 @@ public final class StringCondition {
 	                                   final Integer min,
 	                                   final String formatString,
 	                                   final Object... arguments) {
-		assert string != null : Condition.getCallerString()
-		        + String.format("Null (string) can not hold any length constraints. Violation: %s",
-		                        String.format(formatString, arguments));
+		// assert string != null : Condition.getCallerString()
+		// +
+		// String.format("Null (string) can not hold any length constraints. Violation: %s",
+		// String.format(formatString, arguments));
 		assert min != null : Condition.getCallerString()
-		        + String.format("Null is not a valid length for a string. Violation: %s",
-		                        String.format(formatString, arguments));
+		+ String.format("Null is not a valid length for a string. Violation: %s",
+		                String.format(formatString, arguments));
 		assert min >= 0 : Condition.getCallerString()
-		        + String.format("Negative lengths (%s) are not allowed for string constraints. Violation: %s", min,
-		                        String.format(formatString, arguments));
-		assert string.length() >= min : Condition.getCallerString()
-		        + String.format("String (length=%s) does not have minimum length of %s: %s. Violation: %s",
-		                        string.length(), min, string, String.format(formatString, arguments));
+		+ String.format("Negative lengths (%s) are not allowed for string constraints. Violation: %s", min,
+		                String.format(formatString, arguments));
+		assert (string == null) || (string.length() >= min) : Condition.getCallerString()
+		+ String.format("String (length=%s) does not have minimum length of %s: %s. Violation: %s",
+		                string.length(), min, string, String.format(formatString, arguments));
 	}
 	
 	/**
@@ -428,11 +443,12 @@ public final class StringCondition {
 	public static final void notEmpty(final String string,
 	                                  final String formatString,
 	                                  final Object... arguments) {
-		assert string != null : Condition.getCallerString()
-		        + String.format("Null (string) can not hold any length constraints. Violation: %s",
-		                        String.format(formatString, arguments));
-		assert string.length() > 0 : Condition.getCallerString()
-		        + String.format("String is empty: %s. Violation: %s", string, String.format(formatString, arguments));
+		// assert string != null : Condition.getCallerString()
+		// +
+		// String.format("Null (string) can not hold any length constraints. Violation: %s",
+		// String.format(formatString, arguments));
+		assert (string == null) || (string.length() > 0) : Condition.getCallerString()
+		+ String.format("String is empty: %s. Violation: %s", string, String.format(formatString, arguments));
 	}
 	
 	/**
@@ -451,16 +467,17 @@ public final class StringCondition {
 	                                    final String pattern,
 	                                    final String formatString,
 	                                    final Object... arguments) {
-		assert string != null : Condition.getCallerString()
-		        + String.format("Null is not a valid string. Violation: %s", String.format(formatString, arguments));
+		// assert string != null : Condition.getCallerString()
+		// + String.format("Null is not a valid string. Violation: %s",
+		// String.format(formatString, arguments));
 		assert pattern != null : Condition.getCallerString()
-		        + String.format("Null is not a valid pattern. Violation: %s", String.format(formatString, arguments));
+		+ String.format("Null is not a valid pattern. Violation: %s", String.format(formatString, arguments));
 		assert compilablePattern(pattern) : Condition.getCallerString()
-		        + String.format("The pattern `%s` can not be compiled. Violation: %s", pattern,
-		                        String.format(formatString, arguments));
-		assert !Pattern.matches(pattern, string) : Condition.getCallerString()
-		        + String.format("String `%s` does match the pattern: %s. Violation: %s", string, pattern,
-		                        String.format(formatString, arguments));
+		+ String.format("The pattern `%s` can not be compiled. Violation: %s", pattern,
+		                String.format(formatString, arguments));
+		assert (string == null) || !Pattern.matches(pattern, string) : Condition.getCallerString()
+		+ String.format("String `%s` does match the pattern: %s. Violation: %s", string, pattern,
+		                String.format(formatString, arguments));
 	}
 	
 	private static final boolean pairwiseSameLength(final String[] strings,
@@ -488,15 +505,22 @@ public final class StringCondition {
 	                                    final String second,
 	                                    final String formatString,
 	                                    final Object... arguments) {
-		assert first != null : Condition.getCallerString()
-		        + String.format("Null (first string) can not hold any length compare constraints. Violation: %s",
-		                        String.format(formatString, arguments));
-		assert second != null : Condition.getCallerString()
-		        + String.format("Null (second string) can not hold any length compare constraints. Violation: %s",
-		                        String.format(formatString, arguments));
-		assert first.length() == second.length() : Condition.getCallerString()
-		        + String.format("Strings do not have equal length (%s vs. %s): `%s` vs `%s`. Violation: %s",
-		                        first.length(), second.length(), first, second, String.format(formatString, arguments));
+		// assert first != null : Condition.getCallerString()
+		// +
+		// String.format("Null (first string) can not hold any length compare constraints. Violation: %s",
+		// String.format(formatString, arguments));
+		// assert second != null : Condition.getCallerString()
+		// +
+		// String.format("Null (second string) can not hold any length compare constraints. Violation: %s",
+		// String.format(formatString, arguments));
+		assert ((first == null) && (second == null)) || (first.length() == second.length()) : Condition.getCallerString()
+		+ String.format("Strings do not have equal length (%s vs. %s): `%s` vs `%s`. Violation: %s",
+		                first == null
+		                ? "null"
+		                  : first.length(), second == null
+		                  ? "null"
+		                    : second.length(), first, second,
+		                    String.format(formatString, arguments));
 	}
 	
 	/**
@@ -512,15 +536,16 @@ public final class StringCondition {
 	public static final void sameLength(final String[] strings,
 	                                    final String formatString,
 	                                    final Object... arguments) {
-		assert strings != null : Condition.getCallerString()
-		        + String.format("Null array can not be checked for equal strings of equal length. Violation: %s",
-		                        String.format(formatString, arguments));
-		assert strings.length > 1 : Condition.getCallerString()
-		        + String.format("String array has to consist of at least 2 strings for equal length constrain checks. Violation: %s",
-		                        String.format(formatString, arguments));
-		assert pairwiseSameLength(strings, formatString, arguments) : Condition.getCallerString()
-		        + String.format("Strings in the array do not have equal length. Violation: %s",
-		                        String.format(formatString, arguments));
+		// assert strings != null : Condition.getCallerString()
+		// +
+		// String.format("Null array can not be checked for equal strings of equal length. Violation: %s",
+		// String.format(formatString, arguments));
+		assert (strings == null) || (strings.length > 1) : Condition.getCallerString()
+		+ String.format("String array has to consist of at least 2 strings for equal length constrain checks. Violation: %s",
+		                String.format(formatString, arguments));
+		assert (strings == null) || pairwiseSameLength(strings, formatString, arguments) : Condition.getCallerString()
+		+ String.format("Strings in the array do not have equal length. Violation: %s",
+		                String.format(formatString, arguments));
 	}
 	
 	/**
@@ -536,12 +561,13 @@ public final class StringCondition {
 	public static final void trimmed(final String string,
 	                                 final String formatString,
 	                                 final Object... arguments) {
-		assert string != null : Condition.getCallerString()
-		        + String.format("Null (string) can not be checked for trimmed equality. Violation: %s",
-		                        String.format(formatString, arguments));
-		assert string.equals(string.trim()) : Condition.getCallerString()
-		        + String.format("String `%s` was not trimmed. Violation: %s", string,
-		                        String.format(formatString, arguments));
+		// assert string != null : Condition.getCallerString()
+		// +
+		// String.format("Null (string) can not be checked for trimmed equality. Violation: %s",
+		// String.format(formatString, arguments));
+		assert (string == null) || string.equals(string.trim()) : Condition.getCallerString()
+		+ String.format("String `%s` was not trimmed. Violation: %s", string,
+		                String.format(formatString, arguments));
 	}
 	
 	/**
@@ -557,10 +583,11 @@ public final class StringCondition {
 	public static final void uppercase(final String string,
 	                                   final String formatString,
 	                                   final Object... arguments) {
-		assert string != null : Condition.getCallerString()
-		        + String.format("Null is not a uppercase string. Violation: %s", String.format(formatString, arguments));
-		assert (string.length() == 0) || uppercase.matcher(string).matches() : Condition.getCallerString()
-		        + String.format("Not an uppercase string: %s. Violation: %s", string,
-		                        String.format(formatString, arguments));
+		// assert string != null : Condition.getCallerString()
+		// + String.format("Null is not a uppercase string. Violation: %s",
+		// String.format(formatString, arguments));
+		assert (string == null) || (string.length() == 0) || uppercase.matcher(string).matches() : Condition.getCallerString()
+		+ String.format("Not an uppercase string: %s. Violation: %s", string,
+		                String.format(formatString, arguments));
 	}
 }

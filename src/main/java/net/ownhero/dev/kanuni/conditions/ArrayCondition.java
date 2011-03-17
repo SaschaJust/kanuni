@@ -214,7 +214,6 @@ public final class ArrayCondition {
 	 */
 	public static final void validIndex(final Object array,
 	                                    final Integer index,
-	                                    
 	                                    final String formatString,
 	                                    final Object... arguments) {
 		assert array != null : Condition.getCallerString()

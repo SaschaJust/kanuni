@@ -17,22 +17,28 @@ import javassist.bytecode.annotation.Annotation;
 public interface Creator {
 	
 	/**
+	 * Used to request an instrumentation for a given annotation/behavior pair.
+	 * 
 	 * @param annotation
 	 * @param behavior
 	 * @param markers
-	 * @return
+	 * @return a string representation of the instrumentation that have to be
+	 *         added to the behavior
 	 */
 	public String createBehaviorInstrumentation(Annotation annotation,
 	                                            CtBehavior behavior,
 	                                            Map<Integer, SortedSet<String>> markers);
 	
 	/**
+	 * Used to request an instrumentation for a given annotation/parameter pair.
+	 * 
 	 * @param annotation
 	 * @param behavior
 	 * @param parameterName
 	 * @param parameterType
 	 * @param markers
-	 * @return
+	 * @return a string representation of the instrumentation that have to be
+	 *         added to the behavior
 	 */
 	public String createParameterInstrumentation(Annotation annotation,
 	                                             CtBehavior behavior,

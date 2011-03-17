@@ -6,6 +6,8 @@ package net.ownhero.dev.kanuni.checks;
 import java.util.Collection;
 import java.util.Map;
 
+import net.ownhero.dev.kanuni.exceptions.CheckViolation;
+
 import org.apache.commons.collections.Predicate;
 
 /**
@@ -81,6 +83,20 @@ public class Check {
 	final static NoneNullPredicate noneNullPredicate = new NoneNullPredicate();
 	
 	/**
+	 * @param condition
+	 * @param formatString
+	 * @param arguments
+	 */
+	public static final void check(final boolean condition,
+	                               final String formatString,
+	                               final Object... arguments) {
+		if (!condition) { throw new CheckViolation(Check.getCallerString()
+		                                           + String.format("Condition evaluated to false. Violation: %s", String.format(formatString, arguments)
+		                                                           .toString()));
+		}
+	}
+	
+	/**
 	 * @return a string representing the line of code the check was called from.
 	 */
 	static final String getCallerString() {
@@ -93,5 +109,20 @@ public class Check {
 		String className = throwable.getStackTrace()[2].getClassName();
 		
 		return "[" + className + "::" + methodName + "#" + lineNumber + "] Assertion violated: ";
+	}
+	
+	/**
+	 * @param object
+	 * @param formatString
+	 * @param arguments
+	 */
+	public static final void notNull(final Object object,
+	                                 final String formatString,
+	                                 final Object... arguments) {
+		if (object == null) {
+			throw new CheckViolation(Check.getCallerString()
+			                         + String.format("Argument should not be (null). Violation: %s",
+			                                         String.format(formatString, arguments).toString()));
+		}
 	}
 }

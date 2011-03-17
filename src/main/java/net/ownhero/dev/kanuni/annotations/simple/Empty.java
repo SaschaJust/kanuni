@@ -9,9 +9,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import net.ownhero.dev.kanuni.annotations.factories.CreatorNotEmpty;
+import net.ownhero.dev.kanuni.annotations.factories.CreatorEmpty;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
-
 
 /**
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
@@ -19,9 +18,9 @@ import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
-@FactoryClass (CreatorNotEmpty.class)
+@FactoryClass (CreatorEmpty.class)
 @Target (value = { ElementType.PARAMETER })
-public @interface NotEmpty {
+public @interface Empty {
 	
 	String value() default "";
 }

@@ -4,13 +4,12 @@
 package net.ownhero.dev.kanuni.annotations.factories;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.SortedSet;
 
-import javassist.CannotCompileException;
 import javassist.CtBehavior;
 import javassist.CtClass;
-import javassist.NotFoundException;
 import javassist.bytecode.annotation.Annotation;
 import javassist.bytecode.annotation.IntegerMemberValue;
 import javassist.bytecode.annotation.StringMemberValue;
@@ -19,8 +18,6 @@ import net.ownhero.dev.kanuni.conditions.CollectionCondition;
 import net.ownhero.dev.kanuni.conditions.MapCondition;
 import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
 import net.ownhero.dev.kanuni.loader.KanuniClassloader;
-
-import org.apache.commons.lang.ArrayUtils;
 
 
 /**
@@ -36,8 +33,8 @@ public class CreatorSize implements Creator {
 	public String createBehaviorInstrumentation(final Annotation annotation,
 	                                            final CtBehavior behavior,
 	                                            final Map<Integer, SortedSet<String>> markers) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported behavior ("
+		                                       + behavior.getName() + ") annotation: " + annotation.getTypeName());
 	}
 	
 	/* (non-Javadoc)
@@ -59,36 +56,32 @@ public class CreatorSize implements Creator {
 		
 		if (parameterType.isArray()) {
 			builder.append(ArrayCondition.class.getCanonicalName())
-			       .append(String.format(".size(%s, %s, \"%s\", new Object[0]);", parameterName, size, text))
-			       .append(System.getProperty("line.separator"));
+			.append(String.format(".size(%s, new Integer(%s), \"%s\", new Object[0]);", parameterName, size,
+			                      text))
+			                      .append(System.getProperty("line.separator"));
 		} else {
 			try {
-				CtClass[] interfaces = parameterType.getInterfaces();
+				HashSet<Class<?>> realInterfaces = new HashSet<Class<?>>();
+				Class<?> original = Class.forName(parameterType.getName());
+				realInterfaces.add(original);
+				realInterfaces.addAll(KanuniClassloader.getInterfaces(original));
 				
-				Class<?>[] realInterfaces = new Class[interfaces.length];
-				
-				for (int i = 0; i < interfaces.length; ++i) {
-					realInterfaces[i] = interfaces[i].toClass();
-				}
-				
-				if (ArrayUtils.contains(realInterfaces, Map.class)) {
+				if (realInterfaces.contains(Map.class)) {
 					builder.append(MapCondition.class.getCanonicalName())
-					       .append(String.format(".size(%s, %s, \"%s\", new Object[0]);", parameterName, size, text))
-					       .append(System.getProperty("line.separator"));
-				} else if (ArrayUtils.contains(realInterfaces, Collection.class)) {
+					.append(String.format(".size((java.util.Map) %s, %s, \"%s\", new Object[0]);",
+					                      parameterName, size, text))
+					                      .append(System.getProperty("line.separator"));
+				} else if (realInterfaces.contains(Collection.class)) {
 					builder.append(CollectionCondition.class.getCanonicalName())
-					       .append(String.format(".size(%s, %s, \"%s\", new Object[0]);", parameterName, size, text))
-					       .append(System.getProperty("line.separator"));
+					.append(String.format(".size((java.util.Collection) %s, %s,  \"%s\", new Object[0]);",
+					                      parameterName, size, text))
+					                      .append(System.getProperty("line.separator"));
 				} else {
 					throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported parameter ("
-					        + parameterName + ":" + parameterType.getName() + ") annotation: "
-					        + annotation.getTypeName());
+					                                       + parameterName + ":" + parameterType.getName() + ") annotation: "
+					                                       + annotation.getTypeName());
 				}
-			} catch (NotFoundException e) {
-				throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported parameter ("
-				                                       + parameterName + ":" + parameterType.getName() + ") annotation: " + annotation.getTypeName(),
-				                                       e);
-			} catch (CannotCompileException e) {
+			} catch (ClassNotFoundException e) {
 				throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported parameter ("
 				                                       + parameterName + ":" + parameterType.getName() + ") annotation: " + annotation.getTypeName(),
 				                                       e);

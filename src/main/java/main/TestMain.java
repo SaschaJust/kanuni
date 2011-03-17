@@ -8,6 +8,8 @@ import java.util.List;
 
 import net.ownhero.dev.kanuni.annotations.AnnotatedForArray;
 import net.ownhero.dev.kanuni.annotations.AnnotatedForBounds;
+import net.ownhero.dev.kanuni.annotations.AnnotatedForCollection;
+import net.ownhero.dev.kanuni.annotations.AnnotatedForCompare;
 import net.ownhero.dev.kanuni.annotations.AnnotatedForString;
 
 /**
@@ -104,8 +106,10 @@ public final class TestMain {
 	 */
 	public static void main(final String[] args) {
 		AnnotatedForString afs = new AnnotatedForString();
+		new AnnotatedForCollection();
 		AnnotatedForArray afa = new AnnotatedForArray();
 		new AnnotatedForBounds();
+		new AnnotatedForCompare();
 		
 		try {
 			afs.maxLength3("123456789");

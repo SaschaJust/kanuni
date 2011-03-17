@@ -6,6 +6,7 @@ package net.ownhero.dev.kanuni.loader;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -45,7 +46,6 @@ import javassist.bytecode.annotation.MemberValue;
 import javassist.bytecode.annotation.MemberValueVisitor;
 import javassist.bytecode.annotation.ShortMemberValue;
 import javassist.bytecode.annotation.StringMemberValue;
-import net.ownhero.dev.kanuni.annotations.bevahiors.Contains;
 import net.ownhero.dev.kanuni.annotations.bevahiors.NoneNull;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeChar;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeDouble;
@@ -53,17 +53,22 @@ import net.ownhero.dev.kanuni.annotations.bounds.RangeFloat;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeInteger;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeLong;
 import net.ownhero.dev.kanuni.annotations.compare.Equals;
+import net.ownhero.dev.kanuni.annotations.compare.EqualsInt;
 import net.ownhero.dev.kanuni.annotations.compare.Greater;
+import net.ownhero.dev.kanuni.annotations.compare.GreaterInt;
 import net.ownhero.dev.kanuni.annotations.compare.GreaterOrEqual;
 import net.ownhero.dev.kanuni.annotations.compare.Less;
+import net.ownhero.dev.kanuni.annotations.compare.LessInt;
 import net.ownhero.dev.kanuni.annotations.compare.LessOrEqual;
+import net.ownhero.dev.kanuni.annotations.compare.NotEquals;
+import net.ownhero.dev.kanuni.annotations.compare.NotEqualsInt;
 import net.ownhero.dev.kanuni.annotations.factories.Creator;
 import net.ownhero.dev.kanuni.annotations.map.ContainsKey;
 import net.ownhero.dev.kanuni.annotations.map.ContainsValue;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 import net.ownhero.dev.kanuni.annotations.meta.Marker;
-import net.ownhero.dev.kanuni.annotations.simple.IndexRange;
-import net.ownhero.dev.kanuni.annotations.simple.IsEmpty;
+import net.ownhero.dev.kanuni.annotations.simple.Contains;
+import net.ownhero.dev.kanuni.annotations.simple.Empty;
 import net.ownhero.dev.kanuni.annotations.simple.MaxSize;
 import net.ownhero.dev.kanuni.annotations.simple.MinSize;
 import net.ownhero.dev.kanuni.annotations.simple.Negative;
@@ -74,6 +79,7 @@ import net.ownhero.dev.kanuni.annotations.simple.NotPositive;
 import net.ownhero.dev.kanuni.annotations.simple.Null;
 import net.ownhero.dev.kanuni.annotations.simple.Positive;
 import net.ownhero.dev.kanuni.annotations.simple.Size;
+import net.ownhero.dev.kanuni.annotations.simple.ValidIndex;
 import net.ownhero.dev.kanuni.annotations.string.AlphaNumString;
 import net.ownhero.dev.kanuni.annotations.string.AlphaString;
 import net.ownhero.dev.kanuni.annotations.string.AsciiString;
@@ -95,6 +101,8 @@ import net.ownhero.dev.kanuni.annotations.string.SameLength;
 import net.ownhero.dev.kanuni.annotations.string.ShortString;
 import net.ownhero.dev.kanuni.annotations.string.Trimmed;
 import net.ownhero.dev.kanuni.annotations.string.Uppercase;
+import net.ownhero.dev.kanuni.conditions.Condition;
+import net.ownhero.dev.kanuni.conditions.StringCondition;
 
 /**
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
@@ -190,6 +198,8 @@ public final class KanuniClassloader extends ClassLoader {
 	 */
 	private static boolean                    assertionsEnabled      = false;
 	
+	private static boolean                    debug                  = System.getProperty("KanuniDebug") != null;
+	
 	/**
 	 * @param memberValue
 	 * @return
@@ -271,7 +281,9 @@ public final class KanuniClassloader extends ClassLoader {
 			assert (false);
 		} catch (AssertionError e) {
 			assertionsEnabled = true;
-			System.err.println("Specification checks enabled.");
+			if (debug) {
+				System.err.println("Specification checks enabled.");
+			}
 		}
 		
 		// in general, this should not be necessary, since
@@ -287,24 +299,29 @@ public final class KanuniClassloader extends ClassLoader {
 		//@formatter:off
 		
 		Class<?>[] kanuniAnnotations = {
-				Contains.class,
-				NoneNull.class,
 				net.ownhero.dev.kanuni.annotations.simple.NoneNull.class,
+				NoneNull.class,
 				RangeChar.class,
 				RangeDouble.class,
 				RangeFloat.class,
 				RangeInteger.class,
 				RangeLong.class,
 				Equals.class,
+				EqualsInt.class,
 				Greater.class,
+				GreaterInt.class,
 				GreaterOrEqual.class,
 				Less.class,
+				LessInt.class,
 				LessOrEqual.class,
+				NotEquals.class,
+				NotEqualsInt.class,
 				ContainsKey.class,
 				ContainsValue.class,
+				FactoryClass.class,
+				Marker.class,
 				Contains.class,
-				IndexRange.class,
-				IsEmpty.class,
+				Empty.class,
 				MaxSize.class,
 				MinSize.class,
 				Negative.class,
@@ -316,6 +333,7 @@ public final class KanuniClassloader extends ClassLoader {
 				Null.class,
 				Positive.class,
 				Size.class,
+				ValidIndex.class,
 				AlphaNumString.class,
 				AlphaString.class,
 				AsciiString.class,
@@ -349,7 +367,9 @@ public final class KanuniClassloader extends ClassLoader {
 			try {
 				if ((target != null) && (factoryClass != null)) {
 					for (ElementType t : target.value()) {
-						System.err.println("Registering annotation " + kanuniAnnotation);
+						if (debug) {
+							System.err.println("Registering annotation " + kanuniAnnotation);
+						}
 						switch (t) {
 							case PARAMETER:
 								parameterAnnotations.put(kanuniAnnotation.getCanonicalName(),
@@ -373,6 +393,27 @@ public final class KanuniClassloader extends ClassLoader {
 				throw new RuntimeException("Could not instantiate kanuni factory `" + factoryClass.value() + "`.", e);
 			}
 		}
+	}
+	
+	/**
+	 * @param interfaze
+	 * @return
+	 */
+	public static Collection<Class<?>> getInterfaces(final Class<?> interfaze) {
+		LinkedList<Class<?>> ifaces = new LinkedList<Class<?>>();
+		
+		Class<?>[] interfaces = interfaze.getInterfaces();
+		
+		for (Class<?> clazz : interfaces) {
+			ifaces.add(clazz);
+			Collection<Class<?>> collection = getInterfaces(clazz);
+			
+			if (collection != null) {
+				ifaces.addAll(collection);
+			}
+		}
+		
+		return ifaces;
 	}
 	
 	/**
@@ -408,7 +449,15 @@ public final class KanuniClassloader extends ClassLoader {
 	 */
 	private void addInstrumentation(final CtBehavior behavior,
 	                                final String instrumentation) {
-		System.err.println("Adding instrumentation: " + instrumentation.trim());
+		Condition.notNull(instrumentation, "Valid instrumentations may never be null, but got (null) for %s.",
+		                  behavior.getName());
+		StringCondition.notEmpty(instrumentation, "Valid instrumentations may never be empty for %s.",
+		                         behavior.getName());
+		
+		if (debug) {
+			System.err.println("Adding instrumentation: " + instrumentation.trim());
+		}
+		
 		this.instrumentations.add(instrumentation);
 	}
 	
@@ -458,11 +507,31 @@ public final class KanuniClassloader extends ClassLoader {
 				|| name.startsWith("net.jini.")
 				|| name.startsWith("org.eclipse.")) {
 			//@formatter:on
+			if (debug) {
+				System.err.println("Delegating loading for " + name);
+			}
 			return getParent().loadClass(name);
 		} else {
 			try {
 				// load class that might be annotated with kanuni annotations
+				if (debug) {
+					System.err.println("Intervene loading for " + name);
+				}
 				CtClass ctClass = classPool.get(name);
+				
+				int i = name.lastIndexOf('.');
+				if (i != -1) {
+					String pname = name.substring(0, i);
+					if (getPackage(pname) == null) {
+						try {
+							definePackage(pname, null, null, null, null, null, null, null);
+						} catch (IllegalArgumentException e) {
+							// ignore. maybe the package object for the same
+							// name has been created just right away.
+						}
+					}
+				}
+				
 				// only instrument if assertions are enabled
 				return assertionsEnabled
 				? processAnnotations(ctClass).toClass()
@@ -531,6 +600,11 @@ public final class KanuniClassloader extends ClassLoader {
 						creator = constructorAnnotations.get(annotation.getTypeName());
 					}
 					
+					if (debug) {
+						System.err.println("Requesting instrumentation for " + behavior.getName() + " of type "
+						                   + annotation.getTypeName());
+					}
+					
 					addInstrumentation(behavior, creator.createBehaviorInstrumentation(annotation, behavior, markers));
 				}
 			}
@@ -564,7 +638,15 @@ public final class KanuniClassloader extends ClassLoader {
 					try {
 						parameterType = behavior.getParameterTypes()[i - 1];
 					} catch (NotFoundException e) {
-						e.printStackTrace();
+						if (debug) {
+							e.printStackTrace();
+						}
+					}
+					
+					if (debug) {
+						System.err.println("Requesting instrumentation for " + behavior.getName() + " of type "
+						                   + annotation.getTypeName() + " on parameter " + parameterName + " with type "
+						                   + parameterType.getName());
 					}
 					
 					addInstrumentation(behavior, creator.createParameterInstrumentation(annotation, behavior,
@@ -606,7 +688,9 @@ public final class KanuniClassloader extends ClassLoader {
 				try {
 					behavior.insertBefore(instrumentation);
 				} catch (CannotCompileException e) {
-					e.printStackTrace();
+					if (debug) {
+						e.printStackTrace();
+					}
 				}
 			}
 			

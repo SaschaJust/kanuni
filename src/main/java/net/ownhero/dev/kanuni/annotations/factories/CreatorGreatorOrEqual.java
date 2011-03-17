@@ -9,7 +9,14 @@ import java.util.SortedSet;
 import javassist.CtBehavior;
 import javassist.CtClass;
 import javassist.bytecode.annotation.Annotation;
+import javassist.bytecode.annotation.IntegerMemberValue;
+import javassist.bytecode.annotation.StringMemberValue;
+import net.ownhero.dev.kanuni.annotations.compare.GreaterOrEqualInt;
+import net.ownhero.dev.kanuni.annotations.meta.Marker;
+import net.ownhero.dev.kanuni.conditions.CompareCondition;
+import net.ownhero.dev.kanuni.conditions.StringCondition;
 import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
+import net.ownhero.dev.kanuni.loader.KanuniClassloader;
 
 
 /**
@@ -38,8 +45,46 @@ public class CreatorGreatorOrEqual implements Creator {
 	                                             final String parameterName,
 	                                             final CtClass parameterType,
 	                                             final Map<Integer, SortedSet<String>> markers) {
-		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported parameter ("
-		        + parameterName + ":" + parameterType.getName() + ") annotation: " + annotation.getTypeName());
+		StringBuilder builder = new StringBuilder();
+		
+		StringMemberValue textMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation, "value");
+		String text = textMember.getValue();
+		
+		if (markers.isEmpty()) {
+			if (annotation.getTypeName().equals(GreaterOrEqualInt.class.getName())) {
+				IntegerMemberValue refMemberValue = (IntegerMemberValue) KanuniClassloader.getMemberValue(annotation,
+				"ref");
+				int ref = refMemberValue.getValue();
+				
+				builder.append(CompareCondition.class.getCanonicalName()).append(".");
+				if (parameterType.isPrimitive()) {
+					builder.append(String.format("greaterOrEqual(new Integer(%s), new Integer(%s), \"%s\", new Object[0]);",
+					                             parameterName, ref, text));
+				} else {
+					builder.append(String.format("greaterOrEqual(%s, new Integer(%s), \"%s\", new Object[0]);",
+					                             parameterName,
+					                             ref, text));
+				}
+				builder.append(System.getProperty("line.separator"));
+			} else {
+				throw new MalformedAnnotationException(annotation.getTypeName() + " requires corresponding "
+				                                       + Marker.class.getSimpleName() + " annotation on the same behavior.");
+			}
+		} else {
+			
+			for (Integer markerId : markers.keySet()) {
+				for (String markerParameter : markers.get(markerId)) {
+					builder.append(CompareCondition.class.getCanonicalName()).append(".");
+					builder.append(String.format("greaterOrEqual(($w) %s, ($w) %s, \"%s\", new Object[0]);",
+					                             parameterName,
+					                             markerParameter, text));
+					builder.append(System.getProperty("line.separator"));
+				}
+			}
+		}
+		
+		StringCondition.notEmpty(builder.toString(), "Valid instrumentations may never be empty.");
+		return builder.toString();
 	}
 	
 }

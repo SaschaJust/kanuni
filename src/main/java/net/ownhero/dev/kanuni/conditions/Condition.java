@@ -83,7 +83,7 @@ public final class Condition {
 		}
 		
 	}
-	
+
 	static final NoneNullPredicate noneNullPredicate = new Condition.NoneNullPredicate();
 	
 	/**
@@ -95,8 +95,8 @@ public final class Condition {
 	                               final String formatString,
 	                               final Object... arguments) {
 		assert condition : getCallerString()
-		        + String.format("Condition evaluated to false. Violation: %s", String.format(formatString, arguments)
-		                                                                             .toString());
+		+ String.format("Condition evaluated to false. Violation: %s", String.format(formatString, arguments)
+		                .toString());
 	}
 	
 	/**
@@ -124,8 +124,8 @@ public final class Condition {
 	                                   final String formatString,
 	                                   final Object... arguments) {
 		assert (object != null) && (object instanceof Boolean) : getCallerString()
-		        + String.format("Argument should be of type Integer. Violation: %s",
-		                        String.format(formatString, arguments).toString());
+		+ String.format("Argument should be of type Integer. Violation: %s",
+		                String.format(formatString, arguments).toString());
 	}
 	
 	/**
@@ -137,8 +137,8 @@ public final class Condition {
 	                                final String formatString,
 	                                final Object... arguments) {
 		assert (object != null) && (object instanceof Byte) : getCallerString()
-		        + String.format("Argument should be of type Integer. Violation: %s",
-		                        String.format(formatString, arguments).toString());
+		+ String.format("Argument should be of type Integer. Violation: %s",
+		                String.format(formatString, arguments).toString());
 	}
 	
 	/**
@@ -150,8 +150,8 @@ public final class Condition {
 	                                     final String formatString,
 	                                     final Object... arguments) {
 		assert (object != null) && (object instanceof Character) : getCallerString()
-		        + String.format("Argument should be of type Integer. Violation: %s",
-		                        String.format(formatString, arguments).toString());
+		+ String.format("Argument should be of type Integer. Violation: %s",
+		                String.format(formatString, arguments).toString());
 	}
 	
 	/**
@@ -163,8 +163,8 @@ public final class Condition {
 	                                  final String formatString,
 	                                  final Object... arguments) {
 		assert (object != null) && (object instanceof Double) : getCallerString()
-		        + String.format("Argument should be of type Integer. Violation: %s",
-		                        String.format(formatString, arguments).toString());
+		+ String.format("Argument should be of type Integer. Violation: %s",
+		                String.format(formatString, arguments).toString());
 	}
 	
 	/**
@@ -176,8 +176,8 @@ public final class Condition {
 	                                 final String formatString,
 	                                 final Object... arguments) {
 		assert (object != null) && (object instanceof Float) : getCallerString()
-		        + String.format("Argument should be of type Integer. Violation: %s",
-		                        String.format(formatString, arguments).toString());
+		+ String.format("Argument should be of type Integer. Violation: %s",
+		                String.format(formatString, arguments).toString());
 	}
 	
 	/**
@@ -189,8 +189,8 @@ public final class Condition {
 	                                   final String formatString,
 	                                   final Object... arguments) {
 		assert (object != null) && (object instanceof Integer) : getCallerString()
-		        + String.format("Argument should be of type Integer. Violation: %s",
-		                        String.format(formatString, arguments).toString());
+		+ String.format("Argument should be of type Integer. Violation: %s",
+		                String.format(formatString, arguments).toString());
 	}
 	
 	/**
@@ -202,8 +202,8 @@ public final class Condition {
 	                                final String formatString,
 	                                final Object... arguments) {
 		assert (object != null) && (object instanceof Long) : getCallerString()
-		        + String.format("Argument should be of type Integer. Violation: %s",
-		                        String.format(formatString, arguments).toString());
+		+ String.format("Argument should be of type Integer. Violation: %s",
+		                String.format(formatString, arguments).toString());
 	}
 	
 	/**
@@ -215,8 +215,8 @@ public final class Condition {
 	                                final String formatString,
 	                                final Object... arguments) {
 		assert object == null : getCallerString()
-		        + String.format("Argument MUST be (null). Violation: %s", String.format(formatString, arguments)
-		                                                                        .toString());
+		+ String.format("Argument MUST be (null). Violation: %s", String.format(formatString, arguments)
+		                .toString());
 	}
 	
 	/**
@@ -228,8 +228,8 @@ public final class Condition {
 	                                 final String formatString,
 	                                 final Object... arguments) {
 		assert (object != null) && (object instanceof Double) : getCallerString()
-		        + String.format("Argument should be of type Integer. Violation: %s",
-		                        String.format(formatString, arguments).toString());
+		+ String.format("Argument should be of type Integer. Violation: %s",
+		                String.format(formatString, arguments).toString());
 	}
 	
 	/**
@@ -241,8 +241,8 @@ public final class Condition {
 	                                 final String formatString,
 	                                 final Object... arguments) {
 		assert object != null : getCallerString()
-		        + String.format("Argument should not be (null). Violation: %s", String.format(formatString, arguments)
-		                                                                              .toString());
+		+ String.format("Argument should not be (null). Violation: %s", String.format(formatString, arguments)
+		                .toString());
 	}
 	
 }

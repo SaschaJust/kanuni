@@ -3,6 +3,8 @@
  */
 package net.ownhero.dev.kanuni.annotations.factories;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.SortedSet;
 
@@ -10,7 +12,9 @@ import javassist.CtBehavior;
 import javassist.CtClass;
 import javassist.bytecode.annotation.Annotation;
 import javassist.bytecode.annotation.StringMemberValue;
-import net.ownhero.dev.kanuni.conditions.Condition;
+import net.ownhero.dev.kanuni.conditions.ArrayCondition;
+import net.ownhero.dev.kanuni.conditions.CollectionCondition;
+import net.ownhero.dev.kanuni.conditions.MapCondition;
 import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
 import net.ownhero.dev.kanuni.loader.KanuniClassloader;
 
@@ -34,20 +38,23 @@ public class CreatorNoneNull implements Creator {
 	                                            final Map<Integer, SortedSet<String>> markers) {
 		StringBuilder builder = new StringBuilder();
 		
-		for (Integer markerId : markers.keySet()) {
-			for (String markerParameter : markers.get(markerId)) {
-				builder.append(Condition.class.getPackage().getName()).append(".");
-				
-				StringMemberValue textMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation, "value");
-				String text = textMember.getValue();
-				
-				builder.append(String.format("Condition.notNull(%s, \"%s\", new Object[0])", markerParameter,
-				                             StringEscapeUtils.escapeJava(text)));
-				
-				builder.append(";");
-				builder.append(System.getProperty("line.separator"));
-			}
+		// TODO this is a hack
+		for (int i = 1; i < behavior.getSignature().split(";").length; ++i) {
+			// for (Integer markerId : markers.keySet()) {
+			// for (String markerParameter : markers.get(markerId)) {
+			builder.append(ArrayCondition.class.getPackage().getName()).append(".");
+			
+			StringMemberValue textMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation, "value");
+			String text = textMember.getValue();
+			
+			builder.append(String.format("Condition.notNull($%s, \"(parameter: %s) %s\", new Object[0])", i, i,
+			                             StringEscapeUtils.escapeJava(text)));
+			
+			builder.append(";");
+			builder.append(System.getProperty("line.separator"));
 		}
+		// }
+		// }
 		
 		return builder.toString();
 	}
@@ -64,9 +71,43 @@ public class CreatorNoneNull implements Creator {
 	                                             final String parameterName,
 	                                             final CtClass parameterType,
 	                                             final Map<Integer, SortedSet<String>> markers) {
-		// TODO check for collections/maps/arrays
-		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported parameter ("
-		                                       + parameterName + ":" + parameterType.getName() + ") annotation: " + annotation.getTypeName());
+		StringBuilder builder = new StringBuilder();
+		
+		StringMemberValue textMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation, "value");
+		String text = textMember.getValue();
+		
+		if (parameterType.isArray()) {
+			builder.append(ArrayCondition.class.getCanonicalName())
+			.append(String.format(".noneNull(%s, \"%s\", new Object[0]);", parameterName, text))
+			.append(System.getProperty("line.separator"));
+		} else {
+			try {
+				HashSet<Class<?>> realInterfaces = new HashSet<Class<?>>();
+				Class<?> original = Class.forName(parameterType.getName());
+				realInterfaces.add(original);
+				realInterfaces.addAll(KanuniClassloader.getInterfaces(original));
+				
+				if (realInterfaces.contains(Map.class)) {
+					builder.append(MapCondition.class.getCanonicalName())
+					.append(String.format(".noneNull((java.util.Map) %s, \"%s\", new Object[0]);",
+					                      parameterName, text)).append(System.getProperty("line.separator"));
+				} else if (realInterfaces.contains(Collection.class)) {
+					builder.append(CollectionCondition.class.getCanonicalName())
+					.append(String.format(".noneNull((java.util.Collection) %s, \"%s\", new Object[0]);",
+					                      parameterName, text)).append(System.getProperty("line.separator"));
+				} else {
+					throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported parameter ("
+					                                       + parameterName + ":" + parameterType.getName() + ") annotation: "
+					                                       + annotation.getTypeName());
+				}
+			} catch (ClassNotFoundException e) {
+				throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported parameter ("
+				                                       + parameterName + ":" + parameterType.getName() + ") annotation: " + annotation.getTypeName(),
+				                                       e);
+			}
+		}
+		
+		return builder.toString();
 	}
 	
 }
