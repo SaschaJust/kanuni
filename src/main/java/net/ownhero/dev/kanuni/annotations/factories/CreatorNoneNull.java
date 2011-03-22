@@ -47,7 +47,7 @@ public class CreatorNoneNull implements Creator {
 			StringMemberValue textMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation, "value");
 			String text = textMember.getValue();
 			
-			builder.append(String.format("Condition.notNull($%s, \"(parameter: %s) %s\", new Object[0])", i, i,
+			builder.append(String.format("Condition.notNull(($w) $%s, \"(parameter: %s) %s\", new Object[0])", i, i,
 			                             StringEscapeUtils.escapeJava(text)));
 			
 			builder.append(";");
@@ -78,8 +78,8 @@ public class CreatorNoneNull implements Creator {
 		
 		if (parameterType.isArray()) {
 			builder.append(ArrayCondition.class.getCanonicalName())
-			.append(String.format(".noneNull(%s, \"%s\", new Object[0]);", parameterName, text))
-			.append(System.getProperty("line.separator"));
+			       .append(String.format(".noneNull(%s, \"%s\", new Object[0]);", parameterName, text))
+			       .append(System.getProperty("line.separator"));
 		} else {
 			try {
 				HashSet<Class<?>> realInterfaces = new HashSet<Class<?>>();
@@ -89,20 +89,20 @@ public class CreatorNoneNull implements Creator {
 				
 				if (realInterfaces.contains(Map.class)) {
 					builder.append(MapCondition.class.getCanonicalName())
-					.append(String.format(".noneNull((java.util.Map) %s, \"%s\", new Object[0]);",
-					                      parameterName, text)).append(System.getProperty("line.separator"));
+					       .append(String.format(".noneNull((java.util.Map) %s, \"%s\", new Object[0]);",
+					                             parameterName, text)).append(System.getProperty("line.separator"));
 				} else if (realInterfaces.contains(Collection.class)) {
 					builder.append(CollectionCondition.class.getCanonicalName())
-					.append(String.format(".noneNull((java.util.Collection) %s, \"%s\", new Object[0]);",
-					                      parameterName, text)).append(System.getProperty("line.separator"));
+					       .append(String.format(".noneNull((java.util.Collection) %s, \"%s\", new Object[0]);",
+					                             parameterName, text)).append(System.getProperty("line.separator"));
 				} else {
 					throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported parameter ("
-					                                       + parameterName + ":" + parameterType.getName() + ") annotation: "
-					                                       + annotation.getTypeName());
+					        + parameterName + ":" + parameterType.getName() + ") annotation: "
+					        + annotation.getTypeName());
 				}
 			} catch (ClassNotFoundException e) {
 				throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported parameter ("
-				                                       + parameterName + ":" + parameterType.getName() + ") annotation: " + annotation.getTypeName(),
+				        + parameterName + ":" + parameterType.getName() + ") annotation: " + annotation.getTypeName(),
 				                                       e);
 			}
 		}
