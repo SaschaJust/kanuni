@@ -202,6 +202,8 @@ public final class KanuniClassloader extends ClassLoader {
 	
 	private static boolean                    debug                  = System.getProperty("KanuniDebug") != null;
 	
+	private static Map<String, Class<?>>      cache                  = new HashMap<String, Class<?>>();
+	
 	/**
 	 * @param memberValue
 	 * @return an array containing all marker indexes to a memberValue
@@ -483,6 +485,7 @@ public final class KanuniClassloader extends ClassLoader {
 	 */
 	@Override
 	public Class<?> loadClass(final String name) throws ClassNotFoundException {
+		int i = name.lastIndexOf('.');
 		//@formatter:off
 		
 		/* skip classes that may not be stubbed
@@ -508,7 +511,8 @@ public final class KanuniClassloader extends ClassLoader {
 				|| name.startsWith("org.xml.sax.")
 				|| name.startsWith("net.jini.")
 				|| name.startsWith("org.eclipse.")
-				|| name.startsWith("org.ccil.")) {
+				|| name.startsWith("org.ccil.")
+				|| (i < 0)) {
 			//@formatter:on
 			if (debug) {
 				System.err.println("Delegating loading for " + name);
@@ -516,13 +520,15 @@ public final class KanuniClassloader extends ClassLoader {
 			return getParent().loadClass(name);
 		} else {
 			try {
+				if (cache.containsKey(name)) {
+					return cache.get(name);
+				}
 				// load class that might be annotated with kanuni annotations
 				if (debug) {
 					System.err.println("Intervene loading for " + name);
 				}
 				CtClass ctClass = classPool.get(name);
 				
-				int i = name.lastIndexOf('.');
 				if (i != -1) {
 					String pname = name.substring(0, i);
 					if (getPackage(pname) == null) {
@@ -535,10 +541,21 @@ public final class KanuniClassloader extends ClassLoader {
 					}
 				}
 				
+				Class<?> c = null;
 				// only instrument if assertions are enabled
-				return assertionsEnabled
-				? processAnnotations(ctClass).toClass()
-				: ctClass.toClass();
+				if (assertionsEnabled) {
+					ctClass = processAnnotations(ctClass);
+				}
+				
+				try {
+					c = ctClass.toClass();
+				} catch (NullPointerException e) {
+					System.err.println(">$>$>$>$>$");
+					System.err.println("$$$$$$$$$$ " + ctClass.getName());
+				}
+				
+				cache.put(name, c);
+				return c;
 			} catch (NotFoundException e) {
 				throw new ClassNotFoundException(e.getMessage(), e);
 			} catch (CannotCompileException e) {
@@ -596,7 +613,7 @@ public final class KanuniClassloader extends ClassLoader {
 			for (Annotation annotation : annotations) {
 				// we are responsible for this annotation
 				if (methodAnnotations.containsKey(annotation.getTypeName())
-						|| constructorAnnotations.containsKey(annotation.getTypeName())) {
+				        || constructorAnnotations.containsKey(annotation.getTypeName())) {
 					Creator creator = methodAnnotations.get(annotation.getTypeName());
 					
 					if (creator == null) {
@@ -605,7 +622,7 @@ public final class KanuniClassloader extends ClassLoader {
 					
 					if (debug) {
 						System.err.println("Requesting instrumentation for " + behavior.getName() + " of type "
-						                   + annotation.getTypeName());
+						        + annotation.getTypeName());
 					}
 					
 					addInstrumentation(behavior, creator.createBehaviorInstrumentation(annotation, behavior, markers));
@@ -630,7 +647,7 @@ public final class KanuniClassloader extends ClassLoader {
 			// for each annotation
 			for (Annotation annotation : parAnnotations) {
 				if (!annotation.getTypeName().equals(Marker.class.getCanonicalName())
-						&& parameterAnnotations.containsKey(annotation.getTypeName())) {
+				        && parameterAnnotations.containsKey(annotation.getTypeName())) {
 					// method.getMethodInfo().getAttributes().get(i - 1);
 					// String parameterName = attributeInfo.getName();
 					
@@ -649,8 +666,8 @@ public final class KanuniClassloader extends ClassLoader {
 					
 					if (debug) {
 						System.err.println("Requesting instrumentation for " + behavior.getName() + " of type "
-						                   + annotation.getTypeName() + " on parameter " + parameterName + " with type "
-						                   + parameterType.getName());
+						        + annotation.getTypeName() + " on parameter " + parameterName + " with type "
+						        + parameterType.getName());
 					}
 					
 					addInstrumentation(behavior, creator.createParameterInstrumentation(annotation, behavior,
