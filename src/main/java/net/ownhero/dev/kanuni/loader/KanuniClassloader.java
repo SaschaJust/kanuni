@@ -520,8 +520,6 @@ public final class KanuniClassloader extends ClassLoader {
 			return getParent().loadClass(name);
 		} else {
 			try {
-				// String fullName = name;
-				
 				if (cache.containsKey(name)) {
 					return cache.get(name);
 				}
@@ -530,26 +528,7 @@ public final class KanuniClassloader extends ClassLoader {
 					System.err.println("Intervene loading for " + name);
 				}
 				
-				// String innerName = null;
-				// if (name.contains("$")) {
-				// System.err.println("Looking for nested class: " + name);
-				// String[] arr = name.split("\\$");
-				// name = arr[0];
-				// innerName = arr[1];
-				// }
-				
 				CtClass ctClass = classPool.get(name);
-				
-				// if (innerName != null) {
-				// CtClass[] nestedClasses = ctClass.getNestedClasses();
-				// for (CtClass ct : nestedClasses) {
-				// System.err.println("Found nested class: " + ct.getName());
-				// if (ct.getName().equals(fullName)) {
-				// ctClass = ct;
-				// break;
-				// }
-				// }
-				// }
 				
 				if (i != -1) {
 					String pname = name.substring(0, i);
