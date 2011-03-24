@@ -28,7 +28,7 @@ import net.ownhero.dev.kanuni.annotations.string.Trimmed;
 import net.ownhero.dev.kanuni.annotations.string.Uppercase;
 import net.ownhero.dev.kanuni.conditions.StringCondition;
 import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
-import net.ownhero.dev.kanuni.loader.KanuniClassloader;
+import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 
 import org.apache.commons.lang.StringEscapeUtils;
 

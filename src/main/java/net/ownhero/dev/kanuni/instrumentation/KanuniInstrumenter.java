@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.ownhero.dev.kanuni.loader;
+package net.ownhero.dev.kanuni.instrumentation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
@@ -18,13 +18,11 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import javassist.CannotCompileException;
-import javassist.ClassClassPath;
 import javassist.ClassPool;
 import javassist.CtBehavior;
 import javassist.CtClass;
 import javassist.CtConstructor;
 import javassist.CtMethod;
-import javassist.LoaderClassPath;
 import javassist.NotFoundException;
 import javassist.bytecode.AnnotationDefaultAttribute;
 import javassist.bytecode.AnnotationsAttribute;
@@ -107,10 +105,10 @@ import net.ownhero.dev.kanuni.conditions.Condition;
 import net.ownhero.dev.kanuni.conditions.StringCondition;
 
 /**
- * @author Sascha Just <sascha.just@own-hero.net>
- * 
+ * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ *
  */
-public final class KanuniClassloader extends ClassLoader {
+public class KanuniInstrumenter {
 	
 	/**
 	 * This internal class is used to extract integer values from
@@ -200,9 +198,7 @@ public final class KanuniClassloader extends ClassLoader {
 	 */
 	private static boolean                    assertionsEnabled      = false;
 	
-	private static boolean                    debug                  = System.getProperty("KanuniDebug") != null;
-	
-	private static Map<String, Class<?>>      cache                  = new HashMap<String, Class<?>>();
+	public static final boolean               debug                  = System.getProperty("KanuniDebug") != null;
 	
 	/**
 	 * @param memberValue
@@ -210,7 +206,7 @@ public final class KanuniClassloader extends ClassLoader {
 	 */
 	public static Integer[] convertMarkerIndexes(final ArrayMemberValue memberValue) {
 		final LinkedList<Integer> markerIndexes = new LinkedList<Integer>();
-		IntegerValueVisitor visitor = new KanuniClassloader().new IntegerValueVisitor(markerIndexes);
+		IntegerValueVisitor visitor = new KanuniInstrumenter().new IntegerValueVisitor(markerIndexes);
 		
 		for (MemberValue meValue : memberValue.getValue()) {
 			meValue.accept(visitor);
@@ -421,31 +417,6 @@ public final class KanuniClassloader extends ClassLoader {
 	}
 	
 	/**
-	 * This constructor will never be called by the VM itself. If you call the
-	 * constructor manually make sure that {@link KanuniClassloader} isn't the
-	 * system's class loader. Otherwise this will cause a stack overflow.
-	 * 
-	 * The only reason that this constructor exists is for testing purpose. You
-	 * can load single annotated classes and test the annotations under suspect.
-	 */
-	public KanuniClassloader() {
-		KanuniClassloader.classPool.insertClassPath(new ClassClassPath(this.getClass()));
-		KanuniClassloader.classPool.insertClassPath(new LoaderClassPath(getSystemClassLoader()));
-	}
-	
-	/**
-	 * The constructor called when bootstrapping the VM and having the system
-	 * bootloader set to {@link KanuniClassloader}.
-	 * 
-	 * @param arg0
-	 *            the parent class loader
-	 */
-	public KanuniClassloader(final ClassLoader arg0) {
-		super(arg0);
-		KanuniClassloader.classPool.insertClassPath(new ClassClassPath(this.getClass()));
-	}
-	
-	/**
 	 * Wrapper to add an instrumentation to the list of the instance.
 	 * 
 	 * @param behavior
@@ -479,98 +450,14 @@ public final class KanuniClassloader extends ClassLoader {
 		return markerIndexes.iterator().next();
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.ClassLoader#loadClass(java.lang.String)
-	 */
-	@Override
-	public Class<?> loadClass(final String name) throws ClassNotFoundException {
-		int i = name.lastIndexOf('.');
-		//@formatter:off
-		
-		/* skip classes that may not be stubbed
-		 * (taken from the JUnit exclude list)
-		 * 
-		 * sun.*
-		 * com.sun.*
-		 * org.omg.*
-		 * javax.*
-		 * sunw.*
-		 * java.*
-		 * org.w3c.dom.*
-		 * org.xml.sax.*
-		 * net.jini.*
-		 */
-		if (name.startsWith("sun.")
-				|| name.startsWith("com.sun.")
-				|| name.startsWith("org.omg.")
-				|| name.startsWith("javax.")
-				|| name.startsWith("sunw.")
-				|| name.startsWith("java.")
-				|| name.startsWith("org.w3c.dom.")
-				|| name.startsWith("org.xml.sax.")
-				|| name.startsWith("net.jini.")
-				|| name.startsWith("org.eclipse.")
-				|| name.startsWith("org.ccil.")
-				|| (i < 0)) {
-			//@formatter:on
-			if (debug) {
-				System.err.println("Delegating loading for " + name);
-			}
-			return getParent().loadClass(name);
-		} else {
-			try {
-				if (cache.containsKey(name)) {
-					return cache.get(name);
-				}
-				// load class that might be annotated with kanuni annotations
-				if (debug) {
-					System.err.println("Intervene loading for " + name);
-				}
-				
-				CtClass ctClass = classPool.get(name);
-				
-				if (i != -1) {
-					String pname = name.substring(0, i);
-					if (getPackage(pname) == null) {
-						try {
-							definePackage(pname, null, null, null, null, null, null, null);
-						} catch (IllegalArgumentException e) {
-							// ignore. maybe the package object for the same
-							// name has been created just right away.
-						}
-					}
-				}
-				
-				Class<?> c = null;
-				// only instrument if assertions are enabled
-				if (assertionsEnabled) {
-					ctClass = processAnnotations(ctClass);
-				}
-				
-				try {
-					c = ctClass.toClass();
-				} catch (NullPointerException e) {
-					System.err.println(">$>$>$>$>$");
-					System.err.println("$$$$$$$$$$ " + ctClass.getName());
-				}
-				
-				cache.put(name, c);
-				return c;
-			} catch (NotFoundException e) {
-				throw new ClassNotFoundException(e.getMessage(), e);
-			} catch (CannotCompileException e) {
-				// in case of an compile error, try the parent bootloader
-				return getParent().loadClass(name);
-			}
-		}
-	}
-	
 	/**
 	 * @param cc
 	 * @return a CtClass instance after being instrumented
 	 */
-	private CtClass processAnnotations(final CtClass cc) {
+	public CtClass processAnnotations(final CtClass cc) {
+		if (debug) {
+			System.err.println("Parsing " + cc.getName());
+		}
 		// process methods
 		processBehaviors(cc);
 		
@@ -615,6 +502,10 @@ public final class KanuniClassloader extends ClassLoader {
 				// we are responsible for this annotation
 				if (methodAnnotations.containsKey(annotation.getTypeName())
 				        || constructorAnnotations.containsKey(annotation.getTypeName())) {
+					if (debug) {
+						System.err.println("Processing annotation " + annotation.getTypeName());
+					}
+					
 					Creator creator = methodAnnotations.get(annotation.getTypeName());
 					
 					if (creator == null) {
@@ -649,8 +540,9 @@ public final class KanuniClassloader extends ClassLoader {
 			for (Annotation annotation : parAnnotations) {
 				if (!annotation.getTypeName().equals(Marker.class.getCanonicalName())
 				        && parameterAnnotations.containsKey(annotation.getTypeName())) {
-					// method.getMethodInfo().getAttributes().get(i - 1);
-					// String parameterName = attributeInfo.getName();
+					if (debug) {
+						System.err.println("Processing annotation " + annotation.getTypeName());
+					}
 					
 					Creator creator = parameterAnnotations.get(annotation.getTypeName());
 					
@@ -685,6 +577,10 @@ public final class KanuniClassloader extends ClassLoader {
 	 * @param loadedClass
 	 */
 	private void processBehaviors(final CtClass loadedClass) {
+		if (debug) {
+			System.err.println("Processing annotations for " + loadedClass.getName());
+		}
+		
 		CtMethod[] declaredMethods = loadedClass.getDeclaredMethods();
 		CtConstructor[] declaredConstructors = loadedClass.getDeclaredConstructors();
 		
@@ -699,6 +595,10 @@ public final class KanuniClassloader extends ClassLoader {
 		for (CtBehavior behavior : constructorsAndMethods) {
 			// process all annotations for the corresponding behavior
 			// (constructor/method)
+			if (debug) {
+				System.err.println("Processing annotations on " + behavior.getLongName());
+			}
+			
 			processBehaviorAnnotations(loadedClass, behavior);
 			
 			ListIterator<String> iterator = this.instrumentations.listIterator(this.instrumentations.size());
@@ -751,4 +651,5 @@ public final class KanuniClassloader extends ClassLoader {
 		}
 		return map;
 	}
+	
 }

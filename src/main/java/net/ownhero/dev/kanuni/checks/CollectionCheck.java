@@ -6,7 +6,7 @@ package net.ownhero.dev.kanuni.checks;
 import java.util.Collection;
 
 import net.ownhero.dev.kanuni.exceptions.CheckViolation;
-import net.ownhero.dev.kanuni.loader.KanuniClassloader;
+import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
@@ -27,11 +27,11 @@ public class CollectionCheck {
 	                                  final Object object,
 	                                  final String formatString,
 	                                  final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			if (!collection.contains(object)) {
 				throw new CheckViolation(Check.getCallerString()
-				                         + String.format("Collection does not contain object `%s`. Violation: %s", object,
-				                                         String.format(formatString, arguments)));
+				        + String.format("Collection does not contain object `%s`. Violation: %s", object,
+				                        String.format(formatString, arguments)));
 			}
 		}
 	}
@@ -46,11 +46,11 @@ public class CollectionCheck {
 	                                     final Collection<?> innerCollection,
 	                                     final String formatString,
 	                                     final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			if (!collection.containsAll(innerCollection)) {
 				throw new CheckViolation(Check.getCallerString()
-				                         + String.format("Collection does not contain all objects in `%s`. Violation: %s",
-				                                         innerCollection, String.format(formatString, arguments)));
+				        + String.format("Collection does not contain all objects in `%s`. Violation: %s",
+				                        innerCollection, String.format(formatString, arguments)));
 			}
 		}
 	}
@@ -65,11 +65,11 @@ public class CollectionCheck {
 	                                     final Collection<?> innerCollection,
 	                                     final String formatString,
 	                                     final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			if (!CollectionUtils.containsAny(collection, innerCollection)) {
 				throw new CheckViolation(Check.getCallerString()
-				                         + String.format("Collection does not contain any of the objects in `%s`. Violataion: %s",
-				                                         innerCollection, String.format(formatString, arguments)));
+				        + String.format("Collection does not contain any of the objects in `%s`. Violataion: %s",
+				                        innerCollection, String.format(formatString, arguments)));
 			}
 		}
 	}
@@ -82,11 +82,11 @@ public class CollectionCheck {
 	public static final void empty(final Collection<?> collection,
 	                               final String formatString,
 	                               final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			if (!collection.isEmpty()) {
 				throw new CheckViolation(Check.getCallerString()
-				                         + String.format("Collection is not empty. Violataion: %s",
-				                                         String.format(formatString, arguments)));
+				        + String.format("Collection is not empty. Violataion: %s",
+				                        String.format(formatString, arguments)));
 			}
 		}
 	}
@@ -101,11 +101,11 @@ public class CollectionCheck {
 	                                 final int length,
 	                                 final String formatString,
 	                                 final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			if (collection.size() > length) {
 				throw new CheckViolation(Check.getCallerString()
-				                         + String.format("Collection exceeds max size of %s (actual size: %s). Violataion: %s", length,
-				                                         collection.size(), String.format(formatString, arguments)));
+				        + String.format("Collection exceeds max size of %s (actual size: %s). Violataion: %s", length,
+				                        collection.size(), String.format(formatString, arguments)));
 			}
 		}
 	}
@@ -120,11 +120,11 @@ public class CollectionCheck {
 	                                 final int length,
 	                                 final String formatString,
 	                                 final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			if (collection.size() < length) {
 				throw new CheckViolation(Check.getCallerString()
-				                         + String.format("Collection exceeds min size of %s (actual size: %s). Violataion: %s", length,
-				                                         collection.size(), String.format(formatString, arguments)));
+				        + String.format("Collection exceeds min size of %s (actual size: %s). Violataion: %s", length,
+				                        collection.size(), String.format(formatString, arguments)));
 			}
 		}
 	}
@@ -137,13 +137,13 @@ public class CollectionCheck {
 	public static final void noneNull(final Collection<?> collection,
 	                                  final String formatString,
 	                                  final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			if ((collection == null)
-					|| (CollectionUtils.countMatches(collection,
-					                                 Check.noneNullPredicate.setMessage(formatString, arguments)) != 0)) {
+			        || (CollectionUtils.countMatches(collection,
+			                                         Check.noneNullPredicate.setMessage(formatString, arguments)) != 0)) {
 				throw new CheckViolation(Check.getCallerString()
-				                         + String.format("Recursive search found null element. Violataion: %s",
-				                                         String.format(formatString, arguments)));
+				        + String.format("Recursive search found null element. Violataion: %s",
+				                        String.format(formatString, arguments)));
 			}
 		}
 	}
@@ -157,7 +157,7 @@ public class CollectionCheck {
 	                                    final String formatString,
 	                                    final Object... arguments) {
 		
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			if ((collection == null) || (CollectionUtils.countMatches(collection, new Predicate() {
 				
 				public boolean evaluate(final Object object) {
@@ -165,8 +165,8 @@ public class CollectionCheck {
 				}
 			}) == collection.size())) {
 				throw new CheckViolation(Check.getCallerString()
-				                         + String.format("All elements (%s) of the collection are (null). Violation: %s",
-				                                         collection.size(), String.format(formatString, arguments)));
+				        + String.format("All elements (%s) of the collection are (null). Violation: %s",
+				                        collection.size(), String.format(formatString, arguments)));
 			}
 		}
 	}
@@ -181,11 +181,11 @@ public class CollectionCheck {
 	                                     final Object object,
 	                                     final String formatString,
 	                                     final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			if (collection.contains(object)) {
 				throw new CheckViolation(Check.getCallerString()
-				                         + String.format("Collection contains object `%s`. Violataion: %s", object,
-				                                         String.format(formatString, arguments)));
+				        + String.format("Collection contains object `%s`. Violataion: %s", object,
+				                        String.format(formatString, arguments)));
 			}
 		}
 	}
@@ -200,11 +200,11 @@ public class CollectionCheck {
 	                                        final Collection<?> innerCollection,
 	                                        final String formatString,
 	                                        final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			if (collection.containsAll(innerCollection)) {
 				throw new CheckViolation(Check.getCallerString()
-				                         + String.format("Collection contains all objects in `%s`. Violataion: %s", innerCollection,
-				                                         String.format(formatString, arguments)));
+				        + String.format("Collection contains all objects in `%s`. Violataion: %s", innerCollection,
+				                        String.format(formatString, arguments)));
 			}
 		}
 	}
@@ -219,11 +219,11 @@ public class CollectionCheck {
 	                                        final Collection<?> innerCollection,
 	                                        final String formatString,
 	                                        final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			if (!CollectionUtils.containsAny(collection, innerCollection)) {
 				throw new CheckViolation(Check.getCallerString()
-				                         + String.format("Collection contains any of the objects in `%s`. Violataion: %s",
-				                                         innerCollection, String.format(formatString, arguments)));
+				        + String.format("Collection contains any of the objects in `%s`. Violataion: %s",
+				                        innerCollection, String.format(formatString, arguments)));
 			}
 		}
 	}
@@ -236,10 +236,10 @@ public class CollectionCheck {
 	public static final void notEmpty(final Collection<?> collection,
 	                                  final String formatString,
 	                                  final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			if (!collection.isEmpty()) {
 				throw new CheckViolation(Check.getCallerString()
-				                         + String.format("Collection is empty. Violataion: %s", String.format(formatString, arguments)));
+				        + String.format("Collection is empty. Violataion: %s", String.format(formatString, arguments)));
 			}
 		}
 	}
@@ -254,12 +254,12 @@ public class CollectionCheck {
 	                                  final Collection<?> secondCollection,
 	                                  final String formatString,
 	                                  final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			if (CollectionUtils.size(firstCollection) != CollectionUtils.size(secondCollection)) {
 				throw new CheckViolation(Check.getCallerString()
-				                         + String.format("Collections do not have same size (`%s` vs. `%s`). Violataion: %s",
-				                                         CollectionUtils.size(firstCollection), CollectionUtils.size(secondCollection),
-				                                         String.format(formatString, arguments)));
+				        + String.format("Collections do not have same size (`%s` vs. `%s`). Violataion: %s",
+				                        CollectionUtils.size(firstCollection), CollectionUtils.size(secondCollection),
+				                        String.format(formatString, arguments)));
 			}
 		}
 	}
@@ -274,11 +274,11 @@ public class CollectionCheck {
 	                              final int length,
 	                              final String formatString,
 	                              final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			if (collection.size() != length) {
 				throw new CheckViolation(Check.getCallerString()
-				                         + String.format("Collection doesn't have size of %s (actual size: %s). Violataion: %s", length,
-				                                         collection.size(), String.format(formatString, arguments)));
+				        + String.format("Collection doesn't have size of %s (actual size: %s). Violataion: %s", length,
+				                        collection.size(), String.format(formatString, arguments)));
 			}
 		}
 	}

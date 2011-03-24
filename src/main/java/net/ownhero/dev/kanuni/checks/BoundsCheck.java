@@ -4,7 +4,7 @@
 package net.ownhero.dev.kanuni.checks;
 
 import net.ownhero.dev.kanuni.exceptions.CheckViolation;
-import net.ownhero.dev.kanuni.loader.KanuniClassloader;
+import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
 import org.apache.commons.lang.math.NumberRange;
 
@@ -26,7 +26,7 @@ public class BoundsCheck {
 	                               final Character max,
 	                               final String formatString,
 	                               final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			if (value == null) {
 				throw new CheckViolation(Check.getCallerString()
 				        + String.format("Character might not be null for range check. Violation: %s", formatString));
@@ -70,7 +70,7 @@ public class BoundsCheck {
 	                               final Number max,
 	                               final String formatString,
 	                               final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			if (value == null) {
 				throw new CheckViolation(Check.getCallerString()
 				        + String.format("Number might not be null for range check. Violation: %s", formatString));

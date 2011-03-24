@@ -12,7 +12,7 @@ import javassist.bytecode.annotation.Annotation;
 import javassist.bytecode.annotation.StringMemberValue;
 import net.ownhero.dev.kanuni.conditions.Condition;
 import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
-import net.ownhero.dev.kanuni.loader.KanuniClassloader;
+import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 
 import org.apache.commons.lang.StringEscapeUtils;
 

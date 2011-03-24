@@ -22,7 +22,7 @@ import net.ownhero.dev.kanuni.annotations.bounds.RangeInteger;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeLong;
 import net.ownhero.dev.kanuni.conditions.BoundsCondition;
 import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
-import net.ownhero.dev.kanuni.loader.KanuniClassloader;
+import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 
 import org.apache.commons.lang.StringEscapeUtils;
 

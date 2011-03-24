@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 import net.ownhero.dev.kanuni.annotations.factories.CreatorStringType;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 import net.ownhero.dev.kanuni.annotations.simple.NotNull;
-import net.ownhero.dev.kanuni.loader.KanuniClassloader;
+import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 
 /**
  * Annotation to assert a string is either empty or consists of a ready trimmed

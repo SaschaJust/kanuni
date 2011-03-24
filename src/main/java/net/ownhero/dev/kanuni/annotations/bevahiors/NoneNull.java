@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 import net.ownhero.dev.kanuni.annotations.factories.CreatorNoneNull;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 import net.ownhero.dev.kanuni.conditions.Condition;
-import net.ownhero.dev.kanuni.loader.KanuniClassloader;
+import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 
 /**
  * This annotation can be used on constructors and methods. The

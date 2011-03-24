@@ -13,7 +13,7 @@ import net.ownhero.dev.kanuni.annotations.factories.CreatorStringType;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 import net.ownhero.dev.kanuni.annotations.simple.NotNull;
 import net.ownhero.dev.kanuni.conditions.StringCondition;
-import net.ownhero.dev.kanuni.loader.KanuniClassloader;
+import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 
 /**
  * Annotation to assert a string is either empty or consist on of digits. If the string

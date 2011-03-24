@@ -16,7 +16,7 @@ import net.ownhero.dev.kanuni.conditions.ArrayCondition;
 import net.ownhero.dev.kanuni.conditions.CollectionCondition;
 import net.ownhero.dev.kanuni.conditions.MapCondition;
 import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
-import net.ownhero.dev.kanuni.loader.KanuniClassloader;
+import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
 import org.apache.commons.lang.StringEscapeUtils;
 
@@ -44,7 +44,7 @@ public class CreatorNoneNull implements Creator {
 			// for (String markerParameter : markers.get(markerId)) {
 			builder.append(ArrayCondition.class.getPackage().getName()).append(".");
 			
-			StringMemberValue textMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation, "value");
+			StringMemberValue textMember = (StringMemberValue) KanuniInstrumenter.getMemberValue(annotation, "value");
 			String text = textMember.getValue();
 			
 			builder.append(String.format("Condition.notNull(($w) $%s, \"(parameter: %s) %s\", new Object[0])", i, i,
@@ -73,7 +73,7 @@ public class CreatorNoneNull implements Creator {
 	                                             final Map<Integer, SortedSet<String>> markers) {
 		StringBuilder builder = new StringBuilder();
 		
-		StringMemberValue textMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation, "value");
+		StringMemberValue textMember = (StringMemberValue) KanuniInstrumenter.getMemberValue(annotation, "value");
 		String text = textMember.getValue();
 		
 		if (parameterType.isArray()) {
@@ -85,7 +85,7 @@ public class CreatorNoneNull implements Creator {
 				HashSet<Class<?>> realInterfaces = new HashSet<Class<?>>();
 				Class<?> original = Class.forName(parameterType.getName());
 				realInterfaces.add(original);
-				realInterfaces.addAll(KanuniClassloader.getInterfaces(original));
+				realInterfaces.addAll(KanuniInstrumenter.getInterfaces(original));
 				
 				if (realInterfaces.contains(Map.class)) {
 					builder.append(MapCondition.class.getCanonicalName())

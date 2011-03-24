@@ -7,7 +7,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import net.ownhero.dev.kanuni.exceptions.CheckViolation;
-import net.ownhero.dev.kanuni.loader.KanuniClassloader;
+import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
 import org.apache.commons.collections.CollectionUtils;
 
@@ -46,7 +46,7 @@ public class ArrayCheck {
 	                                  final Object element,
 	                                  final String formatString,
 	                                  final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			if (array == null) {
 				throw new CheckViolation(Check.getCallerString()
 				        + String.format("Argument is null, but should be a none empty array . Violation: %s",
@@ -87,7 +87,7 @@ public class ArrayCheck {
 	public static final void empty(final Object array,
 	                               final String formatString,
 	                               final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			if (array == null) {
 				throw new CheckViolation(Check.getCallerString()
 				        + String.format("Argument is null, but should be an empty array . Violation: %s",
@@ -117,7 +117,7 @@ public class ArrayCheck {
 	                                 final Integer length,
 	                                 final String formatString,
 	                                 final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			if (array == null) {
 				throw new CheckViolation(Check.getCallerString()
 				        + String.format("Argument is null, but should be an array with maximum size %s. Violation: %s",
@@ -149,7 +149,7 @@ public class ArrayCheck {
 	                                 final Integer length,
 	                                 final String formatString,
 	                                 final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			
 			if (array == null) {
 				throw new CheckViolation(Check.getCallerString()
@@ -180,7 +180,7 @@ public class ArrayCheck {
 	public static final void noneNull(final Object array,
 	                                  final String formatString,
 	                                  final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			
 			if (array == null) {
 				throw new CheckViolation(
@@ -215,7 +215,7 @@ public class ArrayCheck {
 	public static final void notEmpty(final Object array,
 	                                  final String formatString,
 	                                  final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			
 			if (array == null) {
 				throw new CheckViolation(Check.getCallerString()
@@ -246,7 +246,7 @@ public class ArrayCheck {
 	                                  final Object secondArray,
 	                                  final String formatString,
 	                                  final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			
 			if (firstArray == null) {
 				throw new CheckViolation(
@@ -297,7 +297,7 @@ public class ArrayCheck {
 	                              final Integer length,
 	                              final String formatString,
 	                              final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			
 			if (array == null) {
 				throw new CheckViolation(Check.getCallerString()
@@ -331,7 +331,7 @@ public class ArrayCheck {
 	                                    
 	                                    final String formatString,
 	                                    final Object... arguments) {
-		if (KanuniClassloader.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.isAssertionsEnabled()) {
 			
 			if (array == null) {
 				throw new CheckViolation(
