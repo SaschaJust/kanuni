@@ -7,7 +7,7 @@ package net.ownhero.dev.kanuni.exceptions;
  * @author Sascha Just <sascha.just@own-hero.net>
  * 
  */
-public class MalformedAnnotationException extends Error {
+public class MalformedAnnotationException extends Exception {
 	
 	/**
 	 * 
@@ -33,7 +33,7 @@ public class MalformedAnnotationException extends Error {
 	 */
 	public MalformedAnnotationException(final String arg0, final Throwable arg1) {
 		super(arg0, arg1);
-
+		
 	}
 	
 	/**

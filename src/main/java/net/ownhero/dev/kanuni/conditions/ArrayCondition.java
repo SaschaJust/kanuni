@@ -55,7 +55,7 @@ public final class ArrayCondition {
 		// element.getClass(), array.getClass().getComponentType(),
 		// String.format(formatString, arguments));
 		assert contains(array, element) : Condition.getCallerString()
-		        + String.format("Array does not contain element `%s`. Violation: %s", element,
+		        + String.format("Container does not contain element `%s`. Violation: %s", element,
 		                        String.format(formatString, arguments));
 	}
 	
@@ -74,7 +74,7 @@ public final class ArrayCondition {
 		        + String.format("Argument is not an array, but should be an empty array. Violation: %s",
 		                        String.format(formatString, arguments));
 		assert Array.getLength(array) == 0 : Condition.getCallerString()
-		        + String.format("Array is not empty. Violation: %s", String.format(formatString, arguments));
+		        + String.format("Container is not empty. Violation: %s", String.format(formatString, arguments));
 	}
 	
 	/**
@@ -94,7 +94,7 @@ public final class ArrayCondition {
 		        + String.format("Argument is not an array, but should be an array with maximum size %s. Violation: %s",
 		                        length, String.format(formatString, arguments));
 		assert Array.getLength(array) <= length : Condition.getCallerString()
-		        + String.format("Array exceeds maximum length of %s: %s. Violation: %s", length,
+		        + String.format("Container exceeds maximum length of %s: %s. Violation: %s", length,
 		                        Array.getLength(array), String.format(formatString, arguments));
 	}
 	
@@ -115,7 +115,7 @@ public final class ArrayCondition {
 		        + String.format("Argument is not an array, but should be an array with minimum size %s. Violation: %s",
 		                        length, String.format(formatString, arguments));
 		assert Array.getLength(array) >= length : Condition.getCallerString()
-		        + String.format("Array exceeds minimum length of %s: %s. Violation: %s", length,
+		        + String.format("Container exceeds minimum length of %s: %s. Violation: %s", length,
 		                        Array.getLength(array), String.format(formatString, arguments));
 	}
 	
@@ -154,7 +154,7 @@ public final class ArrayCondition {
 		        + String.format("Argument is not an array, but should be a none empty array. Violation: %s",
 		                        String.format(formatString, arguments));
 		assert Array.getLength(array) > 0 : Condition.getCallerString()
-		        + String.format("Array is empty. Violation: %s", String.format(formatString, arguments));
+		        + String.format("Container is empty. Violation: %s", String.format(formatString, arguments));
 	}
 	
 	/**
@@ -202,7 +202,7 @@ public final class ArrayCondition {
 		        + String.format("Argument is not an array, but should be an array with maximum size %s. Violation: %s",
 		                        length, String.format(formatString, arguments));
 		assert Array.getLength(array) == length : Condition.getCallerString()
-		        + String.format("Array does not have required size of %s: %s. Violation: %s", length,
+		        + String.format("Container does not have required size of %s: %s. Violation: %s", length,
 		                        Array.getLength(array), String.format(formatString, arguments));
 	}
 	
@@ -223,10 +223,10 @@ public final class ArrayCondition {
 		        + String.format("Index has to be in bounds of given array, but given argument is not an array. Violation: %s",
 		                        String.format(formatString, arguments));
 		assert index >= 0 : Condition.getCallerString()
-		        + String.format("Array index negative: %s. Violation: %s", index,
+		        + String.format("Container index negative: %s. Violation: %s", index,
 		                        String.format(formatString, arguments));
 		assert Array.getLength(array) > index : Condition.getCallerString()
-		        + String.format("Array index not in bounds (0..%s): %s. Violation: %s", Array.getLength(array), index,
+		        + String.format("Container index not in bounds (0..%s): %s. Violation: %s", Array.getLength(array), index,
 		                        String.format(formatString, arguments));
 	}
 	

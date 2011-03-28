@@ -38,7 +38,7 @@
 				<checksumPolicy>warn</checksumPolicy>
 			</releases>
 			<snapshots>
-				<enabled>false</enabled>
+				<enabled>true</enabled>
 				<checksumPolicy>warn</checksumPolicy>
 			</snapshots>
 			<id>dev.own-hero.net</id>
@@ -98,6 +98,8 @@
 							<Agent-Class>net.ownhero.dev.kanuni.instrumentation.KanuniAgent</Agent-Class>
 							<Premain-Class>net.ownhero.dev.kanuni.instrumentation.KanuniAgent</Premain-Class>
 							<Boot-Class-Path>../lib/javassist.jar</Boot-Class-Path>
+				            <Can-Redefine-Classes>true</Can-Redefine-Classes>
+				            <Can-Retransform-Classes>true</Can-Retransform-Classes>
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -182,7 +184,6 @@
 			</releases>
 			<snapshots>
 				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
 				<checksumPolicy>fail</checksumPolicy>
 			</snapshots>
 			<id>own-hero.net</id>

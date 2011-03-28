@@ -9,6 +9,7 @@ import java.util.SortedSet;
 import javassist.CtBehavior;
 import javassist.CtClass;
 import javassist.bytecode.annotation.Annotation;
+import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
 
 /**
  * @author Sascha Just <sascha.just@own-hero.net>
@@ -27,7 +28,7 @@ public interface Creator {
 	 */
 	public String createBehaviorInstrumentation(Annotation annotation,
 	                                            CtBehavior behavior,
-	                                            Map<Integer, SortedSet<String>> markers);
+	                                            Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException;
 	
 	/**
 	 * Used to request an instrumentation for a given annotation/parameter pair.
@@ -44,6 +45,6 @@ public interface Creator {
 	                                             CtBehavior behavior,
 	                                             String parameterName,
 	                                             CtClass parameterType,
-	                                             Map<Integer, SortedSet<String>> markers);
+	                                             Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException;
 	
 }

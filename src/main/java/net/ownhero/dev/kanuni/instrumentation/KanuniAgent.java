@@ -22,6 +22,8 @@ import javassist.CtClass;
  */
 public class KanuniAgent implements ClassFileTransformer {
 	
+	private static Instrumentation instrumentation;
+	
 	/**
 	 * @param agentArgs
 	 * @param inst
@@ -31,8 +33,18 @@ public class KanuniAgent implements ClassFileTransformer {
 		premain(agentArgs, inst);
 	}
 	
+	/**
+	 * Programmatic hook to dynamically load javaagent at runtime.
+	 */
+	public static void initialize() {
+		if (instrumentation == null) {
+			KanuniAgentLoader.loadAgent();
+		}
+	}
+	
 	public static void premain(final String agentArgument,
 	                           final Instrumentation instrumentation) {
+		KanuniAgent.instrumentation = instrumentation;
 		if (agentArgument != null) {
 			String[] args = agentArgument.split(",");
 			Set<String> argSet = new HashSet<String>(Arrays.asList(args));

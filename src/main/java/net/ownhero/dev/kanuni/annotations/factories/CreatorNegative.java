@@ -22,16 +22,16 @@ public class CreatorNegative implements Creator {
 	
 	public String createBehaviorInstrumentation(final Annotation annotation,
 	                                            final CtBehavior behavior,
-	                                            final Map<Integer, SortedSet<String>> markers) {
+	                                            final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
 		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported behavior ("
-		                                       + behavior.getName() + ") annotation: " + annotation.getTypeName());
+		        + behavior.getName() + ") annotation: " + annotation.getTypeName());
 	}
 	
 	public String createParameterInstrumentation(final Annotation annotation,
 	                                             final CtBehavior behavior,
 	                                             final String parameterName,
 	                                             final CtClass parameterType,
-	                                             final Map<Integer, SortedSet<String>> markers) {
+	                                             final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
 		StringBuilder builder = new StringBuilder();
 		
 		StringMemberValue textMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation, "value");
@@ -59,8 +59,8 @@ public class CreatorNegative implements Creator {
 			       .append(System.getProperty("line.separator"));
 		} else {
 			builder.append(CompareCondition.class.getCanonicalName())
-			.append(String.format(".negative(%s, \"%s\", new Object[0]);", parameterName, text))
-			.append(System.getProperty("line.separator"));
+			       .append(String.format(".negative(%s, \"%s\", new Object[0]);", parameterName, text))
+			       .append(System.getProperty("line.separator"));
 		}
 		
 		return builder.toString();

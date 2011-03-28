@@ -4,6 +4,7 @@
 package net.ownhero.dev.kanuni.annotations;
 
 import net.ownhero.dev.kanuni.annotations.meta.Marker;
+import net.ownhero.dev.kanuni.annotations.specifics.Container;
 import net.ownhero.dev.kanuni.annotations.string.AlphaNumString;
 import net.ownhero.dev.kanuni.annotations.string.AlphaString;
 import net.ownhero.dev.kanuni.annotations.string.AsciiString;
@@ -30,7 +31,7 @@ public class AnnotatedForString {
 	/**
 	 * @param string
 	 */
-	public void alpha(@AlphaString final String string) {
+	public void alpha(@Container (allowEmpty = false, allowNull = false, maxSize = 16, spec = "test", noneNull = true) @AlphaString final String string) {
 		
 	}
 	

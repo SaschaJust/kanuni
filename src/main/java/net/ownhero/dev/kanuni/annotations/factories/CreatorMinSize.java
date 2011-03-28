@@ -35,7 +35,7 @@ public class CreatorMinSize implements Creator {
 	@Override
 	public String createBehaviorInstrumentation(final Annotation annotation,
 	                                            final CtBehavior behavior,
-	                                            final Map<Integer, SortedSet<String>> markers) {
+	                                            final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
 		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported behavior ("
 		        + behavior.getName() + ") annotation: " + annotation.getTypeName());
 	}
@@ -51,7 +51,7 @@ public class CreatorMinSize implements Creator {
 	                                             final CtBehavior behavior,
 	                                             final String parameterName,
 	                                             final CtClass parameterType,
-	                                             final Map<Integer, SortedSet<String>> markers) {
+	                                             final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
 		StringBuilder builder = new StringBuilder();
 		
 		StringMemberValue textMember = (StringMemberValue) KanuniInstrumenter.getMemberValue(annotation, "value");

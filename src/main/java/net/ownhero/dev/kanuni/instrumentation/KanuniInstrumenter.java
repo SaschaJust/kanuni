@@ -80,6 +80,7 @@ import net.ownhero.dev.kanuni.annotations.simple.Null;
 import net.ownhero.dev.kanuni.annotations.simple.Positive;
 import net.ownhero.dev.kanuni.annotations.simple.Size;
 import net.ownhero.dev.kanuni.annotations.simple.ValidIndex;
+import net.ownhero.dev.kanuni.annotations.specifics.Container;
 import net.ownhero.dev.kanuni.annotations.string.AlphaNumString;
 import net.ownhero.dev.kanuni.annotations.string.AlphaString;
 import net.ownhero.dev.kanuni.annotations.string.AsciiString;
@@ -103,6 +104,7 @@ import net.ownhero.dev.kanuni.annotations.string.Trimmed;
 import net.ownhero.dev.kanuni.annotations.string.Uppercase;
 import net.ownhero.dev.kanuni.conditions.Condition;
 import net.ownhero.dev.kanuni.conditions.StringCondition;
+import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
 
 /**
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
@@ -306,6 +308,7 @@ public class KanuniInstrumenter {
 				RangeFloat.class,
 				RangeInteger.class,
 				RangeLong.class,
+				Container.class,
 				Equals.class,
 				EqualsInt.class,
 				Greater.class,
@@ -517,7 +520,14 @@ public class KanuniInstrumenter {
 						        + annotation.getTypeName());
 					}
 					
-					addInstrumentation(behavior, creator.createBehaviorInstrumentation(annotation, behavior, markers));
+					try {
+						addInstrumentation(behavior,
+						                   creator.createBehaviorInstrumentation(annotation, behavior, markers));
+					} catch (MalformedAnnotationException e) {
+						System.err.println("Error processing annotation on " + behavior.getLongName() + ", annotation "
+						        + annotation.getTypeName() + ": " + e.getMessage());
+						e.printStackTrace();
+					}
 				}
 			}
 		}
@@ -563,9 +573,15 @@ public class KanuniInstrumenter {
 						        + parameterType.getName());
 					}
 					
-					addInstrumentation(behavior, creator.createParameterInstrumentation(annotation, behavior,
-					                                                                    parameterName, parameterType,
-					                                                                    markers));
+					try {
+						addInstrumentation(behavior, creator.createParameterInstrumentation(annotation, behavior,
+						                                                                    parameterName,
+						                                                                    parameterType, markers));
+					} catch (MalformedAnnotationException e) {
+						System.err.println("Error processing annotation on " + behavior.getLongName() + ", annotation "
+						        + annotation.getTypeName() + ", argument number " + i + ": " + e.getMessage());
+						e.printStackTrace();
+					}
 				}
 			}
 			++i;

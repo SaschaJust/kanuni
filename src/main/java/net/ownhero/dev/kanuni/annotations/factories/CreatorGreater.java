@@ -33,9 +33,9 @@ public class CreatorGreater implements Creator {
 	@Override
 	public String createBehaviorInstrumentation(final Annotation annotation,
 	                                            final CtBehavior behavior,
-	                                            final Map<Integer, SortedSet<String>> markers) {
+	                                            final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
 		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported behavior ("
-		                                       + behavior.getName() + ") annotation: " + annotation.getTypeName());
+		        + behavior.getName() + ") annotation: " + annotation.getTypeName());
 	}
 	
 	/*
@@ -49,7 +49,7 @@ public class CreatorGreater implements Creator {
 	                                             final CtBehavior behavior,
 	                                             final String parameterName,
 	                                             final CtClass parameterType,
-	                                             final Map<Integer, SortedSet<String>> markers) {
+	                                             final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
 		StringBuilder builder = new StringBuilder();
 		
 		StringMemberValue textMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation, "value");
@@ -58,7 +58,7 @@ public class CreatorGreater implements Creator {
 		if (markers.isEmpty()) {
 			if (annotation.getTypeName().equals(GreaterInt.class.getName())) {
 				IntegerMemberValue refMemberValue = (IntegerMemberValue) KanuniClassloader.getMemberValue(annotation,
-				"ref");
+				                                                                                          "ref");
 				int ref = refMemberValue.getValue();
 				
 				builder.append(CompareCondition.class.getCanonicalName()).append(".");

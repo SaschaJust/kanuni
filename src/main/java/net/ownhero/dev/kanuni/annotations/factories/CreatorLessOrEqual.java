@@ -18,32 +18,38 @@ import net.ownhero.dev.kanuni.conditions.StringCondition;
 import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
 import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 
-
 /**
  * @author Sascha Just <sascha.just@own-hero.net>
  *
  */
 public class CreatorLessOrEqual implements Creator {
-	/* (non-Javadoc)
-	 * @see net.ownhero.dev.kanuni.annotations.factories.Creator#createBehaviorInstrumentation(javassist.bytecode.annotation.Annotation, javassist.CtBehavior, java.util.Map)
+	
+	/*
+	 * (non-Javadoc)
+	 * @see net.ownhero.dev.kanuni.annotations.factories.Creator#
+	 * createBehaviorInstrumentation(javassist.bytecode.annotation.Annotation,
+	 * javassist.CtBehavior, java.util.Map)
 	 */
 	@Override
 	public String createBehaviorInstrumentation(final Annotation annotation,
 	                                            final CtBehavior behavior,
-	                                            final Map<Integer, SortedSet<String>> markers) {
+	                                            final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
 		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported behavior ("
-		                                       + behavior.getName() + ") annotation: " + annotation.getTypeName());
+		        + behavior.getName() + ") annotation: " + annotation.getTypeName());
 	}
 	
-	/* (non-Javadoc)
-	 * @see net.ownhero.dev.kanuni.annotations.factories.Creator#createParameterInstrumentation(javassist.bytecode.annotation.Annotation, javassist.CtBehavior, java.lang.String, javassist.CtClass, java.util.Map)
+	/*
+	 * (non-Javadoc)
+	 * @see net.ownhero.dev.kanuni.annotations.factories.Creator#
+	 * createParameterInstrumentation(javassist.bytecode.annotation.Annotation,
+	 * javassist.CtBehavior, java.lang.String, javassist.CtClass, java.util.Map)
 	 */
 	@Override
 	public String createParameterInstrumentation(final Annotation annotation,
 	                                             final CtBehavior behavior,
 	                                             final String parameterName,
 	                                             final CtClass parameterType,
-	                                             final Map<Integer, SortedSet<String>> markers) {
+	                                             final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
 		StringBuilder builder = new StringBuilder();
 		
 		StringMemberValue textMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation, "value");
@@ -54,7 +60,7 @@ public class CreatorLessOrEqual implements Creator {
 				IntegerMemberValue refMemberValue = (IntegerMemberValue) KanuniClassloader.getMemberValue(annotation,
 				                                                                                          "ref");
 				int ref = refMemberValue.getValue();
-
+				
 				builder.append(CompareCondition.class.getCanonicalName()).append(".");
 				if (parameterType.isPrimitive()) {
 					builder.append(String.format("lessOrEqual(new Integer(%s), new Integer(%s), \"%s\", new Object[0]);",

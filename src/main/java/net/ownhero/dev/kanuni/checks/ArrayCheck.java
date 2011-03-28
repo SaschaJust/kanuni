@@ -73,7 +73,7 @@ public class ArrayCheck {
 			
 			if (!contains(array, element)) {
 				throw new CheckViolation(Check.getCallerString()
-				        + String.format("Array does not contain element `%s`. Violation: %s", element,
+				        + String.format("Container does not contain element `%s`. Violation: %s", element,
 				                        String.format(formatString, arguments)));
 			}
 		}
@@ -102,7 +102,7 @@ public class ArrayCheck {
 			
 			if (Array.getLength(array) != 0) {
 				throw new CheckViolation(Check.getCallerString()
-				        + String.format("Array is not empty. Violation: %s", String.format(formatString, arguments)));
+				        + String.format("Container is not empty. Violation: %s", String.format(formatString, arguments)));
 			}
 		}
 	}
@@ -133,7 +133,7 @@ public class ArrayCheck {
 			
 			if (Array.getLength(array) > length) {
 				throw new CheckViolation(Check.getCallerString()
-				        + String.format("Array exceeds maximum length of %s: %s. Violation: %s", length,
+				        + String.format("Container exceeds maximum length of %s: %s. Violation: %s", length,
 				                        Array.getLength(array), String.format(formatString, arguments)));
 			}
 		}
@@ -166,7 +166,7 @@ public class ArrayCheck {
 			
 			if (Array.getLength(array) < length) {
 				throw new CheckViolation(Check.getCallerString()
-				        + String.format("Array exceeds minimum length of %s: %s. Violation: %s", length,
+				        + String.format("Container exceeds minimum length of %s: %s. Violation: %s", length,
 				                        Array.getLength(array), String.format(formatString, arguments)));
 			}
 		}
@@ -231,7 +231,7 @@ public class ArrayCheck {
 			
 			if (Array.getLength(array) == 0) {
 				throw new CheckViolation(Check.getCallerString()
-				        + String.format("Array is empty. Violation: %s", String.format(formatString, arguments)));
+				        + String.format("Container is empty. Violation: %s", String.format(formatString, arguments)));
 			}
 		}
 	}
@@ -314,7 +314,7 @@ public class ArrayCheck {
 			
 			if (Array.getLength(array) != length) {
 				throw new CheckViolation(Check.getCallerString()
-				        + String.format("Array does not have required size of %s: %s. Violation: %s", length,
+				        + String.format("Container does not have required size of %s: %s. Violation: %s", length,
 				                        Array.getLength(array), String.format(formatString, arguments)));
 			}
 		}
@@ -349,13 +349,13 @@ public class ArrayCheck {
 			
 			if (index < 0) {
 				throw new CheckViolation(Check.getCallerString()
-				        + String.format("Array index negative: %s. Violation: %s", index,
+				        + String.format("Container index negative: %s. Violation: %s", index,
 				                        String.format(formatString, arguments)));
 			}
 			
 			if (Array.getLength(array) <= index) {
 				throw new CheckViolation(Check.getCallerString()
-				        + String.format("Array index not in bounds (0..%s): %s. Violation: %s", Array.getLength(array),
+				        + String.format("Container index not in bounds (0..%s): %s. Violation: %s", Array.getLength(array),
 				                        index, String.format(formatString, arguments)));
 				
 			}

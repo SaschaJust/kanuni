@@ -35,7 +35,7 @@ public class CreatorNoneNull implements Creator {
 	@Override
 	public String createBehaviorInstrumentation(final Annotation annotation,
 	                                            final CtBehavior behavior,
-	                                            final Map<Integer, SortedSet<String>> markers) {
+	                                            final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
 		StringBuilder builder = new StringBuilder();
 		
 		// TODO this is a hack
@@ -70,7 +70,7 @@ public class CreatorNoneNull implements Creator {
 	                                             final CtBehavior behavior,
 	                                             final String parameterName,
 	                                             final CtClass parameterType,
-	                                             final Map<Integer, SortedSet<String>> markers) {
+	                                             final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
 		StringBuilder builder = new StringBuilder();
 		
 		StringMemberValue textMember = (StringMemberValue) KanuniInstrumenter.getMemberValue(annotation, "value");
