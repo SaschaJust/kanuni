@@ -20,7 +20,13 @@ import java.util.jar.JarFile;
 import java.util.jar.JarOutputStream;
 import java.util.jar.Manifest;
 
+import sun.tools.attach.LinuxVirtualMachine;
+import sun.tools.attach.WindowsVirtualMachine;
+
+import com.sun.tools.attach.AttachNotSupportedException;
 import com.sun.tools.attach.VirtualMachine;
+import com.sun.tools.attach.VirtualMachineDescriptor;
+import com.sun.tools.attach.spi.AttachProvider;
 
 /**
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
@@ -28,14 +34,37 @@ import com.sun.tools.attach.VirtualMachine;
  */
 public class KanuniAgentLoader {
 	
-	private static final String packageName = "net.ownhero.dev.kanuni";
-	private static final String path        = packageName.replaceAll("\\.", "/");
+	private static final String[]       paths           = new String[] { "net/ownhero/dev/kanuni", "com/sun/tools",
+	        "sun/tools"                                };
+	
+	private static final AttachProvider ATTACH_PROVIDER = new AttachProvider() {
+		                                                    
+		                                                    @Override
+		                                                    public VirtualMachine attachVirtualMachine(final String id) {
+			                                                    return null;
+		                                                    }
+		                                                    
+		                                                    @Override
+		                                                    public List<VirtualMachineDescriptor> listVirtualMachines() {
+			                                                    return null;
+		                                                    }
+		                                                    
+		                                                    @Override
+		                                                    public String name() {
+			                                                    return null;
+		                                                    }
+		                                                    
+		                                                    @Override
+		                                                    public String type() {
+			                                                    return null;
+		                                                    }
+	                                                    };
 	
 	/**
-	 * @param source
-	 * @param target
-	 * @throws IOException
-	 */
+	* @param source
+	* @param target
+	* @throws IOException
+	*/
 	private static void add(final File source,
 	                        final JarOutputStream target) throws IOException {
 		BufferedInputStream in = null;
@@ -89,17 +118,11 @@ public class KanuniAgentLoader {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	private static String createAgentJarFromClassFiles(final File file,
-	                                                   final File baseDirectory) throws FileNotFoundException,
-	                                                                            IOException {
-		JarOutputStream agentJarFile = new JarOutputStream(new FileOutputStream(file), createManifest());
-		
+	private static void appendAgentJarFromClassFiles(final JarOutputStream agentJarFile,
+	                                                 final File file,
+	                                                 final File baseDirectory) throws FileNotFoundException,
+	                                                                          IOException {
 		add(baseDirectory, agentJarFile);
-		
-		agentJarFile.flush();
-		agentJarFile.close();
-		
-		return file.getAbsolutePath();
 	}
 	
 	/**
@@ -109,16 +132,14 @@ public class KanuniAgentLoader {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	private static String createAgentJarFromJar(final File file,
-	                                            final JarFile jarFile) throws FileNotFoundException, IOException {
-		JarOutputStream agentJarFile = new JarOutputStream(new FileOutputStream(file), createManifest());
-		
+	private static void appendAgentJarFromJar(final JarOutputStream agentJarFile,
+	                                          final File file,
+	                                          final String packagePath,
+	                                          final JarFile jarFile) throws FileNotFoundException, IOException {
 		for (Enumeration<JarEntry> e = jarFile.entries(); e.hasMoreElements();) {
 			JarEntry current = e.nextElement();
 			
-			if ((current.getName().length() > path.length())
-			        && current.getName().substring(0, path.length()).equals(path)
-			        && current.getName().endsWith(".class")) {
+			if ((current.getName().startsWith(packagePath)) && current.getName().endsWith(".class")) {
 				agentJarFile.putNextEntry(current);
 				jarFile.getInputStream(current);
 				
@@ -138,11 +159,6 @@ public class KanuniAgentLoader {
 				agentJarFile.closeEntry();
 			}
 		}
-		
-		agentJarFile.flush();
-		agentJarFile.close();
-		
-		return file.getAbsolutePath();
 	}
 	
 	/**
@@ -170,41 +186,41 @@ public class KanuniAgentLoader {
 			throw new ClassNotFoundException("Can't get class loader.");
 		}
 		
-		Enumeration<URL> resources = classLoader.getResources(path);
-		while (resources.hasMoreElements()) {
-			URL url = resources.nextElement();
-			String internalPath = url.getPath();
-			
-			if (internalPath.startsWith("file:")) {
-				internalPath = internalPath.substring(5);
-			}
-			
-			if (internalPath.contains("!")) {
-				internalPath = internalPath.substring(0, internalPath.indexOf('!'));
-			}
-			
-			System.err.println("Internal path: " + internalPath);
-			
-			if (internalPath.endsWith(".jar")) {
-				// jar file
-				if (internalPath.startsWith("kanuni")) {
-					return internalPath;
-				} else {
-					final File tempJar = File.createTempFile("kanuni-", ".jar");
-					tempJar.deleteOnExit();
-					return createAgentJarFromJar(tempJar, new JarFile(internalPath));
-				}
-			} else {
-				// class files
-				final File tempJar = File.createTempFile("kanuni-", ".jar");
-				tempJar.deleteOnExit();
+		final File tempJar = File.createTempFile("kanuni-", ".jar");
+		tempJar.deleteOnExit();
+		JarOutputStream agentJarFile = new JarOutputStream(new FileOutputStream(tempJar), createManifest());
+		
+		for (String path : paths) {
+			Enumeration<URL> resources = classLoader.getResources(path);
+			while (resources.hasMoreElements()) {
+				URL url = resources.nextElement();
+				String internalPath = url.getPath();
 				
-				File directory = new File(internalPath);
-				return createAgentJarFromClassFiles(tempJar, directory);
+				if (internalPath.startsWith("file:")) {
+					internalPath = internalPath.substring(5);
+				}
+				
+				if (internalPath.contains("!")) {
+					internalPath = internalPath.substring(0, internalPath.indexOf('!'));
+				}
+				
+				System.err.println("Internal " + path + ": " + internalPath);
+				
+				if (internalPath.endsWith(".jar")) {
+					appendAgentJarFromJar(agentJarFile, tempJar, path, new JarFile(internalPath));
+				} else {
+					// class files
+					File directory = new File(internalPath);
+					appendAgentJarFromClassFiles(agentJarFile, tempJar, directory);
+				}
+				break;
 			}
 		}
 		
-		throw new ClassNotFoundException();
+		agentJarFile.flush();
+		agentJarFile.close();
+		
+		return tempJar.getAbsolutePath();
 	}
 	
 	/**
@@ -230,6 +246,28 @@ public class KanuniAgentLoader {
 	}
 	
 	/**
+	 * @param pid
+	 * @return
+	 */
+	private static VirtualMachine getVirtualMachineImplementationFromEmbeddedOnes(final String pid) {
+		try {
+			if (File.separatorChar == '\\') {
+				return new WindowsVirtualMachine(ATTACH_PROVIDER, pid);
+			} else {
+				return new LinuxVirtualMachine(ATTACH_PROVIDER, pid);
+			}
+		} catch (AttachNotSupportedException e) {
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} catch (UnsatisfiedLinkError ignore) {
+			// noinspection ThrowInsideCatchBlockWhichIgnoresCaughtException
+			throw new IllegalStateException(
+			                                "Unable to load Java agent; please add lib/tools.jar from your JDK to the classpath");
+		}
+	}
+	
+	/**
 	 * 
 	 */
 	public static void loadAgent() {
@@ -243,7 +281,13 @@ public class KanuniAgentLoader {
 		try {
 			jarFilePath = getAgentJar();
 			System.err.println("Using agent: " + jarFilePath);
-			VirtualMachine vm = VirtualMachine.attach(pid);
+			VirtualMachine vm = null;
+			
+			if (AttachProvider.providers().isEmpty()) {
+				vm = getVirtualMachineImplementationFromEmbeddedOnes(pid);
+			} else {
+				vm = VirtualMachine.attach(pid);
+			}
 			vm.loadAgent(jarFilePath, "");
 			vm.detach();
 		} catch (Exception e) {

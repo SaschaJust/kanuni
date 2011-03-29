@@ -98,8 +98,8 @@
 							<Agent-Class>net.ownhero.dev.kanuni.instrumentation.KanuniAgent</Agent-Class>
 							<Premain-Class>net.ownhero.dev.kanuni.instrumentation.KanuniAgent</Premain-Class>
 							<Boot-Class-Path>../lib/javassist.jar</Boot-Class-Path>
-				            <Can-Redefine-Classes>true</Can-Redefine-Classes>
-				            <Can-Retransform-Classes>true</Can-Retransform-Classes>
+							<Can-Redefine-Classes>true</Can-Redefine-Classes>
+							<Can-Retransform-Classes>true</Can-Retransform-Classes>
 						</manifestEntries>
 					</archive>
 				</configuration>
