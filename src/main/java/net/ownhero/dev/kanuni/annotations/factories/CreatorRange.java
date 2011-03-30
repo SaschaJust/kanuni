@@ -20,9 +20,9 @@ import net.ownhero.dev.kanuni.annotations.bounds.RangeDouble;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeFloat;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeInteger;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeLong;
-import net.ownhero.dev.kanuni.conditions.BoundsCondition;
 import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
 import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
+import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
 import org.apache.commons.lang.StringEscapeUtils;
 
@@ -30,21 +30,7 @@ import org.apache.commons.lang.StringEscapeUtils;
  * @author Sascha Just <sascha.just@own-hero.net>
  * 
  */
-public class CreatorRange implements Creator {
-	
-	/*
-	 * (non-Javadoc)
-	 * @see net.ownhero.dev.kanuni.annotations.factories.Creator#
-	 * createBehaviorInstrumentation(javassist.bytecode.annotation.Annotation,
-	 * javassist.CtBehavior, java.util.Map)
-	 */
-	@Override
-	public String createBehaviorInstrumentation(final Annotation annotation,
-	                                            final CtBehavior behavior,
-	                                            final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
-		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported behavior ("
-		        + behavior.getName() + ") annotation: " + annotation.getTypeName());
-	}
+public final class CreatorRange extends Creator {
 	
 	/*
 	 * (non-Javadoc)
@@ -61,7 +47,7 @@ public class CreatorRange implements Creator {
 	                                             final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
 		StringBuilder builder = new StringBuilder();
 		
-		builder.append(BoundsCondition.class.getPackage().getName()).append(".");
+		builder.append(KanuniInstrumenter.boundsClass);
 		
 		if (annotation.getTypeName().equals(RangeChar.class.getName())) {
 			// process RangeChar
@@ -75,10 +61,10 @@ public class CreatorRange implements Creator {
 			String text = textMember.getValue();
 			
 			if (parameterType.isPrimitive()) {
-				builder.append(String.format("BoundsCondition.range(new Character('%s'), new Character('%s'), new Character('%s'), \"%s\", new Object[0])",
+				builder.append(String.format(".range(new Character(%s), new Character('%s'), new Character('%s'), \"%s\", new Object[0])",
 				                             parameterName, min, max, StringEscapeUtils.escapeJava(text)));
 			} else {
-				builder.append(String.format("BoundsCondition.range((Character) %s, new Character('%s'), new Character('%s'), \"%s\", new Object[0])",
+				builder.append(String.format(".range((Character) %s, new Character('%s'), new Character('%s'), \"%s\", new Object[0])",
 				                             parameterName, min, max, StringEscapeUtils.escapeJava(text)));
 			}
 		} else if (annotation.getTypeName().equals(RangeDouble.class.getName())) {
@@ -93,10 +79,10 @@ public class CreatorRange implements Creator {
 			String text = textMember.getValue();
 			
 			if (parameterType.isPrimitive()) {
-				builder.append(String.format("BoundsCondition.range(new Double(%s), new Double(%s), new Double(%s), \"%s\", new Object[0])",
+				builder.append(String.format(".range(new Double(%s), new Double(%s), new Double(%s), \"%s\", new Object[0])",
 				                             parameterName, min, max, StringEscapeUtils.escapeJava(text)));
 			} else {
-				builder.append(String.format("BoundsCondition.range((Double) %s, new Double(%s), new Double(%s), \"%s\", new Object[0])",
+				builder.append(String.format(".range((Double) %s, new Double(%s), new Double(%s), \"%s\", new Object[0])",
 				                             parameterName, min, max, StringEscapeUtils.escapeJava(text)));
 			}
 		} else if (annotation.getTypeName().equals(RangeFloat.class.getName())) {
@@ -111,10 +97,10 @@ public class CreatorRange implements Creator {
 			String text = textMember.getValue();
 			
 			if (parameterType.isPrimitive()) {
-				builder.append(String.format("BoundsCondition.range(new Float(%s), new Float(%s), new Float(%s), \"%s\", new Object[0])",
+				builder.append(String.format(".range(new Float(%s), new Float(%s), new Float(%s), \"%s\", new Object[0])",
 				                             parameterName, min, max, StringEscapeUtils.escapeJava(text)));
 			} else {
-				builder.append(String.format("BoundsCondition.range((Float) %s, new Float(%s), new Float(%s), \"%s\", new Object[0])",
+				builder.append(String.format(".range((Float) %s, new Float(%s), new Float(%s), \"%s\", new Object[0])",
 				                             parameterName, min, max, StringEscapeUtils.escapeJava(text)));
 			}
 		} else if (annotation.getTypeName().equals(RangeInteger.class.getName())) {
@@ -129,10 +115,10 @@ public class CreatorRange implements Creator {
 			String text = textMember.getValue();
 			
 			if (parameterType.isPrimitive()) {
-				builder.append(String.format("BoundsCondition.range(new Integer(%s), new Integer(%s), new Integer(%s), \"%s\", new Object[0])",
+				builder.append(String.format(".range(new Integer(%s), new Integer(%s), new Integer(%s), \"%s\", new Object[0])",
 				                             parameterName, min, max, StringEscapeUtils.escapeJava(text)));
 			} else {
-				builder.append(String.format("BoundsCondition.range((Integer) %s, new Integer(%s), new Integer(%s), \"%s\", new Object[0])",
+				builder.append(String.format(".range((Integer) %s, new Integer(%s), new Integer(%s), \"%s\", new Object[0])",
 				                             parameterName, min, max, StringEscapeUtils.escapeJava(text)));
 			}
 		} else if (annotation.getTypeName().equals(RangeLong.class.getName())) {
@@ -147,10 +133,10 @@ public class CreatorRange implements Creator {
 			String text = textMember.getValue();
 			
 			if (parameterType.isPrimitive()) {
-				builder.append(String.format("BoundsCondition.range(new Long(%s), new Long((long) %s), new Long((long) %s), \"%s\", new Object[0])",
+				builder.append(String.format(".range(new Long(%s), new Long((long) %s), new Long((long) %s), \"%s\", new Object[0])",
 				                             parameterName, min, max, StringEscapeUtils.escapeJava(text)));
 			} else {
-				builder.append(String.format("BoundsCondition.range((Long) %s, new Long((long) %s), new Long((long) %s), \"%s\", new Object[0])",
+				builder.append(String.format(".range((Long) %s, new Long((long) %s), new Long((long) %s), \"%s\", new Object[0])",
 				                             parameterName, min, max, StringEscapeUtils.escapeJava(text)));
 			}
 		} else {

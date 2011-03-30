@@ -15,7 +15,7 @@ import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
  * @author Sascha Just <sascha.just@own-hero.net>
  * 
  */
-public interface Creator {
+public abstract class Creator {
 	
 	/**
 	 * Used to request an instrumentation for a given annotation/behavior pair.
@@ -26,9 +26,12 @@ public interface Creator {
 	 * @return a string representation of the instrumentation that have to be
 	 *         added to the behavior
 	 */
-	public String createBehaviorInstrumentation(Annotation annotation,
-	                                            CtBehavior behavior,
-	                                            Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException;
+	public String createBehaviorInstrumentation(final Annotation annotation,
+	                                            final CtBehavior behavior,
+	                                            final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
+		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported behavior ("
+		        + behavior.getName() + ") annotation: " + annotation.getTypeName());
+	}
 	
 	/**
 	 * Used to request an instrumentation for a given annotation/parameter pair.
@@ -41,10 +44,13 @@ public interface Creator {
 	 * @return a string representation of the instrumentation that have to be
 	 *         added to the behavior
 	 */
-	public String createParameterInstrumentation(Annotation annotation,
-	                                             CtBehavior behavior,
-	                                             String parameterName,
-	                                             CtClass parameterType,
-	                                             Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException;
+	public String createParameterInstrumentation(final Annotation annotation,
+	                                             final CtBehavior behavior,
+	                                             final String parameterName,
+	                                             final CtClass parameterType,
+	                                             final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
+		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported parameter (" + parameterName
+		        + ":" + parameterType.getName() + ") annotation: " + annotation.getTypeName());
+	}
 	
 }

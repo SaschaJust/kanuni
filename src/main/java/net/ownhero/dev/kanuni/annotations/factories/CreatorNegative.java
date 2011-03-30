@@ -10,23 +10,23 @@ import javassist.CtBehavior;
 import javassist.CtClass;
 import javassist.bytecode.annotation.Annotation;
 import javassist.bytecode.annotation.StringMemberValue;
-import net.ownhero.dev.kanuni.conditions.CompareCondition;
 import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
 import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
+import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
 /**
  * @author Sascha Just <sascha.just@own-hero.net>
  * 
  */
-public class CreatorNegative implements Creator {
+public final class CreatorNegative extends Creator {
 	
-	public String createBehaviorInstrumentation(final Annotation annotation,
-	                                            final CtBehavior behavior,
-	                                            final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
-		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported behavior ("
-		        + behavior.getName() + ") annotation: " + annotation.getTypeName());
-	}
-	
+	/*
+	 * (non-Javadoc)
+	 * @see net.ownhero.dev.kanuni.annotations.factories.Creator#
+	 * createParameterInstrumentation(javassist.bytecode.annotation.Annotation,
+	 * javassist.CtBehavior, java.lang.String, javassist.CtClass, java.util.Map)
+	 */
+	@Override
 	public String createParameterInstrumentation(final Annotation annotation,
 	                                             final CtBehavior behavior,
 	                                             final String parameterName,
@@ -39,7 +39,7 @@ public class CreatorNegative implements Creator {
 		
 		if (parameterType.isPrimitive()) {
 			// load corresponding class and check type
-			builder.append(CompareCondition.class.getCanonicalName()).append(".negative(");
+			builder.append(KanuniInstrumenter.compareClass).append(".negative(");
 			if (parameterType.getName().equals("double")) {
 				builder.append("new Double(").append(parameterName).append(")");
 			} else if (parameterType.getName().equals("long")) {
@@ -58,7 +58,7 @@ public class CreatorNegative implements Creator {
 			builder.append(String.format(", \"%s\", new Object[0]);", text))
 			       .append(System.getProperty("line.separator"));
 		} else {
-			builder.append(CompareCondition.class.getCanonicalName())
+			builder.append(KanuniInstrumenter.compareClass)
 			       .append(String.format(".negative(%s, \"%s\", new Object[0]);", parameterName, text))
 			       .append(System.getProperty("line.separator"));
 		}

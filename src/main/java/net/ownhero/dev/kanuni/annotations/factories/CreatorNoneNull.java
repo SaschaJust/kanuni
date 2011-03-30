@@ -12,9 +12,6 @@ import javassist.CtBehavior;
 import javassist.CtClass;
 import javassist.bytecode.annotation.Annotation;
 import javassist.bytecode.annotation.StringMemberValue;
-import net.ownhero.dev.kanuni.conditions.ArrayCondition;
-import net.ownhero.dev.kanuni.conditions.CollectionCondition;
-import net.ownhero.dev.kanuni.conditions.MapCondition;
 import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
 import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
@@ -24,7 +21,7 @@ import org.apache.commons.lang.StringEscapeUtils;
  * @author Sascha Just <sascha.just@own-hero.net>
  * 
  */
-public class CreatorNoneNull implements Creator {
+public final class CreatorNoneNull extends Creator {
 	
 	/*
 	 * (non-Javadoc)
@@ -42,12 +39,12 @@ public class CreatorNoneNull implements Creator {
 		for (int i = 1; i < behavior.getSignature().split(";").length; ++i) {
 			// for (Integer markerId : markers.keySet()) {
 			// for (String markerParameter : markers.get(markerId)) {
-			builder.append(ArrayCondition.class.getPackage().getName()).append(".");
+			builder.append(KanuniInstrumenter.simpleClass);
 			
 			StringMemberValue textMember = (StringMemberValue) KanuniInstrumenter.getMemberValue(annotation, "value");
 			String text = textMember.getValue();
 			
-			builder.append(String.format("Condition.notNull(($w) $%s, \"(parameter: %s) %s\", new Object[0])", i, i,
+			builder.append(String.format(".notNull(($w) $%s, \"(parameter: %s) %s\", new Object[0])", i, i,
 			                             StringEscapeUtils.escapeJava(text)));
 			
 			builder.append(";");
@@ -77,7 +74,7 @@ public class CreatorNoneNull implements Creator {
 		String text = textMember.getValue();
 		
 		if (parameterType.isArray()) {
-			builder.append(ArrayCondition.class.getCanonicalName())
+			builder.append(KanuniInstrumenter.arrayClass)
 			       .append(String.format(".noneNull(%s, \"%s\", new Object[0]);", parameterName, text))
 			       .append(System.getProperty("line.separator"));
 		} else {
@@ -88,11 +85,11 @@ public class CreatorNoneNull implements Creator {
 				realInterfaces.addAll(KanuniInstrumenter.getInterfaces(original));
 				
 				if (realInterfaces.contains(Map.class)) {
-					builder.append(MapCondition.class.getCanonicalName())
+					builder.append(KanuniInstrumenter.mapClass)
 					       .append(String.format(".noneNull((java.util.Map) %s, \"%s\", new Object[0]);",
 					                             parameterName, text)).append(System.getProperty("line.separator"));
 				} else if (realInterfaces.contains(Collection.class)) {
-					builder.append(CollectionCondition.class.getCanonicalName())
+					builder.append(KanuniInstrumenter.collectionClass)
 					       .append(String.format(".noneNull((java.util.Collection) %s, \"%s\", new Object[0]);",
 					                             parameterName, text)).append(System.getProperty("line.separator"));
 				} else {

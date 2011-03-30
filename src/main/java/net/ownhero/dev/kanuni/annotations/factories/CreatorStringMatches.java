@@ -10,9 +10,9 @@ import javassist.CtBehavior;
 import javassist.CtClass;
 import javassist.bytecode.annotation.Annotation;
 import javassist.bytecode.annotation.StringMemberValue;
-import net.ownhero.dev.kanuni.conditions.StringCondition;
 import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
 import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
+import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
 import org.apache.commons.lang.StringEscapeUtils;
 
@@ -20,21 +20,7 @@ import org.apache.commons.lang.StringEscapeUtils;
  * @author Sascha Just <sascha.just@own-hero.net>
  *
  */
-public class CreatorStringMatches implements Creator {
-	
-	/*
-	 * (non-Javadoc)
-	 * @see net.ownhero.dev.kanuni.annotations.factories.Creator#
-	 * createBehaviorInstrumentation(javassist.bytecode.annotation.Annotation,
-	 * javassist.CtBehavior, java.util.Map)
-	 */
-	@Override
-	public String createBehaviorInstrumentation(final Annotation annotation,
-	                                            final CtBehavior behavior,
-	                                            final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
-		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported behavior ("
-		        + behavior.getName() + ") annotation: " + annotation.getTypeName());
-	}
+public final class CreatorStringMatches extends Creator {
 	
 	/*
 	 * (non-Javadoc)
@@ -50,17 +36,15 @@ public class CreatorStringMatches implements Creator {
 	                                             final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
 		StringBuilder builder = new StringBuilder();
 		
-		builder.append(StringCondition.class.getPackage().getName()).append(".");
-		
 		StringMemberValue patternMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation, "pattern");
 		String pattern = patternMember.getValue();
 		
 		StringMemberValue textMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation, "value");
 		String text = textMember.getValue();
 		
-		builder.append(String.format("StringCondition.matches(%s, \"%s\", \"%s\", new Object[0]);", parameterName,
-		                             pattern, StringEscapeUtils.escapeJava(text)));
-		builder.append(System.getProperty("line.separator"));
+		builder.append(KanuniInstrumenter.stringClass)
+		       .append(String.format(".matches(%s, \"%s\", \"%s\", new Object[0]);", parameterName, pattern,
+		                             StringEscapeUtils.escapeJava(text))).append(System.getProperty("line.separator"));
 		
 		return builder.toString();
 		

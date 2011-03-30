@@ -15,9 +15,9 @@ import net.ownhero.dev.kanuni.annotations.string.MaxLength;
 import net.ownhero.dev.kanuni.annotations.string.MinLength;
 import net.ownhero.dev.kanuni.annotations.string.SameLength;
 import net.ownhero.dev.kanuni.conditions.CollectionCondition;
-import net.ownhero.dev.kanuni.conditions.StringCondition;
 import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
 import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
+import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
 import org.apache.commons.lang.StringEscapeUtils;
 
@@ -25,7 +25,7 @@ import org.apache.commons.lang.StringEscapeUtils;
  * @author Sascha Just <sascha.just@own-hero.net>
  *
  */
-public class CreatorStringLength implements Creator {
+public final class CreatorStringLength extends Creator {
 	
 	/*
 	 * (non-Javadoc)
@@ -58,19 +58,14 @@ public class CreatorStringLength implements Creator {
 				
 				arrayBuilder.append(" } ");
 				
-				builder.append(StringCondition.class.getPackage().getName()).append(".");
-				
 				StringMemberValue textMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation, "value");
 				String text = textMember.getValue();
 				
-				builder.append(String.format("StringCondition.sameLength(%s, \"%s\", new Object[0])", arrayBuilder,
-				                             StringEscapeUtils.escapeJava(text)));
-				
-				builder.append(";");
-				builder.append(System.getProperty("line.separator"));
+				builder.append(KanuniInstrumenter.stringClass)
+				       .append(String.format(".sameLength(%s, \"%s\", new Object[0]);", arrayBuilder,
+				                             StringEscapeUtils.escapeJava(text)))
+				       .append(System.getProperty("line.separator"));
 			}
-			
-			StringCondition.notEmpty(builder.toString(), "Successful created annotations may never be empty.");
 			
 			return builder.toString();
 		} else {
@@ -93,22 +88,21 @@ public class CreatorStringLength implements Creator {
 	                                             final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
 		StringBuilder builder = new StringBuilder();
 		
-		builder.append(StringCondition.class.getPackage().getName()).append(".");
-		
 		StringMemberValue textMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation, "value");
 		String text = textMember.getValue();
-		builder.append("StringCondition.");
+		
+		builder.append(KanuniInstrumenter.stringClass);
 		
 		if (annotation.getTypeName().equals(MaxLength.class.getName())) {
 			IntegerMemberValue maxMemberValue = (IntegerMemberValue) KanuniClassloader.getMemberValue(annotation, "max");
 			int max = maxMemberValue.getValue();
 			
-			builder.append(String.format("maxLength(%s, new Integer(%s)", parameterName, max));
+			builder.append(String.format(".maxLength(%s, new Integer(%s)", parameterName, max));
 		} else if (annotation.getTypeName().equals(MinLength.class.getName())) {
 			IntegerMemberValue maxMemberValue = (IntegerMemberValue) KanuniClassloader.getMemberValue(annotation, "min");
 			int max = maxMemberValue.getValue();
 			
-			builder.append(String.format("minLength(%s, new Integer(%s)", parameterName, max));
+			builder.append(String.format(".minLength(%s, new Integer(%s)", parameterName, max));
 		} else {
 			throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported parameter ("
 			        + parameterName + ":" + parameterType.getName() + ") annotation: " + annotation.getTypeName());

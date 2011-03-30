@@ -102,7 +102,19 @@ import net.ownhero.dev.kanuni.annotations.string.SameLength;
 import net.ownhero.dev.kanuni.annotations.string.ShortString;
 import net.ownhero.dev.kanuni.annotations.string.Trimmed;
 import net.ownhero.dev.kanuni.annotations.string.Uppercase;
+import net.ownhero.dev.kanuni.checks.ArrayCheck;
+import net.ownhero.dev.kanuni.checks.BoundsCheck;
+import net.ownhero.dev.kanuni.checks.Check;
+import net.ownhero.dev.kanuni.checks.CollectionCheck;
+import net.ownhero.dev.kanuni.checks.CompareCheck;
+import net.ownhero.dev.kanuni.checks.MapCheck;
+import net.ownhero.dev.kanuni.checks.StringCheck;
+import net.ownhero.dev.kanuni.conditions.ArrayCondition;
+import net.ownhero.dev.kanuni.conditions.BoundsCondition;
+import net.ownhero.dev.kanuni.conditions.CollectionCondition;
+import net.ownhero.dev.kanuni.conditions.CompareCondition;
 import net.ownhero.dev.kanuni.conditions.Condition;
+import net.ownhero.dev.kanuni.conditions.MapCondition;
 import net.ownhero.dev.kanuni.conditions.StringCondition;
 import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
 
@@ -200,7 +212,37 @@ public class KanuniInstrumenter {
 	 */
 	private static boolean                    assertionsEnabled      = false;
 	
+	/**
+	 * Forces the instrumentations to insert {@link Check}s instead of {@link Condition}s.
+	 */
+	private static boolean                    useExceptions          = System.getProperty("KanuniExceptions") != null;                ;
+	
+	/**
+	 * kanuni debugging enabled
+	 */
 	public static final boolean               debug                  = System.getProperty("KanuniDebug") != null;
+	
+	public static final String                simpleClass            = (useExceptions
+	                                                                                 ? Check.class
+	                                                                                 : Condition.class).getCanonicalName();
+	public static final String                arrayClass             = (useExceptions
+	                                                                                 ? ArrayCheck.class
+	                                                                                 : ArrayCondition.class).getCanonicalName();
+	public static final String                stringClass            = (useExceptions
+	                                                                                 ? StringCheck.class
+	                                                                                 : StringCondition.class).getCanonicalName();
+	public static final String                mapClass               = (useExceptions
+	                                                                                 ? MapCheck.class
+	                                                                                 : MapCondition.class).getCanonicalName();
+	public static final String                collectionClass        = (useExceptions
+	                                                                                 ? CollectionCheck.class
+	                                                                                 : CollectionCondition.class).getCanonicalName();
+	public static final String                compareClass           = (useExceptions
+	                                                                                 ? CompareCheck.class
+	                                                                                 : CompareCondition.class).getCanonicalName();
+	public static final String                boundsClass            = (useExceptions
+	                                                                                 ? BoundsCheck.class
+	                                                                                 : BoundsCondition.class).getCanonicalName();
 	
 	/**
 	 * @param memberValue
@@ -268,6 +310,13 @@ public class KanuniInstrumenter {
 	 */
 	public static boolean isAssertionsEnabled() {
 		return assertionsEnabled;
+	}
+	
+	/**
+	 * @return the useExceptions
+	 */
+	public static boolean useExceptions() {
+		return useExceptions;
 	}
 	
 	/**

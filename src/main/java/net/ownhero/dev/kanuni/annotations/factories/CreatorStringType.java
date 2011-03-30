@@ -26,9 +26,9 @@ import net.ownhero.dev.kanuni.annotations.string.NotEmptyString;
 import net.ownhero.dev.kanuni.annotations.string.ShortString;
 import net.ownhero.dev.kanuni.annotations.string.Trimmed;
 import net.ownhero.dev.kanuni.annotations.string.Uppercase;
-import net.ownhero.dev.kanuni.conditions.StringCondition;
 import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
 import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
+import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
 import org.apache.commons.lang.StringEscapeUtils;
 
@@ -36,21 +36,7 @@ import org.apache.commons.lang.StringEscapeUtils;
  * @author Sascha Just <sascha.just@own-hero.net>
  *
  */
-public class CreatorStringType implements Creator {
-	
-	/*
-	 * (non-Javadoc)
-	 * @see net.ownhero.dev.kanuni.annotations.factories.Creator#
-	 * createBehaviorInstrumentation(javassist.bytecode.annotation.Annotation,
-	 * javassist.CtBehavior, java.util.Map)
-	 */
-	@Override
-	public String createBehaviorInstrumentation(final Annotation annotation,
-	                                            final CtBehavior behavior,
-	                                            final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
-		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported behavior ("
-		        + behavior.getName() + ") annotation: " + annotation.getTypeName());
-	}
+public final class CreatorStringType extends Creator {
 	
 	/*
 	 * (non-Javadoc)
@@ -66,11 +52,10 @@ public class CreatorStringType implements Creator {
 	                                             final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
 		StringBuilder builder = new StringBuilder();
 		
-		builder.append(StringCondition.class.getPackage().getName()).append(".");
-		
 		StringMemberValue textMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation, "value");
 		String text = textMember.getValue();
-		builder.append("StringCondition.");
+		
+		builder.append(KanuniInstrumenter.stringClass).append(".");
 		
 		if (annotation.getTypeName().equals(AlphaNumString.class.getName())) {
 			builder.append("alphanum");

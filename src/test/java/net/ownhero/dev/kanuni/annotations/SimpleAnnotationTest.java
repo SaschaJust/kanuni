@@ -3,19 +3,18 @@
  */
 package net.ownhero.dev.kanuni.annotations;
 
-import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
+
 
 /**
- * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ * @author Sascha Just <sascha.just@own-hero.net>
  *
  */
-public class ArrayTest {
+public class SimpleAnnotationTest {
 	
 	/**
 	 * @throws java.lang.Exception
@@ -31,8 +30,6 @@ public class ArrayTest {
 	public static void tearDownAfterClass() throws Exception {
 	}
 	
-	AnnotatedForArray afa = new AnnotatedForArray();
-	
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -45,20 +42,6 @@ public class ArrayTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
-	}
-	
-	@Test
-	public void testMaxLength3Invalid() {
-		boolean err = false;
-		try {
-			this.afa.testArrayContainsElement(new int[] { 1, 2, 3 }, 0);
-			err = true;
-		} catch (AssertionError e) {
-		}
-		
-		if (err) {
-			fail();
-		}
 	}
 	
 }

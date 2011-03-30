@@ -9,10 +9,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
+
 /**
- * This meta annotation should me used within kanuni only. It's used to specify
- * a factory class for a kanuni annotation and is used by the classloader for
- * compiling purpose only.
+ * This meta-annotation for kanuni annotations determines the factory
+ * class for that annotation and is used by the {@link KanuniInstrumenter}
+ * to create the corresponding instance for instrumentation.
  * 
  * @author Sascha Just <sascha.just@own-hero.net>
  * 

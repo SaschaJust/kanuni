@@ -13,9 +13,6 @@ import javassist.CtClass;
 import javassist.bytecode.annotation.Annotation;
 import javassist.bytecode.annotation.IntegerMemberValue;
 import javassist.bytecode.annotation.StringMemberValue;
-import net.ownhero.dev.kanuni.conditions.ArrayCondition;
-import net.ownhero.dev.kanuni.conditions.CollectionCondition;
-import net.ownhero.dev.kanuni.conditions.MapCondition;
 import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
 import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
@@ -23,21 +20,7 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
  * @author Sascha Just <sascha.just@own-hero.net>
  *
  */
-public class CreatorSize implements Creator {
-	
-	/*
-	 * (non-Javadoc)
-	 * @see net.ownhero.dev.kanuni.annotations.factories.Creator#
-	 * createBehaviorInstrumentation(javassist.bytecode.annotation.Annotation,
-	 * javassist.CtBehavior, java.util.Map)
-	 */
-	@Override
-	public String createBehaviorInstrumentation(final Annotation annotation,
-	                                            final CtBehavior behavior,
-	                                            final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
-		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported behavior ("
-		        + behavior.getName() + ") annotation: " + annotation.getTypeName());
-	}
+public final class CreatorSize extends Creator {
 	
 	/*
 	 * (non-Javadoc)
@@ -60,7 +43,7 @@ public class CreatorSize implements Creator {
 		int size = sizeMemberValue.getValue();
 		
 		if (parameterType.isArray()) {
-			builder.append(ArrayCondition.class.getCanonicalName())
+			builder.append(KanuniInstrumenter.arrayClass)
 			       .append(String.format(".size(%s, new Integer(%s), \"%s\", new Object[0]);", parameterName, size,
 			                             text)).append(System.getProperty("line.separator"));
 		} else {
@@ -71,12 +54,12 @@ public class CreatorSize implements Creator {
 				realInterfaces.addAll(KanuniInstrumenter.getInterfaces(original));
 				
 				if (realInterfaces.contains(Map.class)) {
-					builder.append(MapCondition.class.getCanonicalName())
+					builder.append(KanuniInstrumenter.mapClass)
 					       .append(String.format(".size((java.util.Map) %s, %s, \"%s\", new Object[0]);",
 					                             parameterName, size, text))
 					       .append(System.getProperty("line.separator"));
 				} else if (realInterfaces.contains(Collection.class)) {
-					builder.append(CollectionCondition.class.getCanonicalName())
+					builder.append(KanuniInstrumenter.collectionClass)
 					       .append(String.format(".size((java.util.Collection) %s, %s,  \"%s\", new Object[0]);",
 					                             parameterName, size, text))
 					       .append(System.getProperty("line.separator"));

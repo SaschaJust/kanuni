@@ -14,11 +14,6 @@ import javassist.bytecode.annotation.Annotation;
 import javassist.bytecode.annotation.BooleanMemberValue;
 import javassist.bytecode.annotation.IntegerMemberValue;
 import javassist.bytecode.annotation.StringMemberValue;
-import net.ownhero.dev.kanuni.conditions.ArrayCondition;
-import net.ownhero.dev.kanuni.conditions.CollectionCondition;
-import net.ownhero.dev.kanuni.conditions.Condition;
-import net.ownhero.dev.kanuni.conditions.MapCondition;
-import net.ownhero.dev.kanuni.conditions.StringCondition;
 import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
 import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
@@ -28,21 +23,7 @@ import org.apache.commons.lang.StringEscapeUtils;
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
  *
  */
-public class CreatorContainer implements Creator {
-	
-	/*
-	 * (non-Javadoc)
-	 * @see net.ownhero.dev.kanuni.annotations.factories.Creator#
-	 * createBehaviorInstrumentation(javassist.bytecode.annotation.Annotation,
-	 * javassist.CtBehavior, java.util.Map)
-	 */
-	@Override
-	public String createBehaviorInstrumentation(final Annotation annotation,
-	                                            final CtBehavior behavior,
-	                                            final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
-		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported behavior ("
-		        + behavior.getName() + ") annotation: " + annotation.getTypeName());
-	}
+public final class CreatorContainer extends Creator {
 	
 	/*
 	 * (non-Javadoc)
@@ -128,53 +109,53 @@ public class CreatorContainer implements Creator {
 		
 		if (parameterType.isArray()) {
 			if (forceNull) {
-				builder.append(Condition.class.getCanonicalName())
+				builder.append(KanuniInstrumenter.simpleClass)
 				       .append(String.format(".isNull(%s, \"%s\", new Object[0]);", parameterName,
 				                             StringEscapeUtils.escapeJava(text)))
 				       .append(System.getProperty("line.separator"));
 			} else {
 				if (!allowNull) {
-					builder.append(Condition.class.getCanonicalName())
+					builder.append(KanuniInstrumenter.simpleClass)
 					       .append(String.format(".notNull(%s, \"%s\", new Object[0]);", parameterName,
 					                             StringEscapeUtils.escapeJava(text)))
 					       .append(System.getProperty("line.separator"));
 				}
 				
 				if (!allowEmpty) {
-					builder.append(ArrayCondition.class.getCanonicalName())
+					builder.append(KanuniInstrumenter.arrayClass)
 					       .append(String.format(".notEmpty(%s, \"%s\", new Object[0]);", parameterName,
 					                             StringEscapeUtils.escapeJava(text)))
 					       .append(System.getProperty("line.separator"));
 				} else if (forceEmpty) {
-					builder.append(ArrayCondition.class.getCanonicalName())
+					builder.append(KanuniInstrumenter.arrayClass)
 					       .append(String.format(".isEmpty(%s, \"%s\", new Object[0]);", parameterName,
 					                             StringEscapeUtils.escapeJava(text)))
 					       .append(System.getProperty("line.separator"));
 				}
 				
 				if (minSize > 0) {
-					builder.append(ArrayCondition.class.getCanonicalName())
+					builder.append(KanuniInstrumenter.arrayClass)
 					       .append(String.format(".minSize(%s, new Integer(%s), \"%s\", new Object[0]);",
 					                             parameterName, maxSize, StringEscapeUtils.escapeJava(text)))
 					       .append(System.getProperty("line.separator"));
 				}
 				
 				if (maxSize > 0) {
-					builder.append(ArrayCondition.class.getCanonicalName())
+					builder.append(KanuniInstrumenter.arrayClass)
 					       .append(String.format(".maxSize(%s, new Integer(%s), \"%s\", new Object[0]);",
 					                             parameterName, maxSize, StringEscapeUtils.escapeJava(text)))
 					       .append(System.getProperty("line.separator"));
 				}
 				
 				if (size > 0) {
-					builder.append(ArrayCondition.class.getCanonicalName())
+					builder.append(KanuniInstrumenter.arrayClass)
 					       .append(String.format(".size(%s, new Integer(%s), \"%s\", new Object[0]);", parameterName,
 					                             maxSize, StringEscapeUtils.escapeJava(text)))
 					       .append(System.getProperty("line.separator"));
 				}
 				
 				if (noneNull) {
-					builder.append(ArrayCondition.class.getCanonicalName())
+					builder.append(KanuniInstrumenter.arrayClass)
 					       .append(String.format(".noneNull(%s, \"%s\", new Object[0]);", parameterName,
 					                             StringEscapeUtils.escapeJava(text)))
 					       .append(System.getProperty("line.separator"));
@@ -193,46 +174,46 @@ public class CreatorContainer implements Creator {
 					}
 					
 					if (forceNull) {
-						builder.append(Condition.class.getCanonicalName())
+						builder.append(KanuniInstrumenter.simpleClass)
 						       .append(String.format(".isNull(%s, \"%s\", new Object[0]);", parameterName,
 						                             StringEscapeUtils.escapeJava(text)))
 						       .append(System.getProperty("line.separator"));
 					} else {
 						if (!allowNull) {
-							builder.append(Condition.class.getCanonicalName())
+							builder.append(KanuniInstrumenter.simpleClass)
 							       .append(String.format(".notNull(%s, \"%s\", new Object[0]);", parameterName,
 							                             StringEscapeUtils.escapeJava(text)))
 							       .append(System.getProperty("line.separator"));
 						}
 						
 						if (!allowEmpty) {
-							builder.append(StringCondition.class.getCanonicalName())
+							builder.append(KanuniInstrumenter.stringClass)
 							       .append(String.format(".notEmpty(%s, \"%s\", new Object[0]);", parameterName,
 							                             StringEscapeUtils.escapeJava(text)))
 							       .append(System.getProperty("line.separator"));
 						} else if (forceEmpty) {
-							builder.append(StringCondition.class.getCanonicalName())
+							builder.append(KanuniInstrumenter.stringClass)
 							       .append(String.format(".isEmpty(%s, \"%s\", new Object[0]);", parameterName,
 							                             StringEscapeUtils.escapeJava(text)))
 							       .append(System.getProperty("line.separator"));
 						}
 						
 						if (minSize > 0) {
-							builder.append(StringCondition.class.getCanonicalName())
+							builder.append(KanuniInstrumenter.stringClass)
 							       .append(String.format(".minLength(%s, new Integer(%s), \"%s\", new Object[0]);",
 							                             parameterName, maxSize, StringEscapeUtils.escapeJava(text)))
 							       .append(System.getProperty("line.separator"));
 						}
 						
 						if (maxSize > 0) {
-							builder.append(StringCondition.class.getCanonicalName())
+							builder.append(KanuniInstrumenter.stringClass)
 							       .append(String.format(".maxLength(%s, new Integer(%s), \"%s\", new Object[0]);",
 							                             parameterName, maxSize, StringEscapeUtils.escapeJava(text)))
 							       .append(System.getProperty("line.separator"));
 						}
 						
 						if (size > 0) {
-							builder.append(StringCondition.class.getCanonicalName())
+							builder.append(KanuniInstrumenter.stringClass)
 							       .append(String.format(".size(%s, new Integer(%s), \"%s\", new Object[0]);",
 							                             parameterName, maxSize, StringEscapeUtils.escapeJava(text)))
 							       .append(System.getProperty("line.separator"));
@@ -244,53 +225,53 @@ public class CreatorContainer implements Creator {
 					if (realInterfaces.contains(Map.class)) {
 						
 						if (forceNull) {
-							builder.append(Condition.class.getCanonicalName())
+							builder.append(KanuniInstrumenter.simpleClass)
 							       .append(String.format(".isNull(%s, \"%s\", new Object[0]);", parameterName,
 							                             StringEscapeUtils.escapeJava(text)))
 							       .append(System.getProperty("line.separator"));
 						} else {
 							if (!allowNull) {
-								builder.append(Condition.class.getCanonicalName())
+								builder.append(KanuniInstrumenter.simpleClass)
 								       .append(String.format(".notNull(%s, \"%s\", new Object[0]);", parameterName,
 								                             StringEscapeUtils.escapeJava(text)))
 								       .append(System.getProperty("line.separator"));
 							}
 							
 							if (!allowEmpty) {
-								builder.append(MapCondition.class.getCanonicalName())
+								builder.append(KanuniInstrumenter.mapClass)
 								       .append(String.format(".notEmpty(%s, \"%s\", new Object[0]);", parameterName,
 								                             StringEscapeUtils.escapeJava(text)))
 								       .append(System.getProperty("line.separator"));
 							} else if (forceEmpty) {
-								builder.append(MapCondition.class.getCanonicalName())
+								builder.append(KanuniInstrumenter.mapClass)
 								       .append(String.format(".isEmpty(%s, \"%s\", new Object[0]);", parameterName,
 								                             StringEscapeUtils.escapeJava(text)))
 								       .append(System.getProperty("line.separator"));
 							}
 							
 							if (minSize > 0) {
-								builder.append(MapCondition.class.getCanonicalName())
+								builder.append(KanuniInstrumenter.mapClass)
 								       .append(String.format(".minSize(%s, new Integer(%s), \"%s\", new Object[0]);",
 								                             parameterName, maxSize, StringEscapeUtils.escapeJava(text)))
 								       .append(System.getProperty("line.separator"));
 							}
 							
 							if (maxSize > 0) {
-								builder.append(MapCondition.class.getCanonicalName())
+								builder.append(KanuniInstrumenter.mapClass)
 								       .append(String.format(".maxSize(%s, new Integer(%s), \"%s\", new Object[0]);",
 								                             parameterName, maxSize, StringEscapeUtils.escapeJava(text)))
 								       .append(System.getProperty("line.separator"));
 							}
 							
 							if (size > 0) {
-								builder.append(MapCondition.class.getCanonicalName())
+								builder.append(KanuniInstrumenter.mapClass)
 								       .append(String.format(".size(%s, new Integer(%s), \"%s\", new Object[0]);",
 								                             parameterName, maxSize, StringEscapeUtils.escapeJava(text)))
 								       .append(System.getProperty("line.separator"));
 							}
 							
 							if (noneNull) {
-								builder.append(MapCondition.class.getCanonicalName())
+								builder.append(KanuniInstrumenter.mapClass)
 								       .append(String.format(".noneNull(%s, \"%s\", new Object[0]);", parameterName,
 								                             StringEscapeUtils.escapeJava(text)))
 								       .append(System.getProperty("line.separator"));
@@ -299,53 +280,53 @@ public class CreatorContainer implements Creator {
 					} else if (realInterfaces.contains(Collection.class)) {
 						
 						if (forceNull) {
-							builder.append(Condition.class.getCanonicalName())
+							builder.append(KanuniInstrumenter.simpleClass)
 							       .append(String.format(".isNull(%s, \"%s\", new Object[0]);", parameterName,
 							                             StringEscapeUtils.escapeJava(text)))
 							       .append(System.getProperty("line.separator"));
 						} else {
 							if (!allowNull) {
-								builder.append(Condition.class.getCanonicalName())
+								builder.append(KanuniInstrumenter.simpleClass)
 								       .append(String.format(".notNull(%s, \"%s\", new Object[0]);", parameterName,
 								                             StringEscapeUtils.escapeJava(text)))
 								       .append(System.getProperty("line.separator"));
 							}
 							
 							if (!allowEmpty) {
-								builder.append(CollectionCondition.class.getCanonicalName())
+								builder.append(KanuniInstrumenter.collectionClass)
 								       .append(String.format(".notEmpty(%s, \"%s\", new Object[0]);", parameterName,
 								                             StringEscapeUtils.escapeJava(text)))
 								       .append(System.getProperty("line.separator"));
 							} else if (forceEmpty) {
-								builder.append(CollectionCondition.class.getCanonicalName())
+								builder.append(KanuniInstrumenter.collectionClass)
 								       .append(String.format(".isEmpty(%s, \"%s\", new Object[0]);", parameterName,
 								                             StringEscapeUtils.escapeJava(text)))
 								       .append(System.getProperty("line.separator"));
 							}
 							
 							if (minSize > 0) {
-								builder.append(CollectionCondition.class.getCanonicalName())
+								builder.append(KanuniInstrumenter.collectionClass)
 								       .append(String.format(".minSize(%s, new Integer(%s), \"%s\", new Object[0]);",
 								                             parameterName, maxSize, StringEscapeUtils.escapeJava(text)))
 								       .append(System.getProperty("line.separator"));
 							}
 							
 							if (maxSize > 0) {
-								builder.append(CollectionCondition.class.getCanonicalName())
+								builder.append(KanuniInstrumenter.collectionClass)
 								       .append(String.format(".maxSize(%s, new Integer(%s), \"%s\", new Object[0]);",
 								                             parameterName, maxSize, StringEscapeUtils.escapeJava(text)))
 								       .append(System.getProperty("line.separator"));
 							}
 							
 							if (size > 0) {
-								builder.append(CollectionCondition.class.getCanonicalName())
+								builder.append(KanuniInstrumenter.collectionClass)
 								       .append(String.format(".size(%s, new Integer(%s), \"%s\", new Object[0]);",
 								                             parameterName, maxSize, StringEscapeUtils.escapeJava(text)))
 								       .append(System.getProperty("line.separator"));
 							}
 							
 							if (noneNull) {
-								builder.append(CollectionCondition.class.getCanonicalName())
+								builder.append(KanuniInstrumenter.collectionClass)
 								       .append(String.format(".noneNull(%s, \"%s\", new Object[0]);", parameterName,
 								                             StringEscapeUtils.escapeJava(text)))
 								       .append(System.getProperty("line.separator"));

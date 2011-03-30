@@ -13,30 +13,16 @@ import javassist.bytecode.annotation.IntegerMemberValue;
 import javassist.bytecode.annotation.StringMemberValue;
 import net.ownhero.dev.kanuni.annotations.compare.EqualsInt;
 import net.ownhero.dev.kanuni.annotations.meta.Marker;
-import net.ownhero.dev.kanuni.conditions.CompareCondition;
 import net.ownhero.dev.kanuni.conditions.StringCondition;
 import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
 import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
+import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
 /**
  * @author Sascha Just <sascha.just@own-hero.net>
  *
  */
-public class CreatorEquals implements Creator {
-	
-	/*
-	 * (non-Javadoc)
-	 * @see net.ownhero.dev.kanuni.annotations.factories.Creator#
-	 * createBehaviorInstrumentation(javassist.bytecode.annotation.Annotation,
-	 * javassist.CtBehavior, java.util.Map)
-	 */
-	@Override
-	public String createBehaviorInstrumentation(final Annotation annotation,
-	                                            final CtBehavior behavior,
-	                                            final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
-		throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported behavior ("
-		        + behavior.getName() + ") annotation: " + annotation.getTypeName());
-	}
+public final class CreatorEquals extends Creator {
 	
 	/*
 	 * (non-Javadoc)
@@ -61,12 +47,12 @@ public class CreatorEquals implements Creator {
 				                                                                                          "ref");
 				int ref = refMemberValue.getValue();
 				
-				builder.append(CompareCondition.class.getCanonicalName()).append(".");
+				builder.append(KanuniInstrumenter.compareClass);
 				if (parameterType.isPrimitive()) {
-					builder.append(String.format("equals(new Integer(%s), new Integer(%s), \"%s\", new Object[0]);",
+					builder.append(String.format(".equals(new Integer(%s), new Integer(%s), \"%s\", new Object[0]);",
 					                             parameterName, ref, text));
 				} else {
-					builder.append(String.format("equals(%s, new Integer(%s), \"%s\", new Object[0]);", parameterName,
+					builder.append(String.format(".equals(%s, new Integer(%s), \"%s\", new Object[0]);", parameterName,
 					                             ref, text));
 				}
 				builder.append(System.getProperty("line.separator"));
@@ -78,10 +64,9 @@ public class CreatorEquals implements Creator {
 		
 		for (Integer markerId : markers.keySet()) {
 			for (String markerParameter : markers.get(markerId)) {
-				builder.append(CompareCondition.class.getCanonicalName()).append(".");
-				builder.append(String.format("equals(($w) %s, ($w) %s, \"%s\", new Object[0]);", parameterName,
-				                             markerParameter, text));
-				builder.append(System.getProperty("line.separator"));
+				builder.append(KanuniInstrumenter.compareClass)
+				       .append(String.format(".equals(($w) %s, ($w) %s, \"%s\", new Object[0]);", parameterName,
+				                             markerParameter, text)).append(System.getProperty("line.separator"));
 			}
 		}
 		
