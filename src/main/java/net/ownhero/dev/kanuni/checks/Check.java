@@ -6,7 +6,9 @@ package net.ownhero.dev.kanuni.checks;
 import java.util.Collection;
 import java.util.Map;
 
-import net.ownhero.dev.kanuni.exceptions.CheckViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.CommonCheckViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.CommonNotNullViolation;
+import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
 import org.apache.commons.collections.Predicate;
 
@@ -90,9 +92,12 @@ public class Check {
 	public static final void check(final boolean condition,
 	                               final String formatString,
 	                               final Object... arguments) {
-		if (!condition) { throw new CheckViolation(Check.getCallerString()
-		                                           + String.format("Condition evaluated to false. Violation: %s", String.format(formatString, arguments)
-		                                                           .toString()));
+		if (KanuniInstrumenter.exceptionsEnabled()) {
+			if (!condition) {
+				throw new CommonCheckViolation(Check.getCallerString()
+				        + String.format("Condition evaluated to false. Violation: %s",
+				                        String.format(formatString, arguments).toString()));
+			}
 		}
 	}
 	
@@ -119,10 +124,12 @@ public class Check {
 	public static final void notNull(final Object object,
 	                                 final String formatString,
 	                                 final Object... arguments) {
-		if (object == null) {
-			throw new CheckViolation(Check.getCallerString()
-			                         + String.format("Argument should not be (null). Violation: %s",
-			                                         String.format(formatString, arguments).toString()));
+		if (KanuniInstrumenter.exceptionsEnabled()) {
+			if (object == null) {
+				throw new CommonNotNullViolation(Check.getCallerString()
+				        + String.format("Argument should not be (null). Violation: %s",
+				                        String.format(formatString, arguments).toString()));
+			}
 		}
 	}
 }

@@ -15,7 +15,7 @@ import net.ownhero.dev.kanuni.annotations.string.MaxLength;
 import net.ownhero.dev.kanuni.annotations.string.MinLength;
 import net.ownhero.dev.kanuni.annotations.string.SameLength;
 import net.ownhero.dev.kanuni.conditions.CollectionCondition;
-import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
+import net.ownhero.dev.kanuni.exceptions.annotations.MalformedAnnotationException;
 import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 

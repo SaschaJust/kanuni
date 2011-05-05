@@ -23,16 +23,14 @@ public final class BoundsCondition {
 	                               final Character max,
 	                               final String formatString,
 	                               final Object... arguments) {
-		assert value != null : Condition.getCallerString()
-		        + String.format("Character might not be null for range check. Violation: %s", formatString);
 		assert min != null : Condition.getCallerString()
 		        + String.format("Minimum value might not be null for range check. Violation: %s", formatString);
 		assert max != null : Condition.getCallerString()
 		        + String.format("Maximum value might not be null for range check. Violation: %s", formatString);
-		assert value >= min : Condition.getCallerString()
+		assert (value == null) || (value >= min) : Condition.getCallerString()
 		        + String.format("Character `%s` does not fit minimum range condition (min: `%s`). Violation: %s",
 		                        value, min, formatString);
-		assert value <= max : Condition.getCallerString()
+		assert (value == null) || (value <= max) : Condition.getCallerString()
 		        + String.format("Character `%s` does not fit maximum range condition (min: `%s`). Violation: %s",
 		                        value, max, formatString);
 	}
@@ -49,13 +47,11 @@ public final class BoundsCondition {
 	                               final Number max,
 	                               final String formatString,
 	                               final Object... arguments) {
-		assert value != null : Condition.getCallerString()
-		        + String.format("Number might not be null for range check. Violation: %s", formatString);
 		assert min != null : Condition.getCallerString()
 		        + String.format("Minimum value might not be null for range check. Violation: %s", formatString);
 		assert max != null : Condition.getCallerString()
 		        + String.format("Maximum value might not be null for range check. Violation: %s", formatString);
-		assert new NumberRange(min, max).containsNumber(value) : Condition.getCallerString()
+		assert (value == null) || new NumberRange(min, max).containsNumber(value) : Condition.getCallerString()
 		        + String.format("Argument `%s` is not in specified number range (%s..%s). Violation: %s", value, min,
 		                        max, String.format(formatString, arguments));
 	}

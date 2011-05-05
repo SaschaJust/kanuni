@@ -14,7 +14,7 @@ import javassist.bytecode.annotation.Annotation;
 import javassist.bytecode.annotation.BooleanMemberValue;
 import javassist.bytecode.annotation.IntegerMemberValue;
 import javassist.bytecode.annotation.StringMemberValue;
-import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
+import net.ownhero.dev.kanuni.exceptions.annotations.MalformedAnnotationException;
 import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
 import org.apache.commons.lang.StringEscapeUtils;

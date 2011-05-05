@@ -182,7 +182,7 @@ public final class KanuniClassloader extends ClassLoader {
 				
 				Class<?> c = null;
 				// only instrument if assertions are enabled
-				if (KanuniInstrumenter.isAssertionsEnabled()) {
+				if (KanuniInstrumenter.assertionsEnabled()) {
 					ctClass = this.instrumenter.processAnnotations(ctClass);
 				}
 				

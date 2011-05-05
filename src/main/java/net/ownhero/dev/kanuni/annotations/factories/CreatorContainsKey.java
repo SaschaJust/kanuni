@@ -11,7 +11,7 @@ import javassist.CtBehavior;
 import javassist.CtClass;
 import javassist.bytecode.annotation.Annotation;
 import javassist.bytecode.annotation.StringMemberValue;
-import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
+import net.ownhero.dev.kanuni.exceptions.annotations.MalformedAnnotationException;
 import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
 /**

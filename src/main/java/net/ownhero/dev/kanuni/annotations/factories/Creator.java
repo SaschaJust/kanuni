@@ -9,7 +9,7 @@ import java.util.SortedSet;
 import javassist.CtBehavior;
 import javassist.CtClass;
 import javassist.bytecode.annotation.Annotation;
-import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
+import net.ownhero.dev.kanuni.exceptions.annotations.MalformedAnnotationException;
 
 /**
  * @author Sascha Just <sascha.just@own-hero.net>

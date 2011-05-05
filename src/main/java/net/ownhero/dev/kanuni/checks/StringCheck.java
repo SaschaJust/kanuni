@@ -5,7 +5,28 @@ package net.ownhero.dev.kanuni.checks;
 
 import java.util.regex.Pattern;
 
-import net.ownhero.dev.kanuni.exceptions.CheckViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringAlphaViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringAlphanumViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringAsciiViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringDigitViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringEmptyViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringIsByteViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringIsDoubleViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringIsFloatViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringIsIntegerViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringIsLongViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringIsShortViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringLengthViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringLowercaseViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringMatchesViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringMaxLengthViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringMinLengthViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringNotEmptyViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringNotMatchesViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringSameLengthViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringTrimmedViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringUppercaseViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.StringXdigitViolation;
 import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 import net.ownhero.dev.kanuni.utils.KanuniUtils;
 import net.ownhero.dev.kanuni.utils.KanuniUtils.NumberType;
@@ -15,6 +36,28 @@ import net.ownhero.dev.kanuni.utils.KanuniUtils.NumberType;
  * 
  */
 public class StringCheck {
+	
+	/**
+	 * Checks a given string to consist only of alphabetic characters.
+	 * 
+	 * @param string
+	 *            the string under suspect
+	 * @param formatString
+	 *            the message/formatString describing the violation
+	 * @param arguments
+	 *            optional arguments to the formatString
+	 */
+	public static final void alpha(final String string,
+	                               final String formatString,
+	                               final Object... arguments) {
+		if (KanuniInstrumenter.exceptionsEnabled()) {
+			if ((string != null) && (string.length() > 0) && !KanuniUtils.isAlpha(string)) {
+				throw new StringAlphaViolation(Check.getCallerString()
+				        + String.format("Not an alphanum string: %s. Violation: %s", string,
+				                        String.format(formatString, arguments)));
+			}
+		}
+	}
 	
 	/**
 	 * Checks a given string to consist only of Alphanum characters.
@@ -29,9 +72,9 @@ public class StringCheck {
 	public static final void alphanum(final String string,
 	                                  final String formatString,
 	                                  final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if ((string != null) && (string.length() > 0) && !KanuniUtils.isAlphanum(string)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringAlphanumViolation(Check.getCallerString()
 				        + String.format("Not an alphanum string: %s. Violation: %s", string,
 				                        String.format(formatString, arguments)));
 			}
@@ -51,15 +94,9 @@ public class StringCheck {
 	public static final void ascii(final String string,
 	                               final String formatString,
 	                               final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
-			// if (string == null) {
-			// throw new CheckViolation(Check.getCallerString()
-			// + String.format("Null is not an ascii string. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			//
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if ((string != null) && (string.length() > 0) && !KanuniUtils.isAscii(string)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringAsciiViolation(Check.getCallerString()
 				        + String.format("Not an ascii string: %s. Violation: %s", string,
 				                        String.format(formatString, arguments)));
 			}
@@ -79,15 +116,9 @@ public class StringCheck {
 	public static final void digit(final String string,
 	                               final String formatString,
 	                               final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
-			// if (string == null) {
-			// throw new CheckViolation(Check.getCallerString()
-			// + String.format("Null is not an ascii string. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			//
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if ((string != null) && (string.length() > 0) && !KanuniUtils.isDigit(string)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringDigitViolation(Check.getCallerString()
 				        + String.format("Not an digit string: %s. Violation: %s", string,
 				                        String.format(formatString, arguments)));
 			}
@@ -107,16 +138,9 @@ public class StringCheck {
 	public static final void empty(final String string,
 	                               final String formatString,
 	                               final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
-			// if (string == null) {
-			// throw new CheckViolation(Check.getCallerString()
-			// +
-			// String.format("Null (string) can not hold any length constraints. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			//
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if ((string != null) && (string.length() > 0)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringEmptyViolation(Check.getCallerString()
 				        + String.format("String is not empty: %s. Violation: %s", string,
 				                        String.format(formatString, arguments)));
 			}
@@ -136,15 +160,9 @@ public class StringCheck {
 	public static final void isByte(final String string,
 	                                final String formatString,
 	                                final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
-			// if (string == null) {
-			// throw new CheckViolation(Check.getCallerString()
-			// + String.format("Null is no Byte. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			//
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if ((string != null) && (string.length() > 0) && !KanuniUtils.checkNumber(string, NumberType.BYTE)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringIsByteViolation(Check.getCallerString()
 				        + String.format("String is no Byte: %s. Violation: %s", string,
 				                        String.format(formatString, arguments)));
 			}
@@ -164,15 +182,9 @@ public class StringCheck {
 	public static final void isDouble(final String string,
 	                                  final String formatString,
 	                                  final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
-			// if (string == null) {
-			// throw new CheckViolation(Check.getCallerString()
-			// + String.format("Null is no Double. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if ((string != null) && (string.length() > 0) && !KanuniUtils.checkNumber(string, NumberType.DOUBLE)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringIsDoubleViolation(Check.getCallerString()
 				        + String.format("String is no Double: %s. Violation: %s", string,
 				                        String.format(formatString, arguments)));
 			}
@@ -192,15 +204,9 @@ public class StringCheck {
 	public static final void isFloat(final String string,
 	                                 final String formatString,
 	                                 final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
-			// if (string == null) {
-			// throw new CheckViolation(Check.getCallerString()
-			// + String.format("Null is no Float. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if ((string != null) && (string.length() > 0) && !KanuniUtils.checkNumber(string, NumberType.FLOAT)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringIsFloatViolation(Check.getCallerString()
 				        + String.format("String is no Float: %s. Violation: %s", string,
 				                        String.format(formatString, arguments)));
 			}
@@ -220,15 +226,9 @@ public class StringCheck {
 	public static final void isInteger(final String string,
 	                                   final String formatString,
 	                                   final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
-			// if (string == null) {
-			// throw new CheckViolation(Check.getCallerString()
-			// + String.format("Null is no Integer. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			//
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if ((string != null) && (string.length() > 0) && !KanuniUtils.checkNumber(string, NumberType.INTEGER)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringIsIntegerViolation(Check.getCallerString()
 				        + String.format("String is no Integer: %s. Violation: %s", string,
 				                        String.format(formatString, arguments)));
 			}
@@ -248,15 +248,9 @@ public class StringCheck {
 	public static final void isLong(final String string,
 	                                final String formatString,
 	                                final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
-			// if (string == null) {
-			// throw new CheckViolation(Check.getCallerString()
-			// + String.format("Null is no Long. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if ((string != null) && (string.length() > 0) && KanuniUtils.checkNumber(string, NumberType.LONG)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringIsLongViolation(Check.getCallerString()
 				        + String.format("String is no Long: %s. Violation: %s", string,
 				                        String.format(formatString, arguments)));
 			}
@@ -276,15 +270,9 @@ public class StringCheck {
 	public static final void isShort(final String string,
 	                                 final String formatString,
 	                                 final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
-			// if (string == null) {
-			// throw new CheckViolation(Check.getCallerString()
-			// + String.format("Null is no Short. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			//
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if ((string != null) && (string.length() > 0) && !KanuniUtils.checkNumber(string, NumberType.SHORT)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringIsShortViolation(Check.getCallerString()
 				        + String.format("String is no Short: %s. Violation: %s", string,
 				                        String.format(formatString, arguments)));
 			}
@@ -307,22 +295,15 @@ public class StringCheck {
 	                                final Integer length,
 	                                final String formatString,
 	                                final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
-			// if (string == null) {
-			// throw new CheckViolation(Check.getCallerString()
-			// +
-			// String.format("Null (string) can not hold any length constraints. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if (length == null) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringLengthViolation(Check.getCallerString()
 				        + String.format("Null is not a valid length for a string. Violation: %s",
 				                        String.format(formatString, arguments)));
 			}
 			
 			if ((string != null) && (string.length() != length)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringLengthViolation(Check.getCallerString()
 				        + String.format("String (length=%s) does not have length %s: %s. Violation: %s",
 				                        string.length(), length, string, String.format(formatString, arguments)));
 			}
@@ -342,15 +323,9 @@ public class StringCheck {
 	public static final void lowercase(final String string,
 	                                   final String formatString,
 	                                   final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
-			// if (string == null) {
-			// throw new CheckViolation(Check.getCallerString()
-			// + String.format("Null is not an ascii string. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			//
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if ((string != null) && (string.length() > 0) && !KanuniUtils.isLowercase(string)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringLowercaseViolation(Check.getCallerString()
 				        + String.format("Not an lowercase string: %s. Violation: %s", string,
 				                        String.format(formatString, arguments)));
 			}
@@ -373,27 +348,21 @@ public class StringCheck {
 	                                 final String pattern,
 	                                 final String formatString,
 	                                 final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
-			// if (string == null) {
-			// throw new CheckViolation(Check.getCallerString()
-			// + String.format("Null is not a valid string. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if (pattern == null) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringMatchesViolation(Check.getCallerString()
 				        + String.format("Null is not a valid pattern. Violation: %s",
 				                        String.format(formatString, arguments)));
 			}
 			
 			if (!KanuniUtils.compilablePattern(pattern)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringMatchesViolation(Check.getCallerString()
 				        + String.format("The pattern `%s` can not be compiled. Violation: %s", pattern,
 				                        String.format(formatString, arguments)));
 			}
 			
 			if ((string != null) && !Pattern.matches(pattern, string)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringMatchesViolation(Check.getCallerString()
 				        + String.format("String `%s` does not match pattern: %s. Violation: %s", string, pattern,
 				                        String.format(formatString, arguments)));
 			}
@@ -416,28 +385,21 @@ public class StringCheck {
 	                                   final Integer max,
 	                                   final String formatString,
 	                                   final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
-			// if (string == null) {
-			// throw new CheckViolation(Check.getCallerString()
-			// +
-			// String.format("Null (string) can not hold any length constraints. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			//
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if (max == null) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringMaxLengthViolation(Check.getCallerString()
 				        + String.format("Null is not a valid length for a string. Violation: %s",
 				                        String.format(formatString, arguments)));
 			}
 			
 			if (max < 0) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringMaxLengthViolation(Check.getCallerString()
 				        + String.format("Negative lengths (%s) are not allowed for string constraints. Violation: %s",
 				                        max, String.format(formatString, arguments)));
 			}
 			
 			if ((string != null) && (string.length() > max)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringMaxLengthViolation(Check.getCallerString()
 				        + String.format("String (length=%s) does not have maximal length of %s: %s. Violation: %s",
 				                        string.length(), max, string, String.format(formatString, arguments)));
 			}
@@ -460,28 +422,21 @@ public class StringCheck {
 	                                   final Integer min,
 	                                   final String formatString,
 	                                   final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
-			// if (string == null) {
-			// throw new CheckViolation(Check.getCallerString()
-			// +
-			// String.format("Null (string) can not hold any length constraints. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			//
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if (min == null) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringMinLengthViolation(Check.getCallerString()
 				        + String.format("Null is not a valid length for a string. Violation: %s",
 				                        String.format(formatString, arguments)));
 			}
 			
 			if (min < 0) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringMinLengthViolation(Check.getCallerString()
 				        + String.format("Negative lengths (%s) are not allowed for string constraints. Violation: %s",
 				                        min, String.format(formatString, arguments)));
 			}
 			
 			if ((string != null) && (string.length() < min)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringMinLengthViolation(Check.getCallerString()
 				        + String.format("String (length=%s) does not have minimum length of %s: %s. Violation: %s",
 				                        string.length(), min, string, String.format(formatString, arguments)));
 			}
@@ -501,16 +456,9 @@ public class StringCheck {
 	public static final void notEmpty(final String string,
 	                                  final String formatString,
 	                                  final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
-			// if (string == null) {
-			// throw new CheckViolation(Check.getCallerString()
-			// +
-			// String.format("Null (string) can not hold any length constraints. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if ((string != null) && (string.length() <= 0)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringNotEmptyViolation(Check.getCallerString()
 				        + String.format("String is empty: %s. Violation: %s", string,
 				                        String.format(formatString, arguments)));
 			}
@@ -533,27 +481,21 @@ public class StringCheck {
 	                                    final String pattern,
 	                                    final String formatString,
 	                                    final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
-			// if (string == null) {
-			// throw new CheckViolation(Check.getCallerString()
-			// + String.format("Null is not a valid string. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if (pattern == null) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringNotMatchesViolation(Check.getCallerString()
 				        + String.format("Null is not a valid pattern. Violation: %s",
 				                        String.format(formatString, arguments)));
 			}
 			
 			if (!KanuniUtils.compilablePattern(pattern)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringNotMatchesViolation(Check.getCallerString()
 				        + String.format("The pattern `%s` can not be compiled. Violation: %s", pattern,
 				                        String.format(formatString, arguments)));
 			}
 			
 			if ((string != null) && Pattern.matches(pattern, string)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringNotMatchesViolation(Check.getCallerString()
 				        + String.format("String `%s` does match the pattern: %s. Violation: %s", string, pattern,
 				                        String.format(formatString, arguments)));
 			}
@@ -594,25 +536,9 @@ public class StringCheck {
 	                                    final String second,
 	                                    final String formatString,
 	                                    final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
-			// if (first == null) {
-			// throw new CheckViolation(
-			// Check.getCallerString()
-			// +
-			// String.format("Null (first string) can not hold any length compare constraints. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			//
-			// if (second == null) {
-			// throw new CheckViolation(
-			// Check.getCallerString()
-			// +
-			// String.format("Null (second string) can not hold any length compare constraints. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if ((first != second) && (first.length() != second.length())) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringSameLengthViolation(Check.getCallerString()
 				        + String.format("Strings do not have equal length (%s vs. %s): `%s` vs `%s`. Violation: %s",
 				                        first.length(), second.length(), first, second,
 				                        String.format(formatString, arguments)));
@@ -633,24 +559,16 @@ public class StringCheck {
 	public static final void sameLength(final String[] strings,
 	                                    final String formatString,
 	                                    final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
-			// if (strings == null) {
-			// throw new CheckViolation(
-			// Check.getCallerString()
-			// +
-			// String.format("Null array can not be checked for equal strings of equal length. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if ((strings != null) && (strings.length <= 1)) {
-				throw new CheckViolation(
-				                         Check.getCallerString()
-				                                 + String.format("String array has to consist of at least 2 strings for equal length constrain checks. Violation: %s",
-				                                                 String.format(formatString, arguments)));
+				throw new StringSameLengthViolation(
+				                                    Check.getCallerString()
+				                                            + String.format("String array has to consist of at least 2 strings for equal length constrain checks. Violation: %s",
+				                                                            String.format(formatString, arguments)));
 			}
 			
 			if ((strings != null) && !pairwiseSameLength(strings, formatString, arguments)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringSameLengthViolation(Check.getCallerString()
 				        + String.format("Strings in the array do not have equal length. Violation: %s",
 				                        String.format(formatString, arguments)));
 			}
@@ -670,16 +588,9 @@ public class StringCheck {
 	public static final void trimmed(final String string,
 	                                 final String formatString,
 	                                 final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
-			// if (string == null) {
-			// throw new CheckViolation(Check.getCallerString()
-			// +
-			// String.format("Null (string) can not be checked for trimmed equality. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if ((string != null) && !string.equals(string.trim())) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringTrimmedViolation(Check.getCallerString()
 				        + String.format("String `%s` was not trimmed. Violation: %s", string,
 				                        String.format(formatString, arguments)));
 			}
@@ -699,15 +610,9 @@ public class StringCheck {
 	public static final void uppercase(final String string,
 	                                   final String formatString,
 	                                   final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
-			// if (string == null) {
-			// throw new CheckViolation(Check.getCallerString()
-			// + String.format("Null is not an ascii string. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if ((string != null) && (string.length() > 0) && !KanuniUtils.isUppercase(string)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringUppercaseViolation(Check.getCallerString()
 				        + String.format("Not an uppercase string: %s. Violation: %s", string,
 				                        String.format(formatString, arguments)));
 			}
@@ -727,15 +632,9 @@ public class StringCheck {
 	public static final void xdigit(final String string,
 	                                final String formatString,
 	                                final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
-			// if (string == null) {
-			// throw new CheckViolation(Check.getCallerString()
-			// + String.format("Null is not an ascii string. Violation: %s",
-			// String.format(formatString, arguments)));
-			// }
-			
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if ((string != null) && (string.length() > 0) && !KanuniUtils.isXDigit(string)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new StringXdigitViolation(Check.getCallerString()
 				        + String.format("Not an xdigit string: %s. Violation: %s", string,
 				                        String.format(formatString, arguments)));
 			}

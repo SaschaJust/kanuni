@@ -116,7 +116,7 @@ import net.ownhero.dev.kanuni.conditions.CompareCondition;
 import net.ownhero.dev.kanuni.conditions.Condition;
 import net.ownhero.dev.kanuni.conditions.MapCondition;
 import net.ownhero.dev.kanuni.conditions.StringCondition;
-import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
+import net.ownhero.dev.kanuni.exceptions.annotations.MalformedAnnotationException;
 
 /**
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
@@ -215,7 +215,9 @@ public class KanuniInstrumenter {
 	/**
 	 * Forces the instrumentations to insert {@link Check}s instead of {@link Condition}s.
 	 */
-	private static boolean                    useExceptions          = System.getProperty("KanuniExceptions") != null;                ;
+	private static final boolean              useExceptions          = System.getProperty("KanuniExceptions") != null;
+	
+	private static final boolean              exceptionsEnabled      = System.getProperty("KanuniDisableExceptions") == null;
 	
 	/**
 	 * kanuni debugging enabled
@@ -257,6 +259,13 @@ public class KanuniInstrumenter {
 		}
 		
 		return markerIndexes.toArray(new Integer[0]);
+	}
+	
+	/**
+	 * @return the exceptionsenabled
+	 */
+	public static boolean exceptionsEnabled() {
+		return exceptionsEnabled;
 	}
 	
 	/**
@@ -308,7 +317,7 @@ public class KanuniInstrumenter {
 	/**
 	 * @return the assertionsEnabled
 	 */
-	public static boolean isAssertionsEnabled() {
+	public static boolean assertionsEnabled() {
 		return assertionsEnabled;
 	}
 	

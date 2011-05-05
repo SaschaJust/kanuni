@@ -6,7 +6,7 @@ package net.ownhero.dev.kanuni.utils;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import net.ownhero.dev.kanuni.exceptions.CheckViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.CheckViolation;
 
 import org.apache.commons.lang.math.NumberUtils;
 

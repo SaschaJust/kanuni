@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.ownhero.dev.kanuni.exceptions;
+package net.ownhero.dev.kanuni.exceptions.annotations;
 
 /**
  * @author Sascha Just <sascha.just@own-hero.net>

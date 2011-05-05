@@ -60,7 +60,7 @@ public class KanuniAgent implements ClassFileTransformer {
 				});
 			}
 			
-			if (KanuniInstrumenter.isAssertionsEnabled()) {
+			if (KanuniInstrumenter.assertionsEnabled()) {
 				System.err.println("Kanuni annotations/conditions/checks are being processed.");
 			}
 		}
@@ -127,7 +127,7 @@ public class KanuniAgent implements ClassFileTransformer {
 		 * org.xml.sax.*
 		 * net.jini.*
 		 */
-		if (!KanuniInstrumenter.isAssertionsEnabled()
+		if (!KanuniInstrumenter.assertionsEnabled()
 				|| name.startsWith("sun/")
 				|| name.startsWith("com/sun/")
 				|| name.startsWith("org/omg/")

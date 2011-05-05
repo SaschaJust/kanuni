@@ -24,6 +24,7 @@ import org.junit.Test;
 public class RangeAnnotationTest {
 	
 	static {
+		System.setProperty("KanuniExceptions", "true");
 		KanuniAgent.initialize();
 	}
 	
@@ -94,4 +95,352 @@ public class RangeAnnotationTest {
 			fail(ArrayUtils.toString(err.toArray()));
 		}
 	}
+	
+	@Test
+	public void testRangeCharWrapperTypeInvalid() {
+		AnnotatedForRange afr = new AnnotatedForRange();
+		List<String> err = new LinkedList<String>();
+		
+		try {
+			afr.rangeCharWrapperType('A');
+			err.add("Input: 'A'");
+			Character d = 'd';
+			afr.rangeCharWrapperType(d);
+			err.add("Input: Character d = 'd'");
+			afr.rangeCharWrapperType('1');
+			err.add("Input: '1'");
+		} catch (Throwable t) {
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
+		}
+	}
+	
+	@Test
+	public void testRangeCharWrapperTypeValid() {
+		AnnotatedForRange afr = new AnnotatedForRange();
+		List<String> err = new LinkedList<String>();
+		
+		try {
+			afr.rangeCharWrapperType('a');
+			Character b = 'b';
+			afr.rangeCharWrapperType(b);
+			afr.rangeCharWrapperType('c');
+			Character d = null;
+			afr.rangeCharWrapperType(d);
+		} catch (Throwable e) {
+			err.add(e.getMessage() + " " + e.getClass().getCanonicalName());
+			e.printStackTrace();
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
+		}
+	}
+	
+	@Test
+	public void testRangeDoublePrimitiveInvalid() {
+		AnnotatedForRange afr = new AnnotatedForRange();
+		List<String> err = new LinkedList<String>();
+		
+		try {
+			double values[] = { Double.MAX_VALUE, -1, -0.000000001d, 3.000000001d, 10d };
+			for (double value : values) {
+				afr.rangeDoublePrimitive(value);
+				err.add("Input: " + value);
+			}
+		} catch (Throwable e) {
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
+		}
+	}
+	
+	@Test
+	public void testRangeDoublePrimitiveValid() {
+		AnnotatedForRange afr = new AnnotatedForRange();
+		List<String> err = new LinkedList<String>();
+		
+		try {
+			double values[] = { 0.0d, 0.1d, 1.5d, 2.9d, 3.0d };
+			for (double value : values) {
+				afr.rangeDoublePrimitive(value);
+			}
+		} catch (Throwable e) {
+			err.add(e.getMessage());
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
+		}
+	}
+	
+	@Test
+	public void testRangeDoubleWrapperTypeInvalid() {
+		AnnotatedForRange afr = new AnnotatedForRange();
+		List<String> err = new LinkedList<String>();
+		
+		try {
+			Double values[] = { Double.MAX_VALUE, -1d, -0.000000001d, 3.000000001d, 10d };
+			for (Double value : values) {
+				afr.rangeDoubleWrapperType(value);
+				err.add("Input: " + value);
+			}
+		} catch (Throwable e) {
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
+		}
+	}
+	
+	@Test
+	public void testRangeDoubleWrapperTypeValid() {
+		AnnotatedForRange afr = new AnnotatedForRange();
+		List<String> err = new LinkedList<String>();
+		
+		try {
+			Double values[] = { null, 0.0d, 0.1d, 1.5d, 2.9d, 3.0d };
+			for (Double value : values) {
+				afr.rangeDoubleWrapperType(value);
+			}
+		} catch (Throwable e) {
+			err.add(e.getMessage());
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
+		}
+	}
+	
+	@Test
+	public void testRangeFloatPrimitiveInvalid() {
+		AnnotatedForRange afr = new AnnotatedForRange();
+		List<String> err = new LinkedList<String>();
+		
+		try {
+			float values[] = { Float.MAX_VALUE, -1, -0.000000001f, 3.000000001f, 10f };
+			for (float value : values) {
+				afr.rangeFloatPrimitive(value);
+				err.add("Input: " + value);
+			}
+		} catch (Throwable e) {
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
+		}
+	}
+	
+	@Test
+	public void testRangeFloatPrimitiveValid() {
+		AnnotatedForRange afr = new AnnotatedForRange();
+		List<String> err = new LinkedList<String>();
+		
+		try {
+			float values[] = { 0.0f, 0.1f, 1.5f, 2.9f, 3.0f };
+			for (float value : values) {
+				afr.rangeFloatPrimitive(value);
+			}
+		} catch (Throwable e) {
+			err.add(e.getMessage());
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
+		}
+	}
+	
+	@Test
+	public void testRangeFloatWrapperTypeInvalid() {
+		AnnotatedForRange afr = new AnnotatedForRange();
+		List<String> err = new LinkedList<String>();
+		
+		try {
+			Float values[] = { Float.MAX_VALUE, -1f, -0.000000001f, 3.000000001f, 10f };
+			for (Float value : values) {
+				afr.rangeFloatWrapperType(value);
+				err.add("Input: " + value);
+			}
+		} catch (Throwable e) {
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
+		}
+	}
+	
+	@Test
+	public void testRangeFloatWrapperTypeValid() {
+		AnnotatedForRange afr = new AnnotatedForRange();
+		List<String> err = new LinkedList<String>();
+		
+		try {
+			Float values[] = { null, 0.0f, 0.1f, 1.5f, 2.9f, 3.0f };
+			for (Float value : values) {
+				afr.rangeFloatWrapperType(value);
+			}
+		} catch (Throwable e) {
+			err.add(e.getMessage());
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
+		}
+	}
+	
+	@Test
+	public void testRangeIntegerPrimitiveInvalid() {
+		AnnotatedForRange afr = new AnnotatedForRange();
+		List<String> err = new LinkedList<String>();
+		
+		try {
+			int values[] = { 0, Integer.MIN_VALUE, 10, Integer.MAX_VALUE };
+			for (int value : values) {
+				afr.rangeIntegerPrimitive(value);
+				err.add("Input: " + value);
+			}
+		} catch (Throwable e) {
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
+		}
+	}
+	
+	@Test
+	public void testRangeIntegerPrimitiveValid() {
+		AnnotatedForRange afr = new AnnotatedForRange();
+		List<String> err = new LinkedList<String>();
+		
+		try {
+			int values[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+			for (int value : values) {
+				afr.rangeIntegerPrimitive(value);
+			}
+		} catch (Throwable e) {
+			err.add(e.getMessage());
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
+		}
+	}
+	
+	@Test
+	public void testRangeIntegerWrapperTypeInvalid() {
+		AnnotatedForRange afr = new AnnotatedForRange();
+		List<String> err = new LinkedList<String>();
+		
+		try {
+			Integer values[] = { 0, Integer.MIN_VALUE, 10, Integer.MAX_VALUE };
+			for (Integer value : values) {
+				afr.rangeIntegerWrapperType(value);
+				err.add("Input: " + value);
+			}
+		} catch (Throwable e) {
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
+		}
+	}
+	
+	@Test
+	public void testRangeIntegerWrapperTypeValid() {
+		AnnotatedForRange afr = new AnnotatedForRange();
+		List<String> err = new LinkedList<String>();
+		
+		try {
+			Integer values[] = { null, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+			for (Integer value : values) {
+				afr.rangeIntegerWrapperType(value);
+			}
+		} catch (Throwable e) {
+			err.add(e.getMessage());
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
+		}
+	}
+	
+	@Test
+	public void testRangeLongPrimitiveInvalid() {
+		AnnotatedForRange afr = new AnnotatedForRange();
+		List<String> err = new LinkedList<String>();
+		
+		try {
+			long values[] = { Long.MIN_VALUE, Long.MAX_VALUE, 6l, 9l };
+			for (long value : values) {
+				afr.rangeLongPrimitive(value);
+				err.add("Input: " + value);
+			}
+		} catch (Throwable e) {
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
+		}
+	}
+	
+	@Test
+	public void testRangeLongPrimitiveValid() {
+		AnnotatedForRange afr = new AnnotatedForRange();
+		List<String> err = new LinkedList<String>();
+		
+		try {
+			long values[] = { 7l, 8l };
+			for (long value : values) {
+				afr.rangeLongPrimitive(value);
+			}
+		} catch (Throwable e) {
+			err.add(e.getMessage());
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
+		}
+	}
+	
+	@Test
+	public void testRangeLongWrapperTypeInvalid() {
+		AnnotatedForRange afr = new AnnotatedForRange();
+		List<String> err = new LinkedList<String>();
+		
+		try {
+			Long values[] = { Long.MIN_VALUE, Long.MAX_VALUE, 6l, 9l };
+			for (Long value : values) {
+				afr.rangeLongWrapperType(value);
+				err.add("Input: " + value);
+			}
+		} catch (Throwable e) {
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
+		}
+	}
+	
+	@Test
+	public void testRangeLongWrapperTypeValid() {
+		AnnotatedForRange afr = new AnnotatedForRange();
+		List<String> err = new LinkedList<String>();
+		
+		try {
+			Long values[] = { null, 7l, 8l };
+			for (Long value : values) {
+				afr.rangeLongWrapperType(value);
+			}
+		} catch (Throwable e) {
+			err.add(e.getMessage());
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
+		}
+	}
+	
 }

@@ -14,7 +14,7 @@ import javassist.bytecode.annotation.StringMemberValue;
 import net.ownhero.dev.kanuni.annotations.compare.LessOrEqualInt;
 import net.ownhero.dev.kanuni.annotations.meta.Marker;
 import net.ownhero.dev.kanuni.conditions.StringCondition;
-import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
+import net.ownhero.dev.kanuni.exceptions.annotations.MalformedAnnotationException;
 import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 

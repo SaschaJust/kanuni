@@ -48,12 +48,6 @@ public final class ArrayCondition {
 		assert element != null : Condition.getCallerString()
 		        + String.format("Element is null, but should be a valid element of the array. Violation: %s",
 		                        String.format(formatString, arguments));
-		// assert element.getClass().equals(array.getClass().getComponentType())
-		// : Condition.getCallerString()
-		// +
-		// String.format("Element type differs from array component type (%s vs. %s). Violation: %s",
-		// element.getClass(), array.getClass().getComponentType(),
-		// String.format(formatString, arguments));
 		assert contains(array, element) : Condition.getCallerString()
 		        + String.format("Container does not contain element `%s`. Violation: %s", element,
 		                        String.format(formatString, arguments));
@@ -226,8 +220,8 @@ public final class ArrayCondition {
 		        + String.format("Container index negative: %s. Violation: %s", index,
 		                        String.format(formatString, arguments));
 		assert Array.getLength(array) > index : Condition.getCallerString()
-		        + String.format("Container index not in bounds (0..%s): %s. Violation: %s", Array.getLength(array), index,
-		                        String.format(formatString, arguments));
+		        + String.format("Container index not in bounds (0..%s): %s. Violation: %s", Array.getLength(array),
+		                        index, String.format(formatString, arguments));
 	}
 	
 }

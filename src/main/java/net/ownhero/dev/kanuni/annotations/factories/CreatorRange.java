@@ -20,7 +20,7 @@ import net.ownhero.dev.kanuni.annotations.bounds.RangeDouble;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeFloat;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeInteger;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeLong;
-import net.ownhero.dev.kanuni.exceptions.MalformedAnnotationException;
+import net.ownhero.dev.kanuni.exceptions.annotations.MalformedAnnotationException;
 import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 

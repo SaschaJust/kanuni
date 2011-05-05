@@ -4,8 +4,7 @@
 package net.ownhero.dev.kanuni.checks;
 
 import static org.junit.Assert.fail;
-import net.ownhero.dev.kanuni.checks.ArrayCheck;
-import net.ownhero.dev.kanuni.exceptions.CheckViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.CheckViolation;
 
 import org.junit.After;
 import org.junit.AfterClass;

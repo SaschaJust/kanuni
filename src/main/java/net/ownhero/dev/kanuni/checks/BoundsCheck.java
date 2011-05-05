@@ -3,7 +3,7 @@
  */
 package net.ownhero.dev.kanuni.checks;
 
-import net.ownhero.dev.kanuni.exceptions.CheckViolation;
+import net.ownhero.dev.kanuni.exceptions.violations.BoundsRangeViolation;
 import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
 import org.apache.commons.lang.math.NumberRange;
@@ -26,34 +26,34 @@ public class BoundsCheck {
 	                               final Character max,
 	                               final String formatString,
 	                               final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if (value == null) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new BoundsRangeViolation(Check.getCallerString()
 				        + String.format("Character might not be null for range check. Violation: %s", formatString));
 			}
 			
 			if (min == null) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new BoundsRangeViolation(Check.getCallerString()
 				        + String.format("Minimum value might not be null for range check. Violation: %s", formatString));
 			}
 			
 			if (max == null) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new BoundsRangeViolation(Check.getCallerString()
 				        + String.format("Maximum value might not be null for range check. Violation: %s", formatString));
 			}
 			
 			if (value < min) {
-				throw new CheckViolation(
-				                         Check.getCallerString()
-				                                 + String.format("Character `%s` does not fit minimum range condition (min: `%s`). Violation: %s",
-				                                                 value, min, formatString));
+				throw new BoundsRangeViolation(
+				                               Check.getCallerString()
+				                                       + String.format("Character `%s` does not fit minimum range condition (min: `%s`). Violation: %s",
+				                                                       value, min, formatString));
 			}
 			
 			if (value > max) {
-				throw new CheckViolation(
-				                         Check.getCallerString()
-				                                 + String.format("Character `%s` does not fit maximum range condition (min: `%s`). Violation: %s",
-				                                                 value, max, formatString));
+				throw new BoundsRangeViolation(
+				                               Check.getCallerString()
+				                                       + String.format("Character `%s` does not fit maximum range condition (min: `%s`). Violation: %s",
+				                                                       value, max, formatString));
 			}
 		}
 	}
@@ -70,24 +70,24 @@ public class BoundsCheck {
 	                               final Number max,
 	                               final String formatString,
 	                               final Object... arguments) {
-		if (KanuniInstrumenter.isAssertionsEnabled()) {
+		if (KanuniInstrumenter.exceptionsEnabled()) {
 			if (value == null) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new BoundsRangeViolation(Check.getCallerString()
 				        + String.format("Number might not be null for range check. Violation: %s", formatString));
 			}
 			
 			if (min == null) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new BoundsRangeViolation(Check.getCallerString()
 				        + String.format("Minimum value might not be null for range check. Violation: %s", formatString));
 			}
 			
 			if (max == null) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new BoundsRangeViolation(Check.getCallerString()
 				        + String.format("Maximum value might not be null for range check. Violation: %s", formatString));
 			}
 			
 			if (!new NumberRange(min, max).containsNumber(value)) {
-				throw new CheckViolation(Check.getCallerString()
+				throw new BoundsRangeViolation(Check.getCallerString()
 				        + String.format("Argument `%s` is not in specified number range (%s..%s). Violation: %s",
 				                        value, min, max, String.format(formatString, arguments)));
 			}

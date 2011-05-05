@@ -15,7 +15,7 @@ import org.junit.Test;
  * @author Sascha Just <sascha.just@own-hero.net>
  * 
  */
-public class CheckTest {
+public class CommonCheckTest {
 	
 	/**
 	 * @throws java.lang.Exception

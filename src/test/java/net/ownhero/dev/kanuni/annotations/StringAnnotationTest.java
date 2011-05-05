@@ -4,8 +4,14 @@
 package net.ownhero.dev.kanuni.annotations;
 
 import static org.junit.Assert.fail;
-import net.ownhero.dev.kanuni.conditions.StringConditionTest;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import net.ownhero.dev.kanuni.conditions.StringConditionTest;
+import net.ownhero.dev.kanuni.instrumentation.KanuniAgent;
+
+import org.apache.commons.lang.ArrayUtils;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,17 +24,16 @@ import org.junit.Test;
  */
 public class StringAnnotationTest {
 	
+	static {
+		KanuniAgent.initialize();
+	}
+	
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		// ClassLoader cl = new KanuniClassloader();
-		// Class<?> afsClass =
-		// cl.loadClass(StringAnnotationTest.class.getPackage().getName() +
-		// ".AnnotatedForString");
-		// AnnotatedForString afs = (AnnotatedForString) afsClass.newInstance();
-		// afs.maxLength3("123456789");
+		
 	}
 	
 	/**
@@ -38,14 +43,11 @@ public class StringAnnotationTest {
 	public static void tearDownAfterClass() throws Exception {
 	}
 	
-	private AnnotatedForString afs;
-	
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		this.afs = new AnnotatedForString();
 	}
 	
 	/**
@@ -57,11 +59,12 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testAlphaEmpty() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String();
 		
 		try {
-			this.afs.alpha(string);
-		} catch (AssertionError e) {
+			afs.alpha(string);
+		} catch (Throwable e) {
 			fail("The string `" + string + "` is a valid alpha string. The assertion should not have triggered: "
 			        + e.getMessage());
 		}
@@ -69,10 +72,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testAlphaInvalid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("AbC_dEfgH");
 		
 		try {
-			this.afs.alpha(string);
+			afs.alpha(string);
 			fail("The string `" + string + "` is NOT a valid alpha string. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			boolean junit = StringConditionTest.checkJUnitThrow(e);
@@ -84,24 +88,28 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testAlphaNull() {
+		AnnotatedForString afs = new AnnotatedForString();
+		List<String> err = new LinkedList<String>();
 		String string = null;
 		
 		try {
-			this.afs.alpha(string);
-			fail("The string `" + string + "` is NOT a valid alpha string. The assertion should have triggered.");
+			afs.alpha(string);
 		} catch (AssertionError e) {
-			if (StringConditionTest.checkJUnitThrow(e)) {
-				fail(e.getMessage());
-			}
+			err.add("Parameter (null) shall not trigger string property violations. See: https://dev.own-hero.net/projects/kanuni/wiki/Developer_Guide#Conditions");
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
 		}
 	}
 	
 	@Test
 	public void testAlphaNumEmpty() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String();
 		
 		try {
-			this.afs.alphanum(string);
+			afs.alphanum(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string
 			        + "` is a valid alpha-numeric string. The assertion should not have triggered: " + e.getMessage());
@@ -110,10 +118,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testAlphaNumInvalid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("Ab12dEfgH49_");
 		
 		try {
-			this.afs.alphanum(string);
+			afs.alphanum(string);
 			fail("The string `" + string
 			        + "` is NOT a valid alpha-numeric string. The assertion should have triggered.");
 		} catch (AssertionError e) {
@@ -125,25 +134,28 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testAlphaNumNull() {
+		AnnotatedForString afs = new AnnotatedForString();
+		List<String> err = new LinkedList<String>();
 		String string = null;
 		
 		try {
-			this.afs.alphanum(string);
-			fail("The string `" + string
-			        + "` is NOT a valid alpha-numeric string. The assertion should have triggered.");
+			afs.alphanum(string);
 		} catch (AssertionError e) {
-			if (StringConditionTest.checkJUnitThrow(e)) {
-				fail(e.getMessage());
-			}
+			err.add("Parameter (null) shall not trigger string property violations. See: https://dev.own-hero.net/projects/kanuni/wiki/Developer_Guide#Conditions");
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
 		}
 	}
 	
 	@Test
 	public void testAlphaNumValid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("AbC12dEfg6H9");
 		
 		try {
-			this.afs.alphanum(string);
+			afs.alphanum(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string
 			        + "` is a valid alpha-numeric string. The assertion should not have triggered: " + e.getMessage());
@@ -152,10 +164,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testAlphaValid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("AbCdEfgH");
 		
 		try {
-			this.afs.alpha(string);
+			afs.alpha(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid alpha string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -164,10 +177,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testAsciiEmpty() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String();
 		
 		try {
-			this.afs.ascii(string);
+			afs.ascii(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid ascii string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -176,10 +190,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testAsciiInvalid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("The Apple™ Logo () is not pure ascii.");
 		
 		try {
-			this.afs.ascii(string);
+			afs.ascii(string);
 			fail("The string `" + string + "` is NOT a valid ascii string. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -190,20 +205,24 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testAsciiNull() {
+		AnnotatedForString afs = new AnnotatedForString();
+		List<String> err = new LinkedList<String>();
 		String string = null;
 		
 		try {
-			this.afs.ascii(string);
-			fail("The string `" + string + "` is NOT a ascii string. The assertion should have triggered.");
+			afs.ascii(string);
 		} catch (AssertionError e) {
-			if (StringConditionTest.checkJUnitThrow(e)) {
-				fail(e.getMessage());
-			}
+			err.add("Parameter (null) shall not trigger string property violations. See: https://dev.own-hero.net/projects/kanuni/wiki/Developer_Guide#Conditions");
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
 		}
 	}
 	
 	@Test
 	public void testAsciiValid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		StringBuilder builder = new StringBuilder();
 		for (int i = 32; i < 126; ++i) {
 			builder.append((char) i);
@@ -211,7 +230,7 @@ public class StringAnnotationTest {
 		String string = builder.toString();
 		
 		try {
-			this.afs.ascii(string);
+			afs.ascii(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid ascii string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -220,10 +239,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testDigitEmpty() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String();
 		
 		try {
-			this.afs.digit(string);
+			afs.digit(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid digit string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -232,10 +252,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testDigitInvalid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("0123456789a");
 		
 		try {
-			this.afs.digit(string);
+			afs.digit(string);
 			fail("The string `" + string + "` is NOT a valid digit string. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -246,20 +267,24 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testDigitNull() {
+		AnnotatedForString afs = new AnnotatedForString();
+		List<String> err = new LinkedList<String>();
 		String string = null;
 		
 		try {
-			this.afs.digit(string);
-			fail("The string `" + string + "` is NOT a digit string. The assertion should have triggered.");
+			afs.digit(string);
 		} catch (AssertionError e) {
-			if (StringConditionTest.checkJUnitThrow(e)) {
-				fail(e.getMessage());
-			}
+			err.add("Parameter (null) shall not trigger string property violations. See: https://dev.own-hero.net/projects/kanuni/wiki/Developer_Guide#Conditions");
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
 		}
 	}
 	
 	@Test
 	public void testDigitValid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < 256; ++i) {
 			builder.append(i % 10);
@@ -267,7 +292,7 @@ public class StringAnnotationTest {
 		String string = builder.toString();
 		
 		try {
-			this.afs.digit(string);
+			afs.digit(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid digit string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -276,10 +301,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testHexEmpty() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String();
 		
 		try {
-			this.afs.digit(string);
+			afs.hex(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid hex string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -288,34 +314,41 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testHexInvalid() {
+		AnnotatedForString afs = new AnnotatedForString();
+		List<String> err = new LinkedList<String>();
 		String string = new String("0123456789af");
 		
 		try {
-			this.afs.digit(string);
-			fail("The string `" + string + "` is NOT a valid hex string. The assertion should have triggered.");
+			afs.hex(string);
 		} catch (AssertionError e) {
-			if (StringConditionTest.checkJUnitThrow(e)) {
-				fail(e.getMessage());
-			}
+			err.add(e.getMessage());
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
 		}
 	}
 	
 	@Test
 	public void testHexNull() {
+		AnnotatedForString afs = new AnnotatedForString();
+		List<String> err = new LinkedList<String>();
 		String string = null;
 		
 		try {
-			this.afs.digit(string);
-			fail("The string `" + string + "` is NOT a hex string. The assertion should have triggered.");
+			afs.hex(string);
 		} catch (AssertionError e) {
-			if (StringConditionTest.checkJUnitThrow(e)) {
-				fail(e.getMessage());
-			}
+			err.add("Parameter (null) shall not trigger string property violations. See: https://dev.own-hero.net/projects/kanuni/wiki/Developer_Guide#Conditions");
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
 		}
 	}
 	
 	@Test
 	public void testHexValid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		char[] chars = new char[22];
 		int j = 0;
 		
@@ -340,7 +373,7 @@ public class StringAnnotationTest {
 		String string = builder.toString();
 		
 		try {
-			this.afs.digit(string);
+			afs.hex(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid hex string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -349,10 +382,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testIsByteEmpty() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String();
 		
 		try {
-			this.afs.isByte(string);
+			afs.isByte(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid byte string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -361,10 +395,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testIsByteInvalid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("0123456789af");
 		
 		try {
-			this.afs.isByte(string);
+			afs.isByte(string);
 			fail("The string `" + string + "` is NOT a valid byte string. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -375,25 +410,29 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testIsByteNull() {
+		AnnotatedForString afs = new AnnotatedForString();
+		List<String> err = new LinkedList<String>();
 		String string = null;
 		
 		try {
-			this.afs.isByte(string);
-			fail("The string `" + string + "` is NOT a byte string. The assertion should have triggered.");
+			afs.isByte(string);
 		} catch (AssertionError e) {
-			if (StringConditionTest.checkJUnitThrow(e)) {
-				fail(e.getMessage());
-			}
+			err.add("Parameter (null) shall not trigger string property violations. See: https://dev.own-hero.net/projects/kanuni/wiki/Developer_Guide#Conditions");
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
 		}
 	}
 	
 	@Test
 	public void testIsByteValid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String();
 		for (int i = 0; i < 8; ++i) {
 			string = ((byte) i) + "";
 			try {
-				this.afs.isByte(string);
+				afs.isByte(string);
 			} catch (AssertionError e) {
 				fail("The string `" + string + "` is a valid byte string. The assertion should not have triggered: "
 				        + e.getMessage());
@@ -404,10 +443,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testIsDoubleEmpty() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String();
 		
 		try {
-			this.afs.isDouble(string);
+			afs.isDouble(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid double string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -416,10 +456,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testIsDoubleInvalid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("143.03l");
 		
 		try {
-			this.afs.isDouble(string);
+			afs.isDouble(string);
 			fail("The string `" + string + "` is NOT a valid double string. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -430,24 +471,28 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testIsDoubleNull() {
+		AnnotatedForString afs = new AnnotatedForString();
+		List<String> err = new LinkedList<String>();
 		String string = null;
 		
 		try {
-			this.afs.isDouble(string);
-			fail("The string `" + string + "` is NOT a byte double. The assertion should have triggered.");
+			afs.isDouble(string);
 		} catch (AssertionError e) {
-			if (StringConditionTest.checkJUnitThrow(e)) {
-				fail(e.getMessage());
-			}
+			err.add("Parameter (null) shall not trigger string property violations. See: https://dev.own-hero.net/projects/kanuni/wiki/Developer_Guide#Conditions");
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
 		}
 	}
 	
 	@Test
 	public void testIsDoubleValid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("123");
 		
 		try {
-			this.afs.isDouble(string);
+			afs.isDouble(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid double string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -456,7 +501,7 @@ public class StringAnnotationTest {
 		string = new String("10.12");
 		
 		try {
-			this.afs.isDouble(string);
+			afs.isDouble(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid double string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -465,7 +510,7 @@ public class StringAnnotationTest {
 		string = new String("18d");
 		
 		try {
-			this.afs.isDouble(string);
+			afs.isDouble(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid double string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -474,7 +519,7 @@ public class StringAnnotationTest {
 		string = new String(".32");
 		
 		try {
-			this.afs.isDouble(string);
+			afs.isDouble(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid double string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -483,7 +528,7 @@ public class StringAnnotationTest {
 		string = new String("-.17d");
 		
 		try {
-			this.afs.isDouble(string);
+			afs.isDouble(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid double string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -492,10 +537,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testIsFloatEmpty() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String();
 		
 		try {
-			this.afs.isFloat(string);
+			afs.isFloat(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid float string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -504,10 +550,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testIsFloatInvalid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("143.03d");
 		
 		try {
-			this.afs.isFloat(string);
+			afs.isFloat(string);
 		} catch (AssertionError e) {
 			fail("The string `"
 			        + string
@@ -518,7 +565,7 @@ public class StringAnnotationTest {
 		string = new String(Double.MAX_VALUE + "d");
 		
 		try {
-			this.afs.isFloat(string);
+			afs.isFloat(string);
 			fail("The string `" + string + "` is NOT a valid float string. The assertion should have triggered.");
 		} catch (AssertionError e) {
 		}
@@ -526,24 +573,28 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testIsFloatNull() {
+		AnnotatedForString afs = new AnnotatedForString();
+		List<String> err = new LinkedList<String>();
 		String string = null;
 		
 		try {
-			this.afs.isFloat(string);
-			fail("The string `" + string + "` is NOT a byte float. The assertion should have triggered.");
+			afs.isFloat(string);
 		} catch (AssertionError e) {
-			if (StringConditionTest.checkJUnitThrow(e)) {
-				fail(e.getMessage());
-			}
+			err.add("Parameter (null) shall not trigger string property violations. See: https://dev.own-hero.net/projects/kanuni/wiki/Developer_Guide#Conditions");
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
 		}
 	}
 	
 	@Test
 	public void testIsFloatValid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("123");
 		
 		try {
-			this.afs.isFloat(string);
+			afs.isFloat(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid float string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -552,7 +603,7 @@ public class StringAnnotationTest {
 		string = new String("10.12");
 		
 		try {
-			this.afs.isFloat(string);
+			afs.isFloat(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid float string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -561,7 +612,7 @@ public class StringAnnotationTest {
 		string = new String("18f");
 		
 		try {
-			this.afs.isFloat(string);
+			afs.isFloat(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid float string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -570,7 +621,7 @@ public class StringAnnotationTest {
 		string = new String(".32");
 		
 		try {
-			this.afs.isFloat(string);
+			afs.isFloat(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid float string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -579,7 +630,7 @@ public class StringAnnotationTest {
 		string = new String("-.17f");
 		
 		try {
-			this.afs.isFloat(string);
+			afs.isFloat(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid float string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -588,10 +639,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testIsIntegerEmpty() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String();
 		
 		try {
-			this.afs.isInteger(string);
+			afs.isInteger(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid integer string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -600,10 +652,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testIsIntegerInvalid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("143.0");
 		
 		try {
-			this.afs.isInteger(string);
+			afs.isInteger(string);
 			fail("The string `" + string + "` is NOT a valid integer string. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -614,7 +667,7 @@ public class StringAnnotationTest {
 		string = new String("14a");
 		
 		try {
-			this.afs.isInteger(string);
+			afs.isInteger(string);
 			fail("The string `" + string + "` is NOT a valid integer string. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -625,7 +678,7 @@ public class StringAnnotationTest {
 		string = new String("0l");
 		
 		try {
-			this.afs.isInteger(string);
+			afs.isInteger(string);
 			fail("The string `" + string + "` is NOT a valid integer string. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -636,24 +689,28 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testIsIntegerNull() {
+		AnnotatedForString afs = new AnnotatedForString();
+		List<String> err = new LinkedList<String>();
 		String string = null;
 		
 		try {
-			this.afs.isInteger(string);
-			fail("The string `" + string + "` is NOT a byte integer. The assertion should have triggered.");
+			afs.isInteger(string);
 		} catch (AssertionError e) {
-			if (StringConditionTest.checkJUnitThrow(e)) {
-				fail(e.getMessage());
-			}
+			err.add("Parameter (null) shall not trigger string property violations. See: https://dev.own-hero.net/projects/kanuni/wiki/Developer_Guide#Conditions");
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
 		}
 	}
 	
 	@Test
 	public void testIsIntegerValid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("123");
 		
 		try {
-			this.afs.isInteger(string);
+			afs.isInteger(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid integer string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -661,7 +718,7 @@ public class StringAnnotationTest {
 		string = new String("0");
 		
 		try {
-			this.afs.isInteger(string);
+			afs.isInteger(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid integer string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -670,7 +727,7 @@ public class StringAnnotationTest {
 		string = new String("" + Integer.MAX_VALUE);
 		
 		try {
-			this.afs.isInteger(string);
+			afs.isInteger(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid integer string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -679,7 +736,7 @@ public class StringAnnotationTest {
 		string = new String("" + Integer.MIN_VALUE);
 		
 		try {
-			this.afs.isInteger(string);
+			afs.isInteger(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid integer string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -688,7 +745,7 @@ public class StringAnnotationTest {
 		string = new String("0x10");
 		
 		try {
-			this.afs.isInteger(string);
+			afs.isInteger(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid integer string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -697,10 +754,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testIsLongEmpty() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String();
 		
 		try {
-			this.afs.isLong(string);
+			afs.isLong(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid long string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -709,10 +767,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testIsLongInvalid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("143.0");
 		
 		try {
-			this.afs.isLong(string);
+			afs.isLong(string);
 			fail("The string `" + string + "` is NOT a valid long string. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -723,7 +782,7 @@ public class StringAnnotationTest {
 		string = new String("14a");
 		
 		try {
-			this.afs.isLong(string);
+			afs.isLong(string);
 			fail("The string `" + string + "` is NOT a valid long string. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -734,7 +793,7 @@ public class StringAnnotationTest {
 		string = new String("0f");
 		
 		try {
-			this.afs.isLong(string);
+			afs.isLong(string);
 			fail("The string `" + string + "` is NOT a valid long string. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -744,7 +803,7 @@ public class StringAnnotationTest {
 		
 		string = new String("0x10");
 		try {
-			this.afs.isLong(string);
+			afs.isLong(string);
 			fail("The string `" + string + "` is NOT a valid long string. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -755,24 +814,28 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testIsLongNull() {
+		AnnotatedForString afs = new AnnotatedForString();
+		List<String> err = new LinkedList<String>();
 		String string = null;
 		
 		try {
-			this.afs.isLong(string);
-			fail("The string `" + string + "` is NOT a byte long. The assertion should have triggered.");
+			afs.isLong(string);
 		} catch (AssertionError e) {
-			if (StringConditionTest.checkJUnitThrow(e)) {
-				fail(e.getMessage());
-			}
+			err.add("Parameter (null) shall not trigger string property violations. See: https://dev.own-hero.net/projects/kanuni/wiki/Developer_Guide#Conditions");
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
 		}
 	}
 	
 	@Test
 	public void testIsLongValid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("123");
 		
 		try {
-			this.afs.isLong(string);
+			afs.isLong(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid long string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -780,7 +843,7 @@ public class StringAnnotationTest {
 		string = new String("0");
 		
 		try {
-			this.afs.isLong(string);
+			afs.isLong(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid long string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -789,7 +852,7 @@ public class StringAnnotationTest {
 		string = new String("" + Long.MAX_VALUE);
 		
 		try {
-			this.afs.isLong(string);
+			afs.isLong(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid long string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -798,7 +861,7 @@ public class StringAnnotationTest {
 		string = new String("" + Long.MIN_VALUE);
 		
 		try {
-			this.afs.isLong(string);
+			afs.isLong(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid long string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -807,10 +870,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testIsShortEmpty() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String();
 		
 		try {
-			this.afs.isShort(string);
+			afs.isShort(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid short string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -819,10 +883,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testIsShortInvalid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("143.0");
 		
 		try {
-			this.afs.isShort(string);
+			afs.isShort(string);
 			fail("The string `" + string + "` is NOT a valid short string. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -832,7 +897,7 @@ public class StringAnnotationTest {
 		string = new String("14a");
 		
 		try {
-			this.afs.isShort(string);
+			afs.isShort(string);
 			fail("The string `" + string + "` is NOT a valid short string. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -842,7 +907,7 @@ public class StringAnnotationTest {
 		string = new String("0f");
 		
 		try {
-			this.afs.isShort(string);
+			afs.isShort(string);
 			fail("The string `" + string + "` is NOT a valid short string. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -852,7 +917,7 @@ public class StringAnnotationTest {
 		
 		string = new String("" + Integer.MAX_VALUE);
 		try {
-			this.afs.isShort(string);
+			afs.isShort(string);
 			fail("The string `" + string + "` is NOT a valid short string. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -862,7 +927,7 @@ public class StringAnnotationTest {
 		
 		string = new String("" + (Short.MAX_VALUE + 1));
 		try {
-			this.afs.isShort(string);
+			afs.isShort(string);
 			fail("The string `" + string + "` is NOT a valid short string. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -873,24 +938,28 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testIsShortNull() {
+		AnnotatedForString afs = new AnnotatedForString();
+		List<String> err = new LinkedList<String>();
 		String string = null;
 		
 		try {
-			this.afs.isShort(string);
-			fail("The string `" + string + "` is NOT a byte short. The assertion should have triggered.");
+			afs.isShort(string);
 		} catch (AssertionError e) {
-			if (StringConditionTest.checkJUnitThrow(e)) {
-				fail(e.getMessage());
-			}
+			err.add("Parameter (null) shall not trigger string property violations. See: https://dev.own-hero.net/projects/kanuni/wiki/Developer_Guide#Conditions");
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
 		}
 	}
 	
 	@Test
 	public void testIsShortValid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("123");
 		
 		try {
-			this.afs.isShort(string);
+			afs.isShort(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid short string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -898,7 +967,7 @@ public class StringAnnotationTest {
 		string = new String("0");
 		
 		try {
-			this.afs.isShort(string);
+			afs.isShort(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid short string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -907,7 +976,7 @@ public class StringAnnotationTest {
 		string = new String("" + Short.MAX_VALUE);
 		
 		try {
-			this.afs.isShort(string);
+			afs.isShort(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid short string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -916,7 +985,7 @@ public class StringAnnotationTest {
 		string = new String("" + Short.MIN_VALUE);
 		
 		try {
-			this.afs.isShort(string);
+			afs.isShort(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid short string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -925,10 +994,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testLowercaseEmpty() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String();
 		
 		try {
-			this.afs.lowercase(string);
+			afs.lowercase(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid lowercase string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -937,12 +1007,13 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testLowercaseInvalid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String[] tokens = { "Bleh" };
 		
 		for (String string : tokens) {
 			
 			try {
-				this.afs.lowercase(string);
+				afs.lowercase(string);
 				fail("The string `" + string
 				        + "` is NOT a valid lowercase string. The assertion should have triggered.");
 			} catch (AssertionError e) {
@@ -955,26 +1026,30 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testLowercaseNull() {
+		AnnotatedForString afs = new AnnotatedForString();
+		List<String> err = new LinkedList<String>();
 		String string = null;
 		
 		try {
-			this.afs.lowercase(string);
-			fail("The string `" + string + "` is NOT a valid lowercase string. The assertion should have triggered.");
+			afs.lowercase(string);
 		} catch (AssertionError e) {
-			if (StringConditionTest.checkJUnitThrow(e)) {
-				fail(e.getMessage());
-			}
+			err.add("Parameter (null) shall not trigger string property violations. See: https://dev.own-hero.net/projects/kanuni/wiki/Developer_Guide#Conditions");
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
 		}
 	}
 	
 	@Test
 	public void testLowercaseValid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String fullname = new String(StringConditionTest.class.getCanonicalName().toLowerCase());
 		
 		for (String string : fullname.split("\\.")) {
 			
 			try {
-				this.afs.lowercase(string);
+				afs.lowercase(string);
 			} catch (AssertionError e) {
 				fail("The string `" + string
 				        + "` is a valid lowercase string. The assertion should not have triggered: " + e.getMessage());
@@ -984,11 +1059,12 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testMatchesInvalid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("aaabababa");
 		String pattern = new String("[b]+");
 		
 		try {
-			this.afs.matches1(string);
+			afs.matches1(string);
 			fail("The string `" + string + "` should not match the pattern `" + pattern
 			        + "`. The assertion should have triggered.");
 		} catch (AssertionError e) {
@@ -1000,11 +1076,12 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testMatchesStringEmpty() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("");
 		String pattern = new String(".*");
 		
 		try {
-			this.afs.matches2(string);
+			afs.matches2(string);
 		} catch (AssertionError e) {
 			fail("The string is empty and should thus match the pattern `" + pattern
 			        + "`. The assertion should not have triggered: " + e.getMessage());
@@ -1013,26 +1090,29 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testMatchesStringNull() {
+		AnnotatedForString afs = new AnnotatedForString();
+		List<String> err = new LinkedList<String>();
 		String string = null;
-		new String(".*");
 		
 		try {
-			this.afs.matches2(string);
-			fail("The string is null and thus does not match any pattern. The assertion should have triggered.");
+			afs.matches2(string);
 		} catch (AssertionError e) {
-			if (StringConditionTest.checkJUnitThrow(e)) {
-				fail(e.getMessage());
-			}
+			err.add("Parameter (null) shall not trigger string property violations. See: https://dev.own-hero.net/projects/kanuni/wiki/Developer_Guide#Conditions");
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
 		}
 	}
 	
 	@Test
 	public void testMatchesValid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("aaabababa");
 		String pattern = new String("[ab]+");
 		
 		try {
-			this.afs.matches3(string);
+			afs.matches3(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` should match the pattern `" + pattern
 			        + "`. The assertion should not have triggered: " + e.getMessage());
@@ -1041,10 +1121,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testMaxLengthInvalid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("abcd");
 		
 		try {
-			this.afs.maxLength3(string);
+			afs.maxLength3(string);
 			fail("The string `" + string + "` has not the maximal length of 3. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -1055,9 +1136,10 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testMaxLengthValid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("abcdefg");
 		try {
-			this.afs.maxLength10(string);
+			afs.maxLength10(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` has length " + string.length()
 			        + " and thus fits maximal length of 10. The assertion should not have triggered: " + e.getMessage());
@@ -1067,10 +1149,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testMinLengthInvalid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("abcd");
 		
 		try {
-			this.afs.minLength5(string);
+			afs.minLength5(string);
 			fail("The string `" + string + "` has not the minimal length of 5. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -1081,9 +1164,10 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testMinLengthValid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String("abcdefghijklmnop");
 		try {
-			this.afs.minLength10(string);
+			afs.minLength10(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` has length " + string.length()
 			        + " and thus fits minimal length of 10. The assertion should not have triggered: " + e.getMessage());
@@ -1093,10 +1177,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testMultipleSameLengthInvalid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String[] args = { "valid", "invalid", "valid", "also", "also" };
 		
 		try {
-			this.afs.sameLength1(args[0], args[1], args[2], args[3], args[4]);
+			afs.sameLength1(args[0], args[1], args[2], args[3], args[4]);
 			fail("Arguments do not fit conditions (same length: 1, 3 but not 2). The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -1108,7 +1193,7 @@ public class StringAnnotationTest {
 		args[4] = "invalid";
 		
 		try {
-			this.afs.sameLength1(args[0], args[1], args[2], args[3], args[4]);
+			afs.sameLength1(args[0], args[1], args[2], args[3], args[4]);
 			fail("Arguments do not fit conditions (same length: 1, 3 but not 2). The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -1119,10 +1204,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testMultipleSameLengthValid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String[] args = { "valid", "valid", "valid", "also", "also" };
 		
 		try {
-			this.afs.sameLength1(args[0], args[1], args[2], args[3], args[4]);
+			afs.sameLength1(args[0], args[1], args[2], args[3], args[4]);
 		} catch (AssertionError e) {
 			fail("Arguments perfectly fit conditions (same length: 1, 2, 3 and 4, 5). The assertion should not have triggered: "
 			        + e.getMessage());
@@ -1131,11 +1217,12 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testSameLengthBothEmpty() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String first = new String();
 		String second = new String();
 		
 		try {
-			this.afs.sameLength(first, second);
+			afs.sameLength(first, second);
 		} catch (AssertionError e) {
 			fail("Both strings are empth. The assertion should not have triggered: " + e.getMessage());
 			
@@ -1143,12 +1230,31 @@ public class StringAnnotationTest {
 	}
 	
 	@Test
+	public void testSameLengthBothNull() {
+		AnnotatedForString afs = new AnnotatedForString();
+		List<String> err = new LinkedList<String>();
+		String first = null;
+		String second = null;
+		
+		try {
+			afs.sameLength(first, second);
+		} catch (AssertionError e) {
+			err.add("Parameter (null) shall not trigger string property violations. See: https://dev.own-hero.net/projects/kanuni/wiki/Developer_Guide#Conditions");
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
+		}
+	}
+	
+	@Test
 	public void testSameLengthFirstEmpty() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String first = new String();
 		String second = new String("second");
 		
 		try {
-			this.afs.sameLength(first, second);
+			afs.sameLength(first, second);
 			fail("The first string is empty and the second one not. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -1159,27 +1265,30 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testSameLengthFirstNull() {
+		AnnotatedForString afs = new AnnotatedForString();
+		List<String> err = new LinkedList<String>();
 		String first = null;
-		String second = new String("second");
+		String second = "second";
 		
 		try {
-			this.afs.sameLength(first, second);
-			fail("The first string is null and string length compare is thus not valid. The assertion should have triggered.");
-		} catch (AssertionError e) {
-			if (StringConditionTest.checkJUnitThrow(e)) {
-				fail(e.getMessage());
-			}
+			afs.sameLength(first, second);
+			err.add("If one of the strings is (null) and the other not, the condition is violated.");
+		} catch (Throwable e) {
 		}
 		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
+		}
 	}
 	
 	@Test
 	public void testSameLengthInvalid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String first = new String("first");
 		String second = new String("second");
 		
 		try {
-			this.afs.sameLength(first, second);
+			afs.sameLength(first, second);
 			fail("The first string has length " + first.length() + " and the second string has length "
 			        + second.length() + ". The assertion should have triggered.");
 		} catch (AssertionError e) {
@@ -1191,11 +1300,12 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testSameLengthSecondEmpty() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String first = new String("first");
 		String second = new String();
 		
 		try {
-			this.afs.sameLength(first, second);
+			afs.sameLength(first, second);
 			fail("The second string is empty and the first one not. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -1206,26 +1316,30 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testSameLengthSecondNull() {
-		String first = new String("first");
+		AnnotatedForString afs = new AnnotatedForString();
+		List<String> err = new LinkedList<String>();
+		String first = "first";
 		String second = null;
 		
 		try {
-			this.afs.sameLength(first, second);
-			fail("The second string is null and string length compare is thus not valid. The assertion should have triggered.");
-		} catch (AssertionError e) {
-			if (StringConditionTest.checkJUnitThrow(e)) {
-				fail(e.getMessage());
-			}
+			afs.sameLength(first, second);
+			err.add("If one of the strings is (null) and the other not, the condition is violated.");
+		} catch (Throwable e) {
+		}
+		
+		if (!err.isEmpty()) {
+			fail(ArrayUtils.toString(err.toArray()));
 		}
 	}
 	
 	@Test
 	public void testSameLengthValid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String first = new String("equal");
 		String second = new String("equal");
 		
 		try {
-			this.afs.sameLength(first, second);
+			afs.sameLength(first, second);
 		} catch (AssertionError e) {
 			fail("The first string has length " + first.length() + " and the second string has length "
 			        + second.length() + ". The assertion should NOT have triggered: " + e.getMessage());
@@ -1234,10 +1348,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testUppercaseEmpty() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = new String();
 		
 		try {
-			this.afs.uppercase(string);
+			afs.uppercase(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid uppercase string. The assertion should not have triggered: "
 			        + e.getMessage());
@@ -1246,10 +1361,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testUppercaseInvalid() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = "UPPERCASe";
 		
 		try {
-			this.afs.uppercase(string);
+			afs.uppercase(string);
 			fail("The string `" + string + "` is NOT a valid uppercase string. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -1260,7 +1376,7 @@ public class StringAnnotationTest {
 		string = "UPPERCAS3";
 		
 		try {
-			this.afs.uppercase(string);
+			afs.uppercase(string);
 			fail("The string `" + string + "` is NOT a valid uppercase string. The assertion should have triggered.");
 		} catch (AssertionError e) {
 			if (StringConditionTest.checkJUnitThrow(e)) {
@@ -1271,10 +1387,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testUppercaseNull() {
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = null;
 		
 		try {
-			this.afs.uppercase(string);
+			afs.uppercase(string);
 			fail("The string `" + string + "` is NOT a valid uppercase string. The assertion should have triggered.");
 		} catch (AssertionError e) {
 		}
@@ -1282,11 +1399,11 @@ public class StringAnnotationTest {
 	
 	@Test
 	public void testUppercaseValid() {
-		
+		AnnotatedForString afs = new AnnotatedForString();
 		String string = "UPPERCASE";
 		
 		try {
-			this.afs.uppercase(string);
+			afs.uppercase(string);
 		} catch (AssertionError e) {
 			fail("The string `" + string + "` is a valid uppercase string. The assertion should not have triggered: "
 			        + e.getMessage());

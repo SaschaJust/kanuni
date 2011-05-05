@@ -4,7 +4,6 @@
 package net.ownhero.dev.kanuni.annotations;
 
 import net.ownhero.dev.kanuni.annotations.meta.Marker;
-import net.ownhero.dev.kanuni.annotations.specifics.Container;
 import net.ownhero.dev.kanuni.annotations.string.AlphaNumString;
 import net.ownhero.dev.kanuni.annotations.string.AlphaString;
 import net.ownhero.dev.kanuni.annotations.string.AsciiString;
@@ -12,6 +11,7 @@ import net.ownhero.dev.kanuni.annotations.string.ByteString;
 import net.ownhero.dev.kanuni.annotations.string.DigitString;
 import net.ownhero.dev.kanuni.annotations.string.DoubleString;
 import net.ownhero.dev.kanuni.annotations.string.FloatString;
+import net.ownhero.dev.kanuni.annotations.string.HexString;
 import net.ownhero.dev.kanuni.annotations.string.IntegerString;
 import net.ownhero.dev.kanuni.annotations.string.LongString;
 import net.ownhero.dev.kanuni.annotations.string.Lowercase;
@@ -31,7 +31,7 @@ public class AnnotatedForString {
 	/**
 	 * @param string
 	 */
-	public void alpha(@Container (allowEmpty = false, allowNull = false, maxSize = 16, spec = "test", noneNull = true) @AlphaString final String string) {
+	public void alpha(@AlphaString final String string) {
 		
 	}
 	
@@ -53,6 +53,13 @@ public class AnnotatedForString {
 	 * @param string
 	 */
 	public void digit(@DigitString final String string) {
+		
+	}
+	
+	/**
+	 * @param string
+	 */
+	public void hex(@HexString final String string) {
 		
 	}
 	
