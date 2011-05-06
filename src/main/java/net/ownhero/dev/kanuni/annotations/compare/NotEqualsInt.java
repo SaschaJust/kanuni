@@ -22,7 +22,7 @@ import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 @Target (value = { ElementType.PARAMETER })
 public @interface NotEqualsInt {
 	
-	int ref();
+	double ref();
 	
 	String value() default "";
 	

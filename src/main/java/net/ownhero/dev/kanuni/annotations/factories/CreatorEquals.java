@@ -9,8 +9,10 @@ import java.util.SortedSet;
 import javassist.CtBehavior;
 import javassist.CtClass;
 import javassist.bytecode.annotation.Annotation;
+import javassist.bytecode.annotation.DoubleMemberValue;
 import javassist.bytecode.annotation.IntegerMemberValue;
 import javassist.bytecode.annotation.StringMemberValue;
+import net.ownhero.dev.kanuni.annotations.compare.EqualsDouble;
 import net.ownhero.dev.kanuni.annotations.compare.EqualsInt;
 import net.ownhero.dev.kanuni.annotations.meta.Marker;
 import net.ownhero.dev.kanuni.conditions.StringCondition;
@@ -53,6 +55,20 @@ public final class CreatorEquals extends Creator {
 					                             parameterName, ref, text));
 				} else {
 					builder.append(String.format(".equals(%s, new Integer(%s), \"%s\", new Object[0]);", parameterName,
+					                             ref, text));
+				}
+				builder.append(System.getProperty("line.separator"));
+			} else if (annotation.getTypeName().equals(EqualsDouble.class.getName())) {
+				DoubleMemberValue refMemberValue = (DoubleMemberValue) KanuniClassloader.getMemberValue(annotation,
+				                                                                                        "ref");
+				double ref = refMemberValue.getValue();
+				
+				builder.append(KanuniInstrumenter.compareClass);
+				if (parameterType.isPrimitive()) {
+					builder.append(String.format(".equals(new Double(%s), new Double(%s), \"%s\", new Object[0]);",
+					                             parameterName, ref, text));
+				} else {
+					builder.append(String.format(".equals(%s, new Double(%s), \"%s\", new Object[0]);", parameterName,
 					                             ref, text));
 				}
 				builder.append(System.getProperty("line.separator"));

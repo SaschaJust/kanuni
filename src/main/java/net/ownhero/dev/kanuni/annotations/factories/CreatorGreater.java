@@ -9,8 +9,10 @@ import java.util.SortedSet;
 import javassist.CtBehavior;
 import javassist.CtClass;
 import javassist.bytecode.annotation.Annotation;
+import javassist.bytecode.annotation.DoubleMemberValue;
 import javassist.bytecode.annotation.IntegerMemberValue;
 import javassist.bytecode.annotation.StringMemberValue;
+import net.ownhero.dev.kanuni.annotations.compare.GreaterDouble;
 import net.ownhero.dev.kanuni.annotations.compare.GreaterInt;
 import net.ownhero.dev.kanuni.annotations.meta.Marker;
 import net.ownhero.dev.kanuni.conditions.StringCondition;
@@ -54,6 +56,20 @@ public final class CreatorGreater extends Creator {
 				} else {
 					builder.append(String.format(".greater(%s, new Integer(%s), \"%s\", new Object[0]);",
 					                             parameterName, ref, text));
+				}
+				builder.append(System.getProperty("line.separator"));
+			} else if (annotation.getTypeName().equals(GreaterDouble.class.getName())) {
+				DoubleMemberValue refMemberValue = (DoubleMemberValue) KanuniClassloader.getMemberValue(annotation,
+				                                                                                        "ref");
+				double ref = refMemberValue.getValue();
+				
+				builder.append(KanuniInstrumenter.compareClass);
+				if (parameterType.isPrimitive()) {
+					builder.append(String.format(".greater(new Double(%s), new Double(%s), \"%s\", new Object[0]);",
+					                             parameterName, ref, text));
+				} else {
+					builder.append(String.format(".greater(%s, new Double(%s), \"%s\", new Object[0]);", parameterName,
+					                             ref, text));
 				}
 				builder.append(System.getProperty("line.separator"));
 			} else {

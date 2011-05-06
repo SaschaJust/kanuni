@@ -9,7 +9,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import net.ownhero.dev.kanuni.annotations.factories.CreatorLessOrEqual;
+import net.ownhero.dev.kanuni.annotations.factories.CreatorEquals;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 
 /**
@@ -18,9 +18,9 @@ import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
-@FactoryClass (CreatorLessOrEqual.class)
+@FactoryClass (CreatorEquals.class)
 @Target (value = { ElementType.PARAMETER })
-public @interface LessOrEqualInt {
+public @interface EqualsDouble {
 	
 	double ref();
 	

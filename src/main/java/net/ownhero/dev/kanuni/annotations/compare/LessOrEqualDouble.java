@@ -20,9 +20,9 @@ import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 @Retention (RetentionPolicy.RUNTIME)
 @FactoryClass (CreatorLessOrEqual.class)
 @Target (value = { ElementType.PARAMETER })
-public @interface LessOrEqualInt {
+public @interface LessOrEqualDouble {
 	
-	double ref();
+	int ref();
 	
 	String value() default "";
 	
