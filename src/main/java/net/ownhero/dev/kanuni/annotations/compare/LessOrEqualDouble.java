@@ -14,7 +14,7 @@ import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 
 /**
  * @author Sascha Just <sascha.just@own-hero.net>
- *
+ * 
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
@@ -22,7 +22,7 @@ import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 @Target (value = { ElementType.PARAMETER })
 public @interface LessOrEqualDouble {
 	
-	int ref();
+	double ref();
 	
 	String value() default "";
 	
