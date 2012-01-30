@@ -30,7 +30,7 @@ import com.sun.tools.attach.spi.AttachProvider;
 
 /**
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
- *
+ * 
  */
 public class KanuniAgentLoader {
 	
@@ -61,10 +61,10 @@ public class KanuniAgentLoader {
 	                                                    };
 	
 	/**
-	* @param source
-	* @param target
-	* @throws IOException
-	*/
+	 * @param source
+	 * @param target
+	 * @throws IOException
+	 */
 	private static void add(final File source,
 	                        final JarOutputStream target) throws IOException {
 		BufferedInputStream in = null;

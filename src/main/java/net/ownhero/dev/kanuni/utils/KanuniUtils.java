@@ -29,14 +29,12 @@ public class KanuniUtils {
 	private static final Pattern alphanum  = Pattern.compile("^\\p{Alnum}+$");
 	
 	/**
-	 * Checks a given string to be convertible to a given number type (e.g.
-	 * float).
+	 * Checks a given string to be convertible to a given number type (e.g. float).
 	 * 
 	 * @param string
 	 *            the string under suspect
 	 * @param type
-	 *            the number type the string has to be checked against (see
-	 *            {@link NumberType})
+	 *            the number type the string has to be checked against (see {@link NumberType})
 	 * @return true iff the string can be converted to the given type
 	 */
 	public static final boolean checkNumber(final String string,
@@ -71,8 +69,7 @@ public class KanuniUtils {
 	}
 	
 	/**
-	 * Checks if the given pattern can be compiled using
-	 * {@link Pattern#compile(String)}.
+	 * Checks if the given pattern can be compiled using {@link Pattern#compile(String)}.
 	 * 
 	 * @param pattern
 	 *            the pattern under suspect
@@ -89,8 +86,7 @@ public class KanuniUtils {
 	}
 	
 	/**
-	 * Returns true if the given string matches the corresponding Alpha regular
-	 * expression.
+	 * Returns true if the given string matches the corresponding Alpha regular expression.
 	 * 
 	 * @param string
 	 * @return true if the given string matches the corresponding pattern.
@@ -101,8 +97,7 @@ public class KanuniUtils {
 	}
 	
 	/**
-	 * Returns true if the given string matches the corresponding Alphanum
-	 * regular expression.
+	 * Returns true if the given string matches the corresponding Alphanum regular expression.
 	 * 
 	 * @param string
 	 * @return true if the given string matches the corresponding pattern.
@@ -113,8 +108,7 @@ public class KanuniUtils {
 	}
 	
 	/**
-	 * Returns true if the given string matches the corresponding Ascii regular
-	 * expression.
+	 * Returns true if the given string matches the corresponding Ascii regular expression.
 	 * 
 	 * @param string
 	 * @return true if the given string matches the corresponding pattern.
@@ -125,8 +119,7 @@ public class KanuniUtils {
 	}
 	
 	/**
-	 * Returns true if the given string matches the corresponding Digit regular
-	 * expression.
+	 * Returns true if the given string matches the corresponding Digit regular expression.
 	 * 
 	 * @param string
 	 * @return true if the given string matches the corresponding pattern.
@@ -137,8 +130,7 @@ public class KanuniUtils {
 	}
 	
 	/**
-	 * Returns true if the given string matches the corresponding Lowercase
-	 * regular expression.
+	 * Returns true if the given string matches the corresponding Lowercase regular expression.
 	 * 
 	 * @param string
 	 * @return true if the given string matches the corresponding pattern.
@@ -149,8 +141,7 @@ public class KanuniUtils {
 	}
 	
 	/**
-	 * Returns true if the given string matches the corresponding Uppercase
-	 * regular expression.
+	 * Returns true if the given string matches the corresponding Uppercase regular expression.
 	 * 
 	 * @param string
 	 * @return true if the given string matches the corresponding pattern.
@@ -161,8 +152,7 @@ public class KanuniUtils {
 	}
 	
 	/**
-	 * Returns true if the given string matches the corresponding XDigit regular
-	 * expression.
+	 * Returns true if the given string matches the corresponding XDigit regular expression.
 	 * 
 	 * @param string
 	 * @return true if the given string matches the corresponding pattern.

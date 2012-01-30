@@ -15,10 +15,9 @@ import net.ownhero.dev.kanuni.conditions.Condition;
 import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 
 /**
- * This annotation can be used on constructors and methods. The
- * {@link KanuniClassloader} will translate this to a series of
- * {@link Condition#notNull(Object, String, Object...)} method calls for each
- * parameter of the annotated behavior.
+ * This annotation can be used on constructors and methods. The {@link KanuniClassloader} will translate this to a
+ * series of {@link Condition#notNull(Object, String, Object...)} method calls for each parameter of the annotated
+ * behavior.
  * 
  * <h3>Example</h3>
  * <dl>

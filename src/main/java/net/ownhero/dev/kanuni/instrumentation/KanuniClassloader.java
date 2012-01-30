@@ -26,9 +26,8 @@ import javassist.bytecode.annotation.Annotation;
 public final class KanuniClassloader extends ClassLoader {
 	
 	/**
-	 * the {@link ClassPool} instance to manage classes loaded by javassist. For
-	 * a list of packages loaded by the bootstrap classloader see documentation
-	 * of {@link KanuniClassloader#loadClass(String)}.
+	 * the {@link ClassPool} instance to manage classes loaded by javassist. For a list of packages loaded by the
+	 * bootstrap classloader see documentation of {@link KanuniClassloader#loadClass(String)}.
 	 */
 	private static ClassPool             classPool = ClassPool.getDefault();
 	
@@ -92,12 +91,11 @@ public final class KanuniClassloader extends ClassLoader {
 	}
 	
 	/**
-	 * This constructor will never be called by the VM itself. If you call the
-	 * constructor manually make sure that {@link KanuniClassloader} isn't the
-	 * system's class loader. Otherwise this will cause a stack overflow.
+	 * This constructor will never be called by the VM itself. If you call the constructor manually make sure that
+	 * {@link KanuniClassloader} isn't the system's class loader. Otherwise this will cause a stack overflow.
 	 * 
-	 * The only reason that this constructor exists is for testing purpose. You
-	 * can load single annotated classes and test the annotations under suspect.
+	 * The only reason that this constructor exists is for testing purpose. You can load single annotated classes and
+	 * test the annotations under suspect.
 	 */
 	public KanuniClassloader() {
 		KanuniClassloader.classPool.insertClassPath(new ClassClassPath(this.getClass()));
@@ -105,8 +103,8 @@ public final class KanuniClassloader extends ClassLoader {
 	}
 	
 	/**
-	 * The constructor called when bootstrapping the VM and having the system
-	 * bootloader set to {@link KanuniClassloader}.
+	 * The constructor called when bootstrapping the VM and having the system bootloader set to
+	 * {@link KanuniClassloader}.
 	 * 
 	 * @param arg0
 	 *            the parent class loader

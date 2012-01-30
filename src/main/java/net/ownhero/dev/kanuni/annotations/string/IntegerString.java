@@ -15,13 +15,12 @@ import net.ownhero.dev.kanuni.annotations.simple.NotNull;
 import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 
 /**
- * Annotation to assert a string is either empty (but not null) or consists only
- * of alpha-numeric characters. If the string is null, the annotation will
- * <b>not</b> trigger a violation. If you want the string also be checked to be
- * not null use the {@link NotNull} annotation in addition.
+ * Annotation to assert a string is either empty (but not null) or consists only of alpha-numeric characters. If the
+ * string is null, the annotation will <b>not</b> trigger a violation. If you want the string also be checked to be not
+ * null use the {@link NotNull} annotation in addition.
  * 
- * The annotation will cause the {@link KanuniClassloader} to insert appropriate
- * assertions at the beginning of the method/constructor at load time.
+ * The annotation will cause the {@link KanuniClassloader} to insert appropriate assertions at the beginning of the
+ * method/constructor at load time.
  * 
  * <h3>Example 1</h3>
  * <dl>
@@ -67,6 +66,7 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
  * 
  * 
  * 
+ * 
  * </pre>
  * 
  * </dt></dl> This code will be translated by the {@link KanuniClassloader} to:
@@ -83,6 +83,7 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
  * 		...
  * 	}
  * }
+ * 
  * 
  * 
  * 
@@ -113,7 +114,7 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
-@FactoryClass(CreatorStringType.class)
+@FactoryClass (CreatorStringType.class)
 @Target (value = { ElementType.PARAMETER })
 public @interface IntegerString {
 	

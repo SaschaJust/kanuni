@@ -7,7 +7,7 @@ import net.ownhero.dev.kanuni.checks.CompareCheck;
 
 /**
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
- *
+ * 
  */
 public class CompareEqualsViolation extends CheckViolation {
 	

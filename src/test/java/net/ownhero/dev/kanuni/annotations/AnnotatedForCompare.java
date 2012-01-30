@@ -7,10 +7,9 @@ import net.ownhero.dev.kanuni.annotations.compare.Equals;
 import net.ownhero.dev.kanuni.annotations.meta.Marker;
 import net.ownhero.dev.kanuni.annotations.simple.Negative;
 
-
 /**
  * @author Sascha Just <sascha.just@own-hero.net>
- *
+ * 
  */
 public class AnnotatedForCompare {
 	

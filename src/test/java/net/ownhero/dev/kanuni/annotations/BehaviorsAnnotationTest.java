@@ -10,7 +10,7 @@ import org.junit.BeforeClass;
 
 /**
  * @author Sascha Just <sascha.just@own-hero.net>
- *
+ * 
  */
 public class BehaviorsAnnotationTest {
 	

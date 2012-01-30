@@ -3,16 +3,14 @@
  */
 package net.ownhero.dev.kanuni.annotations;
 
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
-
 /**
  * @author Sascha Just <sascha.just@own-hero.net>
- *
+ * 
  */
 public class BoundsAnnotationTest {
 	

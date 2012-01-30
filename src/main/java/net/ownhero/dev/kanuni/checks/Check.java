@@ -24,8 +24,7 @@ public class Check {
 		
 		/*
 		 * (non-Javadoc)
-		 * @see
-		 * org.apache.commons.collections.Predicate#evaluate(java.lang.Object)
+		 * @see org.apache.commons.collections.Predicate#evaluate(java.lang.Object)
 		 */
 		public boolean evaluate(final Object object) {
 			if (object == null) {

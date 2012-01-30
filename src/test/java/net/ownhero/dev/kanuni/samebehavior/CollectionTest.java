@@ -3,7 +3,7 @@
  */
 package net.ownhero.dev.kanuni.samebehavior;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,10 +11,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-
 /**
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
- *
+ * 
  */
 public class CollectionTest {
 	
@@ -47,7 +46,9 @@ public class CollectionTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#contains(java.util.Collection, java.lang.Object, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#contains(java.util.Collection, java.lang.Object, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testContains() {
@@ -55,7 +56,9 @@ public class CollectionTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#containsAll(java.util.Collection, java.util.Collection, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#containsAll(java.util.Collection, java.util.Collection, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testContainsAll() {
@@ -63,7 +66,9 @@ public class CollectionTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#containsAny(java.util.Collection, java.util.Collection, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#containsAny(java.util.Collection, java.util.Collection, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testContainsAny() {
@@ -71,7 +76,9 @@ public class CollectionTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#empty(java.util.Collection, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#empty(java.util.Collection, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testEmpty() {
@@ -79,7 +86,9 @@ public class CollectionTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#maxSize(java.util.Collection, int, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#maxSize(java.util.Collection, int, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testMaxSize() {
@@ -87,7 +96,9 @@ public class CollectionTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#minSize(java.util.Collection, int, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#minSize(java.util.Collection, int, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testMinSize() {
@@ -95,7 +106,9 @@ public class CollectionTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#noneNull(java.util.Collection, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#noneNull(java.util.Collection, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testNoneNull() {
@@ -103,7 +116,9 @@ public class CollectionTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#notAllNull(java.util.Collection, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#notAllNull(java.util.Collection, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testNotAllNull() {
@@ -111,7 +126,9 @@ public class CollectionTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#notContains(java.util.Collection, java.lang.Object, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#notContains(java.util.Collection, java.lang.Object, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testNotContains() {
@@ -119,7 +136,9 @@ public class CollectionTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#notContainsAll(java.util.Collection, java.util.Collection, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#notContainsAll(java.util.Collection, java.util.Collection, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testNotContainsAll() {
@@ -127,7 +146,9 @@ public class CollectionTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#notContainsAny(java.util.Collection, java.util.Collection, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#notContainsAny(java.util.Collection, java.util.Collection, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testNotContainsAny() {
@@ -135,7 +156,9 @@ public class CollectionTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#notEmpty(java.util.Collection, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#notEmpty(java.util.Collection, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testNotEmpty() {
@@ -143,7 +166,9 @@ public class CollectionTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#sameSize(java.util.Collection, java.util.Collection, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#sameSize(java.util.Collection, java.util.Collection, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testSameSize() {
@@ -151,7 +176,9 @@ public class CollectionTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#size(java.util.Collection, int, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#size(java.util.Collection, int, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testSize() {
@@ -159,7 +186,9 @@ public class CollectionTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#validIndex(java.util.Collection, int, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.CollectionCondition#validIndex(java.util.Collection, int, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testValidIndex() {

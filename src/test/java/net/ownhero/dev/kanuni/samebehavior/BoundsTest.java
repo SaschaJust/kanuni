@@ -1,3 +1,16 @@
+/*******************************************************************************
+ * Copyright 2012 Kim Herzig, Sascha Just
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ ******************************************************************************/
+
 package net.ownhero.dev.kanuni.samebehavior;
 
 import static org.junit.Assert.assertEquals;
@@ -38,18 +51,18 @@ public class BoundsTest {
 		        new Character[] { 'c', 'c', null }, new Character[] { 'c', null, null } };
 		
 		Number[][] numberRanges = new Number[][] {
-
+		
 		new Short[] { 123, 123, 124 }, new Short[] { 123, 124, 124 }, new Short[] { 123, 1425, 1824 },
 		        new Short[] { 123, 78, 23 }, new Short[] { 123, 1, 500 }, new Short[] { 123, -1, 200 },
 		        new Short[] { 123, null, 124 }, new Short[] { 123, 123, null }, new Short[] { 123, null, null },
 		        new Short[] { null, 123, 124 }, new Short[] { 123, 1, 10 },
-
+		        
 		        new Integer[] {},
-
+		        
 		        new Long[] {},
-
+		        
 		        new Double[] {},
-
+		        
 		        new Float[] {} };
 		
 		boolean condition = true;

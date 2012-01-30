@@ -23,8 +23,7 @@ public abstract class Creator {
 	 * @param annotation
 	 * @param behavior
 	 * @param markers
-	 * @return a string representation of the instrumentation that have to be
-	 *         added to the behavior
+	 * @return a string representation of the instrumentation that have to be added to the behavior
 	 */
 	public String createBehaviorInstrumentation(final Annotation annotation,
 	                                            final CtBehavior behavior,
@@ -41,8 +40,7 @@ public abstract class Creator {
 	 * @param parameterName
 	 * @param parameterType
 	 * @param markers
-	 * @return a string representation of the instrumentation that have to be
-	 *         added to the behavior
+	 * @return a string representation of the instrumentation that have to be added to the behavior
 	 */
 	public String createParameterInstrumentation(final Annotation annotation,
 	                                             final CtBehavior behavior,

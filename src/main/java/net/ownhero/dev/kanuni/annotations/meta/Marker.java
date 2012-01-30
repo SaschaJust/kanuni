@@ -12,14 +12,15 @@ import java.lang.annotation.Target;
 import net.ownhero.dev.kanuni.annotations.compare.Equals;
 
 /**
- * This meta annotation is used in combination with other annotations. E.g. you
- * are using {@link Equals} you need a marker to specify the compare parameter.
+ * This meta annotation is used in combination with other annotations. E.g. you are using {@link Equals} you need a
+ * marker to specify the compare parameter.
  * 
  * <h3>Example</h3>
  * <dl>
  * <dt>
  * 
  * <pre>
+ * 
  * public final void testEquals(@Equals final int a,
  *                              &#064;Marker final int b) {
  * 	

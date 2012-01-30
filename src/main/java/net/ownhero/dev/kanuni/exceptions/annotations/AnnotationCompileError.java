@@ -5,7 +5,7 @@ package net.ownhero.dev.kanuni.exceptions.annotations;
 
 /**
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
- *
+ * 
  */
 public class AnnotationCompileError extends Error {
 	

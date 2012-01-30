@@ -172,8 +172,7 @@ public class AnnotatedForString {
 	}
 	
 	/**
-	 * This requires first, second and third to have same length as well as
-	 * forth and fifth.
+	 * This requires first, second and third to have same length as well as forth and fifth.
 	 * 
 	 * @param first
 	 * @param second

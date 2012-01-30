@@ -120,13 +120,12 @@ import net.ownhero.dev.kanuni.exceptions.annotations.MalformedAnnotationExceptio
 
 /**
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
- *
+ * 
  */
 public class KanuniInstrumenter {
 	
 	/**
-	 * This internal class is used to extract integer values from
-	 * {@link MemberValue}s and {@link ArrayMemberValue}s.
+	 * This internal class is used to extract integer values from {@link MemberValue}s and {@link ArrayMemberValue}s.
 	 */
 	class IntegerValueVisitor implements MemberValueVisitor {
 		
@@ -182,8 +181,7 @@ public class KanuniInstrumenter {
 	}
 	
 	/**
-	 * holds all known kanuni annotations that target for parameters in methods
-	 * and constructors
+	 * holds all known kanuni annotations that target for parameters in methods and constructors
 	 */
 	private static final Map<String, Creator> parameterAnnotations   = new HashMap<String, Creator>();
 	
@@ -193,22 +191,19 @@ public class KanuniInstrumenter {
 	private static final Map<String, Creator> methodAnnotations      = new HashMap<String, Creator>();
 	
 	/**
-	 * holds all known kanuni annotations that target for constructor
-	 * declarations
+	 * holds all known kanuni annotations that target for constructor declarations
 	 */
 	private static final Map<String, Creator> constructorAnnotations = new HashMap<String, Creator>();
 	
 	/**
-	 * the {@link ClassPool} instance to manage classes loaded by javassist. For
-	 * a list of packages loaded by the bootstrap classloader see documentation
-	 * of {@link KanuniClassloader#loadClass(String)}.
+	 * the {@link ClassPool} instance to manage classes loaded by javassist. For a list of packages loaded by the
+	 * bootstrap classloader see documentation of {@link KanuniClassloader#loadClass(String)}.
 	 */
 	private static ClassPool                  classPool              = ClassPool.getDefault();
 	
 	/**
-	 * this flag specifies if we should manipulate the bytecode on load, i.e.
-	 * adding assertions to the code. We only add the conditions if assertions
-	 * are enabled.
+	 * this flag specifies if we should manipulate the bytecode on load, i.e. adding assertions to the code. We only add
+	 * the conditions if assertions are enabled.
 	 */
 	private static boolean                    assertionsEnabled      = false;
 	
@@ -329,9 +324,8 @@ public class KanuniInstrumenter {
 	}
 	
 	/**
-	 * holds a list of current instrumentation that will be applied to a method
-	 * or constructor. This is not thread safe and not required to be since
-	 * every thread has it's own classloader instance.
+	 * holds a list of current instrumentation that will be applied to a method or constructor. This is not thread safe
+	 * and not required to be since every thread has it's own classloader instance.
 	 */
 	private final LinkedList<String> instrumentations = new LinkedList<String>();
 	
@@ -551,9 +545,8 @@ public class KanuniInstrumenter {
 		AnnotationsAttribute annotationsAttribute = (AnnotationsAttribute) methodInfo.getAttribute(AnnotationsAttribute.visibleTag);
 		
 		/*
-		 * If the annotationsAttribute is not null, the class under subject is
-		 * annotated. Now get all visible annotations and check if we control
-		 * this annotations.
+		 * If the annotationsAttribute is not null, the class under subject is annotated. Now get all visible
+		 * annotations and check if we control this annotations.
 		 */
 		if (annotationsAttribute != null) {
 			Annotation[] annotations = annotationsAttribute.getAnnotations();
@@ -595,8 +588,7 @@ public class KanuniInstrumenter {
 	 * @param behavior
 	 * @param annotations
 	 * @param markers
-	 * @return a map from integer (marker index) to the corresponding argument
-	 *         aliases
+	 * @return a map from integer (marker index) to the corresponding argument aliases
 	 */
 	private Map<Integer, SortedSet<String>> processBehaviorParameterAnnotations(final CtBehavior behavior,
 	                                                                            final Annotation[][] annotations,
@@ -697,8 +689,7 @@ public class KanuniInstrumenter {
 	/**
 	 * @param behavior
 	 * @param annotations
-	 * @return a map from integer (marker index) to the corresponding argument
-	 *         aliases
+	 * @return a map from integer (marker index) to the corresponding argument aliases
 	 */
 	private Map<Integer, SortedSet<String>> processMarkers(final CtBehavior behavior,
 	                                                       final Annotation[][] annotations) {

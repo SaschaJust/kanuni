@@ -506,8 +506,7 @@ public class StringCheck {
 	 * @param strings
 	 * @param formatString
 	 * @param arguments
-	 * @return true if all strings in the array are of same length (pairwise
-	 *         compair).
+	 * @return true if all strings in the array are of same length (pairwise compair).
 	 */
 	private static final boolean pairwiseSameLength(final String[] strings,
 	                                                final String formatString,

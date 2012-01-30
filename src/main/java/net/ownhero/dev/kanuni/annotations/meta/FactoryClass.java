@@ -12,9 +12,8 @@ import java.lang.annotation.Target;
 import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
 /**
- * This meta-annotation for kanuni annotations determines the factory
- * class for that annotation and is used by the {@link KanuniInstrumenter}
- * to create the corresponding instance for instrumentation.
+ * This meta-annotation for kanuni annotations determines the factory class for that annotation and is used by the
+ * {@link KanuniInstrumenter} to create the corresponding instance for instrumentation.
  * 
  * @author Sascha Just <sascha.just@own-hero.net>
  * 
