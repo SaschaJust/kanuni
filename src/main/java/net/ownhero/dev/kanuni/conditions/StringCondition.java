@@ -161,6 +161,31 @@ public final class StringCondition {
 	}
 	
 	/**
+	 * Checks two given strings to be equal. Does not fail if both strings are
+	 * null.
+	 * 
+	 * @param first
+	 *            the string under suspect
+	 * @param string
+	 *            the string to be compared to
+	 * @param formatString
+	 *            the message/formatString describing the violation
+	 * @param arguments
+	 *            optional arguments to the formatString
+	 */
+	public static final void equals(final String first,
+	                                final String second,
+	                                final String formatString,
+	                                final Object... arguments) {
+		assert ((first != null) || (second == null)) : Condition.getCallerString()
+		        + String.format("One of the two strings is null: %s vs %s. Violation: %s", first, second,
+		                        String.format(formatString, arguments));
+		assert ((first != null) && first.equals(second)) : Condition.getCallerString()
+		        + String.format("The two strings are not equal: %s vs %s. Violation: %s", first, second,
+		                        String.format(formatString, arguments));
+	}
+	
+	/**
 	 * Checks a given string to consist only of hexadecimal characters. If the
 	 * string is null, the check is ignored. If the string is empty the test
 	 * passes as well.
@@ -528,7 +553,7 @@ public final class StringCondition {
 	private static final boolean pairwiseSameLength(final String[] strings,
 	                                                final String formatString,
 	                                                final Object... arguments) {
-		for (int i = 0; i < strings.length - 1; ++i) {
+		for (int i = 0; i < (strings.length - 1); ++i) {
 			sameLength(strings[i], strings[i + 1], formatString, arguments);
 		}
 		return true;
@@ -596,10 +621,10 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a given string to contain a given substring. If the string is 
+	 * Checks a given string to contain a given substring. If the string is
 	 * null, the is ignored. If the string is empty, the check passes as well.
 	 * 
-	 * @param string 
+	 * @param string
 	 *            the string under suspect
 	 * @param substring
 	 *            the substring to be contained in the string
