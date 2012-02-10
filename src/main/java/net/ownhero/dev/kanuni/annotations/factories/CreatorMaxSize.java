@@ -18,15 +18,15 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
 /**
  * @author Sascha Just <sascha.just@own-hero.net>
- *
+ * 
  */
 public final class CreatorMaxSize extends Creator {
 	
 	/*
 	 * (non-Javadoc)
 	 * @see net.ownhero.dev.kanuni.annotations.factories.Creator#
-	 * createParameterInstrumentation(javassist.bytecode.annotation.Annotation,
-	 * javassist.CtBehavior, java.lang.String, javassist.CtClass, java.util.Map)
+	 * createParameterInstrumentation(javassist.bytecode.annotation.Annotation, javassist.CtBehavior, java.lang.String,
+	 * javassist.CtClass, java.util.Map)
 	 */
 	@Override
 	public String createParameterInstrumentation(final Annotation annotation,

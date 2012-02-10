@@ -16,53 +16,72 @@ import net.ownhero.dev.kanuni.conditions.StringCondition;
 import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 
 /**
- * Annotation to assert a string is either empty or consists only of
- * ASCII characters. If the string is null, the annotation will
- * <b>not</b> trigger a violation. If you want the string also be checked to be
- * not null use the {@link NotNull} annotation in addition.
+ * Annotation to assert a string is either empty or consists only of ASCII characters. If the string is null, the
+ * annotation will <b>not</b> trigger a violation. If you want the string also be checked to be not null use the
+ * {@link NotNull} annotation in addition.
  * 
- * The annotation will cause the {@link KanuniClassloader} to insert appropriate
- * assertions at the beginning of the method/constructor at load time.
+ * The annotation will cause the {@link KanuniClassloader} to insert appropriate assertions at the beginning of the
+ * method/constructor at load time.
  * 
- * <h3>Example 1</h3>
- * <dt><dl><pre>
+ * <h3>Example 1</h3> <dt>
+ * <dl>
+ * 
+ * <pre>
  * public void someFunction(@AsciiString final String string) {
  * 	...
  * }
- * </pre></dt></dl>
+ * </pre>
+ * 
+ * </dt></dl>
  * 
  * This code will be translated by the {@link KanuniClassloader} to:
  * 
- * <dt><dl><pre>
+ * <dt>
+ * <dl>
+ * 
+ * <pre>
  * public void someFunction(final String string) {
  *  StringCondition.ascii(string);
  *  ...
  * }
- * </pre></dt></dl>
-
+ * </pre>
  * 
- * <h3>Example 2</h3>
- * <dt><dl><pre>
+ * </dt></dl>
+ * 
+ * 
+ * <h3>Example 2</h3> <dt>
+ * <dl>
+ * 
+ * <pre>
  * public class A {
- * 
+ * 	
  * 	A(@AsciiString(&quot;According to spec 123.45 the submitted string has to be ASCII only.&quot;)
  * 	                  final String string) {
  * 		...
  * 	}
  * }
- * </pre></dt></dl>
+ * 
+ * </pre>
+ * 
+ * </dt></dl>
  * 
  * This code will be translated by the {@link KanuniClassloader} to:
  * 
- * <dt><dl><pre>
- * public class A {
+ * <dt>
+ * <dl>
  * 
+ * <pre>
+ * public class A {
+ * 	
  * 	A(final String string) {
  * 		StringCondition.ascii(string, &quot;According to spec 123.45 the submitted string has to be ASCII only.&quot;);
  * 		...
  * 	}
  * }
- * </pre></dt></dl>
+ * 
+ * </pre>
+ * 
+ * </dt></dl>
  * 
  * @see StringCondition#ascii(String, String, Object...)
  * 

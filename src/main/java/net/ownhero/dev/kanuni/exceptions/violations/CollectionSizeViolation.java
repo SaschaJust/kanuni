@@ -7,7 +7,7 @@ import net.ownhero.dev.kanuni.checks.CollectionCheck;
 
 /**
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
- *
+ * 
  */
 public class CollectionSizeViolation extends CheckViolation {
 	

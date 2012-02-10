@@ -12,10 +12,9 @@ import java.lang.annotation.Target;
 import net.ownhero.dev.kanuni.annotations.factories.CreatorStringType;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 
-
 /**
  * @author Sascha Just <sascha.just@own-hero.net>
- *
+ * 
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
@@ -25,4 +24,3 @@ public @interface NotEmptyString {
 	
 	String value() default "";
 }
-

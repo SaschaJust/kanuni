@@ -19,7 +19,7 @@ import org.junit.Test;
 
 /**
  * @author Sascha Just <sascha.just@own-hero.net>
- *
+ * 
  */
 public class RangeAnnotationTest {
 	

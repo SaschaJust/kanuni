@@ -3,7 +3,7 @@
  */
 package net.ownhero.dev.kanuni.samebehavior;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,10 +11,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-
 /**
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
- *
+ * 
  */
 public class CommonTest {
 	
@@ -47,7 +46,8 @@ public class CommonTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.Condition#check(boolean, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.Condition#check(boolean, java.lang.String, java.lang.Object[])}.
 	 */
 	@Test
 	public final void testCheck() {
@@ -63,7 +63,9 @@ public class CommonTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.Condition#isBoolean(java.lang.Object, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.Condition#isBoolean(java.lang.Object, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testIsBoolean() {
@@ -71,7 +73,9 @@ public class CommonTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.Condition#isByte(java.lang.Object, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.Condition#isByte(java.lang.Object, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testIsByte() {
@@ -79,7 +83,9 @@ public class CommonTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.Condition#isCharacter(java.lang.Object, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.Condition#isCharacter(java.lang.Object, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testIsCharacter() {
@@ -87,7 +93,9 @@ public class CommonTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.Condition#isDouble(java.lang.Object, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.Condition#isDouble(java.lang.Object, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testIsDouble() {
@@ -95,7 +103,9 @@ public class CommonTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.Condition#isFloat(java.lang.Object, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.Condition#isFloat(java.lang.Object, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testIsFloat() {
@@ -103,7 +113,9 @@ public class CommonTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.Condition#isInteger(java.lang.Object, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.Condition#isInteger(java.lang.Object, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testIsInteger() {
@@ -111,7 +123,9 @@ public class CommonTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.Condition#isLong(java.lang.Object, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.Condition#isLong(java.lang.Object, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testIsLong() {
@@ -119,7 +133,9 @@ public class CommonTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.Condition#isNull(java.lang.Object, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.Condition#isNull(java.lang.Object, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testIsNull() {
@@ -127,7 +143,9 @@ public class CommonTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.Condition#isShort(java.lang.Object, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.Condition#isShort(java.lang.Object, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testIsShort() {
@@ -135,7 +153,9 @@ public class CommonTest {
 	}
 	
 	/**
-	 * Test method for {@link net.ownhero.dev.kanuni.conditions.Condition#notNull(java.lang.Object, java.lang.String, java.lang.Object[])}.
+	 * Test method for
+	 * {@link net.ownhero.dev.kanuni.conditions.Condition#notNull(java.lang.Object, java.lang.String, java.lang.Object[])}
+	 * .
 	 */
 	@Test
 	public final void testNotNull() {

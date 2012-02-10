@@ -7,7 +7,7 @@ import net.ownhero.dev.kanuni.checks.Check;
 
 /**
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
- *
+ * 
  */
 public class CommonNotNullViolation extends CheckViolation {
 	

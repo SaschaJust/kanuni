@@ -7,7 +7,7 @@ import net.ownhero.dev.kanuni.checks.MapCheck;
 
 /**
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
- *
+ * 
  */
 public class MapContainsKeyViolation extends CheckViolation {
 	

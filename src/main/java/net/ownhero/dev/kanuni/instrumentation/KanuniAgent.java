@@ -18,7 +18,7 @@ import javassist.CtClass;
 
 /**
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
- *
+ * 
  */
 public class KanuniAgent implements ClassFileTransformer {
 	
@@ -100,10 +100,8 @@ public class KanuniAgent implements ClassFileTransformer {
 	
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * java.lang.instrument.ClassFileTransformer#transform(java.lang.ClassLoader
-	 * , java.lang.String, java.lang.Class, java.security.ProtectionDomain,
-	 * byte[])
+	 * @see java.lang.instrument.ClassFileTransformer#transform(java.lang.ClassLoader , java.lang.String,
+	 * java.lang.Class, java.security.ProtectionDomain, byte[])
 	 */
 	@Override
 	public byte[] transform(final ClassLoader classLoader,

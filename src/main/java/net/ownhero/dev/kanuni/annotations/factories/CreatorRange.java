@@ -34,10 +34,8 @@ public final class CreatorRange extends Creator {
 	
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * net.ownhero.dev.kanuni.annotations.factories.Creator#createInstrumentation
-	 * (javassist.bytecode.annotation.Annotation, javassist.CtClass,
-	 * java.util.Map)
+	 * @see net.ownhero.dev.kanuni.annotations.factories.Creator#createInstrumentation
+	 * (javassist.bytecode.annotation.Annotation, javassist.CtClass, java.util.Map)
 	 */
 	@Override
 	public String createParameterInstrumentation(final Annotation annotation,

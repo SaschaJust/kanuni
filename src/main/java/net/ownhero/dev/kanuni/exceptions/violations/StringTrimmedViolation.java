@@ -7,7 +7,7 @@ import net.ownhero.dev.kanuni.checks.StringCheck;
 
 /**
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
- *
+ * 
  */
 public class StringTrimmedViolation extends CheckViolation {
 	
