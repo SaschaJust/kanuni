@@ -89,6 +89,19 @@ public final class MapCondition {
 	}
 	
 	/**
+	 * @param map
+	 * @param formatString
+	 * @param arguments
+	 */
+	public static final void notEmpty(final Map<?, ?> map,
+	                                  final String formatString,
+	                                  final Object... arguments) {
+		assert !map.isEmpty() : Condition.getCallerString()
+		        + String.format("Recursive search found null element. Violation: %s",
+		                        String.format(formatString, arguments));
+	}
+	
+	/**
 	 * @param firstMap
 	 * @param secondMap
 	 * @param formatString
