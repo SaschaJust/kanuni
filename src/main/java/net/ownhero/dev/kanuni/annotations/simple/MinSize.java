@@ -13,8 +13,9 @@ import net.ownhero.dev.kanuni.annotations.factories.CreatorMinSize;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 
 /**
+ * The Interface MinSize.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
@@ -22,7 +23,17 @@ import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 @Target (value = { ElementType.PARAMETER })
 public @interface MinSize {
 	
+	/**
+	 * Min.
+	 *
+	 * @return the int
+	 */
 	int min();
 	
+	/**
+	 * Value.
+	 *
+	 * @return the string
+	 */
 	String value() default "";
 }

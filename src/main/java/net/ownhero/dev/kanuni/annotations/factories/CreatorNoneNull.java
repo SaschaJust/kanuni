@@ -18,8 +18,9 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 import org.apache.commons.lang.StringEscapeUtils;
 
 /**
+ * The Class CreatorNoneNull.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public final class CreatorNoneNull extends Creator {
 	

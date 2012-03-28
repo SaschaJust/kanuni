@@ -10,16 +10,23 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 
 /**
- * @author Sascha Just <sascha.just@own-hero.net>
+ * The Class CollectionCondition.
  * 
+ * @author Sascha Just <sascha.just@own-hero.net>
  */
 public final class CollectionCondition {
 	
 	/**
+	 * Contains.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param object
+	 *            the object
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void contains(final Collection<?> collection,
 	                                  final Object object,
@@ -31,10 +38,16 @@ public final class CollectionCondition {
 	}
 	
 	/**
+	 * Contains all.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param innerCollection
+	 *            the inner collection
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void containsAll(final Collection<?> collection,
 	                                     final Collection<?> innerCollection,
@@ -46,10 +59,16 @@ public final class CollectionCondition {
 	}
 	
 	/**
+	 * Contains any.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param innerCollection
+	 *            the inner collection
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void containsAny(final Collection<?> collection,
 	                                     final Collection<?> innerCollection,
@@ -61,9 +80,14 @@ public final class CollectionCondition {
 	}
 	
 	/**
+	 * Empty.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void empty(final Collection<?> collection,
 	                               final String formatString,
@@ -73,10 +97,16 @@ public final class CollectionCondition {
 	}
 	
 	/**
+	 * Max size.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param length
+	 *            the length
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void maxSize(final Collection<?> collection,
 	                                 final int length,
@@ -88,10 +118,16 @@ public final class CollectionCondition {
 	}
 	
 	/**
+	 * Min size.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param length
+	 *            the length
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void minSize(final Collection<?> collection,
 	                                 final int length,
@@ -103,9 +139,14 @@ public final class CollectionCondition {
 	}
 	
 	/**
+	 * None null.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void noneNull(final Collection<?> collection,
 	                                  final String formatString,
@@ -118,14 +159,23 @@ public final class CollectionCondition {
 	}
 	
 	/**
+	 * Not all null.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void notAllNull(final Collection<?> collection,
 	                                    final String formatString,
 	                                    final Object... arguments) {
-		assert (collection != null) && (CollectionUtils.countMatches(collection, new Predicate() {
+		assert (collection != null) : Condition.getCallerString()
+		        + String.format("The collection itself is (null). Violation: %s",
+		                        String.format(formatString, arguments));
+		
+		assert (CollectionUtils.countMatches(collection, new Predicate() {
 			
 			@Override
 			public boolean evaluate(final Object object) {
@@ -137,10 +187,16 @@ public final class CollectionCondition {
 	}
 	
 	/**
+	 * Not contains.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param object
+	 *            the object
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void notContains(final Collection<?> collection,
 	                                     final Object object,
@@ -152,10 +208,16 @@ public final class CollectionCondition {
 	}
 	
 	/**
+	 * Not contains all.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param innerCollection
+	 *            the inner collection
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void notContainsAll(final Collection<?> collection,
 	                                        final Collection<?> innerCollection,
@@ -167,10 +229,16 @@ public final class CollectionCondition {
 	}
 	
 	/**
+	 * Not contains any.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param innerCollection
+	 *            the inner collection
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void notContainsAny(final Collection<?> collection,
 	                                        final Collection<?> innerCollection,
@@ -182,9 +250,14 @@ public final class CollectionCondition {
 	}
 	
 	/**
+	 * Not empty.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void notEmpty(final Collection<?> collection,
 	                                  final String formatString,
@@ -194,10 +267,16 @@ public final class CollectionCondition {
 	}
 	
 	/**
+	 * Same size.
+	 * 
 	 * @param firstCollection
+	 *            the first collection
 	 * @param secondCollection
+	 *            the second collection
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void sameSize(final Collection<?> firstCollection,
 	                                  final Collection<?> secondCollection,
@@ -210,10 +289,16 @@ public final class CollectionCondition {
 	}
 	
 	/**
-	 * @param firstCollection
-	 * @param secondCollection
+	 * Same size.
+	 * 
+	 * @param collection
+	 *            the collection
+	 * @param array
+	 *            the array
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void sameSize(final Collection<?> collection,
 	                                  final Object array,
@@ -226,10 +311,16 @@ public final class CollectionCondition {
 	}
 	
 	/**
+	 * Size.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param length
+	 *            the length
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void size(final Collection<?> collection,
 	                              final int length,
@@ -241,10 +332,16 @@ public final class CollectionCondition {
 	}
 	
 	/**
+	 * Valid index.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param index
+	 *            the index
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void validIndex(final Collection<?> collection,
 	                                    final int index,

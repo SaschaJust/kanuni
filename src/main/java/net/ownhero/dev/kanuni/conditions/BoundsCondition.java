@@ -6,17 +6,20 @@ package net.ownhero.dev.kanuni.conditions;
 import org.apache.commons.lang.math.NumberRange;
 
 /**
+ * The Class BoundsCondition.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public final class BoundsCondition {
 	
 	/**
-	 * @param value
-	 * @param min
-	 * @param max
-	 * @param formatString
-	 * @param arguments
+	 * Range.
+	 *
+	 * @param value the value
+	 * @param min the min
+	 * @param max the max
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void range(final Character value,
 	                               final Character min,
@@ -38,11 +41,13 @@ public final class BoundsCondition {
 	}
 	
 	/**
-	 * @param value
-	 * @param min
-	 * @param max
-	 * @param formatString
-	 * @param arguments
+	 * Range.
+	 *
+	 * @param value the value
+	 * @param min the min
+	 * @param max the max
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void range(final Number value,
 	                               final Number min,

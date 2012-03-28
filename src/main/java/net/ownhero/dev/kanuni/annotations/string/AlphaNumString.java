@@ -116,6 +116,8 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 public @interface AlphaNumString {
 	
 	/**
+	 * Value.
+	 *
 	 * @return holds a string reasoning about the assertion.
 	 */
 	String value() default "";

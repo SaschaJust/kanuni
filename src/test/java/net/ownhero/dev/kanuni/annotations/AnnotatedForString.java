@@ -23,147 +23,188 @@ import net.ownhero.dev.kanuni.annotations.string.ShortString;
 import net.ownhero.dev.kanuni.annotations.string.Uppercase;
 
 /**
+ * The Class AnnotatedForString.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public class AnnotatedForString {
 	
 	/**
-	 * @param string
+	 * Alpha.
+	 *
+	 * @param string the string
 	 */
 	public void alpha(@AlphaString final String string) {
 		
 	}
 	
 	/**
-	 * @param string
+	 * Alphanum.
+	 *
+	 * @param string the string
 	 */
 	public void alphanum(@AlphaNumString final String string) {
 		
 	}
 	
 	/**
-	 * @param string
+	 * Ascii.
+	 *
+	 * @param string the string
 	 */
 	public void ascii(@AsciiString final String string) {
 		
 	}
 	
 	/**
-	 * @param string
+	 * Digit.
+	 *
+	 * @param string the string
 	 */
 	public void digit(@DigitString final String string) {
 		
 	}
 	
 	/**
-	 * @param string
+	 * Hex.
+	 *
+	 * @param string the string
 	 */
 	public void hex(@HexString final String string) {
 		
 	}
 	
 	/**
-	 * @param string
+	 * Checks if is byte.
+	 *
+	 * @param string the string
 	 */
 	public void isByte(@ByteString final String string) {
 		
 	}
 	
 	/**
-	 * @param string
+	 * Checks if is double.
+	 *
+	 * @param string the string
 	 */
 	public void isDouble(@DoubleString final String string) {
 		
 	}
 	
 	/**
-	 * @param string
+	 * Checks if is float.
+	 *
+	 * @param string the string
 	 */
 	public void isFloat(@FloatString final String string) {
 		
 	}
 	
 	/**
-	 * @param string
+	 * Checks if is integer.
+	 *
+	 * @param string the string
 	 */
 	public void isInteger(@IntegerString final String string) {
 		
 	}
 	
 	/**
-	 * @param string
+	 * Checks if is long.
+	 *
+	 * @param string the string
 	 */
 	public void isLong(@LongString final String string) {
 		
 	}
 	
 	/**
-	 * @param string
+	 * Checks if is short.
+	 *
+	 * @param string the string
 	 */
 	public void isShort(@ShortString final String string) {
 		
 	}
 	
 	/**
-	 * @param string
+	 * Lowercase.
+	 *
+	 * @param string the string
 	 */
 	public void lowercase(@Lowercase final String string) {
 		
 	}
 	
 	/**
-	 * @param string
+	 * Matches1.
+	 *
+	 * @param string the string
 	 */
 	public void matches1(@Matches (pattern = "[b]+") final String string) {
 		
 	}
 	
 	/**
-	 * @param string
+	 * Matches2.
+	 *
+	 * @param string the string
 	 */
 	public void matches2(@Matches (pattern = ".*") final String string) {
 		
 	}
 	
 	/**
-	 * @param string
+	 * Matches3.
+	 *
+	 * @param string the string
 	 */
 	public void matches3(@Matches (pattern = "[ab]+") final String string) {
 		
 	}
 	
 	/**
-	 * @param string
+	 * Max length10.
+	 *
+	 * @param string the string
 	 */
 	public void maxLength10(@MaxLength (max = 10) final String string) {
 		
 	}
 	
 	/**
-	 * @param string
+	 * Max length3.
+	 *
+	 * @param string the string
 	 */
 	public void maxLength3(@MaxLength (max = 3, value = "Testing god said: don't do!") final String string) {
 		
 	}
 	
 	/**
-	 * @param string
+	 * Min length10.
+	 *
+	 * @param string the string
 	 */
 	public void minLength10(@MinLength (min = 10) final String string) {
 		
 	}
 	
 	/**
-	 * @param string
+	 * Min length5.
+	 *
+	 * @param string the string
 	 */
 	public void minLength5(@MinLength (min = 5) final String string) {
 		
 	}
 	
 	/**
-	 * @param first
-	 * @param second
+	 * Same length.
+	 *
+	 * @param first the first
+	 * @param second the second
 	 */
 	@SameLength
 	public void sameLength(@Marker final String first,
@@ -173,12 +214,12 @@ public class AnnotatedForString {
 	
 	/**
 	 * This requires first, second and third to have same length as well as forth and fifth.
-	 * 
-	 * @param first
-	 * @param second
-	 * @param third
-	 * @param forth
-	 * @param fifth
+	 *
+	 * @param first the first
+	 * @param second the second
+	 * @param third the third
+	 * @param forth the forth
+	 * @param fifth the fifth
 	 */
 	@SameLength (marker = { 1, 2 },
 	             value = "This requires first, second and third to have same length as well as forth and fifth.")
@@ -190,6 +231,11 @@ public class AnnotatedForString {
 		
 	}
 	
+	/**
+	 * Uppercase.
+	 *
+	 * @param string the string
+	 */
 	public void uppercase(@Uppercase final String string) {
 		
 	}

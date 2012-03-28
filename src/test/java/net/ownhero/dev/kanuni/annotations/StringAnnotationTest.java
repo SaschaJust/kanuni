@@ -19,8 +19,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
+ * The Class StringAnnotationTest.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public class StringAnnotationTest {
 	
@@ -29,7 +30,9 @@ public class StringAnnotationTest {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up before class.
+	 *
+	 * @throws Exception the exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -37,26 +40,35 @@ public class StringAnnotationTest {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down after class.
+	 *
+	 * @throws Exception the exception
 	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up.
+	 *
+	 * @throws Exception the exception
 	 */
 	@Before
 	public void setUp() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down.
+	 *
+	 * @throws Exception the exception
 	 */
 	@After
 	public void tearDown() throws Exception {
 	}
 	
+	/**
+	 * Test alpha empty.
+	 */
 	@Test
 	public void testAlphaEmpty() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -70,6 +82,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test alpha invalid.
+	 */
 	@Test
 	public void testAlphaInvalid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -86,6 +101,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test alpha null.
+	 */
 	@Test
 	public void testAlphaNull() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -103,6 +121,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test alpha num empty.
+	 */
 	@Test
 	public void testAlphaNumEmpty() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -116,6 +137,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test alpha num invalid.
+	 */
 	@Test
 	public void testAlphaNumInvalid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -132,6 +156,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test alpha num null.
+	 */
 	@Test
 	public void testAlphaNumNull() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -149,6 +176,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test alpha num valid.
+	 */
 	@Test
 	public void testAlphaNumValid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -162,6 +192,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test alpha valid.
+	 */
 	@Test
 	public void testAlphaValid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -175,6 +208,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test ascii empty.
+	 */
 	@Test
 	public void testAsciiEmpty() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -188,6 +224,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test ascii invalid.
+	 */
 	@Test
 	public void testAsciiInvalid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -203,6 +242,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test ascii null.
+	 */
 	@Test
 	public void testAsciiNull() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -220,6 +262,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test ascii valid.
+	 */
 	@Test
 	public void testAsciiValid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -237,6 +282,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test digit empty.
+	 */
 	@Test
 	public void testDigitEmpty() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -250,6 +298,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test digit invalid.
+	 */
 	@Test
 	public void testDigitInvalid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -265,6 +316,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test digit null.
+	 */
 	@Test
 	public void testDigitNull() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -282,6 +336,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test digit valid.
+	 */
 	@Test
 	public void testDigitValid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -299,6 +356,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test hex empty.
+	 */
 	@Test
 	public void testHexEmpty() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -312,6 +372,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test hex invalid.
+	 */
 	@Test
 	public void testHexInvalid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -329,6 +392,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test hex null.
+	 */
 	@Test
 	public void testHexNull() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -346,6 +412,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test hex valid.
+	 */
 	@Test
 	public void testHexValid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -380,6 +449,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is byte empty.
+	 */
 	@Test
 	public void testIsByteEmpty() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -393,6 +465,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is byte invalid.
+	 */
 	@Test
 	public void testIsByteInvalid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -408,6 +483,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is byte null.
+	 */
 	@Test
 	public void testIsByteNull() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -425,6 +503,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is byte valid.
+	 */
 	@Test
 	public void testIsByteValid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -441,6 +522,9 @@ public class StringAnnotationTest {
 		
 	}
 	
+	/**
+	 * Test is double empty.
+	 */
 	@Test
 	public void testIsDoubleEmpty() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -454,6 +538,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is double invalid.
+	 */
 	@Test
 	public void testIsDoubleInvalid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -469,6 +556,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is double null.
+	 */
 	@Test
 	public void testIsDoubleNull() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -486,6 +576,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is double valid.
+	 */
 	@Test
 	public void testIsDoubleValid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -535,6 +628,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is float empty.
+	 */
 	@Test
 	public void testIsFloatEmpty() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -548,6 +644,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is float invalid.
+	 */
 	@Test
 	public void testIsFloatInvalid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -571,6 +670,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is float null.
+	 */
 	@Test
 	public void testIsFloatNull() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -588,6 +690,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is float valid.
+	 */
 	@Test
 	public void testIsFloatValid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -637,6 +742,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is integer empty.
+	 */
 	@Test
 	public void testIsIntegerEmpty() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -650,6 +758,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is integer invalid.
+	 */
 	@Test
 	public void testIsIntegerInvalid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -687,6 +798,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is integer null.
+	 */
 	@Test
 	public void testIsIntegerNull() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -704,6 +818,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is integer valid.
+	 */
 	@Test
 	public void testIsIntegerValid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -752,6 +869,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is long empty.
+	 */
 	@Test
 	public void testIsLongEmpty() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -765,6 +885,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is long invalid.
+	 */
 	@Test
 	public void testIsLongInvalid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -812,6 +935,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is long null.
+	 */
 	@Test
 	public void testIsLongNull() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -829,6 +955,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is long valid.
+	 */
 	@Test
 	public void testIsLongValid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -868,6 +997,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is short empty.
+	 */
 	@Test
 	public void testIsShortEmpty() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -881,6 +1013,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is short invalid.
+	 */
 	@Test
 	public void testIsShortInvalid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -936,6 +1071,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is short null.
+	 */
 	@Test
 	public void testIsShortNull() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -953,6 +1091,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test is short valid.
+	 */
 	@Test
 	public void testIsShortValid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -992,6 +1133,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test lowercase empty.
+	 */
 	@Test
 	public void testLowercaseEmpty() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1005,6 +1149,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test lowercase invalid.
+	 */
 	@Test
 	public void testLowercaseInvalid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1024,6 +1171,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test lowercase null.
+	 */
 	@Test
 	public void testLowercaseNull() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1041,6 +1191,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test lowercase valid.
+	 */
 	@Test
 	public void testLowercaseValid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1057,6 +1210,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test matches invalid.
+	 */
 	@Test
 	public void testMatchesInvalid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1074,6 +1230,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test matches string empty.
+	 */
 	@Test
 	public void testMatchesStringEmpty() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1088,6 +1247,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test matches string null.
+	 */
 	@Test
 	public void testMatchesStringNull() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1105,6 +1267,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test matches valid.
+	 */
 	@Test
 	public void testMatchesValid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1119,6 +1284,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test max length invalid.
+	 */
 	@Test
 	public void testMaxLengthInvalid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1134,6 +1302,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test max length valid.
+	 */
 	@Test
 	public void testMaxLengthValid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1147,6 +1318,9 @@ public class StringAnnotationTest {
 		
 	}
 	
+	/**
+	 * Test min length invalid.
+	 */
 	@Test
 	public void testMinLengthInvalid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1162,6 +1336,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test min length valid.
+	 */
 	@Test
 	public void testMinLengthValid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1175,6 +1352,9 @@ public class StringAnnotationTest {
 		
 	}
 	
+	/**
+	 * Test multiple same length invalid.
+	 */
 	@Test
 	public void testMultipleSameLengthInvalid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1202,6 +1382,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test multiple same length valid.
+	 */
 	@Test
 	public void testMultipleSameLengthValid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1215,6 +1398,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test same length both empty.
+	 */
 	@Test
 	public void testSameLengthBothEmpty() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1229,6 +1415,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test same length both null.
+	 */
 	@Test
 	public void testSameLengthBothNull() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1247,6 +1436,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test same length first empty.
+	 */
 	@Test
 	public void testSameLengthFirstEmpty() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1263,6 +1455,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test same length first null.
+	 */
 	@Test
 	public void testSameLengthFirstNull() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1281,6 +1476,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test same length invalid.
+	 */
 	@Test
 	public void testSameLengthInvalid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1298,6 +1496,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test same length second empty.
+	 */
 	@Test
 	public void testSameLengthSecondEmpty() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1314,6 +1515,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test same length second null.
+	 */
 	@Test
 	public void testSameLengthSecondNull() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1332,6 +1536,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test same length valid.
+	 */
 	@Test
 	public void testSameLengthValid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1346,6 +1553,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test uppercase empty.
+	 */
 	@Test
 	public void testUppercaseEmpty() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1359,6 +1569,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test uppercase invalid.
+	 */
 	@Test
 	public void testUppercaseInvalid() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1385,6 +1598,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test uppercase null.
+	 */
 	@Test
 	public void testUppercaseNull() {
 		AnnotatedForString afs = new AnnotatedForString();
@@ -1397,6 +1613,9 @@ public class StringAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test uppercase valid.
+	 */
 	@Test
 	public void testUppercaseValid() {
 		AnnotatedForString afs = new AnnotatedForString();

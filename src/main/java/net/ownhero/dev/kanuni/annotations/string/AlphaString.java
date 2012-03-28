@@ -112,5 +112,10 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 @Target (value = { ElementType.PARAMETER })
 public @interface AlphaString {
 	
+	/**
+	 * Value.
+	 *
+	 * @return the string
+	 */
 	String value() default "";
 }

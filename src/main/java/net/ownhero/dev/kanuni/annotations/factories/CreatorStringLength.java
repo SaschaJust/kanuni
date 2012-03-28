@@ -22,8 +22,9 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 import org.apache.commons.lang.StringEscapeUtils;
 
 /**
- * @author Sascha Just <sascha.just@own-hero.net>
+ * The Class CreatorStringLength.
  * 
+ * @author Sascha Just <sascha.just@own-hero.net>
  */
 public final class CreatorStringLength extends Creator {
 	
@@ -36,19 +37,20 @@ public final class CreatorStringLength extends Creator {
 	public String createBehaviorInstrumentation(final Annotation annotation,
 	                                            final CtBehavior behavior,
 	                                            final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
+		final StringBuilder builder = new StringBuilder();
+		
 		if (annotation.getTypeName().equals(SameLength.class.getName())) {
-			StringBuilder builder = new StringBuilder();
 			
 			CollectionCondition.notEmpty(markers.keySet(),
 			                             "Marker set of behavior annotations for " + SameLength.class.getName()
 			                                     + " may not be empty.");
 			
-			for (Integer markerId : markers.keySet()) {
-				StringBuilder arrayBuilder = new StringBuilder();
-				String initialPrepend = "new String[] { ";
+			for (final Integer markerId : markers.keySet()) {
+				final StringBuilder arrayBuilder = new StringBuilder();
+				final String initialPrepend = "new String[] { ";
 				arrayBuilder.append(initialPrepend);
 				
-				for (String markerParameter : markers.get(markerId)) {
+				for (final String markerParameter : markers.get(markerId)) {
 					if (arrayBuilder.length() > initialPrepend.length()) {
 						arrayBuilder.append(", ");
 					}
@@ -57,8 +59,9 @@ public final class CreatorStringLength extends Creator {
 				
 				arrayBuilder.append(" } ");
 				
-				StringMemberValue textMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation, "value");
-				String text = textMember.getValue();
+				final StringMemberValue textMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation,
+				                                                                                          "value");
+				final String text = textMember.getValue();
 				
 				builder.append(KanuniInstrumenter.stringClass)
 				       .append(String.format(".sameLength(%s, \"%s\", new Object[0]);", arrayBuilder,
@@ -66,11 +69,12 @@ public final class CreatorStringLength extends Creator {
 				       .append(System.getProperty("line.separator"));
 			}
 			
-			return builder.toString();
 		} else {
 			throw new MalformedAnnotationException(this.getClass().getName() + ": unsupported behavior ("
 			        + behavior.getName() + ") annotation: " + annotation.getTypeName());
 		}
+		
+		return builder.toString();
 	}
 	
 	/*
@@ -85,21 +89,23 @@ public final class CreatorStringLength extends Creator {
 	                                             final String parameterName,
 	                                             final CtClass parameterType,
 	                                             final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
-		StringBuilder builder = new StringBuilder();
+		final StringBuilder builder = new StringBuilder();
 		
-		StringMemberValue textMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation, "value");
-		String text = textMember.getValue();
+		final StringMemberValue textMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation, "value");
+		final String text = textMember.getValue();
 		
 		builder.append(KanuniInstrumenter.stringClass);
 		
 		if (annotation.getTypeName().equals(MaxLength.class.getName())) {
-			IntegerMemberValue maxMemberValue = (IntegerMemberValue) KanuniClassloader.getMemberValue(annotation, "max");
-			int max = maxMemberValue.getValue();
+			final IntegerMemberValue maxMemberValue = (IntegerMemberValue) KanuniClassloader.getMemberValue(annotation,
+			                                                                                                "max");
+			final int max = maxMemberValue.getValue();
 			
 			builder.append(String.format(".maxLength(%s, new Integer(%s)", parameterName, max));
 		} else if (annotation.getTypeName().equals(MinLength.class.getName())) {
-			IntegerMemberValue maxMemberValue = (IntegerMemberValue) KanuniClassloader.getMemberValue(annotation, "min");
-			int max = maxMemberValue.getValue();
+			final IntegerMemberValue maxMemberValue = (IntegerMemberValue) KanuniClassloader.getMemberValue(annotation,
+			                                                                                                "min");
+			final int max = maxMemberValue.getValue();
 			
 			builder.append(String.format(".minLength(%s, new Integer(%s)", parameterName, max));
 		} else {

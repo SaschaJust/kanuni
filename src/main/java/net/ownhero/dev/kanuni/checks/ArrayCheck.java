@@ -21,8 +21,9 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 import org.apache.commons.collections.CollectionUtils;
 
 /**
+ * The Class ArrayCheck.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 /**
  * @author Sascha Just <sascha.just@own-hero.net>
@@ -31,8 +32,10 @@ import org.apache.commons.collections.CollectionUtils;
 public class ArrayCheck {
 	
 	/**
-	 * @param array
-	 * @param element
+	 * Contains.
+	 *
+	 * @param array the array
+	 * @param element the element
 	 * @return true if the element is contained in the array
 	 */
 	private static final boolean contains(final Object array,
@@ -46,10 +49,12 @@ public class ArrayCheck {
 	}
 	
 	/**
-	 * @param array
-	 * @param element
-	 * @param formatString
-	 * @param arguments
+	 * Contains.
+	 *
+	 * @param array the array
+	 * @param element the element
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void contains(final Object array,
 	                                  final Object element,
@@ -83,9 +88,11 @@ public class ArrayCheck {
 	}
 	
 	/**
-	 * @param array
-	 * @param formatString
-	 * @param arguments
+	 * Empty.
+	 *
+	 * @param array the array
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void empty(final Object array,
 	                               final String formatString,
@@ -113,10 +120,12 @@ public class ArrayCheck {
 	}
 	
 	/**
-	 * @param array
-	 * @param length
-	 * @param formatString
-	 * @param arguments
+	 * Max size.
+	 *
+	 * @param array the array
+	 * @param length the length
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void maxSize(final Object array,
 	                                 final Integer length,
@@ -145,10 +154,12 @@ public class ArrayCheck {
 	}
 	
 	/**
-	 * @param array
-	 * @param length
-	 * @param formatString
-	 * @param arguments
+	 * Min size.
+	 *
+	 * @param array the array
+	 * @param length the length
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void minSize(final Object array,
 	                                 final Integer length,
@@ -178,9 +189,11 @@ public class ArrayCheck {
 	}
 	
 	/**
-	 * @param array
-	 * @param formatString
-	 * @param arguments
+	 * None null.
+	 *
+	 * @param array the array
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void noneNull(final Object array,
 	                                  final String formatString,
@@ -213,9 +226,11 @@ public class ArrayCheck {
 	}
 	
 	/**
-	 * @param array
-	 * @param formatString
-	 * @param arguments
+	 * Not empty.
+	 *
+	 * @param array the array
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void notEmpty(final Object array,
 	                                  final String formatString,
@@ -242,10 +257,12 @@ public class ArrayCheck {
 	}
 	
 	/**
-	 * @param firstArray
-	 * @param secondArray
-	 * @param formatString
-	 * @param arguments
+	 * Same size.
+	 *
+	 * @param firstArray the first array
+	 * @param secondArray the second array
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void sameSize(final Object firstArray,
 	                                  final Object secondArray,
@@ -293,10 +310,12 @@ public class ArrayCheck {
 	}
 	
 	/**
-	 * @param array
-	 * @param length
-	 * @param formatString
-	 * @param arguments
+	 * Size.
+	 *
+	 * @param array the array
+	 * @param length the length
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void size(final Object array,
 	                              final Integer length,
@@ -326,10 +345,12 @@ public class ArrayCheck {
 	}
 	
 	/**
-	 * @param index
-	 * @param array
-	 * @param formatString
-	 * @param arguments
+	 * Valid index.
+	 *
+	 * @param array the array
+	 * @param index the index
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void validIndex(final Object array,
 	                                    final Integer index,

@@ -12,41 +12,50 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
+ * The Class CollectionCheckTest.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public class CollectionCheckTest {
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up before class.
+	 *
+	 * @throws Exception the exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down after class.
+	 *
+	 * @throws Exception the exception
 	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up.
+	 *
+	 * @throws Exception the exception
 	 */
 	@Before
 	public void setUp() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down.
+	 *
+	 * @throws Exception the exception
 	 */
 	@After
 	public void tearDown() throws Exception {
 	}
 	
 	/**
-	 * 
+	 * Test contains all negative.
 	 */
 	@Test
 	public void testContainsAllNegative() {
@@ -54,7 +63,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test contains all positive.
 	 */
 	@Test
 	public void testContainsAllPositive() {
@@ -62,7 +71,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test contains any negative.
 	 */
 	@Test
 	public void testContainsAnyNegative() {
@@ -70,7 +79,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test contains any positive.
 	 */
 	@Test
 	public void testContainsAnyPositive() {
@@ -78,7 +87,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test contains negative.
 	 */
 	@Test
 	public void testContainsNegative() {
@@ -86,7 +95,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test contains positive.
 	 */
 	@Test
 	public void testContainsPositive() {
@@ -94,7 +103,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test empty negative.
 	 */
 	@Test
 	public void testEmptyNegative() {
@@ -102,7 +111,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test empty positive.
 	 */
 	@Test
 	public void testEmptyPositive() {
@@ -110,7 +119,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test max size negative.
 	 */
 	@Test
 	public void testMaxSizeNegative() {
@@ -118,7 +127,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test max size positive.
 	 */
 	@Test
 	public void testMaxSizePositive() {
@@ -126,7 +135,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test min size negative.
 	 */
 	@Test
 	public void testMinSizeNegative() {
@@ -134,7 +143,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test min size positive.
 	 */
 	@Test
 	public void testMinSizePositive() {
@@ -142,7 +151,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test none null negative.
 	 */
 	@Test
 	public void testNoneNullNegative() {
@@ -150,7 +159,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test none null positive.
 	 */
 	@Test
 	public void testNoneNullPositive() {
@@ -158,7 +167,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test not all null negative.
 	 */
 	@Test
 	public void testNotAllNullNegative() {
@@ -166,7 +175,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test not all null positive.
 	 */
 	@Test
 	public void testNotAllNullPositive() {
@@ -174,7 +183,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test not contains all negative.
 	 */
 	@Test
 	public void testNotContainsAllNegative() {
@@ -182,7 +191,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test not contains all positive.
 	 */
 	@Test
 	public void testNotContainsAllPositive() {
@@ -190,7 +199,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test not contains any negative.
 	 */
 	@Test
 	public void testNotContainsAnyNegative() {
@@ -198,7 +207,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test not contains any positive.
 	 */
 	@Test
 	public void testNotContainsAnyPositive() {
@@ -206,7 +215,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test not contains negative.
 	 */
 	@Test
 	public void testNotContainsNegative() {
@@ -214,7 +223,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test not contains positive.
 	 */
 	@Test
 	public void testNotContainsPositive() {
@@ -222,7 +231,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test not empty negative.
 	 */
 	@Test
 	public void testNotEmptyNegative() {
@@ -230,7 +239,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test not empty positive.
 	 */
 	@Test
 	public void testNotEmptyPositive() {
@@ -238,7 +247,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test samesize negative.
 	 */
 	@Test
 	public void testSamesizeNegative() {
@@ -246,7 +255,7 @@ public class CollectionCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test same size positive.
 	 */
 	@Test
 	public void testSameSizePositive() {

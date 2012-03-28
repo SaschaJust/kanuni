@@ -13,8 +13,9 @@ import net.ownhero.dev.kanuni.annotations.factories.CreatorEmpty;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 
 /**
+ * The Interface Empty.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
@@ -22,5 +23,10 @@ import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 @Target (value = { ElementType.PARAMETER })
 public @interface Empty {
 	
+	/**
+	 * Value.
+	 *
+	 * @return the string
+	 */
 	String value() default "";
 }

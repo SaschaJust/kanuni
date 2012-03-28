@@ -26,57 +26,194 @@ import com.sun.tools.attach.spi.AttachProvider;
  */
 public abstract class HotSpotVirtualMachine extends VirtualMachine {
 	
-	HotSpotVirtualMachine(AttachProvider provider, String id) {
+	/*
+	 * The possible errors returned by JPLIS's agentmain.
+	 */
+	/** The Constant JNI_ENOMEM. */
+	private static final int  JNI_ENOMEM             = -4;
+	
+	/** The Constant ATTACH_ERROR_BADJAR. */
+	private static final int  ATTACH_ERROR_BADJAR    = 100;
+	
+	/** The Constant ATTACH_ERROR_NOTONCP. */
+	private static final int  ATTACH_ERROR_NOTONCP   = 101;
+	
+	/** The Constant ATTACH_ERROR_STARTFAIL. */
+	private static final int  ATTACH_ERROR_STARTFAIL = 102;
+	
+	/** The Constant defaultAttachTimeout. */
+	private static final long defaultAttachTimeout   = 5000;
+	
+	/** The attach timeout. */
+	private volatile long     attachTimeout;
+	
+	/**
+	 * Instantiates a new hot spot virtual machine.
+	 * 
+	 * @param provider
+	 *            the provider
+	 * @param id
+	 *            the id
+	 */
+	HotSpotVirtualMachine(final AttachProvider provider, final String id) {
 		super(provider, id);
 	}
 	
 	/**
-	 * Load agent library. If isAbsolute is true then the agent library is the absolute path to the library and thus
-	 * will not be expanded in the target VM. If isAbsolute is false then the agent library is just a library name and
-	 * it will be expended in the target VM.
+	 * Return attach timeout based on the value of the sun.tools.attach.attachTimeout property, or the default timeout
+	 * if the property is not set to a positive value.
+	 * 
+	 * @return the long
 	 */
-	private void loadAgentLibrary(String agentLibrary,
-	                              boolean isAbsolute,
-	                              String options) throws AgentLoadException, AgentInitializationException, IOException {
-		InputStream in = execute("load", agentLibrary, isAbsolute
-		                                                         ? "true"
-		                                                         : "false", options);
-		
-		try {
-			int result = readInt(in);
-			
-			if (result != 0) {
-				throw new AgentInitializationException("Agent_OnAttach failed", result);
+	long attachTimeout() {
+		if (this.attachTimeout == 0) {
+			synchronized (this) {
+				if (this.attachTimeout == 0) {
+					try {
+						final String s = System.getProperty("sun.tools.attach.attachTimeout");
+						this.attachTimeout = Long.parseLong(s);
+					} catch (final SecurityException ignore) { //
+					} catch (final NumberFormatException ignore) { //
+					}
+					
+					if (this.attachTimeout <= 0) {
+						this.attachTimeout = defaultAttachTimeout;
+					}
+				}
 			}
-		} finally {
-			in.close();
+		}
+		
+		return this.attachTimeout;
+	}
+	
+	// Remote heap dump. The output (error message) can be read from the returned input stream.
+	/**
+	 * Dump heap.
+	 * 
+	 * @param args
+	 *            the args
+	 * @return the input stream
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public InputStream dumpHeap(final Object... args) throws IOException {
+		return executeCommand("dumpheap", args);
+	}
+	
+	/**
+	 * Execute the given command in the target VM - specific platform implementation must implement this.
+	 * 
+	 * @param cmd
+	 *            the cmd
+	 * @param args
+	 *            the args
+	 * @return the input stream
+	 * @throws AgentLoadException
+	 *             the agent load exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	abstract InputStream execute(String cmd,
+	                             Object... args) throws AgentLoadException, IOException;
+	
+	/**
+	 * Convenience method for simple commands.
+	 * 
+	 * @param cmd
+	 *            the cmd
+	 * @param args
+	 *            the args
+	 * @return the input stream
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	private InputStream executeCommand(final String cmd,
+	                                   final Object... args) throws IOException {
+		try {
+			return execute(cmd, args);
+		} catch (final AgentLoadException ignore) {
+			throw new InternalError("Should not get here");
 		}
 	}
 	
-	/**
-	 * Load agent library - library name will be expanded in target VM.
+	// --- HotSpot specific methods ---
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.sun.tools.attach.VirtualMachine#getAgentProperties()
 	 */
 	@Override
-	public void loadAgentLibrary(String agentLibrary,
-	                             String options) throws AgentLoadException, AgentInitializationException, IOException {
-		loadAgentLibrary(agentLibrary, false, options);
+	public Properties getAgentProperties() throws IOException {
+		InputStream in = null;
+		final Properties props = new Properties();
+		
+		try {
+			in = executeCommand("agentProperties");
+			props.load(in);
+		} finally {
+			if (in != null) {
+				in.close();
+			}
+		}
+		
+		return props;
 	}
 	
 	/**
-	 * Load agent - absolute path of library provided to target VM.
+	 * Send "properties" command to target VM.
+	 * 
+	 * @return the system properties
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	@Override
-	public void loadAgentPath(String agentLibrary,
-	                          String options) throws AgentLoadException, AgentInitializationException, IOException {
-		loadAgentLibrary(agentLibrary, true, options);
+	public Properties getSystemProperties() throws IOException {
+		InputStream in = null;
+		final Properties props = new Properties();
+		
+		try {
+			in = executeCommand("properties");
+			props.load(in);
+		} finally {
+			if (in != null) {
+				in.close();
+			}
+		}
+		
+		return props;
+	}
+	
+	// Heap histogram (heap inspection in HotSpot).
+	/**
+	 * Heap histo.
+	 * 
+	 * @param args
+	 *            the args
+	 * @return the input stream
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public InputStream heapHisto(final Object... args) throws IOException {
+		return executeCommand("inspectheap", args);
 	}
 	
 	/**
 	 * Load JPLIS agent which will load the agent JAR file and invoke the agentmain method.
+	 * 
+	 * @param agent
+	 *            the agent
+	 * @param options
+	 *            the options
+	 * @throws AgentLoadException
+	 *             the agent load exception
+	 * @throws AgentInitializationException
+	 *             the agent initialization exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	@Override
-	public void loadAgent(String agent,
-	                      String options) throws AgentLoadException, AgentInitializationException, IOException {
+	public void loadAgent(final String agent,
+	                      final String options) throws AgentLoadException, AgentInitializationException, IOException {
 		String args = agent;
 		
 		if (options != null) {
@@ -85,14 +222,14 @@ public abstract class HotSpotVirtualMachine extends VirtualMachine {
 		
 		try {
 			loadAgentLibrary("instrument", args);
-		} catch (AgentLoadException ignore) {
+		} catch (final AgentLoadException ignore) {
 			throw new InternalError("instrument library is missing in target VM");
-		} catch (AgentInitializationException x) {
+		} catch (final AgentInitializationException x) {
 			/*
 			 * Translate interesting errors into the right exception and message (FIXME: create a better interface to
 			 * the instrument implementation so this isn't necessary).
 			 */
-			int rc = x.returnValue();
+			final int rc = x.returnValue();
 			
 			switch (rc) {
 				case JNI_ENOMEM:
@@ -109,120 +246,139 @@ public abstract class HotSpotVirtualMachine extends VirtualMachine {
 		}
 	}
 	
-	/*
-	 * The possible errors returned by JPLIS's agentmain.
+	/**
+	 * Load agent library. If isAbsolute is true then the agent library is the absolute path to the library and thus
+	 * will not be expanded in the target VM. If isAbsolute is false then the agent library is just a library name and
+	 * it will be expended in the target VM.
+	 * 
+	 * @param agentLibrary
+	 *            the agent library
+	 * @param isAbsolute
+	 *            the is absolute
+	 * @param options
+	 *            the options
+	 * @throws AgentLoadException
+	 *             the agent load exception
+	 * @throws AgentInitializationException
+	 *             the agent initialization exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
-	private static final int JNI_ENOMEM             = -4;
-	private static final int ATTACH_ERROR_BADJAR    = 100;
-	private static final int ATTACH_ERROR_NOTONCP   = 101;
-	private static final int ATTACH_ERROR_STARTFAIL = 102;
+	private void loadAgentLibrary(final String agentLibrary,
+	                              final boolean isAbsolute,
+	                              final String options) throws AgentLoadException,
+	                                                   AgentInitializationException,
+	                                                   IOException {
+		final InputStream in = execute("load", agentLibrary, isAbsolute
+		                                                               ? "true"
+		                                                               : "false", options);
+		
+		try {
+			final int result = readInt(in);
+			
+			if (result != 0) {
+				throw new AgentInitializationException("Agent_OnAttach failed", result);
+			}
+		} finally {
+			in.close();
+		}
+	}
 	
 	/**
-	 * Send "properties" command to target VM.
+	 * Load agent library - library name will be expanded in target VM.
+	 * 
+	 * @param agentLibrary
+	 *            the agent library
+	 * @param options
+	 *            the options
+	 * @throws AgentLoadException
+	 *             the agent load exception
+	 * @throws AgentInitializationException
+	 *             the agent initialization exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	@Override
-	public Properties getSystemProperties() throws IOException {
-		InputStream in = null;
-		Properties props = new Properties();
-		
-		try {
-			in = executeCommand("properties");
-			props.load(in);
-		} finally {
-			if (in != null) {
-				in.close();
-			}
-		}
-		
-		return props;
-	}
-	
-	@Override
-	public Properties getAgentProperties() throws IOException {
-		InputStream in = null;
-		Properties props = new Properties();
-		
-		try {
-			in = executeCommand("agentProperties");
-			props.load(in);
-		} finally {
-			if (in != null) {
-				in.close();
-			}
-		}
-		
-		return props;
-	}
-	
-	// --- HotSpot specific methods ---
-	
-	// same as SIGQUIT
-	public void localDataDump() throws IOException {
-		executeCommand("datadump").close();
-	}
-	
-	// Remote ctrl-break. The output of the ctrl-break actions can be read from the input stream.
-	public InputStream remoteDataDump(Object... args) throws IOException {
-		return executeCommand("threaddump", args);
-	}
-	
-	// Remote heap dump. The output (error message) can be read from the returned input stream.
-	public InputStream dumpHeap(Object... args) throws IOException {
-		return executeCommand("dumpheap", args);
-	}
-	
-	// Heap histogram (heap inspection in HotSpot).
-	public InputStream heapHisto(Object... args) throws IOException {
-		return executeCommand("inspectheap", args);
-	}
-	
-	// Set JVM command line flag.
-	public InputStream setFlag(String name,
-	                           String value) throws IOException {
-		return executeCommand("setflag", name, value);
-	}
-	
-	// Print command line flag.
-	public InputStream printFlag(String name) throws IOException {
-		return executeCommand("printflag", name);
+	public void loadAgentLibrary(final String agentLibrary,
+	                             final String options) throws AgentLoadException,
+	                                                  AgentInitializationException,
+	                                                  IOException {
+		loadAgentLibrary(agentLibrary, false, options);
 	}
 	
 	// -- Supporting methods
 	
 	/**
-	 * Execute the given command in the target VM - specific platform implementation must implement this.
+	 * Load agent - absolute path of library provided to target VM.
+	 * 
+	 * @param agentLibrary
+	 *            the agent library
+	 * @param options
+	 *            the options
+	 * @throws AgentLoadException
+	 *             the agent load exception
+	 * @throws AgentInitializationException
+	 *             the agent initialization exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
-	abstract InputStream execute(String cmd,
-	                             Object... args) throws AgentLoadException, IOException;
-	
-	/**
-	 * Convenience method for simple commands.
-	 */
-	private InputStream executeCommand(String cmd,
-	                                   Object... args) throws IOException {
-		try {
-			return execute(cmd, args);
-		} catch (AgentLoadException ignore) {
-			throw new InternalError("Should not get here");
-		}
+	@Override
+	public void loadAgentPath(final String agentLibrary,
+	                          final String options) throws AgentLoadException,
+	                                               AgentInitializationException,
+	                                               IOException {
+		loadAgentLibrary(agentLibrary, true, options);
 	}
+	
+	// same as SIGQUIT
+	/**
+	 * Local data dump.
+	 * 
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public void localDataDump() throws IOException {
+		executeCommand("datadump").close();
+	}
+	
+	// Print command line flag.
+	/**
+	 * Prints the flag.
+	 * 
+	 * @param name
+	 *            the name
+	 * @return the input stream
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public InputStream printFlag(final String name) throws IOException {
+		return executeCommand("printflag", name);
+	}
+	
+	// -- attach timeout support
 	
 	/**
 	 * Utility method to read an 'int' from the input stream. Ideally we should be using java.util.Scanner here but this
 	 * implementation guarantees not to read ahead.
+	 * 
+	 * @param in
+	 *            the in
+	 * @return the int
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
-	int readInt(InputStream in) throws IOException {
-		StringBuilder sb = new StringBuilder();
+	int readInt(final InputStream in) throws IOException {
+		final StringBuilder sb = new StringBuilder();
 		
 		// read to \n or EOF
 		int n;
-		byte[] buf = new byte[1];
+		final byte[] buf = new byte[1];
 		
 		do {
 			n = in.read(buf, 0, 1);
 			
 			if (n > 0) {
-				char c = (char) buf[0];
+				final char c = (char) buf[0];
 				
 				if (c == '\n') {
 					break; // EOL found
@@ -240,40 +396,41 @@ public abstract class HotSpotVirtualMachine extends VirtualMachine {
 		
 		try {
 			value = Integer.parseInt(sb.toString());
-		} catch (NumberFormatException ignore) {
+		} catch (final NumberFormatException ignore) {
 			throw new IOException("Non-numeric value found - int expected");
 		}
 		
 		return value;
 	}
 	
-	// -- attach timeout support
-	
-	private static final long defaultAttachTimeout = 5000;
-	private volatile long     attachTimeout;
-	
+	// Remote ctrl-break. The output of the ctrl-break actions can be read from the input stream.
 	/**
-	 * Return attach timeout based on the value of the sun.tools.attach.attachTimeout property, or the default timeout
-	 * if the property is not set to a positive value.
+	 * Remote data dump.
+	 * 
+	 * @param args
+	 *            the args
+	 * @return the input stream
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
-	long attachTimeout() {
-		if (attachTimeout == 0) {
-			synchronized (this) {
-				if (attachTimeout == 0) {
-					try {
-						String s = System.getProperty("sun.tools.attach.attachTimeout");
-						attachTimeout = Long.parseLong(s);
-					} catch (SecurityException ignore) {
-					} catch (NumberFormatException ignore) {
-					}
-					
-					if (attachTimeout <= 0) {
-						attachTimeout = defaultAttachTimeout;
-					}
-				}
-			}
-		}
-		
-		return attachTimeout;
+	public InputStream remoteDataDump(final Object... args) throws IOException {
+		return executeCommand("threaddump", args);
+	}
+	
+	// Set JVM command line flag.
+	/**
+	 * Sets the flag.
+	 * 
+	 * @param name
+	 *            the name
+	 * @param value
+	 *            the value
+	 * @return the input stream
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public InputStream setFlag(final String name,
+	                           final String value) throws IOException {
+		return executeCommand("setflag", name, value);
 	}
 }

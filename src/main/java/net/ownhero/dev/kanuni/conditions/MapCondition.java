@@ -8,16 +8,19 @@ import java.util.Map;
 import org.apache.commons.collections.CollectionUtils;
 
 /**
+ * The Class MapCondition.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public final class MapCondition {
 	
 	/**
-	 * @param map
-	 * @param key
-	 * @param formatString
-	 * @param arguments
+	 * Contains key.
+	 *
+	 * @param map the map
+	 * @param key the key
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void containsKey(final Map<?, ?> map,
 	                                     final Object key,
@@ -29,10 +32,12 @@ public final class MapCondition {
 	}
 	
 	/**
-	 * @param map
-	 * @param value
-	 * @param formatString
-	 * @param arguments
+	 * Contains value.
+	 *
+	 * @param map the map
+	 * @param value the value
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void containsValue(final Map<?, ?> map,
 	                                       final Object value,
@@ -44,10 +49,12 @@ public final class MapCondition {
 	}
 	
 	/**
-	 * @param map
-	 * @param length
-	 * @param formatString
-	 * @param arguments
+	 * Max size.
+	 *
+	 * @param map the map
+	 * @param length the length
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void maxSize(final Map<?, ?> map,
 	                                 final int length,
@@ -59,10 +66,12 @@ public final class MapCondition {
 	}
 	
 	/**
-	 * @param map
-	 * @param length
-	 * @param formatString
-	 * @param arguments
+	 * Min size.
+	 *
+	 * @param map the map
+	 * @param length the length
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void minSize(final Map<?, ?> map,
 	                                 final int length,
@@ -74,9 +83,11 @@ public final class MapCondition {
 	}
 	
 	/**
-	 * @param map
-	 * @param formatString
-	 * @param arguments
+	 * None null.
+	 *
+	 * @param map the map
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void noneNull(final Map<?, ?> map,
 	                                  final String formatString,
@@ -89,9 +100,11 @@ public final class MapCondition {
 	}
 	
 	/**
-	 * @param map
-	 * @param formatString
-	 * @param arguments
+	 * Not empty.
+	 *
+	 * @param map the map
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void notEmpty(final Map<?, ?> map,
 	                                  final String formatString,
@@ -102,10 +115,12 @@ public final class MapCondition {
 	}
 	
 	/**
-	 * @param firstMap
-	 * @param secondMap
-	 * @param formatString
-	 * @param arguments
+	 * Same size.
+	 *
+	 * @param firstMap the first map
+	 * @param secondMap the second map
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void sameSize(final Map<?, ?> firstMap,
 	                                  final Map<?, ?> secondMap,

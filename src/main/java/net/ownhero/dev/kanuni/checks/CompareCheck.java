@@ -18,16 +18,19 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 import org.apache.commons.lang.math.NumberUtils;
 
 /**
+ * The Class CompareCheck.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public class CompareCheck {
 	
 	/**
-	 * @param first
-	 * @param second
-	 * @param formatString
-	 * @param arguments
+	 * Equals.
+	 *
+	 * @param first the first
+	 * @param second the second
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void equals(final Object first,
 	                                final Object second,
@@ -45,11 +48,13 @@ public class CompareCheck {
 	}
 	
 	/**
-	 * @param <T>
-	 * @param original
-	 * @param compareTo
-	 * @param formatString
-	 * @param arguments
+	 * Greater.
+	 *
+	 * @param <T> the generic type
+	 * @param original the original
+	 * @param compareTo the compare to
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final <T> void greater(final Comparable<T> original,
 	                                     final T compareTo,
@@ -68,11 +73,13 @@ public class CompareCheck {
 	}
 	
 	/**
-	 * @param <T>
-	 * @param original
-	 * @param compareTo
-	 * @param formatString
-	 * @param arguments
+	 * Greater or equal.
+	 *
+	 * @param <T> the generic type
+	 * @param original the original
+	 * @param compareTo the compare to
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final <T> void greaterOrEqual(final Comparable<T> original,
 	                                            final T compareTo,
@@ -91,11 +98,13 @@ public class CompareCheck {
 	}
 	
 	/**
-	 * @param <T>
-	 * @param original
-	 * @param compareTo
-	 * @param formatString
-	 * @param arguments
+	 * Less.
+	 *
+	 * @param <T> the generic type
+	 * @param original the original
+	 * @param compareTo the compare to
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final <T> void less(final Comparable<T> original,
 	                                  final T compareTo,
@@ -114,11 +123,13 @@ public class CompareCheck {
 	}
 	
 	/**
-	 * @param <T>
-	 * @param original
-	 * @param compareTo
-	 * @param formatString
-	 * @param arguments
+	 * Less or equal.
+	 *
+	 * @param <T> the generic type
+	 * @param original the original
+	 * @param compareTo the compare to
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final <T> void lessOrEqual(final Comparable<T> original,
 	                                         final T compareTo,
@@ -137,9 +148,11 @@ public class CompareCheck {
 	}
 	
 	/**
-	 * @param number
-	 * @param formatString
-	 * @param arguments
+	 * Negative.
+	 *
+	 * @param number the number
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void negative(final Double number,
 	                                  final String formatString,
@@ -160,9 +173,11 @@ public class CompareCheck {
 	}
 	
 	/**
-	 * @param number
-	 * @param formatString
-	 * @param arguments
+	 * Negative.
+	 *
+	 * @param number the number
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void negative(final Float number,
 	                                  final String formatString,
@@ -183,9 +198,11 @@ public class CompareCheck {
 	}
 	
 	/**
-	 * @param number
-	 * @param formatString
-	 * @param arguments
+	 * Negative.
+	 *
+	 * @param number the number
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void negative(final Integer number,
 	                                  final String formatString,
@@ -200,9 +217,11 @@ public class CompareCheck {
 	}
 	
 	/**
-	 * @param number
-	 * @param formatString
-	 * @param arguments
+	 * Negative.
+	 *
+	 * @param number the number
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void negative(final Long number,
 	                                  final String formatString,
@@ -217,10 +236,12 @@ public class CompareCheck {
 	}
 	
 	/**
-	 * @param first
-	 * @param second
-	 * @param formatString
-	 * @param arguments
+	 * Not equals.
+	 *
+	 * @param first the first
+	 * @param second the second
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void notEquals(final Object first,
 	                                   final Object second,
@@ -238,9 +259,11 @@ public class CompareCheck {
 	}
 	
 	/**
-	 * @param number
-	 * @param formatString
-	 * @param arguments
+	 * Not negative.
+	 *
+	 * @param number the number
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void notNegative(final Double number,
 	                                     final String formatString,
@@ -261,9 +284,11 @@ public class CompareCheck {
 	}
 	
 	/**
-	 * @param number
-	 * @param formatString
-	 * @param arguments
+	 * Not negative.
+	 *
+	 * @param number the number
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void notNegative(final Float number,
 	                                     final String formatString,
@@ -284,9 +309,11 @@ public class CompareCheck {
 	}
 	
 	/**
-	 * @param number
-	 * @param formatString
-	 * @param arguments
+	 * Not negative.
+	 *
+	 * @param number the number
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void notNegative(final Integer number,
 	                                     final String formatString,
@@ -301,9 +328,11 @@ public class CompareCheck {
 	}
 	
 	/**
-	 * @param number
-	 * @param formatString
-	 * @param arguments
+	 * Not negative.
+	 *
+	 * @param number the number
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void notNegative(final Long number,
 	                                     final String formatString,
@@ -318,9 +347,11 @@ public class CompareCheck {
 	}
 	
 	/**
-	 * @param number
-	 * @param formatString
-	 * @param arguments
+	 * Not positive.
+	 *
+	 * @param number the number
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void notPositive(final Double number,
 	                                     final String formatString,
@@ -341,9 +372,11 @@ public class CompareCheck {
 	}
 	
 	/**
-	 * @param number
-	 * @param formatString
-	 * @param arguments
+	 * Not positive.
+	 *
+	 * @param number the number
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void notPositive(final Float number,
 	                                     final String formatString,
@@ -364,9 +397,11 @@ public class CompareCheck {
 	}
 	
 	/**
-	 * @param number
-	 * @param formatString
-	 * @param arguments
+	 * Not positive.
+	 *
+	 * @param number the number
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void notPositive(final Integer number,
 	                                     final String formatString,
@@ -381,9 +416,11 @@ public class CompareCheck {
 	}
 	
 	/**
-	 * @param number
-	 * @param formatString
-	 * @param arguments
+	 * Not positive.
+	 *
+	 * @param number the number
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void notPositive(final Long number,
 	                                     final String formatString,
@@ -398,9 +435,11 @@ public class CompareCheck {
 	}
 	
 	/**
-	 * @param number
-	 * @param formatString
-	 * @param arguments
+	 * Positive.
+	 *
+	 * @param number the number
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void positive(final Double number,
 	                                  final String formatString,
@@ -421,9 +460,11 @@ public class CompareCheck {
 	}
 	
 	/**
-	 * @param number
-	 * @param formatString
-	 * @param arguments
+	 * Positive.
+	 *
+	 * @param number the number
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void positive(final Float number,
 	                                  final String formatString,
@@ -444,9 +485,11 @@ public class CompareCheck {
 	}
 	
 	/**
-	 * @param number
-	 * @param formatString
-	 * @param arguments
+	 * Positive.
+	 *
+	 * @param number the number
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void positive(final Integer number,
 	                                  final String formatString,
@@ -461,9 +504,11 @@ public class CompareCheck {
 	}
 	
 	/**
-	 * @param number
-	 * @param formatString
-	 * @param arguments
+	 * Positive.
+	 *
+	 * @param number the number
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void positive(final Long number,
 	                                  final String formatString,

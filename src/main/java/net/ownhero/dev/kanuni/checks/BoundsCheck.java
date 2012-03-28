@@ -9,17 +9,20 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 import org.apache.commons.lang.math.NumberRange;
 
 /**
+ * The Class BoundsCheck.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public class BoundsCheck {
 	
 	/**
-	 * @param value
-	 * @param min
-	 * @param max
-	 * @param formatString
-	 * @param arguments
+	 * Range.
+	 *
+	 * @param value the value
+	 * @param min the min
+	 * @param max the max
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void range(final Character value,
 	                               final Character min,
@@ -59,11 +62,13 @@ public class BoundsCheck {
 	}
 	
 	/**
-	 * @param value
-	 * @param min
-	 * @param max
-	 * @param formatString
-	 * @param arguments
+	 * Range.
+	 *
+	 * @param value the value
+	 * @param min the min
+	 * @param max the max
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void range(final Number value,
 	                               final Number min,

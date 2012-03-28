@@ -21,8 +21,9 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
 /**
+ * The Class CreatorLessOrEqual.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public final class CreatorLessOrEqual extends Creator {
 	

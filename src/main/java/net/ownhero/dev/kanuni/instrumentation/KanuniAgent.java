@@ -17,16 +17,22 @@ import javassist.ClassPool;
 import javassist.CtClass;
 
 /**
- * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ * The Class KanuniAgent.
  * 
+ * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
  */
 public class KanuniAgent implements ClassFileTransformer {
 	
-	private static Instrumentation instrumentation;
+	/** The instrumentation. */
+	private static Instrumentation _instrumentation;
 	
 	/**
+	 * Agentmain.
+	 * 
 	 * @param agentArgs
+	 *            the agent args
 	 * @param inst
+	 *            the inst
 	 */
 	public static void agentmain(final String agentArgs,
 	                             final Instrumentation inst) {
@@ -37,17 +43,25 @@ public class KanuniAgent implements ClassFileTransformer {
 	 * Programmatic hook to dynamically load javaagent at runtime.
 	 */
 	public static void initialize() {
-		if (instrumentation == null) {
+		if (_instrumentation == null) {
 			KanuniAgentLoader.loadAgent();
 		}
 	}
 	
+	/**
+	 * Premain.
+	 * 
+	 * @param agentArgument
+	 *            the agent argument
+	 * @param instrumentation
+	 *            the instrumentation
+	 */
 	public static void premain(final String agentArgument,
 	                           final Instrumentation instrumentation) {
-		KanuniAgent.instrumentation = instrumentation;
+		KanuniAgent._instrumentation = instrumentation;
 		if (agentArgument != null) {
-			String[] args = agentArgument.split(",");
-			Set<String> argSet = new HashSet<String>(Arrays.asList(args));
+			final String[] args = agentArgument.split(",");
+			final Set<String> argSet = new HashSet<String>(Arrays.asList(args));
 			
 			if (argSet.contains("time") && KanuniInstrumenter.debug) {
 				System.out.println("Start at " + new Date());
@@ -67,35 +81,42 @@ public class KanuniAgent implements ClassFileTransformer {
 		instrumentation.addTransformer(new KanuniAgent());
 	}
 	
+	/** The instrumenter. */
 	private final KanuniInstrumenter instrumenter = new KanuniInstrumenter();
 	
 	/**
+	 * Do class.
+	 * 
 	 * @param name
+	 *            the name
 	 * @param classBeingRedefined
+	 *            the class being redefined
 	 * @param classfileBuffer
+	 *            the classfile buffer
 	 * @return the modified class file buffer
 	 */
 	private byte[] doClass(final String name,
 	                       final Class<?> classBeingRedefined,
-	                       byte[] classfileBuffer) {
+	                       final byte[] classfileBuffer) {
 		CtClass cl = null;
-		ClassPool classPool = ClassPool.getDefault();
+		final ClassPool classPool = ClassPool.getDefault();
+		byte[] cfBuffer = classfileBuffer;
 		
 		try {
-			cl = classPool.makeClass(new ByteArrayInputStream(classfileBuffer));
+			cl = classPool.makeClass(new ByteArrayInputStream(cfBuffer));
 			
 			if (cl.isInterface() == false) {
 				this.instrumenter.processAnnotations(cl);
-				classfileBuffer = cl.toBytecode();
+				cfBuffer = cl.toBytecode();
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			System.err.println("Could not instrument  " + name + ",  exception : " + e.getMessage());
 		} finally {
 			if (cl != null) {
 				cl.detach();
 			}
 		}
-		return classfileBuffer;
+		return cfBuffer;
 	}
 	
 	/*
@@ -109,7 +130,7 @@ public class KanuniAgent implements ClassFileTransformer {
 	                        final Class<?> classBeingRedefined,
 	                        final ProtectionDomain protectionDomain,
 	                        final byte[] classfileBuffer) throws IllegalClassFormatException {
-		int i = name.lastIndexOf('/');
+		final int i = name.lastIndexOf('/');
 		//@formatter:off
 		
 		/* skip classes that may not be stubbed

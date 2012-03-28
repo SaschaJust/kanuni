@@ -21,8 +21,9 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
 /**
+ * The Class CreatorGreater.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public final class CreatorGreater extends Creator {
 	

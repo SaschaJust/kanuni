@@ -24,24 +24,50 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+/**
+ * The Class ArrayTest.
+ */
 public class ArrayTest {
 	
+	/**
+	 * Sets the up before class.
+	 *
+	 * @throws Exception the exception
+	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
 	
+	/**
+	 * Tear down after class.
+	 *
+	 * @throws Exception the exception
+	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
 	
+	/**
+	 * Sets the up.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 	}
 	
+	/**
+	 * Tear down.
+	 *
+	 * @throws Exception the exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 	}
 	
+	/**
+	 * Test contains.
+	 */
 	@Test
 	public final void testContains() {
 		int[] arr = new int[] { 1, 3, 5 };
@@ -130,6 +156,9 @@ public class ArrayTest {
 		assertEquals(condition, check);
 	}
 	
+	/**
+	 * Test empty.
+	 */
 	@Test
 	public final void testEmpty() {
 		int[] arr = new int[] { 1, 3, 5 };
@@ -186,6 +215,9 @@ public class ArrayTest {
 		assertEquals(condition, check);
 	}
 	
+	/**
+	 * Test max size.
+	 */
 	@Test
 	public final void testMaxSize() {
 		int[] arr = new int[] { 1, 3, 5 };
@@ -290,6 +322,9 @@ public class ArrayTest {
 		assertEquals(condition, check);
 	}
 	
+	/**
+	 * Test min size.
+	 */
 	@Test
 	public final void testMinSize() {
 		int[] arr = new int[] { 1, 3, 5 };
@@ -394,6 +429,9 @@ public class ArrayTest {
 		assertEquals(condition, check);
 	}
 	
+	/**
+	 * Test none null.
+	 */
 	@Test
 	public final void testNoneNull() {
 		Object[] arr = new Object[] { new Object(), new Object() };
@@ -472,6 +510,9 @@ public class ArrayTest {
 		assertEquals(condition, check);
 	}
 	
+	/**
+	 * Test not empty.
+	 */
 	@Test
 	public final void testNotEmpty() {
 		int[] arr = new int[] { 1, 3, 5 };
@@ -528,6 +569,9 @@ public class ArrayTest {
 		assertEquals(condition, check);
 	}
 	
+	/**
+	 * Test same size.
+	 */
 	@Test
 	public final void testSameSize() {
 		int[] arr1 = new int[] { 1, 3, 5 };
@@ -668,6 +712,9 @@ public class ArrayTest {
 		
 	}
 	
+	/**
+	 * Test size.
+	 */
 	@Test
 	public final void testSize() {
 		int[] arr = new int[] { 1, 3, 5 };
@@ -740,6 +787,9 @@ public class ArrayTest {
 		assertEquals(condition, check);
 	}
 	
+	/**
+	 * Test valid index.
+	 */
 	@Test
 	public final void testValidIndex() {
 		int[] arr = new int[] { 1, 3, 5 };

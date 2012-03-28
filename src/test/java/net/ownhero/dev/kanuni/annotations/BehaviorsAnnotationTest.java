@@ -9,34 +9,43 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 
 /**
+ * The Class BehaviorsAnnotationTest.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public class BehaviorsAnnotationTest {
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up before class.
+	 *
+	 * @throws Exception the exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down after class.
+	 *
+	 * @throws Exception the exception
 	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up.
+	 *
+	 * @throws Exception the exception
 	 */
 	@Before
 	public void setUp() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down.
+	 *
+	 * @throws Exception the exception
 	 */
 	@After
 	public void tearDown() throws Exception {

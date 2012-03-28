@@ -15,11 +15,17 @@ package net.ownhero.dev.kanuni.conditions;
 import java.lang.reflect.Modifier;
 
 /**
- * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ * The Class ClassCondition.
  * 
+ * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
  */
 public final class ClassCondition {
 	
+	/**
+	 * Gets the caller class name.
+	 * 
+	 * @return the caller class name
+	 */
 	private static final String getCallerClassName() {
 		final Throwable throwable = new Throwable();
 		
@@ -30,13 +36,23 @@ public final class ClassCondition {
 		return className;
 	}
 	
+	/**
+	 * Instantiable.
+	 * 
+	 * @param clazz
+	 *            the clazz
+	 * @param formatString
+	 *            the format string
+	 * @param arguments
+	 *            the arguments
+	 */
 	public static final void instantiable(final Class<?> clazz,
 	                                      final String formatString,
 	                                      final Object... arguments) {
 		final String callerClassName = getCallerClassName();
 		assert clazz != null : Condition.getCallerString()
-		        + String.format("Clazz '%s' is (null) but should be instantiable. Violation: %s",
-		                        clazz.getCanonicalName(), String.format(formatString, arguments));
+		        + String.format("Clazz is (null) but should be instantiable. Violation: %s",
+		                        String.format(formatString, arguments));
 		assert !Modifier.isAbstract(clazz.getModifiers()) : Condition.getCallerString()
 		        + String.format("Clazz '%s' is abstract but should be instantiable. Violation: %s",
 		                        clazz.getCanonicalName(), String.format(formatString, arguments));
@@ -57,6 +73,7 @@ public final class ClassCondition {
 			                        clazz.getCanonicalName(), callerClass.getPackage(),
 			                        String.format(formatString, arguments));
 		} catch (final ClassNotFoundException e) {
+			// silently ignore
 		}
 		
 	}

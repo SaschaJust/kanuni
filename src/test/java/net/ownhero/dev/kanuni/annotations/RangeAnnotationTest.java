@@ -18,8 +18,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
+ * The Class RangeAnnotationTest.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public class RangeAnnotationTest {
 	
@@ -29,33 +30,44 @@ public class RangeAnnotationTest {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up before class.
+	 *
+	 * @throws Exception the exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down after class.
+	 *
+	 * @throws Exception the exception
 	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up.
+	 *
+	 * @throws Exception the exception
 	 */
 	@Before
 	public void setUp() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down.
+	 *
+	 * @throws Exception the exception
 	 */
 	@After
 	public void tearDown() throws Exception {
 	}
 	
+	/**
+	 * Test range char primitive invalid.
+	 */
 	@Test
 	public void testRangeCharPrimitiveInvalid() {
 		AnnotatedForRange afr = new AnnotatedForRange();
@@ -77,6 +89,9 @@ public class RangeAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test range char primitive valid.
+	 */
 	@Test
 	public void testRangeCharPrimitiveValid() {
 		AnnotatedForRange afr = new AnnotatedForRange();
@@ -96,6 +111,9 @@ public class RangeAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test range char wrapper type invalid.
+	 */
 	@Test
 	public void testRangeCharWrapperTypeInvalid() {
 		AnnotatedForRange afr = new AnnotatedForRange();
@@ -117,6 +135,9 @@ public class RangeAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test range char wrapper type valid.
+	 */
 	@Test
 	public void testRangeCharWrapperTypeValid() {
 		AnnotatedForRange afr = new AnnotatedForRange();
@@ -139,6 +160,9 @@ public class RangeAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test range double primitive invalid.
+	 */
 	@Test
 	public void testRangeDoublePrimitiveInvalid() {
 		AnnotatedForRange afr = new AnnotatedForRange();
@@ -158,6 +182,9 @@ public class RangeAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test range double primitive valid.
+	 */
 	@Test
 	public void testRangeDoublePrimitiveValid() {
 		AnnotatedForRange afr = new AnnotatedForRange();
@@ -177,6 +204,9 @@ public class RangeAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test range double wrapper type invalid.
+	 */
 	@Test
 	public void testRangeDoubleWrapperTypeInvalid() {
 		AnnotatedForRange afr = new AnnotatedForRange();
@@ -196,6 +226,9 @@ public class RangeAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test range double wrapper type valid.
+	 */
 	@Test
 	public void testRangeDoubleWrapperTypeValid() {
 		AnnotatedForRange afr = new AnnotatedForRange();
@@ -215,6 +248,9 @@ public class RangeAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test range float primitive invalid.
+	 */
 	@Test
 	public void testRangeFloatPrimitiveInvalid() {
 		AnnotatedForRange afr = new AnnotatedForRange();
@@ -234,6 +270,9 @@ public class RangeAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test range float primitive valid.
+	 */
 	@Test
 	public void testRangeFloatPrimitiveValid() {
 		AnnotatedForRange afr = new AnnotatedForRange();
@@ -253,6 +292,9 @@ public class RangeAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test range float wrapper type invalid.
+	 */
 	@Test
 	public void testRangeFloatWrapperTypeInvalid() {
 		AnnotatedForRange afr = new AnnotatedForRange();
@@ -272,6 +314,9 @@ public class RangeAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test range float wrapper type valid.
+	 */
 	@Test
 	public void testRangeFloatWrapperTypeValid() {
 		AnnotatedForRange afr = new AnnotatedForRange();
@@ -291,6 +336,9 @@ public class RangeAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test range integer primitive invalid.
+	 */
 	@Test
 	public void testRangeIntegerPrimitiveInvalid() {
 		AnnotatedForRange afr = new AnnotatedForRange();
@@ -310,6 +358,9 @@ public class RangeAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test range integer primitive valid.
+	 */
 	@Test
 	public void testRangeIntegerPrimitiveValid() {
 		AnnotatedForRange afr = new AnnotatedForRange();
@@ -329,6 +380,9 @@ public class RangeAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test range integer wrapper type invalid.
+	 */
 	@Test
 	public void testRangeIntegerWrapperTypeInvalid() {
 		AnnotatedForRange afr = new AnnotatedForRange();
@@ -348,6 +402,9 @@ public class RangeAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test range integer wrapper type valid.
+	 */
 	@Test
 	public void testRangeIntegerWrapperTypeValid() {
 		AnnotatedForRange afr = new AnnotatedForRange();
@@ -367,6 +424,9 @@ public class RangeAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test range long primitive invalid.
+	 */
 	@Test
 	public void testRangeLongPrimitiveInvalid() {
 		AnnotatedForRange afr = new AnnotatedForRange();
@@ -386,6 +446,9 @@ public class RangeAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test range long primitive valid.
+	 */
 	@Test
 	public void testRangeLongPrimitiveValid() {
 		AnnotatedForRange afr = new AnnotatedForRange();
@@ -405,6 +468,9 @@ public class RangeAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test range long wrapper type invalid.
+	 */
 	@Test
 	public void testRangeLongWrapperTypeInvalid() {
 		AnnotatedForRange afr = new AnnotatedForRange();
@@ -424,6 +490,9 @@ public class RangeAnnotationTest {
 		}
 	}
 	
+	/**
+	 * Test range long wrapper type valid.
+	 */
 	@Test
 	public void testRangeLongWrapperTypeValid() {
 		AnnotatedForRange afr = new AnnotatedForRange();

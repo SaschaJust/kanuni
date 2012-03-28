@@ -25,16 +25,23 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 
 /**
- * @author Sascha Just <sascha.just@own-hero.net>
+ * The Class CollectionCheck.
  * 
+ * @author Sascha Just <sascha.just@own-hero.net>
  */
 public class CollectionCheck {
 	
 	/**
+	 * Contains.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param object
+	 *            the object
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void contains(final Collection<?> collection,
 	                                  final Object object,
@@ -50,10 +57,16 @@ public class CollectionCheck {
 	}
 	
 	/**
+	 * Contains all.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param innerCollection
+	 *            the inner collection
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void containsAll(final Collection<?> collection,
 	                                     final Collection<?> innerCollection,
@@ -69,10 +82,16 @@ public class CollectionCheck {
 	}
 	
 	/**
+	 * Contains any.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param innerCollection
+	 *            the inner collection
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void containsAny(final Collection<?> collection,
 	                                     final Collection<?> innerCollection,
@@ -88,9 +107,14 @@ public class CollectionCheck {
 	}
 	
 	/**
+	 * Empty.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void empty(final Collection<?> collection,
 	                               final String formatString,
@@ -105,10 +129,16 @@ public class CollectionCheck {
 	}
 	
 	/**
+	 * Max size.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param length
+	 *            the length
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void maxSize(final Collection<?> collection,
 	                                 final int length,
@@ -124,10 +154,16 @@ public class CollectionCheck {
 	}
 	
 	/**
+	 * Min size.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param length
+	 *            the length
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void minSize(final Collection<?> collection,
 	                                 final int length,
@@ -143,9 +179,14 @@ public class CollectionCheck {
 	}
 	
 	/**
+	 * None null.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void noneNull(final Collection<?> collection,
 	                                  final String formatString,
@@ -162,17 +203,29 @@ public class CollectionCheck {
 	}
 	
 	/**
+	 * Not all null.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void notAllNull(final Collection<?> collection,
 	                                    final String formatString,
 	                                    final Object... arguments) {
 		
 		if (KanuniInstrumenter.exceptionsEnabled()) {
-			if ((collection == null) || (CollectionUtils.countMatches(collection, new Predicate() {
+			if (collection == null) {
+				throw new CollectionNotAllNullViolation(Check.getCallerString()
+				        + String.format("The collection itself is (null). Violation: %s",
+				                        String.format(formatString, arguments)));
+			}
+			
+			if ((CollectionUtils.countMatches(collection, new Predicate() {
 				
+				@Override
 				public boolean evaluate(final Object object) {
 					return object == null;
 				}
@@ -185,10 +238,16 @@ public class CollectionCheck {
 	}
 	
 	/**
+	 * Not contains.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param object
+	 *            the object
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void notContains(final Collection<?> collection,
 	                                     final Object object,
@@ -204,10 +263,16 @@ public class CollectionCheck {
 	}
 	
 	/**
+	 * Not contains all.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param innerCollection
+	 *            the inner collection
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void notContainsAll(final Collection<?> collection,
 	                                        final Collection<?> innerCollection,
@@ -223,10 +288,16 @@ public class CollectionCheck {
 	}
 	
 	/**
+	 * Not contains any.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param innerCollection
+	 *            the inner collection
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void notContainsAny(final Collection<?> collection,
 	                                        final Collection<?> innerCollection,
@@ -242,9 +313,14 @@ public class CollectionCheck {
 	}
 	
 	/**
+	 * Not empty.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void notEmpty(final Collection<?> collection,
 	                                  final String formatString,
@@ -258,10 +334,16 @@ public class CollectionCheck {
 	}
 	
 	/**
+	 * Same size.
+	 * 
 	 * @param firstCollection
+	 *            the first collection
 	 * @param secondCollection
+	 *            the second collection
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void sameSize(final Collection<?> firstCollection,
 	                                  final Collection<?> secondCollection,
@@ -278,10 +360,16 @@ public class CollectionCheck {
 	}
 	
 	/**
+	 * Size.
+	 * 
 	 * @param collection
+	 *            the collection
 	 * @param length
+	 *            the length
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void size(final Collection<?> collection,
 	                              final int length,

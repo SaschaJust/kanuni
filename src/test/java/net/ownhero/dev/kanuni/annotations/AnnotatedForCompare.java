@@ -8,14 +8,17 @@ import net.ownhero.dev.kanuni.annotations.meta.Marker;
 import net.ownhero.dev.kanuni.annotations.simple.Negative;
 
 /**
+ * The Class AnnotatedForCompare.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public class AnnotatedForCompare {
 	
 	/**
-	 * @param a
-	 * @param b
+	 * Test equals.
+	 *
+	 * @param a the a
+	 * @param b the b
 	 */
 	public final void testEquals(@Equals final int a,
 	                             @Marker final int b) {
@@ -23,8 +26,10 @@ public class AnnotatedForCompare {
 	}
 	
 	/**
-	 * @param a
-	 * @param b
+	 * Test equals2.
+	 *
+	 * @param a the a
+	 * @param b the b
 	 */
 	public final void testEquals2(@Equals final Double a,
 	                              @Marker final Double b) {
@@ -32,14 +37,18 @@ public class AnnotatedForCompare {
 	}
 	
 	/**
-	 * @param a
+	 * Test negative.
+	 *
+	 * @param a the a
 	 */
 	public final void testNegative(@Negative final Double a) {
 		
 	}
 	
 	/**
-	 * @param a
+	 * Test negative.
+	 *
+	 * @param a the a
 	 */
 	public final void testNegative(@Negative final long a) {
 		

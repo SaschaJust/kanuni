@@ -31,14 +31,19 @@ import org.apache.commons.collections.Predicate;
  */
 public final class Condition {
 	
+	/**
+	 * The Class NoneNullPredicate.
+	 */
 	static final class NoneNullPredicate implements Predicate {
 		
+		/** The string. */
 		String string = "unspecified";
 		
 		/*
 		 * (non-Javadoc)
 		 * @see org.apache.commons.collections.Predicate#evaluate(java.lang.Object)
 		 */
+		@Override
 		public boolean evaluate(final Object object) {
 			if (object == null) {
 				return true;
@@ -74,7 +79,11 @@ public final class Condition {
 		}
 		
 		/**
+		 * Sets the message.
+		 * 
 		 * @param message
+		 *            the message
+		 * @return the none null predicate
 		 */
 		public NoneNullPredicate setMessage(final String message) {
 			this.string = message;
@@ -82,8 +91,12 @@ public final class Condition {
 		}
 		
 		/**
+		 * Sets the message.
+		 * 
 		 * @param formatString
+		 *            the format string
 		 * @param arguments
+		 *            the arguments
 		 * @return the current instance of {@link NoneNullPredicate}.
 		 */
 		public NoneNullPredicate setMessage(final String formatString,
@@ -94,12 +107,18 @@ public final class Condition {
 		
 	}
 	
+	/** The Constant noneNullPredicate. */
 	static final NoneNullPredicate noneNullPredicate = new Condition.NoneNullPredicate();
 	
 	/**
+	 * Check.
+	 * 
 	 * @param condition
+	 *            the condition
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void check(final boolean condition,
 	                               final String formatString,
@@ -110,24 +129,31 @@ public final class Condition {
 	}
 	
 	/**
+	 * Gets the caller string.
+	 * 
 	 * @return a string representing the line of code the condition was triggered from.
 	 */
-	static final String getCallerString() {
-		Throwable throwable = new Throwable();
+	public static final String getCallerString() {
+		final Throwable throwable = new Throwable();
 		
 		throwable.fillInStackTrace();
 		
-		Integer lineNumber = throwable.getStackTrace()[2].getLineNumber();
-		String methodName = throwable.getStackTrace()[2].getMethodName();
-		String className = throwable.getStackTrace()[2].getClassName();
+		final Integer lineNumber = throwable.getStackTrace()[2].getLineNumber();
+		final String methodName = throwable.getStackTrace()[2].getMethodName();
+		final String className = throwable.getStackTrace()[2].getClassName();
 		
 		return "[" + className + "::" + methodName + "#" + lineNumber + "] Assertion violated: ";
 	}
 	
 	/**
+	 * Checks if is boolean.
+	 * 
 	 * @param object
+	 *            the object
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void isBoolean(final Object object,
 	                                   final String formatString,
@@ -138,9 +164,14 @@ public final class Condition {
 	}
 	
 	/**
+	 * Checks if is byte.
+	 * 
 	 * @param object
+	 *            the object
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void isByte(final Object object,
 	                                final String formatString,
@@ -151,9 +182,14 @@ public final class Condition {
 	}
 	
 	/**
+	 * Checks if is character.
+	 * 
 	 * @param object
+	 *            the object
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void isCharacter(final Object object,
 	                                     final String formatString,
@@ -164,9 +200,14 @@ public final class Condition {
 	}
 	
 	/**
+	 * Checks if is double.
+	 * 
 	 * @param object
+	 *            the object
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void isDouble(final Object object,
 	                                  final String formatString,
@@ -177,9 +218,14 @@ public final class Condition {
 	}
 	
 	/**
+	 * Checks if is float.
+	 * 
 	 * @param object
+	 *            the object
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void isFloat(final Object object,
 	                                 final String formatString,
@@ -190,9 +236,14 @@ public final class Condition {
 	}
 	
 	/**
+	 * Checks if is integer.
+	 * 
 	 * @param object
+	 *            the object
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void isInteger(final Object object,
 	                                   final String formatString,
@@ -203,9 +254,14 @@ public final class Condition {
 	}
 	
 	/**
+	 * Checks if is long.
+	 * 
 	 * @param object
+	 *            the object
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void isLong(final Object object,
 	                                final String formatString,
@@ -216,9 +272,14 @@ public final class Condition {
 	}
 	
 	/**
+	 * Checks if is null.
+	 * 
 	 * @param object
+	 *            the object
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void isNull(final Object object,
 	                                final String formatString,
@@ -229,9 +290,14 @@ public final class Condition {
 	}
 	
 	/**
+	 * Checks if is short.
+	 * 
 	 * @param object
+	 *            the object
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void isShort(final Object object,
 	                                 final String formatString,
@@ -242,9 +308,14 @@ public final class Condition {
 	}
 	
 	/**
+	 * Not null.
+	 * 
 	 * @param object
+	 *            the object
 	 * @param formatString
+	 *            the format string
 	 * @param arguments
+	 *            the arguments
 	 */
 	public static final void notNull(final Object object,
 	                                 final String formatString,

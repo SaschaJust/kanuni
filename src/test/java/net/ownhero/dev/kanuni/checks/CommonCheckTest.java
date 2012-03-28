@@ -12,41 +12,50 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
+ * The Class CommonCheckTest.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public class CommonCheckTest {
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up before class.
+	 *
+	 * @throws Exception the exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down after class.
+	 *
+	 * @throws Exception the exception
 	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up.
+	 *
+	 * @throws Exception the exception
 	 */
 	@Before
 	public void setUp() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down.
+	 *
+	 * @throws Exception the exception
 	 */
 	@After
 	public void tearDown() throws Exception {
 	}
 	
 	/**
-	 * 
+	 * Test check negative.
 	 */
 	@Test
 	public void testCheckNegative() {
@@ -54,7 +63,7 @@ public class CommonCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test check positive.
 	 */
 	@Test
 	public void testCheckPositive() {
@@ -62,7 +71,7 @@ public class CommonCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is boolean negative.
 	 */
 	@Test
 	public void testIsBooleanNegative() {
@@ -70,7 +79,7 @@ public class CommonCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is boolean positive.
 	 */
 	@Test
 	public void testIsBooleanPositive() {
@@ -78,7 +87,7 @@ public class CommonCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is byte negative.
 	 */
 	@Test
 	public void testIsByteNegative() {
@@ -86,7 +95,7 @@ public class CommonCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is byte positive.
 	 */
 	@Test
 	public void testIsBytePositive() {
@@ -94,7 +103,7 @@ public class CommonCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is character negative.
 	 */
 	@Test
 	public void testIsCharacterNegative() {
@@ -102,7 +111,7 @@ public class CommonCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is character positive.
 	 */
 	@Test
 	public void testIsCharacterPositive() {
@@ -110,7 +119,7 @@ public class CommonCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is double negative.
 	 */
 	@Test
 	public void testIsDoubleNegative() {
@@ -118,7 +127,7 @@ public class CommonCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is double positive.
 	 */
 	@Test
 	public void testIsDoublePositive() {
@@ -126,7 +135,7 @@ public class CommonCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is float negative.
 	 */
 	@Test
 	public void testIsFloatNegative() {
@@ -134,7 +143,7 @@ public class CommonCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is float positive.
 	 */
 	@Test
 	public void testIsFloatPositive() {
@@ -142,7 +151,7 @@ public class CommonCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is integer negative.
 	 */
 	@Test
 	public void testIsIntegerNegative() {
@@ -150,7 +159,7 @@ public class CommonCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is integer positive.
 	 */
 	@Test
 	public void testIsIntegerPositive() {
@@ -158,7 +167,7 @@ public class CommonCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is long negative.
 	 */
 	@Test
 	public void testIsLongNegative() {
@@ -166,7 +175,7 @@ public class CommonCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is long positive.
 	 */
 	@Test
 	public void testIsLongPositive() {
@@ -174,7 +183,7 @@ public class CommonCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is null negative.
 	 */
 	@Test
 	public void testIsNullNegative() {
@@ -182,7 +191,7 @@ public class CommonCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is null positive.
 	 */
 	@Test
 	public void testIsNullPositive() {
@@ -190,7 +199,7 @@ public class CommonCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is short negative.
 	 */
 	@Test
 	public void testIsShortNegative() {
@@ -198,7 +207,7 @@ public class CommonCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is short positive.
 	 */
 	@Test
 	public void testIsShortPositive() {
@@ -206,7 +215,7 @@ public class CommonCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test not null negative.
 	 */
 	@Test
 	public void testNotNullNegative() {
@@ -214,7 +223,7 @@ public class CommonCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test not null positive.
 	 */
 	@Test
 	public void testNotNullPositive() {

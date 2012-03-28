@@ -20,8 +20,9 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 import org.apache.commons.lang.StringEscapeUtils;
 
 /**
+ * The Class CreatorContainer.
+ *
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
- * 
  */
 public final class CreatorContainer extends Creator {
 	

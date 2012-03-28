@@ -13,8 +13,9 @@ import net.ownhero.dev.kanuni.annotations.factories.CreatorStringMatches;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 
 /**
+ * The Interface Matches.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
@@ -22,7 +23,17 @@ import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 @Target (value = { ElementType.PARAMETER })
 public @interface Matches {
 	
+	/**
+	 * Pattern.
+	 *
+	 * @return the string
+	 */
 	String pattern();
 	
+	/**
+	 * Value.
+	 *
+	 * @return the string
+	 */
 	String value() default "";
 }

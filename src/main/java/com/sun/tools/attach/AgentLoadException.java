@@ -22,6 +22,7 @@ package com.sun.tools.attach;
  */
 public final class AgentLoadException extends Exception {
 	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 688047862952114238L;
 	
 	/**
@@ -32,6 +33,8 @@ public final class AgentLoadException extends Exception {
 	
 	/**
 	 * Constructs an <code>AgentLoadException</code> with the specified detail message.
+	 *
+	 * @param s the s
 	 */
 	public AgentLoadException(String s) {
 		super(s);

@@ -13,8 +13,9 @@ import net.ownhero.dev.kanuni.annotations.factories.CreatorRange;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 
 /**
+ * The Interface RangeFloat.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
@@ -22,9 +23,24 @@ import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 @Target (value = { ElementType.PARAMETER })
 public @interface RangeFloat {
 	
+	/**
+	 * Max.
+	 *
+	 * @return the float
+	 */
 	float max();
 	
+	/**
+	 * Min.
+	 *
+	 * @return the float
+	 */
 	float min();
 	
+	/**
+	 * Value.
+	 *
+	 * @return the string
+	 */
 	String value() default "";
 }

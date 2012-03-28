@@ -13,8 +13,9 @@ import net.ownhero.dev.kanuni.annotations.factories.CreatorContainsValue;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 
 /**
+ * The Interface ContainsValue.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
@@ -22,7 +23,17 @@ import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 @Target (value = { ElementType.PARAMETER })
 public @interface ContainsValue {
 	
+	/**
+	 * Marker.
+	 *
+	 * @return the int[]
+	 */
 	int[] marker();
 	
+	/**
+	 * Value.
+	 *
+	 * @return the string
+	 */
 	String value() default "";
 }

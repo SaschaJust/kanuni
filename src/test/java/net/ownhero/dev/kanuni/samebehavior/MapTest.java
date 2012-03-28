@@ -12,41 +12,51 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
+ * The Class MapTest.
+ *
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
- * 
  */
 public class MapTest {
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up before class.
+	 *
+	 * @throws Exception the exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down after class.
+	 *
+	 * @throws Exception the exception
 	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up.
+	 *
+	 * @throws Exception the exception
 	 */
 	@Before
 	public void setUp() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down.
+	 *
+	 * @throws Exception the exception
 	 */
 	@After
 	public void tearDown() throws Exception {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.MapCondition#containsKey(java.util.Map, java.lang.Object, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -56,7 +66,8 @@ public class MapTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.MapCondition#containsValue(java.util.Map, java.lang.Object, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -66,7 +77,8 @@ public class MapTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.MapCondition#maxSize(java.util.Map, int, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -76,7 +88,8 @@ public class MapTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.MapCondition#minSize(java.util.Map, int, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -86,7 +99,8 @@ public class MapTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.MapCondition#noneNull(java.util.Map, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -96,7 +110,8 @@ public class MapTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.MapCondition#sameSize(java.util.Map, java.util.Map, java.lang.String, java.lang.Object[])}
 	 * .
 	 */

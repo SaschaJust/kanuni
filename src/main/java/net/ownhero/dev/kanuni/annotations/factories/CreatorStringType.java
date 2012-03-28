@@ -33,8 +33,9 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 import org.apache.commons.lang.StringEscapeUtils;
 
 /**
+ * The Class CreatorStringType.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public final class CreatorStringType extends Creator {
 	

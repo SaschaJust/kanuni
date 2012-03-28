@@ -25,8 +25,10 @@ package com.sun.tools.attach;
  */
 public final class AgentInitializationException extends Exception {
 	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -1508756333332806353L;
 	
+	/** The return value. */
 	private final int         returnValue;
 	
 	/**
@@ -64,6 +66,8 @@ public final class AgentInitializationException extends Exception {
 	/**
 	 * If the exception was created with the return value from the agent <code>Agent_OnAttach</code> function then this
 	 * returns that value, otherwise returns <code>0</code>. </p>
+	 *
+	 * @return the int
 	 */
 	public int returnValue() {
 		return returnValue;

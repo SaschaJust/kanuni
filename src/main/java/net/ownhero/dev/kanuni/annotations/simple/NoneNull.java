@@ -12,6 +12,9 @@ import java.lang.annotation.Target;
 import net.ownhero.dev.kanuni.annotations.factories.CreatorNoneNull;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 
+/**
+ * The Interface NoneNull.
+ */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
 @FactoryClass (CreatorNoneNull.class)
@@ -19,6 +22,8 @@ import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 public @interface NoneNull {
 	
 	/**
+	 * Value.
+	 *
 	 * @return holds a string reasoning about the assertion.
 	 */
 	String value() default "";

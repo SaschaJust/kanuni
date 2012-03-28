@@ -29,14 +29,17 @@ import com.sun.tools.attach.VirtualMachineDescriptor;
 import com.sun.tools.attach.spi.AttachProvider;
 
 /**
+ * The Class KanuniAgentLoader.
+ *
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
- * 
  */
 public class KanuniAgentLoader {
 	
+	/** The Constant paths. */
 	private static final String[]       paths           = new String[] { "net/ownhero/dev/kanuni", "com/sun/tools",
 	        "sun/tools"                                };
 	
+	/** The Constant ATTACH_PROVIDER. */
 	private static final AttachProvider ATTACH_PROVIDER = new AttachProvider() {
 		                                                    
 		                                                    @Override
@@ -61,9 +64,11 @@ public class KanuniAgentLoader {
 	                                                    };
 	
 	/**
-	 * @param source
-	 * @param target
-	 * @throws IOException
+	 * Adds the.
+	 *
+	 * @param source the source
+	 * @param target the target
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	private static void add(final File source,
 	                        final JarOutputStream target) throws IOException {
@@ -112,11 +117,13 @@ public class KanuniAgentLoader {
 	}
 	
 	/**
-	 * @param file
-	 * @param baseDirectory
-	 * @return
-	 * @throws FileNotFoundException
-	 * @throws IOException
+	 * Append agent jar from class files.
+	 *
+	 * @param agentJarFile the agent jar file
+	 * @param file the file
+	 * @param baseDirectory the base directory
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	private static void appendAgentJarFromClassFiles(final JarOutputStream agentJarFile,
 	                                                 final File file,
@@ -126,11 +133,14 @@ public class KanuniAgentLoader {
 	}
 	
 	/**
-	 * @param file
-	 * @param jarFile
-	 * @return
-	 * @throws FileNotFoundException
-	 * @throws IOException
+	 * Append agent jar from jar.
+	 *
+	 * @param agentJarFile the agent jar file
+	 * @param file the file
+	 * @param packagePath the package path
+	 * @param jarFile the jar file
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	private static void appendAgentJarFromJar(final JarOutputStream agentJarFile,
 	                                          final File file,
@@ -162,7 +172,9 @@ public class KanuniAgentLoader {
 	}
 	
 	/**
-	 * @return
+	 * Creates the manifest.
+	 *
+	 * @return the manifest
 	 */
 	private static Manifest createManifest() {
 		Manifest manifest = new Manifest();
@@ -174,10 +186,12 @@ public class KanuniAgentLoader {
 	}
 	
 	/**
-	 * @return
-	 * @throws FileNotFoundException
-	 * @throws IOException
-	 * @throws ClassNotFoundException
+	 * Gets the agent jar.
+	 *
+	 * @return the agent jar
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws ClassNotFoundException the class not found exception
 	 */
 	private static String getAgentJar() throws FileNotFoundException, IOException, ClassNotFoundException {
 		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
@@ -246,8 +260,10 @@ public class KanuniAgentLoader {
 	}
 	
 	/**
-	 * @param pid
-	 * @return
+	 * Gets the virtual machine implementation from embedded ones.
+	 *
+	 * @param pid the pid
+	 * @return the virtual machine implementation from embedded ones
 	 */
 	private static VirtualMachine getVirtualMachineImplementationFromEmbeddedOnes(final String pid) {
 		try {
@@ -268,7 +284,7 @@ public class KanuniAgentLoader {
 	}
 	
 	/**
-	 * 
+	 * Load agent.
 	 */
 	public static void loadAgent() {
 		System.err.println("Booting up kanuni...");

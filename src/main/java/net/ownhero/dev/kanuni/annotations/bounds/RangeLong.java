@@ -13,8 +13,9 @@ import net.ownhero.dev.kanuni.annotations.factories.CreatorRange;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 
 /**
+ * The Interface RangeLong.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
@@ -22,9 +23,24 @@ import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 @Target (value = { ElementType.PARAMETER })
 public @interface RangeLong {
 	
+	/**
+	 * Max.
+	 *
+	 * @return the long
+	 */
 	long max();
 	
+	/**
+	 * Min.
+	 *
+	 * @return the long
+	 */
 	long min();
 	
+	/**
+	 * Value.
+	 *
+	 * @return the string
+	 */
 	String value() default "";
 }

@@ -32,8 +32,9 @@ import net.ownhero.dev.kanuni.utils.KanuniUtils;
 import net.ownhero.dev.kanuni.utils.KanuniUtils.NumberType;
 
 /**
+ * The Class StringCheck.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public class StringCheck {
 	
@@ -192,14 +193,11 @@ public class StringCheck {
 	}
 	
 	/**
-	 * Checks a given string to be a representation of a float
-	 * 
-	 * @param string
-	 *            the string under suspect
-	 * @param formatString
-	 *            the message/formatString describing the violation
-	 * @param arguments
-	 *            optional arguments to the formatString
+	 * Checks a given string to be a representation of a float.
+	 *
+	 * @param string the string under suspect
+	 * @param formatString the message/formatString describing the violation
+	 * @param arguments optional arguments to the formatString
 	 */
 	public static final void isFloat(final String string,
 	                                 final String formatString,
@@ -503,9 +501,11 @@ public class StringCheck {
 	}
 	
 	/**
-	 * @param strings
-	 * @param formatString
-	 * @param arguments
+	 * Pairwise same length.
+	 *
+	 * @param strings the strings
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 * @return true if all strings in the array are of same length (pairwise compair).
 	 */
 	private static final boolean pairwiseSameLength(final String[] strings,

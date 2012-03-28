@@ -20,8 +20,9 @@ import javassist.bytecode.MethodInfo;
 import javassist.bytecode.annotation.Annotation;
 
 /**
+ * The Class KanuniClassloader.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public final class KanuniClassloader extends ClassLoader {
 	
@@ -31,10 +32,13 @@ public final class KanuniClassloader extends ClassLoader {
 	 */
 	private static ClassPool             classPool = ClassPool.getDefault();
 	
+	/** The cache. */
 	private static Map<String, Class<?>> cache     = new HashMap<String, Class<?>>();
 	
 	/**
-	 * @param annotation
+	 * Gets the declared member names.
+	 *
+	 * @param annotation the annotation
 	 * @return returns a set with all fields of the annotation
 	 */
 	public static Set<String> getDeclaredMemberNames(final Annotation annotation) {
@@ -53,6 +57,7 @@ public final class KanuniClassloader extends ClassLoader {
 		}
 	}
 	
+	/** The instrumenter. */
 	private final KanuniInstrumenter instrumenter = new KanuniInstrumenter();
 	
 	static {
@@ -65,8 +70,10 @@ public final class KanuniClassloader extends ClassLoader {
 	}
 	
 	/**
-	 * @param annotation
-	 * @param memberName
+	 * Gets the member value.
+	 *
+	 * @param annotation the annotation
+	 * @param memberName the member name
 	 * @return the actual value of a member of the annotation
 	 */
 	public static Object getMemberValue(final Annotation annotation,
@@ -103,11 +110,10 @@ public final class KanuniClassloader extends ClassLoader {
 	}
 	
 	/**
-	 * The constructor called when bootstrapping the VM and having the system bootloader set to
+	 * The constructor called when bootstrapping the VM and having the system bootloader set to.
+	 *
+	 * @param arg0 the parent class loader
 	 * {@link KanuniClassloader}.
-	 * 
-	 * @param arg0
-	 *            the parent class loader
 	 */
 	public KanuniClassloader(final ClassLoader arg0) {
 		super(arg0);

@@ -59,5 +59,10 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 @Target (value = { ElementType.CONSTRUCTOR, ElementType.METHOD })
 public @interface NoneNull {
 	
+	/**
+	 * Value.
+	 *
+	 * @return the string
+	 */
 	String value() default "";
 }

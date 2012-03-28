@@ -10,29 +10,40 @@ import net.ownhero.dev.kanuni.utils.KanuniUtils;
 import net.ownhero.dev.kanuni.utils.KanuniUtils.NumberType;
 
 /**
- * Class that holds all condition checks on strings. Methods will return true on
- * empty strings. See the method descriptions for details.
+ * Class that holds all condition checks on strings. Methods will return true on empty strings. See the method
+ * descriptions for details.
  * 
- * These conditions are used by the annotations in the
- * net.ownhero.dev.kanuni.annotations.string package.
+ * These conditions are used by the annotations in the net.ownhero.dev.kanuni.annotations.string package.
  * 
  * @author Sascha Just <sascha.just@own-hero.net>
  * 
  */
 public final class StringCondition {
 	
+	/** The xdigit. */
 	private static Pattern xdigit    = Pattern.compile("^\\p{XDigit}+$");
+	
+	/** The ascii. */
 	private static Pattern ascii     = Pattern.compile("^\\p{ASCII}+$");
+	
+	/** The uppercase. */
 	private static Pattern uppercase = Pattern.compile("^\\p{Upper}+$");
+	
+	/** The lowercase. */
 	private static Pattern lowercase = Pattern.compile("^\\p{Lower}+$");
+	
+	/** The digit. */
 	private static Pattern digit     = Pattern.compile("^\\p{Digit}+$");
+	
+	/** The alpha. */
 	private static Pattern alpha     = Pattern.compile("^\\p{Alpha}+$");
+	
+	/** The alphanum. */
 	private static Pattern alphanum  = Pattern.compile("^\\p{Alnum}+$");
 	
 	/**
-	 * Checks a given string to consist only of alphabetic characters. If the
-	 * string is null, the check is ignored. If the string is empty the test
-	 * passes as well.
+	 * Checks a given string to consist only of alphabetic characters. If the string is null, the check is ignored. If
+	 * the string is empty the test passes as well.
 	 * 
 	 * @param string
 	 *            the string under suspect
@@ -53,9 +64,8 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a given string to consist only of alphanumeric characters. If the
-	 * string is null, the check is ignored. If the string is empty the test
-	 * passes as well.
+	 * Checks a given string to consist only of alphanumeric characters. If the string is null, the check is ignored. If
+	 * the string is empty the test passes as well.
 	 * 
 	 * @param string
 	 *            the string under suspect
@@ -76,9 +86,8 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a given string to consist only of ASCII characters. If the string
-	 * is null, the check is ignored. If the string is empty the test passes as
-	 * well.
+	 * Checks a given string to consist only of ASCII characters. If the string is null, the check is ignored. If the
+	 * string is empty the test passes as well.
 	 * 
 	 * @param string
 	 *            the string under suspect
@@ -99,26 +108,24 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks if the given pattern can be compiled using
-	 * {@link Pattern#compile(String)}.
+	 * Checks if the given pattern can be compiled using.
 	 * 
 	 * @param pattern
 	 *            the pattern under suspect
-	 * @return true if the compilation was successful
+	 * @return true if the compilation was successful {@link Pattern#compile(String)}.
 	 */
 	private static final boolean compilablePattern(final String pattern) {
 		try {
 			Pattern.compile(pattern);
-		} catch (PatternSyntaxException e) {
+		} catch (final PatternSyntaxException e) {
 			return false;
 		}
 		return true;
 	}
 	
 	/**
-	 * Checks a given string to consist only of digit characters. If the string
-	 * is null, the check is ignored. If the string is empty the test passes as
-	 * well.
+	 * Checks a given string to consist only of digit characters. If the string is null, the check is ignored. If the
+	 * string is empty the test passes as well.
 	 * 
 	 * @param string
 	 *            the string under suspect
@@ -138,8 +145,7 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a given string to be empty. If the string is null, the check is
-	 * ignored.
+	 * Checks a given string to be empty. If the string is null, the check is ignored.
 	 * 
 	 * @param string
 	 *            the string under suspect
@@ -161,13 +167,12 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks two given strings to be equal. Does not fail if both strings are
-	 * null.
+	 * Checks two given strings to be equal. Does not fail if both strings are null.
 	 * 
 	 * @param first
 	 *            the string under suspect
-	 * @param string
-	 *            the string to be compared to
+	 * @param second
+	 *            the second
 	 * @param formatString
 	 *            the message/formatString describing the violation
 	 * @param arguments
@@ -186,9 +191,8 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a given string to consist only of hexadecimal characters. If the
-	 * string is null, the check is ignored. If the string is empty the test
-	 * passes as well.
+	 * Checks a given string to consist only of hexadecimal characters. If the string is null, the check is ignored. If
+	 * the string is empty the test passes as well.
 	 * 
 	 * @param string
 	 *            the string under suspect
@@ -208,9 +212,8 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a given string to be a representation of a byte. If the string is
-	 * null, the check is ignored. If the string is empty the test passes as
-	 * well.
+	 * Checks a given string to be a representation of a byte. If the string is null, the check is ignored. If the
+	 * string is empty the test passes as well.
 	 * 
 	 * @param string
 	 *            the string under suspect
@@ -230,9 +233,8 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a given string to be a representation of a double. If the string
-	 * is null, the check is ignored. If the string is empty the test passes as
-	 * well.
+	 * Checks a given string to be a representation of a double. If the string is null, the check is ignored. If the
+	 * string is empty the test passes as well.
 	 * 
 	 * @param string
 	 *            the string under suspect
@@ -253,9 +255,8 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a given string to be a representation of a float. If the string is
-	 * null, the check is ignored. If the string is empty the test passes as
-	 * well.
+	 * Checks a given string to be a representation of a float. If the string is null, the check is ignored. If the
+	 * string is empty the test passes as well.
 	 * 
 	 * @param string
 	 *            the string under suspect
@@ -275,9 +276,8 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a given string to be a representation of an integer. If the string
-	 * is null, the check is ignored. If the string is empty the test passes as
-	 * well.
+	 * Checks a given string to be a representation of an integer. If the string is null, the check is ignored. If the
+	 * string is empty the test passes as well.
 	 * 
 	 * @param string
 	 *            the string under suspect
@@ -298,9 +298,8 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a given string to be a representation of a long. If the string is
-	 * null, the check is ignored. If the string is empty the test passes as
-	 * well.
+	 * Checks a given string to be a representation of a long. If the string is null, the check is ignored. If the
+	 * string is empty the test passes as well.
 	 * 
 	 * @param string
 	 *            the string under suspect
@@ -320,9 +319,8 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a given string to be a representation of a short. If the string is
-	 * null, the check is ignored. If the string is empty the test passes as
-	 * well.
+	 * Checks a given string to be a representation of a short. If the string is null, the check is ignored. If the
+	 * string is empty the test passes as well.
 	 * 
 	 * @param string
 	 *            the string under suspect
@@ -342,8 +340,8 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a given string to have exactly <code>length</code> characters. If
-	 * the string is null, the check is ignored.
+	 * Checks a given string to have exactly <code>length</code> characters. If the string is null, the check is
+	 * ignored.
 	 * 
 	 * @param string
 	 *            the string under suspect
@@ -371,9 +369,8 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a given string to consist only of lowercase characters. If the
-	 * string is null, the check is ignored. If the string is empty the test
-	 * passes as well.
+	 * Checks a given string to consist only of lowercase characters. If the string is null, the check is ignored. If
+	 * the string is empty the test passes as well.
 	 * 
 	 * @param string
 	 *            the string under suspect
@@ -394,8 +391,7 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a given string to match a given java regular expression. If the
-	 * string is null, the check is ignored.
+	 * Checks a given string to match a given java regular expression. If the string is null, the check is ignored.
 	 * 
 	 * @param string
 	 *            the string under suspect
@@ -424,8 +420,7 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a given string to have at most <code>max</code> characters. If the
-	 * string is null, the check is ignored.
+	 * Checks a given string to have at most <code>max</code> characters. If the string is null, the check is ignored.
 	 * 
 	 * @param string
 	 *            the string under suspect
@@ -456,8 +451,7 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a given string to have at least <code>min</code> characters. If
-	 * the string is null, the check is ignored.
+	 * Checks a given string to have at least <code>min</code> characters. If the string is null, the check is ignored.
 	 * 
 	 * @param string
 	 *            the string under suspect
@@ -488,8 +482,7 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a given string to be not empty. If the string is null, the check
-	 * is ignored.
+	 * Checks a given string to be not empty. If the string is null, the check is ignored.
 	 * 
 	 * @param string
 	 *            the string under suspect
@@ -510,8 +503,7 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a given string to NOT match a given java regular expression. If
-	 * the string is null, the check is ignored.
+	 * Checks a given string to NOT match a given java regular expression. If the string is null, the check is ignored.
 	 * 
 	 * @param string
 	 *            the string under suspect
@@ -540,6 +532,8 @@ public final class StringCondition {
 	}
 	
 	/**
+	 * Pairwise same length.
+	 * 
 	 * @param strings
 	 *            array containing all strings to be checked for same length
 	 * @param formatString
@@ -547,8 +541,7 @@ public final class StringCondition {
 	 * @param arguments
 	 *            optional arguments to the formatString
 	 * @return true if all strings in the given array pass the
-	 *         {@link StringCondition#sameLength(String, String, String, Object...)}
-	 *         test (pairwise).
+	 *         {@link StringCondition#sameLength(String, String, String, Object...)} test (pairwise).
 	 */
 	private static final boolean pairwiseSameLength(final String[] strings,
 	                                                final String formatString,
@@ -560,8 +553,7 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks two given strings to have equal length. If both strings are null,
-	 * the test passes as well.
+	 * Checks two given strings to have equal length. If both strings are null, the test passes as well.
 	 * 
 	 * @param first
 	 *            the first string
@@ -584,7 +576,8 @@ public final class StringCondition {
 		// +
 		// String.format("Null (second string) can not hold any length compare constraints. Violation: %s",
 		// String.format(formatString, arguments));
-		assert ((first == null) && (second == null)) || (first.length() == second.length()) : Condition.getCallerString()
+		assert ((first == null) && (second == null))
+		        || ((first != null) && (second != null) && (first.length() == second.length())) : Condition.getCallerString()
 		        + String.format("Strings do not have equal length (%s vs. %s): `%s` vs `%s`. Violation: %s",
 		                        first == null
 		                                     ? "null"
@@ -595,8 +588,7 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a string array to only contain strings of equal length. The test
-	 * passes if the array is null.
+	 * Checks a string array to only contain strings of equal length. The test passes if the array is null.
 	 * 
 	 * @param strings
 	 *            the string array under suspect
@@ -621,8 +613,8 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a given string to contain a given substring. If the string is
-	 * null, the is ignored. If the string is empty, the check passes as well.
+	 * Checks a given string to contain a given substring. If the string is null, the is ignored. If the string is
+	 * empty, the check passes as well.
 	 * 
 	 * @param string
 	 *            the string under suspect
@@ -646,8 +638,8 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a given string to be trimmed. If the string is null, the check is
-	 * ignored. If the string is empty the test passes as well.
+	 * Checks a given string to be trimmed. If the string is null, the check is ignored. If the string is empty the test
+	 * passes as well.
 	 * 
 	 * @param string
 	 *            the string under suspect
@@ -669,9 +661,8 @@ public final class StringCondition {
 	}
 	
 	/**
-	 * Checks a given string to consist only of uppercase characters. If the
-	 * string is null, the check is ignored. If the string is empty the test
-	 * passes as well.
+	 * Checks a given string to consist only of uppercase characters. If the string is null, the check is ignored. If
+	 * the string is empty the test passes as well.
 	 * 
 	 * @param string
 	 *            the string under suspect

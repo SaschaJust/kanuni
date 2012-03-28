@@ -13,7 +13,8 @@ import net.ownhero.dev.kanuni.annotations.factories.CreatorStringMatches;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 
 /**
- * 
+ * The Interface Substring.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
  */
 
@@ -23,7 +24,17 @@ import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 @Target (value = { ElementType.PARAMETER })
 public @interface Substring {
 	
+	/**
+	 * Substring.
+	 *
+	 * @return the string
+	 */
 	String substring();
 	
+	/**
+	 * Value.
+	 *
+	 * @return the string
+	 */
 	String value() default "";
 }

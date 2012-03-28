@@ -41,23 +41,24 @@ import com.sun.tools.attach.spi.AttachProvider;
  */
 public final class VirtualMachineDescriptor {
 	
+	/** The provider. */
 	private AttachProvider provider;
+	
+	/** The id. */
 	private String         id;
+	
+	/** The display name. */
 	private String         displayName;
 	
+	/** The hash. */
 	private volatile int   hash;       // 0 => not computed
 	                                    
 	/**
 	 * Creates a virtual machine descriptor from the given components.
-	 * 
-	 * @param provider
-	 *            The AttachProvider to attach to the Java virtual machine.
-	 * @param id
-	 *            The virtual machine identifier.
-	 * @param displayName
-	 *            The display name.
-	 * @throws NullPointerException
-	 *             If any of the arguments are <code>null</code>
+	 *
+	 * @param provider The AttachProvider to attach to the Java virtual machine.
+	 * @param id The virtual machine identifier.
+	 * @param displayName The display name.
 	 */
 	public VirtualMachineDescriptor(AttachProvider provider, String id, String displayName) {
 		if (provider == null) {
@@ -91,13 +92,9 @@ public final class VirtualMachineDescriptor {
 	 * <p>
 	 * That is, it creates a virtual machine descriptor such that the <i>display name</i> is the same as the virtual
 	 * machine identifier.
-	 * 
-	 * @param provider
-	 *            The AttachProvider to attach to the Java virtual machine.
-	 * @param id
-	 *            The virtual machine identifier.
-	 * @throws NullPointerException
-	 *             If <tt>provider</tt> or <tt>id</tt> is <tt>null</tt>.
+	 *
+	 * @param provider The AttachProvider to attach to the Java virtual machine.
+	 * @param id The virtual machine identifier.
 	 */
 	public VirtualMachineDescriptor(AttachProvider provider, String id) {
 		this(provider, id, id);
@@ -151,17 +148,16 @@ public final class VirtualMachineDescriptor {
 	 * <p>
 	 * If the given object is not a VirtualMachineDescriptor then this method returns <tt>false</tt>. For two
 	 * VirtualMachineDescriptors to be considered equal requires that they both reference the same provider, and their
+	 *
+	 * @param ob The object to which this object is to be compared
+	 * @return <tt>true</tt> if, and only if, the given object is a VirtualMachineDescriptor that is equal to this
+	 * VirtualMachineDescriptor.
 	 * {@link #id() identifiers} are equal.
 	 * </p>
 	 * <p/>
 	 * <p>
 	 * This method satisfies the general contract of the {@link Object#equals(Object) Object.equals} method.
 	 * </p>
-	 * 
-	 * @param ob
-	 *            The object to which this object is to be compared
-	 * @return <tt>true</tt> if, and only if, the given object is a VirtualMachineDescriptor that is equal to this
-	 *         VirtualMachineDescriptor.
 	 */
 	public boolean equals(Object ob) {
 		if (ob == this) return true;
@@ -178,6 +174,8 @@ public final class VirtualMachineDescriptor {
 	
 	/**
 	 * Returns the string representation of the <code>VirtualMachineDescriptor</code>.
+	 *
+	 * @return the string
 	 */
 	public String toString() {
 		String s = provider.toString() + ": " + id;

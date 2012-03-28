@@ -111,5 +111,10 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 @Target (value = { ElementType.PARAMETER })
 public @interface ByteString {
 	
+	/**
+	 * Value.
+	 *
+	 * @return the string
+	 */
 	String value() default "";
 }

@@ -12,41 +12,50 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
+ * The Class ArrayConditionTest.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public class ArrayConditionTest {
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up before class.
+	 *
+	 * @throws Exception the exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down after class.
+	 *
+	 * @throws Exception the exception
 	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up.
+	 *
+	 * @throws Exception the exception
 	 */
 	@Before
 	public void setUp() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down.
+	 *
+	 * @throws Exception the exception
 	 */
 	@After
 	public void tearDown() throws Exception {
 	}
 	
 	/**
-	 * 
+	 * Test contains negative.
 	 */
 	@Test
 	public void testContainsNegative() {
@@ -54,7 +63,7 @@ public class ArrayConditionTest {
 	}
 	
 	/**
-	 * 
+	 * Test contains positive.
 	 */
 	@Test
 	public void testContainsPositive() {
@@ -62,7 +71,7 @@ public class ArrayConditionTest {
 	}
 	
 	/**
-	 * 
+	 * Test empty negative.
 	 */
 	@Test
 	public void testEmptyNegative() {
@@ -70,7 +79,7 @@ public class ArrayConditionTest {
 	}
 	
 	/**
-	 * 
+	 * Test empty positive.
 	 */
 	@Test
 	public void testEmptyPositive() {
@@ -78,7 +87,7 @@ public class ArrayConditionTest {
 	}
 	
 	/**
-	 * 
+	 * Test max size negative.
 	 */
 	@Test
 	public void testMaxSizeNegative() {
@@ -86,7 +95,7 @@ public class ArrayConditionTest {
 	}
 	
 	/**
-	 * 
+	 * Test max size positive.
 	 */
 	@Test
 	public void testMaxSizePositive() {
@@ -94,7 +103,7 @@ public class ArrayConditionTest {
 	}
 	
 	/**
-	 * 
+	 * Test min size negative.
 	 */
 	@Test
 	public void testMinSizeNegative() {
@@ -102,7 +111,7 @@ public class ArrayConditionTest {
 	}
 	
 	/**
-	 * 
+	 * Test min size positive.
 	 */
 	@Test
 	public void testMinSizePositive() {
@@ -110,7 +119,7 @@ public class ArrayConditionTest {
 	}
 	
 	/**
-	 * 
+	 * Test none null negative.
 	 */
 	@Test
 	public void testNoneNullNegative() {
@@ -118,7 +127,7 @@ public class ArrayConditionTest {
 	}
 	
 	/**
-	 * 
+	 * Test none null positive.
 	 */
 	@Test
 	public void testNoneNullPositive() {
@@ -126,7 +135,7 @@ public class ArrayConditionTest {
 	}
 	
 	/**
-	 * 
+	 * Test not empty negative.
 	 */
 	@Test
 	public void testNotEmptyNegative() {
@@ -134,7 +143,7 @@ public class ArrayConditionTest {
 	}
 	
 	/**
-	 * 
+	 * Test not empty positive.
 	 */
 	@Test
 	public void testNotEmptyPositive() {
@@ -142,7 +151,7 @@ public class ArrayConditionTest {
 	}
 	
 	/**
-	 * 
+	 * Test same size negative.
 	 */
 	@Test
 	public void testSameSizeNegative() {
@@ -150,7 +159,7 @@ public class ArrayConditionTest {
 	}
 	
 	/**
-	 * 
+	 * Test same size positive.
 	 */
 	@Test
 	public void testSameSizePositive() {
@@ -158,7 +167,7 @@ public class ArrayConditionTest {
 	}
 	
 	/**
-	 * 
+	 * Test size negative.
 	 */
 	@Test
 	public void testSizeNegative() {
@@ -166,7 +175,7 @@ public class ArrayConditionTest {
 	}
 	
 	/**
-	 * 
+	 * Test size positive.
 	 */
 	@Test
 	public void testSizePositive() {
@@ -174,7 +183,7 @@ public class ArrayConditionTest {
 	}
 	
 	/**
-	 * 
+	 * Test valid index negative.
 	 */
 	@Test
 	public void testValidIndexNegative() {
@@ -182,7 +191,7 @@ public class ArrayConditionTest {
 	}
 	
 	/**
-	 * 
+	 * Test valid index positive.
 	 */
 	@Test
 	public void testValidIndexPositive() {

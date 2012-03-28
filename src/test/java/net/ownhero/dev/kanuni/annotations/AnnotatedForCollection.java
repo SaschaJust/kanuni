@@ -32,41 +32,91 @@ import net.ownhero.dev.kanuni.annotations.simple.NotEmpty;
 import net.ownhero.dev.kanuni.annotations.simple.Size;
 import net.ownhero.dev.kanuni.annotations.simple.ValidIndex;
 
+/**
+ * The Class AnnotatedForCollection.
+ */
 public class AnnotatedForCollection {
 	
+	/**
+	 * Test collection contains element.
+	 *
+	 * @param array the array
+	 * @param element the element
+	 */
 	public final void testCollectionContainsElement(@Contains final LinkedList<Integer> array,
 	                                                @Marker final int element) {
 		
 	}
 	
+	/**
+	 * Test collection contains element2.
+	 *
+	 * @param array the array
+	 * @param element the element
+	 */
 	public final void testCollectionContainsElement2(@Contains (marker = 2) final Set<Integer> array,
 	                                                 @Marker (2) final int element) {
 	}
 	
+	/**
+	 * Test collection index range.
+	 *
+	 * @param array the array
+	 */
 	public final void testCollectionIndexRange(@ValidIndex (index = 2) final HashSet<Float> array) {
 		
 	}
 	
+	/**
+	 * Test collection is empty.
+	 *
+	 * @param array the array
+	 */
 	public final void testCollectionIsEmpty(@Empty final Deque<Object> array) {
 		
 	}
 	
+	/**
+	 * Test collection max size.
+	 *
+	 * @param array the array
+	 */
 	public final void testCollectionMaxSize(@MaxSize (max = 4) final List<Long> array) {
 		
 	}
 	
+	/**
+	 * Test collection min size.
+	 *
+	 * @param array the array
+	 */
 	public final void testCollectionMinSize(@MinSize (min = 3) final ArrayList<Integer> array) {
 		
 	}
 	
+	/**
+	 * Test collection none null.
+	 *
+	 * @param array the array
+	 */
 	public final void testCollectionNoneNull(@NoneNull final LinkedList<Integer> array) {
 		
 	}
 	
+	/**
+	 * Test collection not empty.
+	 *
+	 * @param array the array
+	 */
 	public final void testCollectionNotEmpty(@NotEmpty final Collection<Character> array) {
 		
 	}
 	
+	/**
+	 * Test collection size.
+	 *
+	 * @param array the array
+	 */
 	public final void testCollectionSize(@Size (size = 3) final Queue<Byte> array) {
 		
 	}

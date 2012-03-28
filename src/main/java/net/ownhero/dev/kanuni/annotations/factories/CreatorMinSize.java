@@ -17,8 +17,9 @@ import net.ownhero.dev.kanuni.exceptions.annotations.MalformedAnnotationExceptio
 import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
 /**
+ * The Class CreatorMinSize.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public class CreatorMinSize extends Creator {
 	

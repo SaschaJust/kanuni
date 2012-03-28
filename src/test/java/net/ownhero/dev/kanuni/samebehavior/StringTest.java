@@ -12,41 +12,51 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
+ * The Class StringTest.
+ *
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
- * 
  */
 public class StringTest {
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up before class.
+	 *
+	 * @throws Exception the exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down after class.
+	 *
+	 * @throws Exception the exception
 	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up.
+	 *
+	 * @throws Exception the exception
 	 */
 	@Before
 	public void setUp() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down.
+	 *
+	 * @throws Exception the exception
 	 */
 	@After
 	public void tearDown() throws Exception {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#alpha(java.lang.String, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -56,7 +66,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#alphanum(java.lang.String, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -66,7 +77,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#ascii(java.lang.String, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -76,7 +88,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#digit(java.lang.String, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -86,7 +99,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#empty(java.lang.String, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -96,7 +110,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#hex(java.lang.String, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -106,7 +121,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#isByte(java.lang.String, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -116,7 +132,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#isDouble(java.lang.String, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -126,7 +143,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#isFloat(java.lang.String, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -136,7 +154,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#isInteger(java.lang.String, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -146,7 +165,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#isLong(java.lang.String, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -156,7 +176,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#isShort(java.lang.String, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -166,7 +187,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#length(java.lang.String, java.lang.Integer, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -176,7 +198,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#lowercase(java.lang.String, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -186,7 +209,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#matches(java.lang.String, java.lang.String, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -196,7 +220,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#maxLength(java.lang.String, java.lang.Integer, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -206,7 +231,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#minLength(java.lang.String, java.lang.Integer, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -216,7 +242,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#notEmpty(java.lang.String, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -226,7 +253,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#notMatches(java.lang.String, java.lang.String, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -236,7 +264,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#sameLength(java.lang.String, java.lang.String, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -246,7 +275,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#sameLength(java.lang.String[], java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -256,7 +286,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#trimmed(java.lang.String, java.lang.String, java.lang.Object[])}
 	 * .
 	 */
@@ -266,7 +297,8 @@ public class StringTest {
 	}
 	
 	/**
-	 * Test method for
+	 * Test method for.
+	 *
 	 * {@link net.ownhero.dev.kanuni.conditions.StringCondition#uppercase(java.lang.String, java.lang.String, java.lang.Object[])}
 	 * .
 	 */

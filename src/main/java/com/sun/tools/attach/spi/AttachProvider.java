@@ -61,7 +61,10 @@ import com.sun.tools.attach.VirtualMachineDescriptor;
  */
 public abstract class AttachProvider {
 	
+	/** The Constant lock. */
 	private static final Object         lock = new Object();
+	
+	/** The providers. */
 	private static List<AttachProvider> providers;
 	
 	/**
@@ -95,27 +98,18 @@ public abstract class AttachProvider {
 	 * <p>
 	 * This method parses the identifier and maps the identifier to a Java virtual machine (in an implementation
 	 * dependent manner). If the identifier cannot be parsed by the provider then an
+	 *
+	 * @param id The abstract identifier that identifies the Java virtual machine.
+	 * @return VirtualMachine representing the target virtual machine.
+	 * @throws AttachNotSupportedException If the identifier cannot be parsed, or it corresponds to to a Java virtual machine that does not
+	 * exist, or it corresponds to a Java virtual machine which this provider cannot attach.
+	 * @throws IOException If some other I/O error occurs
 	 * {@link com.sun.tools.attach.AttachNotSupportedException AttachNotSupportedException} is thrown. Once parsed this
 	 * method attempts to attach to the Java virtual machine. If the provider detects that the identifier corresponds to
 	 * a Java virtual machine that does not exist, or it corresponds to a Java virtual machine that does not support the
 	 * attach mechanism implemented by this provider, or it detects that the Java virtual machine is a version to which
 	 * this provider cannot attach, then an <code>AttachNotSupportedException</code> is thrown.
 	 * </p>
-	 * 
-	 * @param id
-	 *            The abstract identifier that identifies the Java virtual machine.
-	 * @return VirtualMachine representing the target virtual machine.
-	 * @throws SecurityException
-	 *             If a security manager has been installed and it denies {@link com.sun.tools.attach.AttachPermission
-	 *             AttachPermission} <tt>("attachVirtualMachine")</tt>, or other permission required by the
-	 *             implementation.
-	 * @throws AttachNotSupportedException
-	 *             If the identifier cannot be parsed, or it corresponds to to a Java virtual machine that does not
-	 *             exist, or it corresponds to a Java virtual machine which this provider cannot attach.
-	 * @throws IOException
-	 *             If some other I/O error occurs
-	 * @throws NullPointerException
-	 *             If <code>id</code> is <code>null</code>
 	 */
 	public abstract VirtualMachine attachVirtualMachine(String id) throws AttachNotSupportedException, IOException;
 	
@@ -124,24 +118,15 @@ public abstract class AttachProvider {
 	 * <p/>
 	 * A Java virtual machine can be described using a {@link com.sun.tools.attach.VirtualMachineDescriptor
 	 * VirtualMachineDescriptor}. This method invokes the descriptor's
+	 *
+	 * @param vmd The virtual machine descriptor
+	 * @return VirtualMachine representing the target virtual machine.
+	 * @throws AttachNotSupportedException If the descriptor's {@link com.sun.tools.attach.VirtualMachineDescriptor#provider() provider()}
+	 * method returns a provider that is not this provider, or it does not correspond to a Java virtual
+	 * machine to which this provider can attach.
+	 * @throws IOException If some other I/O error occurs
 	 * {@link com.sun.tools.attach.VirtualMachineDescriptor#provider() provider()} method to check that it is equal to
 	 * this provider. It then attempts to attach to the Java virtual machine.
-	 * 
-	 * @param vmd
-	 *            The virtual machine descriptor
-	 * @return VirtualMachine representing the target virtual machine.
-	 * @throws SecurityException
-	 *             If a security manager has been installed and it denies {@link com.sun.tools.attach.AttachPermission
-	 *             AttachPermission} <tt>("attachVirtualMachine")</tt>, or other permission required by the
-	 *             implementation.
-	 * @throws AttachNotSupportedException
-	 *             If the descriptor's {@link com.sun.tools.attach.VirtualMachineDescriptor#provider() provider()}
-	 *             method returns a provider that is not this provider, or it does not correspond to a Java virtual
-	 *             machine to which this provider can attach.
-	 * @throws IOException
-	 *             If some other I/O error occurs
-	 * @throws NullPointerException
-	 *             If <code>vmd</code> is <code>null</code>
 	 */
 	public VirtualMachine attachVirtualMachine(VirtualMachineDescriptor vmd) throws AttachNotSupportedException,
 	                                                                        IOException {
@@ -158,11 +143,11 @@ public abstract class AttachProvider {
 	 * This method returns a list of {@link com.sun.tools.attach.VirtualMachineDescriptor} elements. Each
 	 * <code>VirtualMachineDescriptor</code> describes a Java virtual machine to which this provider can
 	 * <i>potentially</i> attach. There isn't any guarantee that invoking
+	 *
+	 * @return The list of virtual machine descriptors which describe the Java virtual machines known to this provider
+	 * (may be empty).
 	 * {@link #attachVirtualMachine(VirtualMachineDescriptor) attachVirtualMachine} on each descriptor in the list will
 	 * succeed.
-	 * 
-	 * @return The list of virtual machine descriptors which describe the Java virtual machines known to this provider
-	 *         (may be empty).
 	 */
 	public abstract List<VirtualMachineDescriptor> listVirtualMachines();
 	

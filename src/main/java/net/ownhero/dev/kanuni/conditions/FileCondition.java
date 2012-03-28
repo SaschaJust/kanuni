@@ -6,15 +6,18 @@ package net.ownhero.dev.kanuni.conditions;
 import java.io.File;
 
 /**
+ * The Class FileCondition.
+ *
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
- * 
  */
 public final class FileCondition {
 	
 	/**
-	 * @param file
-	 * @param formatString
-	 * @param arguments
+	 * Directory.
+	 *
+	 * @param file the file
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static void directory(final File file,
 	                             final String formatString,
@@ -25,9 +28,11 @@ public final class FileCondition {
 	}
 	
 	/**
-	 * @param file
-	 * @param formatString
-	 * @param arguments
+	 * Executable.
+	 *
+	 * @param file the file
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static void executable(final File file,
 	                              final String formatString,
@@ -38,9 +43,11 @@ public final class FileCondition {
 	}
 	
 	/**
-	 * @param file
-	 * @param formatString
-	 * @param arguments
+	 * Executable file.
+	 *
+	 * @param file the file
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static void executableFile(final File file,
 	                                  final String formatString,
@@ -57,9 +64,11 @@ public final class FileCondition {
 	}
 	
 	/**
-	 * @param file
-	 * @param formatString
-	 * @param arguments
+	 * Exists.
+	 *
+	 * @param file the file
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static void exists(final File file,
 	                          final String formatString,
@@ -70,9 +79,11 @@ public final class FileCondition {
 	}
 	
 	/**
-	 * @param file
-	 * @param formatString
-	 * @param arguments
+	 * File.
+	 *
+	 * @param file the file
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static void file(final File file,
 	                        final String formatString,
@@ -83,9 +94,11 @@ public final class FileCondition {
 	}
 	
 	/**
-	 * @param file
-	 * @param formatString
-	 * @param arguments
+	 * Hidden.
+	 *
+	 * @param file the file
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static void hidden(final File file,
 	                          final String formatString,
@@ -96,11 +109,12 @@ public final class FileCondition {
 	}
 	
 	/**
-	 * @param file
-	 * @param size
-	 *            size of the file in bytes
-	 * @param formatString
-	 * @param arguments
+	 * Max size.
+	 *
+	 * @param file the file
+	 * @param size size of the file in bytes
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static void maxSize(final File file,
 	                           final long size,
@@ -112,11 +126,12 @@ public final class FileCondition {
 	}
 	
 	/**
-	 * @param file
-	 * @param size
-	 *            size of the file in bytes
-	 * @param formatString
-	 * @param arguments
+	 * Min size.
+	 *
+	 * @param file the file
+	 * @param size size of the file in bytes
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static void minSize(final File file,
 	                           final long size,
@@ -128,9 +143,11 @@ public final class FileCondition {
 	}
 	
 	/**
-	 * @param file
-	 * @param formatString
-	 * @param arguments
+	 * Readable.
+	 *
+	 * @param file the file
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static void readable(final File file,
 	                            final String formatString,
@@ -141,9 +158,11 @@ public final class FileCondition {
 	}
 	
 	/**
-	 * @param file
-	 * @param formatString
-	 * @param arguments
+	 * Readable directory.
+	 *
+	 * @param file the file
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static void readableDirectory(final File file,
 	                                     final String formatString,
@@ -163,9 +182,11 @@ public final class FileCondition {
 	}
 	
 	/**
-	 * @param file
-	 * @param formatString
-	 * @param arguments
+	 * Readable file.
+	 *
+	 * @param file the file
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static void readableFile(final File file,
 	                                final String formatString,
@@ -182,9 +203,11 @@ public final class FileCondition {
 	}
 	
 	/**
-	 * @param file
-	 * @param formatString
-	 * @param arguments
+	 * Readable writable directory.
+	 *
+	 * @param file the file
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static void readableWritableDirectory(final File file,
 	                                             final String formatString,
@@ -207,9 +230,11 @@ public final class FileCondition {
 	}
 	
 	/**
-	 * @param file
-	 * @param formatString
-	 * @param arguments
+	 * Readable writable file.
+	 *
+	 * @param file the file
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static void readableWritableFile(final File file,
 	                                        final String formatString,
@@ -229,9 +254,11 @@ public final class FileCondition {
 	}
 	
 	/**
-	 * @param file
-	 * @param formatString
-	 * @param arguments
+	 * Writable.
+	 *
+	 * @param file the file
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static void writable(final File file,
 	                            final String formatString,
@@ -242,9 +269,11 @@ public final class FileCondition {
 	}
 	
 	/**
-	 * @param file
-	 * @param formatString
-	 * @param arguments
+	 * Writable directory.
+	 *
+	 * @param file the file
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static void writableDirectory(final File file,
 	                                     final String formatString,
@@ -264,9 +293,11 @@ public final class FileCondition {
 	}
 	
 	/**
-	 * @param file
-	 * @param formatString
-	 * @param arguments
+	 * Writable file.
+	 *
+	 * @param file the file
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static void writableFile(final File file,
 	                                final String formatString,

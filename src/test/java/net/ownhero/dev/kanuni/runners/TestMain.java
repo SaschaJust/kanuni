@@ -14,17 +14,33 @@ import net.ownhero.dev.kanuni.annotations.AnnotatedForString;
 import net.ownhero.dev.kanuni.instrumentation.KanuniAgent;
 
 /**
+ * The Class TestMain.
+ *
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
- * 
  */
 public final class TestMain {
 	
+	/**
+	 * The Class Error.
+	 */
 	class Error {
 		
+		/** The test. */
 		private String              test;
+		
+		/** The message. */
 		private String              message;
+		
+		/** The trace. */
 		private StackTraceElement[] trace;
 		
+		/**
+		 * Instantiates a new error.
+		 *
+		 * @param test the test
+		 * @param message the message
+		 * @param trace the trace
+		 */
 		Error(final String test, final String message, final StackTraceElement[] trace) {
 			setTest(test);
 			setMessage(message);
@@ -32,6 +48,8 @@ public final class TestMain {
 		}
 		
 		/**
+		 * Gets the message.
+		 *
 		 * @return the message
 		 */
 		public String getMessage() {
@@ -39,6 +57,8 @@ public final class TestMain {
 		}
 		
 		/**
+		 * Gets the test.
+		 *
 		 * @return the test
 		 */
 		public String getTest() {
@@ -46,6 +66,8 @@ public final class TestMain {
 		}
 		
 		/**
+		 * Gets the trace.
+		 *
 		 * @return the trace
 		 */
 		public StackTraceElement[] getTrace() {
@@ -53,29 +75,35 @@ public final class TestMain {
 		}
 		
 		/**
-		 * @param message
-		 *            the message to set
+		 * Sets the message.
+		 *
+		 * @param message the message to set
 		 */
 		public void setMessage(final String message) {
 			this.message = message;
 		}
 		
 		/**
-		 * @param test
-		 *            the test to set
+		 * Sets the test.
+		 *
+		 * @param test the test to set
 		 */
 		public void setTest(final String test) {
 			this.test = test;
 		}
 		
 		/**
-		 * @param trace
-		 *            the trace to set
+		 * Sets the trace.
+		 *
+		 * @param trace the trace to set
 		 */
 		public void setTrace(final StackTraceElement[] trace) {
 			this.trace = trace;
 		}
 		
+		/* (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
 		@Override
 		public String toString() {
 			StringBuilder builder = new StringBuilder();
@@ -95,10 +123,18 @@ public final class TestMain {
 		KanuniAgent.initialize();
 	}
 	
+	/** The Constant ls. */
 	private final static String ls     = System.getProperty("line.separator");
 	
+	/** The errors. */
 	private static List<Error>  errors = new LinkedList<Error>();
 	
+	/**
+	 * Adds the error.
+	 *
+	 * @param test the test
+	 * @param reason the reason
+	 */
 	private static void addError(final String test,
 	                             final String... reason) {
 		TestMain.errors.add(new TestMain().new Error(test, reason.length > 0
@@ -107,7 +143,9 @@ public final class TestMain {
 	}
 	
 	/**
-	 * @param args
+	 * The main method.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(final String[] args) {
 		AnnotatedForString afs = new AnnotatedForString();

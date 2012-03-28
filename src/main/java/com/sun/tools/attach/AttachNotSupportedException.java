@@ -20,6 +20,7 @@ package com.sun.tools.attach;
  */
 public final class AttachNotSupportedException extends Exception {
 	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 3391824968260177264L;
 	
 	/**

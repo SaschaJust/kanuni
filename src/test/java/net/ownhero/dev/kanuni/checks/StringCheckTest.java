@@ -12,41 +12,50 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
+ * The Class StringCheckTest.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public class StringCheckTest {
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up before class.
+	 *
+	 * @throws Exception the exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down after class.
+	 *
+	 * @throws Exception the exception
 	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up.
+	 *
+	 * @throws Exception the exception
 	 */
 	@Before
 	public void setUp() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down.
+	 *
+	 * @throws Exception the exception
 	 */
 	@After
 	public void tearDown() throws Exception {
 	}
 	
 	/**
-	 * 
+	 * Test alpha invalid.
 	 */
 	@Test
 	public void testAlphaInvalid() {
@@ -54,7 +63,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test alphanum invalid.
 	 */
 	@Test
 	public void testAlphanumInvalid() {
@@ -62,7 +71,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test alphanum valid.
 	 */
 	@Test
 	public void testAlphanumValid() {
@@ -70,7 +79,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test alpha valid.
 	 */
 	@Test
 	public void testAlphaValid() {
@@ -78,7 +87,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test ascii invalid.
 	 */
 	@Test
 	public void testAsciiInvalid() {
@@ -86,7 +95,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test ascii valid.
 	 */
 	@Test
 	public void testAsciiValid() {
@@ -94,7 +103,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test digit invalid.
 	 */
 	@Test
 	public void testDigitInvalid() {
@@ -102,7 +111,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test digit valid.
 	 */
 	@Test
 	public void testDigitValid() {
@@ -110,7 +119,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test empty invalid.
 	 */
 	@Test
 	public void testEmptyInvalid() {
@@ -118,7 +127,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test empty valid.
 	 */
 	@Test
 	public void testEmptyValid() {
@@ -126,7 +135,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test hex invalid.
 	 */
 	@Test
 	public void testHexInvalid() {
@@ -134,7 +143,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test hex valid.
 	 */
 	@Test
 	public void testHexValid() {
@@ -142,7 +151,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is byte invalid.
 	 */
 	@Test
 	public void testIsByteInvalid() {
@@ -150,7 +159,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is byte valid.
 	 */
 	@Test
 	public void testIsByteValid() {
@@ -158,7 +167,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is double invalid.
 	 */
 	@Test
 	public void testIsDoubleInvalid() {
@@ -166,7 +175,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is double valid.
 	 */
 	@Test
 	public void testIsDoubleValid() {
@@ -174,7 +183,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is float invalid.
 	 */
 	@Test
 	public void testIsFloatInvalid() {
@@ -182,7 +191,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is float valid.
 	 */
 	@Test
 	public void testIsFloatValid() {
@@ -190,7 +199,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is integer invalid.
 	 */
 	@Test
 	public void testIsIntegerInvalid() {
@@ -198,7 +207,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is integer valid.
 	 */
 	@Test
 	public void testIsIntegerValid() {
@@ -206,7 +215,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is long invalid.
 	 */
 	@Test
 	public void testIsLongInvalid() {
@@ -214,7 +223,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test is long valid.
 	 */
 	@Test
 	public void testIsLongValid() {
@@ -222,7 +231,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test length invalid.
 	 */
 	@Test
 	public void testLengthInvalid() {
@@ -230,7 +239,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test length valid.
 	 */
 	@Test
 	public void testLengthValid() {
@@ -238,7 +247,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test lowercase invalid.
 	 */
 	@Test
 	public void testLowercaseInvalid() {
@@ -246,7 +255,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test lowercase valid.
 	 */
 	@Test
 	public void testLowercaseValid() {
@@ -254,7 +263,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test matches invalid.
 	 */
 	@Test
 	public void testMatchesInvalid() {
@@ -262,7 +271,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test matches valid.
 	 */
 	@Test
 	public void testMatchesValid() {
@@ -270,7 +279,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test max length invalid.
 	 */
 	@Test
 	public void testMaxLengthInvalid() {
@@ -278,7 +287,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test max length valid.
 	 */
 	@Test
 	public void testMaxLengthValid() {
@@ -286,7 +295,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test min length invalid.
 	 */
 	@Test
 	public void testMinLengthInvalid() {
@@ -294,7 +303,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test min length valid.
 	 */
 	@Test
 	public void testMinLengthValid() {
@@ -302,7 +311,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test not empty invalid.
 	 */
 	@Test
 	public void testNotEmptyInvalid() {
@@ -310,7 +319,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test not empty valid.
 	 */
 	@Test
 	public void testNotEmptyValid() {
@@ -318,7 +327,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test not matches invalid.
 	 */
 	@Test
 	public void testNotMatchesInvalid() {
@@ -326,7 +335,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test not matches valid.
 	 */
 	@Test
 	public void testNotMatchesValid() {
@@ -334,7 +343,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test same length invalid.
 	 */
 	@Test
 	public void testSameLengthInvalid() {
@@ -342,7 +351,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test same length valid.
 	 */
 	@Test
 	public void testSameLengthValid() {
@@ -350,7 +359,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test trimmed invalid.
 	 */
 	@Test
 	public void testTrimmedInvalid() {
@@ -358,7 +367,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test trimmed valid.
 	 */
 	@Test
 	public void testTrimmedValid() {
@@ -366,7 +375,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test uppercase invalid.
 	 */
 	@Test
 	public void testUppercaseInvalid() {
@@ -374,7 +383,7 @@ public class StringCheckTest {
 	}
 	
 	/**
-	 * 
+	 * Test uppercase valid.
 	 */
 	@Test
 	public void testUppercaseValid() {

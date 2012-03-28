@@ -12,11 +12,18 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
+ * The Class StringConditionTest.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public class StringConditionTest {
 	
+	/**
+	 * Check j unit throw.
+	 *
+	 * @param e the e
+	 * @return true, if successful
+	 */
 	public static final boolean checkJUnitThrow(final Throwable e) {
 		boolean ret = false;
 		ret |= e == null;
@@ -27,7 +34,9 @@ public class StringConditionTest {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up before class.
+	 *
+	 * @throws Exception the exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -39,26 +48,35 @@ public class StringConditionTest {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down after class.
+	 *
+	 * @throws Exception the exception
 	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Sets the up.
+	 *
+	 * @throws Exception the exception
 	 */
 	@Before
 	public void setUp() throws Exception {
 	}
 	
 	/**
-	 * @throws java.lang.Exception
+	 * Tear down.
+	 *
+	 * @throws Exception the exception
 	 */
 	@After
 	public void tearDown() throws Exception {
 	}
 	
+	/**
+	 * Test alpha empty.
+	 */
 	@Test
 	public void testAlphaEmpty() {
 		String string = new String();
@@ -71,6 +89,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test alpha invalid.
+	 */
 	@Test
 	public void testAlphaInvalid() {
 		String string = new String("AbC_dEfgH");
@@ -86,6 +107,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test alpha null.
+	 */
 	@Test
 	public void testAlphaNull() {
 		String string = null;
@@ -100,6 +124,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test alpha num empty.
+	 */
 	@Test
 	public void testAlphaNumEmpty() {
 		String string = new String();
@@ -112,6 +139,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test alpha num invalid.
+	 */
 	@Test
 	public void testAlphaNumInvalid() {
 		String string = new String("Ab12dEfgH49_");
@@ -127,6 +157,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test alpha num null.
+	 */
 	@Test
 	public void testAlphaNumNull() {
 		String string = null;
@@ -142,6 +175,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test alpha num valid.
+	 */
 	@Test
 	public void testAlphaNumValid() {
 		String string = new String("AbC12dEfg6H9");
@@ -154,6 +190,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test alpha valid.
+	 */
 	@Test
 	public void testAlphaValid() {
 		String string = new String("AbCdEfgH");
@@ -166,6 +205,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test ascii empty.
+	 */
 	@Test
 	public void testAsciiEmpty() {
 		String string = new String();
@@ -178,6 +220,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test ascii invalid.
+	 */
 	@Test
 	public void testAsciiInvalid() {
 		String string = new String("The Apple™ Logo () is not pure ascii.");
@@ -192,6 +237,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test ascii null.
+	 */
 	@Test
 	public void testAsciiNull() {
 		String string = null;
@@ -206,6 +254,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test ascii valid.
+	 */
 	@Test
 	public void testAsciiValid() {
 		StringBuilder builder = new StringBuilder();
@@ -222,6 +273,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test digit empty.
+	 */
 	@Test
 	public void testDigitEmpty() {
 		String string = new String();
@@ -234,6 +288,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test digit invalid.
+	 */
 	@Test
 	public void testDigitInvalid() {
 		String string = new String("0123456789a");
@@ -248,6 +305,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test digit null.
+	 */
 	@Test
 	public void testDigitNull() {
 		String string = null;
@@ -262,6 +322,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test digit valid.
+	 */
 	@Test
 	public void testDigitValid() {
 		StringBuilder builder = new StringBuilder();
@@ -278,6 +341,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test hex empty.
+	 */
 	@Test
 	public void testHexEmpty() {
 		String string = new String();
@@ -290,6 +356,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test hex invalid.
+	 */
 	@Test
 	public void testHexInvalid() {
 		String string = new String("0123456789af");
@@ -304,6 +373,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test hex null.
+	 */
 	@Test
 	public void testHexNull() {
 		String string = null;
@@ -318,6 +390,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test hex valid.
+	 */
 	@Test
 	public void testHexValid() {
 		char[] chars = new char[22];
@@ -351,6 +426,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is byte empty.
+	 */
 	@Test
 	public void testIsByteEmpty() {
 		String string = new String();
@@ -363,6 +441,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is byte invalid.
+	 */
 	@Test
 	public void testIsByteInvalid() {
 		String string = new String("0123456789af");
@@ -377,6 +458,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is byte null.
+	 */
 	@Test
 	public void testIsByteNull() {
 		String string = null;
@@ -391,6 +475,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is byte valid.
+	 */
 	@Test
 	public void testIsByteValid() {
 		String string = new String();
@@ -406,6 +493,9 @@ public class StringConditionTest {
 		
 	}
 	
+	/**
+	 * Test is double empty.
+	 */
 	@Test
 	public void testIsDoubleEmpty() {
 		String string = new String();
@@ -418,6 +508,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is double invalid.
+	 */
 	@Test
 	public void testIsDoubleInvalid() {
 		String string = new String("143.03l");
@@ -432,6 +525,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is double null.
+	 */
 	@Test
 	public void testIsDoubleNull() {
 		String string = null;
@@ -446,6 +542,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is double valid.
+	 */
 	@Test
 	public void testIsDoubleValid() {
 		String string = new String("123");
@@ -494,6 +593,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is float empty.
+	 */
 	@Test
 	public void testIsFloatEmpty() {
 		String string = new String();
@@ -506,6 +608,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is float invalid.
+	 */
 	@Test
 	public void testIsFloatInvalid() {
 		String string = new String("143.03d");
@@ -528,6 +633,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is float null.
+	 */
 	@Test
 	public void testIsFloatNull() {
 		String string = null;
@@ -542,6 +650,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is float valid.
+	 */
 	@Test
 	public void testIsFloatValid() {
 		String string = new String("123");
@@ -590,6 +701,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is integer empty.
+	 */
 	@Test
 	public void testIsIntegerEmpty() {
 		String string = new String();
@@ -602,6 +716,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is integer invalid.
+	 */
 	@Test
 	public void testIsIntegerInvalid() {
 		String string = new String("143.0");
@@ -638,6 +755,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is integer null.
+	 */
 	@Test
 	public void testIsIntegerNull() {
 		String string = null;
@@ -652,6 +772,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is integer valid.
+	 */
 	@Test
 	public void testIsIntegerValid() {
 		String string = new String("123");
@@ -699,6 +822,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is long empty.
+	 */
 	@Test
 	public void testIsLongEmpty() {
 		String string = new String();
@@ -711,6 +837,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is long invalid.
+	 */
 	@Test
 	public void testIsLongInvalid() {
 		String string = new String("143.0");
@@ -757,6 +886,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is long null.
+	 */
 	@Test
 	public void testIsLongNull() {
 		String string = null;
@@ -771,6 +903,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is long valid.
+	 */
 	@Test
 	public void testIsLongValid() {
 		String string = new String("123");
@@ -809,6 +944,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is short empty.
+	 */
 	@Test
 	public void testIsShortEmpty() {
 		String string = new String();
@@ -821,6 +959,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is short invalid.
+	 */
 	@Test
 	public void testIsShortInvalid() {
 		String string = new String("143.0");
@@ -875,6 +1016,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is short null.
+	 */
 	@Test
 	public void testIsShortNull() {
 		String string = null;
@@ -889,6 +1033,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test is short valid.
+	 */
 	@Test
 	public void testIsShortValid() {
 		String string = new String("123");
@@ -927,6 +1074,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test lowercase empty.
+	 */
 	@Test
 	public void testLowercaseEmpty() {
 		String string = new String();
@@ -939,6 +1089,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test lowercase invalid.
+	 */
 	@Test
 	public void testLowercaseInvalid() {
 		String[] tokens = { "Bleh", "bluB", "3", "_", "ABC", "abc de f" };
@@ -957,6 +1110,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test lowercase null.
+	 */
 	@Test
 	public void testLowercaseNull() {
 		String string = null;
@@ -971,6 +1127,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test lowercase valid.
+	 */
 	@Test
 	public void testLowercaseValid() {
 		String fullname = new String(StringConditionTest.class.getCanonicalName().toLowerCase());
@@ -986,6 +1145,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test matches invalid.
+	 */
 	@Test
 	public void testMatchesInvalid() {
 		String string = new String("aaabababa");
@@ -1002,6 +1164,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test matches pattern empty.
+	 */
 	@Test
 	public void testMatchesPatternEmpty() {
 		String string = new String("string");
@@ -1017,6 +1182,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test matches pattern null.
+	 */
 	@Test
 	public void testMatchesPatternNull() {
 		String string = new String("string");
@@ -1032,6 +1200,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test matches string empty.
+	 */
 	@Test
 	public void testMatchesStringEmpty() {
 		String string = new String("");
@@ -1045,6 +1216,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test matches string null.
+	 */
 	@Test
 	public void testMatchesStringNull() {
 		String string = null;
@@ -1060,6 +1234,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test matches valid.
+	 */
 	@Test
 	public void testMatchesValid() {
 		String string = new String("aaabababa");
@@ -1073,6 +1250,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test max length empty.
+	 */
 	@Test
 	public void testMaxLengthEmpty() {
 		String string = new String();
@@ -1085,6 +1265,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test max length invalid.
+	 */
 	@Test
 	public void testMaxLengthInvalid() {
 		String string = new String("abcd");
@@ -1099,6 +1282,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test max length negative.
+	 */
 	@Test
 	public void testMaxLengthNegative() {
 		String string = new String("abcdefghijklmnop");
@@ -1113,6 +1299,9 @@ public class StringConditionTest {
 		
 	}
 	
+	/**
+	 * Test max length null.
+	 */
 	@Test
 	public void testMaxLengthNull() {
 		String string = null;
@@ -1129,6 +1318,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test max length valid.
+	 */
 	@Test
 	public void testMaxLengthValid() {
 		String string = new String("abcdefg");
@@ -1141,6 +1333,9 @@ public class StringConditionTest {
 		
 	}
 	
+	/**
+	 * Test min length empty.
+	 */
 	@Test
 	public void testMinLengthEmpty() {
 		String string = new String();
@@ -1152,6 +1347,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test min length invalid.
+	 */
 	@Test
 	public void testMinLengthInvalid() {
 		String string = new String("abcd");
@@ -1166,6 +1364,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test min length negative.
+	 */
 	@Test
 	public void testMinLengthNegative() {
 		String string = new String("abcdefghijklmnop");
@@ -1180,6 +1381,9 @@ public class StringConditionTest {
 		
 	}
 	
+	/**
+	 * Test min length null.
+	 */
 	@Test
 	public void testMinLengthNull() {
 		String string = null;
@@ -1196,6 +1400,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test min length valid.
+	 */
 	@Test
 	public void testMinLengthValid() {
 		String string = new String("abcdefghijklmnop");
@@ -1208,6 +1415,9 @@ public class StringConditionTest {
 		
 	}
 	
+	/**
+	 * Test same length both empty.
+	 */
 	@Test
 	public void testSameLengthBothEmpty() {
 		String first = new String();
@@ -1221,6 +1431,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test same length first empty.
+	 */
 	@Test
 	public void testSameLengthFirstEmpty() {
 		String first = new String();
@@ -1236,6 +1449,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test same length first null.
+	 */
 	@Test
 	public void testSameLengthFirstNull() {
 		String first = null;
@@ -1252,6 +1468,9 @@ public class StringConditionTest {
 		
 	}
 	
+	/**
+	 * Test same length invalid.
+	 */
 	@Test
 	public void testSameLengthInvalid() {
 		String first = new String("first");
@@ -1268,6 +1487,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test same length second empty.
+	 */
 	@Test
 	public void testSameLengthSecondEmpty() {
 		String first = new String("first");
@@ -1283,6 +1505,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test same length second null.
+	 */
 	@Test
 	public void testSameLengthSecondNull() {
 		String first = new String("first");
@@ -1298,6 +1523,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test same length valid.
+	 */
 	@Test
 	public void testSameLengthValid() {
 		String first = new String("equal");
@@ -1311,6 +1539,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test uppercase empty.
+	 */
 	@Test
 	public void testUppercaseEmpty() {
 		String string = new String();
@@ -1323,6 +1554,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test uppercase invalid.
+	 */
 	@Test
 	public void testUppercaseInvalid() {
 		String string = "UPPERCASe";
@@ -1348,6 +1582,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test uppercase null.
+	 */
 	@Test
 	public void testUppercaseNull() {
 		String string = null;
@@ -1359,6 +1596,9 @@ public class StringConditionTest {
 		}
 	}
 	
+	/**
+	 * Test uppercase valid.
+	 */
 	@Test
 	public void testUppercaseValid() {
 		

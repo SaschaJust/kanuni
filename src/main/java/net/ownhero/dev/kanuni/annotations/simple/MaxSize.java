@@ -13,8 +13,9 @@ import net.ownhero.dev.kanuni.annotations.factories.CreatorMaxSize;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 
 /**
+ * The Interface MaxSize.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
@@ -22,7 +23,17 @@ import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 @Target (value = { ElementType.PARAMETER })
 public @interface MaxSize {
 	
+	/**
+	 * Max.
+	 *
+	 * @return the int
+	 */
 	int max();
 	
+	/**
+	 * Value.
+	 *
+	 * @return the string
+	 */
 	String value() default "";
 }

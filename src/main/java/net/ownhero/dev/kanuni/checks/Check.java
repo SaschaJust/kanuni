@@ -13,13 +13,18 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 import org.apache.commons.collections.Predicate;
 
 /**
+ * The Class Check.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public class Check {
 	
+	/**
+	 * The Class NoneNullPredicate.
+	 */
 	static final class NoneNullPredicate implements Predicate {
 		
+		/** The string. */
 		String string = "unspecified";
 		
 		/*
@@ -61,7 +66,10 @@ public class Check {
 		}
 		
 		/**
-		 * @param message
+		 * Sets the message.
+		 *
+		 * @param message the message
+		 * @return the none null predicate
 		 */
 		public NoneNullPredicate setMessage(final String message) {
 			this.string = message;
@@ -69,8 +77,10 @@ public class Check {
 		}
 		
 		/**
-		 * @param formatString
-		 * @param arguments
+		 * Sets the message.
+		 *
+		 * @param formatString the format string
+		 * @param arguments the arguments
 		 * @return the current instance of the {@link NoneNullPredicate}
 		 */
 		public NoneNullPredicate setMessage(final String formatString,
@@ -81,12 +91,15 @@ public class Check {
 		
 	}
 	
+	/** The Constant noneNullPredicate. */
 	final static NoneNullPredicate noneNullPredicate = new NoneNullPredicate();
 	
 	/**
-	 * @param condition
-	 * @param formatString
-	 * @param arguments
+	 * Check.
+	 *
+	 * @param condition the condition
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void check(final boolean condition,
 	                               final String formatString,
@@ -101,6 +114,8 @@ public class Check {
 	}
 	
 	/**
+	 * Gets the caller string.
+	 *
 	 * @return a string representing the line of code the check was called from.
 	 */
 	static final String getCallerString() {
@@ -116,9 +131,11 @@ public class Check {
 	}
 	
 	/**
-	 * @param object
-	 * @param formatString
-	 * @param arguments
+	 * Not null.
+	 *
+	 * @param object the object
+	 * @param formatString the format string
+	 * @param arguments the arguments
 	 */
 	public static final void notNull(final Object object,
 	                                 final String formatString,

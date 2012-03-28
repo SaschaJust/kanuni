@@ -13,8 +13,9 @@ import net.ownhero.dev.kanuni.annotations.factories.CreatorNotNull;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 
 /**
+ * The Interface NotNull.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
@@ -23,6 +24,8 @@ import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 public @interface NotNull {
 	
 	/**
+	 * Value.
+	 *
 	 * @return holds a string reasoning about the assertion.
 	 */
 	String value() default "";

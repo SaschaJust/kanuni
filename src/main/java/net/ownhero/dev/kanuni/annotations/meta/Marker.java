@@ -38,7 +38,17 @@ import net.ownhero.dev.kanuni.annotations.compare.Equals;
 @Target (value = { ElementType.PARAMETER })
 public @interface Marker {
 	
+	/**
+	 * Hint.
+	 *
+	 * @return the string
+	 */
 	String hint() default "";
 	
+	/**
+	 * Value.
+	 *
+	 * @return the int
+	 */
 	int value() default 1;
 }

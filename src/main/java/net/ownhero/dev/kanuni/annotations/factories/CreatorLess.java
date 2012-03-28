@@ -21,8 +21,9 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 import net.ownhero.dev.kanuni.instrumentation.KanuniInstrumenter;
 
 /**
+ * The Class CreatorLess.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 public class CreatorLess extends Creator {
 	

@@ -13,8 +13,9 @@ import net.ownhero.dev.kanuni.annotations.factories.CreatorNotEquals;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 
 /**
+ * The Interface NotEqualsDouble.
+ *
  * @author Sascha Just <sascha.just@own-hero.net>
- * 
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
@@ -22,8 +23,18 @@ import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 @Target (value = { ElementType.PARAMETER })
 public @interface NotEqualsDouble {
 	
+	/**
+	 * Ref.
+	 *
+	 * @return the double
+	 */
 	double ref();
 	
+	/**
+	 * Value.
+	 *
+	 * @return the string
+	 */
 	String value() default "";
 	
 }
