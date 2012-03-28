@@ -6,13 +6,11 @@ package net.ownhero.dev.kanuni.utils;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import net.ownhero.dev.kanuni.exceptions.violations.CheckViolation;
-
 import org.apache.commons.lang.math.NumberUtils;
 
 /**
  * The Class KanuniUtils.
- *
+ * 
  * @author Sascha Just <sascha.just@own-hero.net>
  */
 public class KanuniUtils {
@@ -23,17 +21,17 @@ public class KanuniUtils {
 	public enum NumberType {
 		
 		/** The BYTE. */
-		BYTE, 
- /** The DOUBLE. */
- DOUBLE, 
- /** The FLOAT. */
- FLOAT, 
- /** The INTEGER. */
- INTEGER, 
- /** The LONG. */
- LONG, 
- /** The SHORT. */
- SHORT;
+		BYTE,
+		/** The DOUBLE. */
+		DOUBLE,
+		/** The FLOAT. */
+		FLOAT,
+		/** The INTEGER. */
+		INTEGER,
+		/** The LONG. */
+		LONG,
+		/** The SHORT. */
+		SHORT;
 	}
 	
 	/** The Constant xdigit. */
@@ -87,10 +85,8 @@ public class KanuniUtils {
 					break;
 				case SHORT:
 					return NumberUtils.createInteger(string).compareTo((int) Short.MAX_VALUE) <= 0;
-				default:
-					throw new CheckViolation("Unhandled NumberType `" + type + "`.");
 			}
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			return false;
 		}
 		
@@ -107,7 +103,7 @@ public class KanuniUtils {
 	public static final boolean compilablePattern(final String pattern) {
 		try {
 			Pattern.compile(pattern);
-		} catch (PatternSyntaxException e) {
+		} catch (final PatternSyntaxException e) {
 			return false;
 		}
 		
@@ -116,8 +112,9 @@ public class KanuniUtils {
 	
 	/**
 	 * Returns true if the given string matches the corresponding Alpha regular expression.
-	 *
-	 * @param string the string
+	 * 
+	 * @param string
+	 *            the string
 	 * @return true if the given string matches the corresponding pattern.
 	 * @see KanuniUtils#alpha
 	 */
@@ -127,8 +124,9 @@ public class KanuniUtils {
 	
 	/**
 	 * Returns true if the given string matches the corresponding Alphanum regular expression.
-	 *
-	 * @param string the string
+	 * 
+	 * @param string
+	 *            the string
 	 * @return true if the given string matches the corresponding pattern.
 	 * @see KanuniUtils#alphanum
 	 */
@@ -138,8 +136,9 @@ public class KanuniUtils {
 	
 	/**
 	 * Returns true if the given string matches the corresponding Ascii regular expression.
-	 *
-	 * @param string the string
+	 * 
+	 * @param string
+	 *            the string
 	 * @return true if the given string matches the corresponding pattern.
 	 * @see KanuniUtils#ascii
 	 */
@@ -149,8 +148,9 @@ public class KanuniUtils {
 	
 	/**
 	 * Returns true if the given string matches the corresponding Digit regular expression.
-	 *
-	 * @param string the string
+	 * 
+	 * @param string
+	 *            the string
 	 * @return true if the given string matches the corresponding pattern.
 	 * @see KanuniUtils#digit
 	 */
@@ -160,8 +160,9 @@ public class KanuniUtils {
 	
 	/**
 	 * Returns true if the given string matches the corresponding Lowercase regular expression.
-	 *
-	 * @param string the string
+	 * 
+	 * @param string
+	 *            the string
 	 * @return true if the given string matches the corresponding pattern.
 	 * @see KanuniUtils#lowercase
 	 */
@@ -171,8 +172,9 @@ public class KanuniUtils {
 	
 	/**
 	 * Returns true if the given string matches the corresponding Uppercase regular expression.
-	 *
-	 * @param string the string
+	 * 
+	 * @param string
+	 *            the string
 	 * @return true if the given string matches the corresponding pattern.
 	 * @see KanuniUtils#uppercase
 	 */
@@ -182,8 +184,9 @@ public class KanuniUtils {
 	
 	/**
 	 * Returns true if the given string matches the corresponding XDigit regular expression.
-	 *
-	 * @param string the string
+	 * 
+	 * @param string
+	 *            the string
 	 * @return true if the given string matches the corresponding pattern.
 	 * @see KanuniUtils#xdigit
 	 */

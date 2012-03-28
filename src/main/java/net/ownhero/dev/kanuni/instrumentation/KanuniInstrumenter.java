@@ -3,6 +3,7 @@
  */
 package net.ownhero.dev.kanuni.instrumentation;
 
+import java.io.IOException;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 import java.util.Arrays;
@@ -44,79 +45,22 @@ import javassist.bytecode.annotation.MemberValue;
 import javassist.bytecode.annotation.MemberValueVisitor;
 import javassist.bytecode.annotation.ShortMemberValue;
 import javassist.bytecode.annotation.StringMemberValue;
-import net.ownhero.dev.kanuni.annotations.bevahiors.NoneNull;
-import net.ownhero.dev.kanuni.annotations.bounds.RangeChar;
-import net.ownhero.dev.kanuni.annotations.bounds.RangeDouble;
-import net.ownhero.dev.kanuni.annotations.bounds.RangeFloat;
-import net.ownhero.dev.kanuni.annotations.bounds.RangeInteger;
-import net.ownhero.dev.kanuni.annotations.bounds.RangeLong;
-import net.ownhero.dev.kanuni.annotations.compare.Equals;
-import net.ownhero.dev.kanuni.annotations.compare.EqualsInt;
-import net.ownhero.dev.kanuni.annotations.compare.Greater;
-import net.ownhero.dev.kanuni.annotations.compare.GreaterInt;
-import net.ownhero.dev.kanuni.annotations.compare.GreaterOrEqual;
-import net.ownhero.dev.kanuni.annotations.compare.GreaterOrEqualInt;
-import net.ownhero.dev.kanuni.annotations.compare.Less;
-import net.ownhero.dev.kanuni.annotations.compare.LessInt;
-import net.ownhero.dev.kanuni.annotations.compare.LessOrEqual;
-import net.ownhero.dev.kanuni.annotations.compare.LessOrEqualInt;
-import net.ownhero.dev.kanuni.annotations.compare.NotEquals;
-import net.ownhero.dev.kanuni.annotations.compare.NotEqualsInt;
+import net.ownhero.dev.kanuni.annotations.Stub;
 import net.ownhero.dev.kanuni.annotations.factories.Creator;
-import net.ownhero.dev.kanuni.annotations.map.ContainsKey;
-import net.ownhero.dev.kanuni.annotations.map.ContainsValue;
 import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 import net.ownhero.dev.kanuni.annotations.meta.Marker;
-import net.ownhero.dev.kanuni.annotations.simple.Contains;
-import net.ownhero.dev.kanuni.annotations.simple.Empty;
-import net.ownhero.dev.kanuni.annotations.simple.MaxSize;
-import net.ownhero.dev.kanuni.annotations.simple.MinSize;
-import net.ownhero.dev.kanuni.annotations.simple.Negative;
-import net.ownhero.dev.kanuni.annotations.simple.NotEmpty;
-import net.ownhero.dev.kanuni.annotations.simple.NotNegative;
-import net.ownhero.dev.kanuni.annotations.simple.NotNull;
-import net.ownhero.dev.kanuni.annotations.simple.NotPositive;
-import net.ownhero.dev.kanuni.annotations.simple.Null;
-import net.ownhero.dev.kanuni.annotations.simple.Positive;
-import net.ownhero.dev.kanuni.annotations.simple.Size;
-import net.ownhero.dev.kanuni.annotations.simple.ValidIndex;
-import net.ownhero.dev.kanuni.annotations.specifics.Container;
-import net.ownhero.dev.kanuni.annotations.string.AlphaNumString;
-import net.ownhero.dev.kanuni.annotations.string.AlphaString;
-import net.ownhero.dev.kanuni.annotations.string.AsciiString;
-import net.ownhero.dev.kanuni.annotations.string.ByteString;
-import net.ownhero.dev.kanuni.annotations.string.DigitString;
-import net.ownhero.dev.kanuni.annotations.string.DoubleString;
-import net.ownhero.dev.kanuni.annotations.string.EmptyString;
-import net.ownhero.dev.kanuni.annotations.string.FloatString;
-import net.ownhero.dev.kanuni.annotations.string.HexString;
-import net.ownhero.dev.kanuni.annotations.string.IntegerString;
-import net.ownhero.dev.kanuni.annotations.string.Length;
-import net.ownhero.dev.kanuni.annotations.string.LongString;
-import net.ownhero.dev.kanuni.annotations.string.Lowercase;
-import net.ownhero.dev.kanuni.annotations.string.Matches;
-import net.ownhero.dev.kanuni.annotations.string.MaxLength;
-import net.ownhero.dev.kanuni.annotations.string.MinLength;
-import net.ownhero.dev.kanuni.annotations.string.NotEmptyString;
-import net.ownhero.dev.kanuni.annotations.string.SameLength;
-import net.ownhero.dev.kanuni.annotations.string.ShortString;
-import net.ownhero.dev.kanuni.annotations.string.Trimmed;
-import net.ownhero.dev.kanuni.annotations.string.Uppercase;
-import net.ownhero.dev.kanuni.checks.ArrayCheck;
-import net.ownhero.dev.kanuni.checks.BoundsCheck;
-import net.ownhero.dev.kanuni.checks.Check;
-import net.ownhero.dev.kanuni.checks.CollectionCheck;
-import net.ownhero.dev.kanuni.checks.CompareCheck;
-import net.ownhero.dev.kanuni.checks.MapCheck;
-import net.ownhero.dev.kanuni.checks.StringCheck;
 import net.ownhero.dev.kanuni.conditions.ArrayCondition;
 import net.ownhero.dev.kanuni.conditions.BoundsCondition;
 import net.ownhero.dev.kanuni.conditions.CollectionCondition;
 import net.ownhero.dev.kanuni.conditions.CompareCondition;
 import net.ownhero.dev.kanuni.conditions.Condition;
+import net.ownhero.dev.kanuni.conditions.FileCondition;
 import net.ownhero.dev.kanuni.conditions.MapCondition;
 import net.ownhero.dev.kanuni.conditions.StringCondition;
 import net.ownhero.dev.kanuni.exceptions.annotations.MalformedAnnotationException;
+import net.ownhero.dev.kanuni.utils.ClassFinder;
+
+import com.sun.tools.javac.comp.Check;
 
 /**
  * The Class KanuniInstrumenter.
@@ -299,6 +243,8 @@ public class KanuniInstrumenter {
 	 */
 	private static boolean                    assertionsEnabled      = false;
 	
+	public static final String                fileClass              = FileCondition.class.getCanonicalName();
+	
 	/**
 	 * Forces the instrumentations to insert {@link Check}s instead of {@link Condition}s.
 	 */
@@ -311,39 +257,25 @@ public class KanuniInstrumenter {
 	public static final boolean               debug                  = System.getProperty("KanuniDebug") != null;
 	
 	/** The Constant simpleClass. */
-	public static final String                simpleClass            = (useExceptions
-	                                                                                 ? Check.class
-	                                                                                 : Condition.class).getCanonicalName();
+	public static final String                simpleClass            = Condition.class.getCanonicalName();
 	
 	/** The Constant arrayClass. */
-	public static final String                arrayClass             = (useExceptions
-	                                                                                 ? ArrayCheck.class
-	                                                                                 : ArrayCondition.class).getCanonicalName();
+	public static final String                arrayClass             = ArrayCondition.class.getCanonicalName();
 	
 	/** The Constant stringClass. */
-	public static final String                stringClass            = (useExceptions
-	                                                                                 ? StringCheck.class
-	                                                                                 : StringCondition.class).getCanonicalName();
+	public static final String                stringClass            = StringCondition.class.getCanonicalName();
 	
 	/** The Constant mapClass. */
-	public static final String                mapClass               = (useExceptions
-	                                                                                 ? MapCheck.class
-	                                                                                 : MapCondition.class).getCanonicalName();
+	public static final String                mapClass               = MapCondition.class.getCanonicalName();
 	
 	/** The Constant collectionClass. */
-	public static final String                collectionClass        = (useExceptions
-	                                                                                 ? CollectionCheck.class
-	                                                                                 : CollectionCondition.class).getCanonicalName();
+	public static final String                collectionClass        = CollectionCondition.class.getCanonicalName();
 	
 	/** The Constant compareClass. */
-	public static final String                compareClass           = (useExceptions
-	                                                                                 ? CompareCheck.class
-	                                                                                 : CompareCondition.class).getCanonicalName();
+	public static final String                compareClass           = CompareCondition.class.getCanonicalName();
 	
 	/** The Constant boundsClass. */
-	public static final String                boundsClass            = (useExceptions
-	                                                                                 ? BoundsCheck.class
-	                                                                                 : BoundsCondition.class).getCanonicalName();
+	public static final String                boundsClass            = BoundsCondition.class.getCanonicalName();
 	
 	/**
 	 * Assertions enabled.
@@ -472,65 +404,83 @@ public class KanuniInstrumenter {
 		
 		//@formatter:off
 		
-		final Class<?>[] kanuniAnnotations = {
-				net.ownhero.dev.kanuni.annotations.simple.NoneNull.class,
-				NoneNull.class,
-				RangeChar.class,
-				RangeDouble.class,
-				RangeFloat.class,
-				RangeInteger.class,
-				RangeLong.class,
-				Container.class,
-				Equals.class,
-				EqualsInt.class,
-				Greater.class,
-				GreaterInt.class,
-				GreaterOrEqual.class,
-				GreaterOrEqualInt.class,
-				Less.class,
-				LessInt.class,
-				LessOrEqual.class,
-				LessOrEqualInt.class,
-				NotEquals.class,
-				NotEqualsInt.class,
-				ContainsKey.class,
-				ContainsValue.class,
-				Contains.class,
-				Empty.class,
-				MaxSize.class,
-				MinSize.class,
-				Negative.class,
-				NoneNull.class,
-				NotEmpty.class,
-				NotNegative.class,
-				NotNull.class,
-				NotPositive.class,
-				Null.class,
-				Positive.class,
-				Size.class,
-				ValidIndex.class,
-				AlphaNumString.class,
-				AlphaString.class,
-				AsciiString.class,
-				ByteString.class,
-				DigitString.class,
-				DoubleString.class,
-				EmptyString.class,
-				FloatString.class,
-				HexString.class,
-				IntegerString.class,
-				Length.class,
-				LongString.class,
-				Lowercase.class,
-				Matches.class,
-				MaxLength.class,
-				MinLength.class,
-				NotEmptyString.class,
-				SameLength.class,
-				ShortString.class,
-				Trimmed.class,
-				Uppercase.class
-		};
+		final Set<Class<?>> kanuniAnnotations  = new HashSet<Class<?>>();
+		try {
+	        final Collection<Class<?>> allClasses = ClassFinder.getAllClasses(Stub.class.getPackage(), 0);
+	        
+	        if (debug) {
+	            System.err.println(String.format("Checking %s potential annotations to register.", allClasses.size()));
+            }
+	        for (final Class<?> c : allClasses) {
+	        	if (c.isAnnotation()) {
+	        		if (c.getAnnotation(FactoryClass.class) != null) {
+	        			kanuniAnnotations.add(c);
+	        		}
+	        	}
+	        }
+        } catch (final ClassNotFoundException ignore) { //ignore
+        } catch (final IOException ignore) { //ignore
+        }
+		
+//		final Class<?>[] kanuniAnnotations = {
+//				net.ownhero.dev.kanuni.annotations.simple.NoneNull.class,
+//				NoneNull.class,
+//				RangeChar.class,
+//				RangeDouble.class,
+//				RangeFloat.class,
+//				RangeInteger.class,
+//				RangeLong.class,
+//				Container.class,
+//				Equals.class,
+//				EqualsInt.class,
+//				Greater.class,
+//				GreaterInt.class,
+//				GreaterOrEqual.class,
+//				GreaterOrEqualInt.class,
+//				Less.class,
+//				LessInt.class,
+//				LessOrEqual.class,
+//				LessOrEqualInt.class,
+//				NotEquals.class,
+//				NotEqualsInt.class,
+//				ContainsKey.class,
+//				ContainsValue.class,
+//				Contains.class,
+//				Empty.class,
+//				MaxSize.class,
+//				MinSize.class,
+//				Negative.class,
+//				NoneNull.class,
+//				NotEmpty.class,
+//				NotNegative.class,
+//				NotNull.class,
+//				NotPositive.class,
+//				Null.class,
+//				Positive.class,
+//				Size.class,
+//				ValidIndex.class,
+//				AlphaNumString.class,
+//				AlphaString.class,
+//				AsciiString.class,
+//				ByteString.class,
+//				DigitString.class,
+//				DoubleString.class,
+//				EmptyString.class,
+//				FloatString.class,
+//				HexString.class,
+//				IntegerString.class,
+//				Length.class,
+//				LongString.class,
+//				Lowercase.class,
+//				Matches.class,
+//				MaxLength.class,
+//				MinLength.class,
+//				NotEmptyString.class,
+//				SameLength.class,
+//				ShortString.class,
+//				Trimmed.class,
+//				Uppercase.class
+//		};
 		
 		//@formatter:on
 		

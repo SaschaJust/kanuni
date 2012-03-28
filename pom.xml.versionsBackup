@@ -4,7 +4,7 @@
 	<groupId>net.ownhero.dev</groupId>
 	<artifactId>kanuni</artifactId>
 	<name>kanuni</name>
-	<version>0.1</version>
+	<version>0.1-SNAPSHOT</version>
 	<description>Supports assertions as annotations and several checks (exceptions) and conditions (assertions) to be specified in the code</description>
 	<url>http://www.st.cs.uni-saarland.de/</url>
 	<inceptionYear>2010</inceptionYear>
