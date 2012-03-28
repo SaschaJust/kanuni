@@ -33,18 +33,8 @@
 	</organization>
 	<distributionManagement>
 		<repository>
-			<releases>
-				<enabled>true</enabled>
-				<checksumPolicy>warn</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<checksumPolicy>warn</checksumPolicy>
-			</snapshots>
-			<id>dev.own-hero.net</id>
-			<name>Dev//own-hero.net</name>
-			<url>https://nexus.own-hero.net/content/repositories/dev.own-hero.net</url>
-			<layout>default</layout>
+			<id>oh-releases</id>
+			<url>https://nexus.own-hero.net/content/repositories/oh-releases</url>
 		</repository>
 	</distributionManagement>
 	<build>
