@@ -193,4 +193,5 @@ public class KanuniUtils {
 	public static boolean isXDigit(final String string) {
 		return xdigit.matcher(string).matches();
 	}
+	
 }
