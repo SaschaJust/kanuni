@@ -125,8 +125,6 @@ import net.ownhero.dev.kanuni.conditions.MapCondition;
 import net.ownhero.dev.kanuni.conditions.StringCondition;
 import net.ownhero.dev.kanuni.exceptions.annotations.MalformedAnnotationException;
 
-import com.sun.tools.javac.comp.Check;
-
 /**
  * The Class KanuniInstrumenter.
  * 

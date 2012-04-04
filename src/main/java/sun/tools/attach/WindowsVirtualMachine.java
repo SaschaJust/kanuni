@@ -159,7 +159,7 @@ public final class WindowsVirtualMachine extends HotSpotVirtualMachine {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	static native void enqueue(long hProcess,
-	                           @SuppressWarnings ("hiding") byte[] stub,
+	                           byte[] stub,
 	                           String cmd,
 	                           String pipeName,
 	                           Object... args) throws IOException;

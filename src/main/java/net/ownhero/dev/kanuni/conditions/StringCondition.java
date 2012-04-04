@@ -9,6 +9,8 @@ import java.util.regex.PatternSyntaxException;
 import net.ownhero.dev.kanuni.utils.KanuniUtils;
 import net.ownhero.dev.kanuni.utils.KanuniUtils.NumberType;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 /**
  * Class that holds all condition checks on strings. Methods will return true on empty strings. See the method
  * descriptions for details.
@@ -412,11 +414,11 @@ public final class StringCondition {
 		assert pattern != null : Condition.getCallerString()
 		        + String.format("Null is not a valid pattern. Violation: %s", String.format(formatString, arguments));
 		assert compilablePattern(pattern) : Condition.getCallerString()
-		        + String.format("The pattern `%s` can not be compiled. Violation: %s", pattern,
-		                        String.format(formatString, arguments));
-		assert (string == null) || Pattern.matches(pattern, string) : Condition.getCallerString()
-		        + String.format("String `%s` does not match pattern: %s. Violation: %s", string, pattern,
-		                        String.format(formatString, arguments));
+		        + String.format("The pattern `%s` can not be compiled. Violation: %s",
+		                        StringEscapeUtils.escapeJava(pattern), String.format(formatString, arguments));
+		assert (string == null) || Pattern.matches(StringEscapeUtils.escapeJava(pattern), string) : Condition.getCallerString()
+		        + String.format("String `%s` does not match pattern: %s. Violation: %s", string,
+		                        StringEscapeUtils.escapeJava(pattern), String.format(formatString, arguments));
 	}
 	
 	/**
