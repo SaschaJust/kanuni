@@ -416,7 +416,7 @@ public final class StringCondition {
 		assert compilablePattern(pattern) : Condition.getCallerString()
 		        + String.format("The pattern `%s` can not be compiled. Violation: %s",
 		                        StringEscapeUtils.escapeJava(pattern), String.format(formatString, arguments));
-		assert (string == null) || Pattern.matches(StringEscapeUtils.escapeJava(pattern), string) : Condition.getCallerString()
+		assert (string == null) || Pattern.matches(pattern, string) : Condition.getCallerString()
 		        + String.format("String `%s` does not match pattern: %s. Violation: %s", string,
 		                        StringEscapeUtils.escapeJava(pattern), String.format(formatString, arguments));
 	}
