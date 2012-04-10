@@ -37,6 +37,30 @@ public final class ClassCondition {
 	}
 	
 	/**
+	 * Instance.
+	 * 
+	 * @param instance
+	 *            the instance
+	 * @param of
+	 *            the of
+	 * @param formatString
+	 *            the format string
+	 * @param arguments
+	 *            the arguments
+	 */
+	public static final void instance(final Object instance,
+	                                  final Class<?> of,
+	                                  final String formatString,
+	                                  final Object... arguments) {
+		// TODO check of for null
+		if (instance != null) {
+			assert (of.isAssignableFrom(instance.getClass())) : Condition.getCallerString()
+			        + String.format("Object should be instance of '%s'. Violation: %s", of.getCanonicalName(),
+			                        String.format(formatString, arguments));
+		}
+	}
+	
+	/**
 	 * Instantiable.
 	 * 
 	 * @param clazz
