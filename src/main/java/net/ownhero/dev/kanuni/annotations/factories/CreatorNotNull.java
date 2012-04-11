@@ -18,7 +18,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 
 /**
  * The Class CreatorNotNull.
- *
+ * 
  * @author Sascha Just <sascha.just@own-hero.net>
  */
 public final class CreatorNotNull extends Creator {
@@ -35,14 +35,14 @@ public final class CreatorNotNull extends Creator {
 	                                             final String parameterName,
 	                                             final CtClass parameterType,
 	                                             final Map<Integer, SortedSet<String>> markers) throws MalformedAnnotationException {
-		StringBuilder builder = new StringBuilder();
+		final StringBuilder builder = new StringBuilder();
 		
-		StringMemberValue textMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation, "value");
-		String text = textMember.getValue();
+		final StringMemberValue textMember = (StringMemberValue) KanuniClassloader.getMemberValue(annotation, "value");
+		final String text = textMember.getValue();
 		
 		builder.append(KanuniInstrumenter.simpleClass)
-		       .append(String.format(".notNull(%s, \"%s\", new Object[0])", parameterName,
-		                             StringEscapeUtils.escapeJava(text))).append(";");
+		       .append(String.format(".notNull(%s, \"%s (parameter id: '%s')\", new Object[0])", parameterName,
+		                             StringEscapeUtils.escapeJava(text), parameterName)).append(";");
 		
 		return builder.toString();
 	}

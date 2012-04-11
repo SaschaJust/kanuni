@@ -30,7 +30,7 @@ import com.sun.tools.attach.spi.AttachProvider;
 
 /**
  * The Class KanuniAgentLoader.
- *
+ * 
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
  */
 public class KanuniAgentLoader {
@@ -65,10 +65,13 @@ public class KanuniAgentLoader {
 	
 	/**
 	 * Adds the.
-	 *
-	 * @param source the source
-	 * @param target the target
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * 
+	 * @param source
+	 *            the source
+	 * @param target
+	 *            the target
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	private static void add(final File source,
 	                        final JarOutputStream target) throws IOException {
@@ -81,28 +84,28 @@ public class KanuniAgentLoader {
 					if (!name.endsWith("/")) {
 						name += "/";
 					}
-					JarEntry entry = new JarEntry(name);
+					final JarEntry entry = new JarEntry(name);
 					entry.setTime(source.lastModified());
 					target.putNextEntry(entry);
 					target.closeEntry();
 				}
 				
-				for (File nestedFile : source.listFiles()) {
+				for (final File nestedFile : source.listFiles()) {
 					add(nestedFile, target);
 				}
 				
 				return;
 			}
 			
-			JarEntry entry = new JarEntry(source.getPath().replace("\\", "/"));
+			final JarEntry entry = new JarEntry(source.getPath().replace("\\", "/"));
 			entry.setTime(source.lastModified());
 			target.putNextEntry(entry);
 			in = new BufferedInputStream(new FileInputStream(source));
 			
-			byte[] buffer = new byte[1024];
+			final byte[] buffer = new byte[1024];
 			
 			while (true) {
-				int count = in.read(buffer);
+				final int count = in.read(buffer);
 				if (count == -1) {
 					break;
 				}
@@ -118,12 +121,17 @@ public class KanuniAgentLoader {
 	
 	/**
 	 * Append agent jar from class files.
-	 *
-	 * @param agentJarFile the agent jar file
-	 * @param file the file
-	 * @param baseDirectory the base directory
-	 * @throws FileNotFoundException the file not found exception
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * 
+	 * @param agentJarFile
+	 *            the agent jar file
+	 * @param file
+	 *            the file
+	 * @param baseDirectory
+	 *            the base directory
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	private static void appendAgentJarFromClassFiles(final JarOutputStream agentJarFile,
 	                                                 final File file,
@@ -134,31 +142,37 @@ public class KanuniAgentLoader {
 	
 	/**
 	 * Append agent jar from jar.
-	 *
-	 * @param agentJarFile the agent jar file
-	 * @param file the file
-	 * @param packagePath the package path
-	 * @param jarFile the jar file
-	 * @throws FileNotFoundException the file not found exception
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * 
+	 * @param agentJarFile
+	 *            the agent jar file
+	 * @param file
+	 *            the file
+	 * @param packagePath
+	 *            the package path
+	 * @param jarFile
+	 *            the jar file
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	private static void appendAgentJarFromJar(final JarOutputStream agentJarFile,
 	                                          final File file,
 	                                          final String packagePath,
 	                                          final JarFile jarFile) throws FileNotFoundException, IOException {
-		for (Enumeration<JarEntry> e = jarFile.entries(); e.hasMoreElements();) {
-			JarEntry current = e.nextElement();
+		for (final Enumeration<JarEntry> e = jarFile.entries(); e.hasMoreElements();) {
+			final JarEntry current = e.nextElement();
 			
 			if ((current.getName().startsWith(packagePath)) && current.getName().endsWith(".class")) {
 				agentJarFile.putNextEntry(current);
 				jarFile.getInputStream(current);
 				
-				BufferedInputStream in = new BufferedInputStream(jarFile.getInputStream(current));
+				final BufferedInputStream in = new BufferedInputStream(jarFile.getInputStream(current));
 				
-				byte[] buffer = new byte[1024];
+				final byte[] buffer = new byte[1024];
 				
 				while (true) {
-					int count = in.read(buffer);
+					final int count = in.read(buffer);
 					if (count == -1) {
 						break;
 					}
@@ -173,11 +187,11 @@ public class KanuniAgentLoader {
 	
 	/**
 	 * Creates the manifest.
-	 *
+	 * 
 	 * @return the manifest
 	 */
 	private static Manifest createManifest() {
-		Manifest manifest = new Manifest();
+		final Manifest manifest = new Manifest();
 		manifest.getMainAttributes().put(Attributes.Name.MANIFEST_VERSION, "1.0");
 		manifest.getMainAttributes().put(new Attributes.Name("Agent-Class"), KanuniAgent.class.getCanonicalName());
 		manifest.getMainAttributes().put(new Attributes.Name("Premain-Class"), KanuniAgent.class.getCanonicalName());
@@ -187,14 +201,17 @@ public class KanuniAgentLoader {
 	
 	/**
 	 * Gets the agent jar.
-	 *
+	 * 
 	 * @return the agent jar
-	 * @throws FileNotFoundException the file not found exception
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws ClassNotFoundException the class not found exception
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws ClassNotFoundException
+	 *             the class not found exception
 	 */
 	private static String getAgentJar() throws FileNotFoundException, IOException, ClassNotFoundException {
-		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 		
 		if (classLoader == null) {
 			throw new ClassNotFoundException("Can't get class loader.");
@@ -202,12 +219,12 @@ public class KanuniAgentLoader {
 		
 		final File tempJar = File.createTempFile("kanuni-", ".jar");
 		tempJar.deleteOnExit();
-		JarOutputStream agentJarFile = new JarOutputStream(new FileOutputStream(tempJar), createManifest());
+		final JarOutputStream agentJarFile = new JarOutputStream(new FileOutputStream(tempJar), createManifest());
 		
-		for (String path : paths) {
-			Enumeration<URL> resources = classLoader.getResources(path);
+		for (final String path : paths) {
+			final Enumeration<URL> resources = classLoader.getResources(path);
 			while (resources.hasMoreElements()) {
-				URL url = resources.nextElement();
+				final URL url = resources.nextElement();
 				String internalPath = url.getPath();
 				
 				if (internalPath.startsWith("file:")) {
@@ -224,7 +241,7 @@ public class KanuniAgentLoader {
 					appendAgentJarFromJar(agentJarFile, tempJar, path, new JarFile(internalPath));
 				} else {
 					// class files
-					File directory = new File(internalPath);
+					final File directory = new File(internalPath);
 					appendAgentJarFromClassFiles(agentJarFile, tempJar, directory);
 				}
 				break;
@@ -245,10 +262,10 @@ public class KanuniAgentLoader {
 	 * @return the recursive directories
 	 */
 	public static List<File> getRecursiveDirectories(final File baseDirectory) {
-		List<File> list = new LinkedList<File>();
+		final List<File> list = new LinkedList<File>();
 		
-		for (String subDirectoryPath : baseDirectory.list()) {
-			File subDirectory = new File(baseDirectory.getAbsolutePath() + System.getProperty("file.separator")
+		for (final String subDirectoryPath : baseDirectory.list()) {
+			final File subDirectory = new File(baseDirectory.getAbsolutePath() + System.getProperty("file.separator")
 			        + subDirectoryPath);
 			if (subDirectory.isDirectory() && subDirectory.canExecute() && subDirectory.canRead()) {
 				list.add(subDirectory);
@@ -261,8 +278,9 @@ public class KanuniAgentLoader {
 	
 	/**
 	 * Gets the virtual machine implementation from embedded ones.
-	 *
-	 * @param pid the pid
+	 * 
+	 * @param pid
+	 *            the pid
 	 * @return the virtual machine implementation from embedded ones
 	 */
 	private static VirtualMachine getVirtualMachineImplementationFromEmbeddedOnes(final String pid) {
@@ -272,14 +290,15 @@ public class KanuniAgentLoader {
 			} else {
 				return new LinuxVirtualMachine(ATTACH_PROVIDER, pid);
 			}
-		} catch (AttachNotSupportedException e) {
+		} catch (final AttachNotSupportedException e) {
 			throw new RuntimeException(e);
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			throw new RuntimeException(e);
-		} catch (UnsatisfiedLinkError ignore) {
+		} catch (final UnsatisfiedLinkError e) {
 			// noinspection ThrowInsideCatchBlockWhichIgnoresCaughtException
 			throw new IllegalStateException(
-			                                "Unable to load Java agent; please add lib/tools.jar from your JDK to the classpath");
+			                                "Unable to load Java agent; please add lib/tools.jar from your JDK to the classpath",
+			                                e);
 		}
 	}
 	
@@ -288,9 +307,9 @@ public class KanuniAgentLoader {
 	 */
 	public static void loadAgent() {
 		System.err.println("Booting up kanuni...");
-		String nameOfRunningVM = ManagementFactory.getRuntimeMXBean().getName();
-		int p = nameOfRunningVM.indexOf('@');
-		String pid = nameOfRunningVM.substring(0, p);
+		final String nameOfRunningVM = ManagementFactory.getRuntimeMXBean().getName();
+		final int p = nameOfRunningVM.indexOf('@');
+		final String pid = nameOfRunningVM.substring(0, p);
 		
 		String jarFilePath;
 		
@@ -306,7 +325,7 @@ public class KanuniAgentLoader {
 			}
 			vm.loadAgent(jarFilePath, "");
 			vm.detach();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
