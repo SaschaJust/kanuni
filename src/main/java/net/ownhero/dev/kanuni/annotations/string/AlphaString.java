@@ -9,11 +9,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import net.ownhero.dev.kanuni.annotations.factories.CreatorStringType;
-import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 import net.ownhero.dev.kanuni.annotations.simple.NotNull;
 import net.ownhero.dev.kanuni.conditions.StringCondition;
-import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 
 /**
  * Annotation to assert a string is either empty or consists only of alphabetic characters. If the string is null, the
@@ -61,6 +58,7 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
  * 	}
  * }
  * 
+ * 
  * </pre>
  * 
  * </dt></dl>
@@ -78,6 +76,7 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
  * 		...
  * 	}
  * }
+ * 
  * 
  * </pre>
  * 
@@ -108,13 +107,12 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
-@FactoryClass (CreatorStringType.class)
 @Target (value = { ElementType.PARAMETER })
 public @interface AlphaString {
 	
 	/**
 	 * Value.
-	 *
+	 * 
 	 * @return the string
 	 */
 	String value() default "";

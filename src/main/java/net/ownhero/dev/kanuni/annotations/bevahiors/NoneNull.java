@@ -9,10 +9,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import net.ownhero.dev.kanuni.annotations.factories.CreatorNoneNull;
-import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
 import net.ownhero.dev.kanuni.conditions.Condition;
-import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
 
 /**
  * This annotation can be used on constructors and methods. The {@link KanuniClassloader} will translate this to a
@@ -55,13 +52,12 @@ import net.ownhero.dev.kanuni.instrumentation.KanuniClassloader;
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
-@FactoryClass (CreatorNoneNull.class)
 @Target (value = { ElementType.CONSTRUCTOR, ElementType.METHOD })
 public @interface NoneNull {
 	
 	/**
 	 * Value.
-	 *
+	 * 
 	 * @return the string
 	 */
 	String value() default "";
