@@ -111,6 +111,33 @@ public final class Condition {
 	static final NoneNullPredicate noneNullPredicate = new Condition.NoneNullPredicate();
 	
 	/**
+	 * All null or none.
+	 * 
+	 * @param object1
+	 *            the object1
+	 * @param object2
+	 *            the object2
+	 * @param formatString
+	 *            the format string
+	 * @param arguments
+	 *            the arguments
+	 */
+	public static final void allNullOrNone(final Object object1,
+	                                       final Object object2,
+	                                       final String formatString,
+	                                       final Object... arguments) {
+		if (object1 == null) {
+			assert object2 == null : getCallerString()
+			        + String.format("Arguments have to be all (null) or none of them. Violation: %s",
+			                        String.format(formatString, arguments).toString());
+		} else {
+			assert object2 != null : getCallerString()
+			        + String.format("Arguments have to be all (null) or none of them. Violation: %s",
+			                        String.format(formatString, arguments).toString());
+		}
+	}
+	
+	/**
 	 * Check.
 	 * 
 	 * @param condition
@@ -304,6 +331,30 @@ public final class Condition {
 	                                 final Object... arguments) {
 		assert (object != null) && (object instanceof Double) : getCallerString()
 		        + String.format("Argument should be of type Integer. Violation: %s",
+		                        String.format(formatString, arguments).toString());
+	}
+	
+	/**
+	 * None null.
+	 * 
+	 * @param object1
+	 *            the object1
+	 * @param object2
+	 *            the object2
+	 * @param formatString
+	 *            the format string
+	 * @param arguments
+	 *            the arguments
+	 */
+	public static final void noneNull(final Object object1,
+	                                  final Object object2,
+	                                  final String formatString,
+	                                  final Object... arguments) {
+		assert object1 != null : getCallerString()
+		        + String.format("All arguments have to be not (null). Violation: %s",
+		                        String.format(formatString, arguments).toString());
+		assert object2 != null : getCallerString()
+		        + String.format("All arguments have to be not (null). Violation: %s",
 		                        String.format(formatString, arguments).toString());
 	}
 	
