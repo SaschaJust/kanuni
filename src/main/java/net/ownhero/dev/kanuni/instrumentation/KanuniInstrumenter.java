@@ -125,8 +125,6 @@ import net.ownhero.dev.kanuni.conditions.MapCondition;
 import net.ownhero.dev.kanuni.conditions.StringCondition;
 import net.ownhero.dev.kanuni.exceptions.annotations.MalformedAnnotationException;
 
-import com.sun.tools.javac.comp.Check;
-
 /**
  * The Class KanuniInstrumenter.
  * 
@@ -158,7 +156,6 @@ public class KanuniInstrumenter {
 		 * javassist.bytecode.annotation.MemberValueVisitor#visitAnnotationMemberValue(javassist.bytecode.annotation
 		 * .AnnotationMemberValue)
 		 */
-		@Override
 		public void visitAnnotationMemberValue(final AnnotationMemberValue node) {
 			// unused
 		}
@@ -168,7 +165,6 @@ public class KanuniInstrumenter {
 		 * @see javassist.bytecode.annotation.MemberValueVisitor#visitArrayMemberValue(javassist.bytecode.annotation.
 		 * ArrayMemberValue)
 		 */
-		@Override
 		public void visitArrayMemberValue(final ArrayMemberValue node) {
 			for (final MemberValue mv : node.getValue()) {
 				mv.accept(this);
@@ -180,7 +176,6 @@ public class KanuniInstrumenter {
 		 * @see javassist.bytecode.annotation.MemberValueVisitor#visitBooleanMemberValue(javassist.bytecode.annotation.
 		 * BooleanMemberValue)
 		 */
-		@Override
 		public void visitBooleanMemberValue(final BooleanMemberValue node) {
 			// unused
 		}
@@ -190,7 +185,6 @@ public class KanuniInstrumenter {
 		 * @see javassist.bytecode.annotation.MemberValueVisitor#visitByteMemberValue(javassist.bytecode.annotation.
 		 * ByteMemberValue)
 		 */
-		@Override
 		public void visitByteMemberValue(final ByteMemberValue node) {
 			// unused
 		}
@@ -200,7 +194,6 @@ public class KanuniInstrumenter {
 		 * @see javassist.bytecode.annotation.MemberValueVisitor#visitCharMemberValue(javassist.bytecode.annotation.
 		 * CharMemberValue)
 		 */
-		@Override
 		public void visitCharMemberValue(final CharMemberValue node) {
 			// unused
 		}
@@ -210,7 +203,6 @@ public class KanuniInstrumenter {
 		 * @see javassist.bytecode.annotation.MemberValueVisitor#visitClassMemberValue(javassist.bytecode.annotation.
 		 * ClassMemberValue)
 		 */
-		@Override
 		public void visitClassMemberValue(final ClassMemberValue node) {
 			// unused
 		}
@@ -220,7 +212,6 @@ public class KanuniInstrumenter {
 		 * @see javassist.bytecode.annotation.MemberValueVisitor#visitDoubleMemberValue(javassist.bytecode.annotation.
 		 * DoubleMemberValue)
 		 */
-		@Override
 		public void visitDoubleMemberValue(final DoubleMemberValue node) {
 			// unused
 		}
@@ -230,7 +221,6 @@ public class KanuniInstrumenter {
 		 * @see javassist.bytecode.annotation.MemberValueVisitor#visitEnumMemberValue(javassist.bytecode.annotation.
 		 * EnumMemberValue)
 		 */
-		@Override
 		public void visitEnumMemberValue(final EnumMemberValue node) {
 			// unused
 		}
@@ -240,7 +230,6 @@ public class KanuniInstrumenter {
 		 * @see javassist.bytecode.annotation.MemberValueVisitor#visitFloatMemberValue(javassist.bytecode.annotation.
 		 * FloatMemberValue)
 		 */
-		@Override
 		public void visitFloatMemberValue(final FloatMemberValue node) {
 			// unused
 		}
@@ -250,7 +239,6 @@ public class KanuniInstrumenter {
 		 * @see javassist.bytecode.annotation.MemberValueVisitor#visitIntegerMemberValue(javassist.bytecode.annotation.
 		 * IntegerMemberValue)
 		 */
-		@Override
 		public void visitIntegerMemberValue(final IntegerMemberValue node) {
 			this.list.add(node.getValue());
 		}
@@ -260,7 +248,6 @@ public class KanuniInstrumenter {
 		 * @see javassist.bytecode.annotation.MemberValueVisitor#visitLongMemberValue(javassist.bytecode.annotation.
 		 * LongMemberValue)
 		 */
-		@Override
 		public void visitLongMemberValue(final LongMemberValue node) {
 			// unused
 		}
@@ -270,7 +257,6 @@ public class KanuniInstrumenter {
 		 * @see javassist.bytecode.annotation.MemberValueVisitor#visitShortMemberValue(javassist.bytecode.annotation.
 		 * ShortMemberValue)
 		 */
-		@Override
 		public void visitShortMemberValue(final ShortMemberValue node) {
 			// unused
 		}
@@ -280,7 +266,6 @@ public class KanuniInstrumenter {
 		 * @see javassist.bytecode.annotation.MemberValueVisitor#visitStringMemberValue(javassist.bytecode.annotation.
 		 * StringMemberValue)
 		 */
-		@Override
 		public void visitStringMemberValue(final StringMemberValue node) {
 			// unused
 		}
@@ -309,11 +294,6 @@ public class KanuniInstrumenter {
 	private static boolean                    assertionsEnabled      = false;
 	
 	public static final String                fileClass              = FileCondition.class.getCanonicalName();
-	
-	/**
-	 * Forces the instrumentations to insert {@link Check}s instead of {@link Condition}s.
-	 */
-	private static final boolean              useExceptions          = System.getProperty("KanuniExceptions") != null;
 	
 	/** The Constant exceptionsEnabled. */
 	private static final boolean              exceptionsEnabled      = System.getProperty("KanuniDisableExceptions") == null;
@@ -429,15 +409,6 @@ public class KanuniInstrumenter {
 		}
 		
 		return memberValue;
-	}
-	
-	/**
-	 * Use exceptions.
-	 * 
-	 * @return the useExceptions
-	 */
-	public static boolean useExceptions() {
-		return useExceptions;
 	}
 	
 	/**

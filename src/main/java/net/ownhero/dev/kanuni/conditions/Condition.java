@@ -43,7 +43,6 @@ public final class Condition {
 		 * (non-Javadoc)
 		 * @see org.apache.commons.collections.Predicate#evaluate(java.lang.Object)
 		 */
-		@Override
 		public boolean evaluate(final Object object) {
 			if (object == null) {
 				return true;

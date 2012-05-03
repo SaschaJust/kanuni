@@ -124,7 +124,6 @@ public class KanuniAgent implements ClassFileTransformer {
 	 * @see java.lang.instrument.ClassFileTransformer#transform(java.lang.ClassLoader , java.lang.String,
 	 * java.lang.Class, java.security.ProtectionDomain, byte[])
 	 */
-	@Override
 	public byte[] transform(final ClassLoader classLoader,
 	                        final String name,
 	                        final Class<?> classBeingRedefined,

@@ -177,7 +177,6 @@ public final class CollectionCondition {
 		
 		assert (CollectionUtils.countMatches(collection, new Predicate() {
 			
-			@Override
 			public boolean evaluate(final Object object) {
 				return object == null;
 			}
