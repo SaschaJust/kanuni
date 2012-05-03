@@ -4,7 +4,7 @@
 	<groupId>net.ownhero.dev</groupId>
 	<artifactId>kanuni</artifactId>
 	<name>kanuni</name>
-	<version>0.1</version>
+	<version>0.1.1</version>
 	<description>Supports assertions as annotations and several checks (exceptions) and conditions (assertions) to be specified in the code</description>
 	<url>http://www.st.cs.uni-saarland.de/</url>
 	<inceptionYear>2010</inceptionYear>
@@ -80,40 +80,6 @@
 					<encoding>${project.build.sourceEncoding}</encoding>
 					<overwrite>true</overwrite>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.2.1</version>
-				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-					<archive>
-						<!-- <manifest>
-							<mainClass>${moduleName}.Main</mainClass>
-						</manifest> -->
-						<manifestEntries>
-							<Agent-Class>net.ownhero.dev.kanuni.instrumentation.KanuniAgent</Agent-Class>
-							<Premain-Class>net.ownhero.dev.kanuni.instrumentation.KanuniAgent</Premain-Class>
-							<Boot-Class-Path>../lib/javassist.jar</Boot-Class-Path>
-							<Can-Redefine-Classes>true</Can-Redefine-Classes>
-							<Can-Retransform-Classes>true</Can-Retransform-Classes>
-						</manifestEntries>
-					</archive>
-				</configuration>
-				<executions>
-					<execution>
-						<id>make-assembly</id>
-						<!-- this is used for inheritance merges -->
-						<phase>package</phase>
-						<!-- append to the packaging phase. -->
-						<goals>
-							<goal>single</goal>
-							<!-- goals == mojos -->
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
