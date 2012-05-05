@@ -1,5 +1,5 @@
 /*******************************************************************************
- * w * Copyright 2012 Kim Herzig, Sascha Just
+ * Copyright 2012 Kim Herzig, Sascha Just
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,7 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  ******************************************************************************/
-package net.ownhero.dev.kanuni.annotations.file;
+package net.ownhero.dev.kanuni.annotations.meta;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -18,27 +18,26 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import net.ownhero.dev.kanuni.annotations.factories.CreatorFile;
-import net.ownhero.dev.kanuni.annotations.meta.FactoryClass;
-import net.ownhero.dev.kanuni.modifiers.Modifier;
-
 /**
- * The Interface Directory.
+ * Required meta annotation on all Kanuni annotations to determine which types the annotation can actually be used on.
+ * Auto-boxing is used here.
+ * 
+ * Keep in mind that kanuni uses a class stub {@link Array} to represent arrays due to the fact that arrays in Java are
+ * represented as objects.
+ * 
  * 
  * @author Sascha Just <sascha.just@st.cs.uni-saarland.de>
+ * @since 0.2
  */
 @Documented
 @Retention (RetentionPolicy.RUNTIME)
-@FactoryClass (CreatorFile.class)
-@Target (value = { ElementType.PARAMETER })
-public @interface Directory {
-	
-	Modifier[] modifiers() default {};
+@Target (value = { ElementType.ANNOTATION_TYPE })
+public @interface TargetType {
 	
 	/**
-	 * Value.
+	 * Array of classes the annotation can be used on.
 	 * 
-	 * @return the string
+	 * @return the class acceptabel target classes.
 	 */
-	String value() default "";
+	Class<?>[] valid();
 }
