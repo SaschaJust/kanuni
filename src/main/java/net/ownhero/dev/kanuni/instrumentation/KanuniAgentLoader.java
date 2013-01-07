@@ -20,13 +20,13 @@ import java.util.jar.JarFile;
 import java.util.jar.JarOutputStream;
 import java.util.jar.Manifest;
 
-import sun.tools.attach.LinuxVirtualMachine;
-import sun.tools.attach.WindowsVirtualMachine;
-
 import com.sun.tools.attach.AttachNotSupportedException;
 import com.sun.tools.attach.VirtualMachine;
 import com.sun.tools.attach.VirtualMachineDescriptor;
 import com.sun.tools.attach.spi.AttachProvider;
+
+import sun.tools.attach.LinuxVirtualMachine;
+import sun.tools.attach.WindowsVirtualMachine;
 
 /**
  * The Class KanuniAgentLoader.

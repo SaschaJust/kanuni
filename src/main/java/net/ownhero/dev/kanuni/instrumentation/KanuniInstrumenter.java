@@ -44,6 +44,9 @@ import javassist.bytecode.annotation.MemberValue;
 import javassist.bytecode.annotation.MemberValueVisitor;
 import javassist.bytecode.annotation.ShortMemberValue;
 import javassist.bytecode.annotation.StringMemberValue;
+
+import com.sun.tools.javac.comp.Check;
+
 import net.ownhero.dev.kanuni.annotations.bevahiors.NoneNull;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeChar;
 import net.ownhero.dev.kanuni.annotations.bounds.RangeDouble;
@@ -96,7 +99,7 @@ import net.ownhero.dev.kanuni.annotations.simple.ValidIndex;
 import net.ownhero.dev.kanuni.annotations.specifics.Container;
 import net.ownhero.dev.kanuni.annotations.string.AlphaNumString;
 import net.ownhero.dev.kanuni.annotations.string.AlphaString;
-import net.ownhero.dev.kanuni.annotations.string.AsciiString;
+import net.ownhero.dev.kanuni.annotations.string.Ascii;
 import net.ownhero.dev.kanuni.annotations.string.ByteString;
 import net.ownhero.dev.kanuni.annotations.string.DigitString;
 import net.ownhero.dev.kanuni.annotations.string.DoubleString;
@@ -524,7 +527,7 @@ public class KanuniInstrumenter {
 				ValidIndex.class,
 				AlphaNumString.class,
 				AlphaString.class,
-				AsciiString.class,
+				Ascii.class,
 				ByteString.class,
 				DigitString.class,
 				DoubleString.class,
